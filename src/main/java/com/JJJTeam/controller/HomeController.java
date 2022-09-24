@@ -1,4 +1,4 @@
-package com.JJJTeam.Jmarket;
+package com.JJJTeam.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
