@@ -1,4 +1,4 @@
-package com.JJJTeam.Jmarket.Controller.user;
+package com.JJJTeam.Jmarket.Controller;
 
 
 import org.slf4j.Logger;
