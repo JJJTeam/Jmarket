@@ -12,5 +12,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <a href="${pageContext.request.contextPath }/login"> 로그인 페이지</a>
+<div>${org.springframework-version}</div>
 </body>
 </html>
