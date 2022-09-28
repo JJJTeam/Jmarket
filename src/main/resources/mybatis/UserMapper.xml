@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="">
-	<insert id="insert2" parameterType="com.jhta.project.vo.MembersVo">
-		insert into favorite values(seq_favorite.nextval,null,null,null,#{mid})
+<mapper namespace="mybatis.UserMapper">
+	<insert id="signUp" parameterType="UserDTO">
+		insert into test values(null,null)
 	</insert>
 </mapper>
