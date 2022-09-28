@@ -1,7 +1,17 @@
 package com.JJJTeam.Jmarket.mapper;
 
-import com.JJJTeam.Jmarket.DTO.UserDTO;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 
+
+
+import com.JJJTeam.Jmarket.DTO.UserDTO;
+import com.JJJTeam.Jmarket.SQL.UserSQL;
+
+@Mapper
 public interface UserMapper {
-	int signUp(UserDTO userDTO);
+	 @InsertProvider(type = UserSQL.class, method = "UserSingUp")
+     public void UserSingUp(UserDTO userDTO);
+
+
 }

@@ -8,6 +8,8 @@ spring:
     password: JJJTeam
   thymeleaf:
     cache:  false
+#mybatis:
+#  config-location: 
 
 ---
 
