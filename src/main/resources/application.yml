@@ -1,0 +1,35 @@
+# local, dev, prod 공통 설정
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
+    username: root
+    password: JJJTeam
+  thymeleaf:
+    cache:  false
+#mybatis:
+#  config-location: 
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: sujin
+server:
+  port: 8082
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: name1
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: name2
