@@ -14,7 +14,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: susin
+      on-profile: sujin
 server:
   port: 8082
 
