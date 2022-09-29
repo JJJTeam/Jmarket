@@ -1,5 +1,8 @@
 package com.JJJTeam.Jmarket.Mapper;
 
-public class UserMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public class UserMapper {
+	
 }

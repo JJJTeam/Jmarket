@@ -1,5 +1,9 @@
 package com.JJJTeam.Jmarket.DTO;
 
-public class UserDTO {
+import lombok.Data;
 
+@Data
+public class UserDTO {
+	private String id;
+	private int pw;
 }
