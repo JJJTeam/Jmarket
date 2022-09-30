@@ -12,33 +12,19 @@ import com.JJJTeam.Jmarket.Service.MemberService;
 @Controller
 public class MemberController {
 	
-	private MemberService userservice;
-	
 	@Autowired
-	public MemberController(MemberService userService) {
-		this.userservice = userService;
+	private MemberService memberService;
+	
+	@GetMapping("/memberFrom")
+	public String loginFrorm() {
+		return "memberform";
 	}
 	
-	@GetMapping("/member/create")
-	public String create() {
-		return "/members/memberForm";
-	}
 	
-	@PostMapping("/member/create")
-	public String create(MemberDTO userDTO) {
-		Member member = new Member(null);
-		member.toString();
-		
-		System.out.println("member = " + member.toString());
-		
-		userservice.join(member);
-		 
-		return "/members/memberForm";
-	}
-	
-	@GetMapping("/login")
-	public String login() {
-		return "login_form";
+	@PostMapping("/memberFrom")
+	public String memberAdd(MemberDTO memberDTO) {
+		memberService.joinMember(memberDTO);
+		return "redirect:/";
 	}
 
 }

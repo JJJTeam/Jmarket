@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>회원가입</h2>
-	<form th:action="@{/member/login}" method="post">
+	<form action="/memberForm" method="post">
 		ID : <input type="text" name="memberID" id="memberID" placeholder="아이디를 입력해주세요.">
 		PW : <input type="password" name="memberPW" id="memberPW" placeholder="비밀번호를 입력해주세요.">
 		<button type="submit">가입</button>
