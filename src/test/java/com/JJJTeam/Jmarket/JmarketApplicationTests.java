@@ -1,4 +1,4 @@
-package com.JJJTeam.Jmarket;
+package com.jjjteam.jmarket;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
