@@ -1,72 +1,64 @@
-# Created by https://www.toptal.com/developers/gitignore/api/eclipse
-# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-### Eclipse ###
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
+# Thumbnails
+._*
 
-# External tool builders
-.externalToolBuilders/
+Icon
 
-# Locally stored "Eclipse launch configurations"
-*.launch
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
 
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
-# CDT- autotools
-.autotools
-
-# Java annotation processor (APT)
+### STS ###
+.apt_generated
+.classpath
 .factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
+.project
+.settings
 .springBeans
+.sts4-cache
 
-# Code Recommenders
-.recommenders/
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# Annotation Processing
-.apt_generated/
-.apt_generated_test/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-# Scala IDE specific (Scala & Java development for Eclipse)
-.cache-main
-.scala_dependencies
-.worksheet
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
-# Uncomment this line if you wish to ignore the project description file.
-# Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-### Eclipse Patch ###
-# Spring Boot Tooling
-.sts4-cache/
-
-# End of https://www.toptal.com/developers/gitignore/api/eclipse
-/target/
-/.classpath
+### VS Code ###
+.vscode/
