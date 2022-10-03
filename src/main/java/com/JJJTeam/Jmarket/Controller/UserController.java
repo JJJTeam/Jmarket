@@ -15,13 +15,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/login/login")
+	@GetMapping("/login/loginFrom")
 	public String loginFrorm() {
 		return "login/login_form";
 	}
 	
 	
-	@PostMapping("/memberFrom")
+	@PostMapping("/UserFrom")
 	public String memberAdd(UserDTO userDTO) {
 		userService.joinUser(userDTO);
 		return "redirect:/";
