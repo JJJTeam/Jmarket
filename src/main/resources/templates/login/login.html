@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Login</h2>
+	<form th:action="@{/login}" method="post">
+		ID : <input type="text" name="memberID" placeholder="아이디를 입력해주세요."><br>
+		PW : <input type="password" name="memberPW" placeholder="비밀번호를 입력해주세요."><br>
+		<button type="submit">Login</button>
+	</form> <br>
+</body>
+</html>
