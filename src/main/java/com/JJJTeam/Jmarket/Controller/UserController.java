@@ -6,24 +6,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.JJJTeam.Jmarket.DTO.MemberDTO;
-import com.JJJTeam.Jmarket.Service.MemberService;
+import com.JJJTeam.Jmarket.DTO.UserDTO;
+import com.JJJTeam.Jmarket.Service.UserService;
 
 @Controller
-public class MemberController {
+public class UserController {
 	
 	@Autowired
-	private MemberService memberService;
+	private UserService userService;
 	
-	@GetMapping("/memberFrom")
+	@GetMapping("/login_form")
 	public String loginFrorm() {
-		return "memberform";
+		return "login";
 	}
 	
 	
 	@PostMapping("/memberFrom")
-	public String memberAdd(MemberDTO memberDTO) {
-		memberService.joinMember(memberDTO);
+	public String memberAdd(UserDTO userDTO) {
+		userService.joinUser(userDTO);
 		return "redirect:/";
 	}
 
