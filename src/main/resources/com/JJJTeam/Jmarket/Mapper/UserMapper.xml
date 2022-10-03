@@ -4,4 +4,7 @@
 	<insert id="addUser" parameterType="com.JJJTeam.Jmarket.DTO.UserDTO">
 		insert into test (id, pw) values(#{id}, #{pw})
 	</insert>
+	<select id="selectUser" parameterType="com.JJJTeam.Jmarket.DTO.UserDTO">
+		select * from test (id, pw) values(#{loginID}, #{loginPW})
+	</select>
 </mapper>

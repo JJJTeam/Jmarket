@@ -25,6 +25,10 @@ public class UserService  {
 	public void joinUser(UserDTO userDTO) {
 		userMapper.addUser(userDTO);
 	}
+	
+	public void selectUser(UserDTO userDTO) {
+		userMapper.selectUser(userDTO);
+	}
 
 	
 	

@@ -6,4 +6,5 @@ import com.JJJTeam.Jmarket.DTO.UserDTO;
 @Mapper
 public interface UserMapper {
 	void addUser(UserDTO userDTO);
+	void selectUser(UserDTO userDTO);
 }
