@@ -26,8 +26,10 @@ public class UserService  {
 		userMapper.addUser(userDTO);
 	}
 	
-	public void selectUser(UserDTO userDTO) {
-		userMapper.selectUser(userDTO);
+	
+	
+	public UserDTO getSelectUser(UserDTO userDTO) throws Exception{
+		return userMapper.selectUser(userDTO);
 	}
 
 	
