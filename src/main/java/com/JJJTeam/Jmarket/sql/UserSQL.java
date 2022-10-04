@@ -1,6 +1,6 @@
-package com.jjjteam.jmarket.sql;
+package com.JJJTeam.Jmarket.sql;
 
-import com.jjjteam.jmarket.dto.UserDTO;
+import com.JJJTeam.Jmarket.dto.UserDTO;
 
 public class UserSQL {
 

@@ -1,10 +1,10 @@
-package com.jjjteam.jmarket.service;
+package com.JJJTeam.Jmarket.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jjjteam.jmarket.dto.UserDTO;
-import com.jjjteam.jmarket.mapper.UserMapper;
+import com.JJJTeam.Jmarket.dto.UserDTO;
+import com.JJJTeam.Jmarket.mapper.UserMapper;
 
 
 

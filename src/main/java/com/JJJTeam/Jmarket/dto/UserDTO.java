@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.dto;
+package com.JJJTeam.Jmarket.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

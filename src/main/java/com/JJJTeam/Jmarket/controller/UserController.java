@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.controller;
+package com.JJJTeam.Jmarket.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jjjteam.jmarket.dto.UserDTO;
-import com.jjjteam.jmarket.service.UserService;
+import com.JJJTeam.Jmarket.dto.UserDTO;
+import com.JJJTeam.Jmarket.service.UserService;
+
+
 
 
 
