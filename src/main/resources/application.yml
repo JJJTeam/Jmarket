@@ -8,7 +8,13 @@ spring:
     password: JJJTeam
   thymeleaf:
     cache:  false
+<<<<<<< HEAD
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
+=======
+#mybatis:
+#  config-location: 
+
+>>>>>>> 수진회원가입로그인만들브랜치생성
 ---
 
 spring:
