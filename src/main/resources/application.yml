@@ -11,6 +11,15 @@ spring:
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 ---
 
+
+#타임리프설정
+spring:
+    thymeleaf:
+        prefix : classpath:templates/
+        suffix : .html
+        cache : false
+
+---
 spring:
   config:
     activate:
