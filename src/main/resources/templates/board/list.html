@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원리스트</title>
+</head>
+<body>
+
+
+	<table>
+		<thead>
+			<tr>
+				<th class="one wide">번호</th>
+				<th class="one wide">글제</th>
+				<th class="one wide">작성자</th>
+				<th class="one wide">작성일</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="board, index:${boardList}">
+
+				<td><span th:text="${index.index}"></span></td>
+
+				<td><a th:href="@{'/list/' + ${board.id}}"> <span
+						th:text="${board.title}"></span>
+				</a></td>
+
+				<td><span th:text="${board.writer}"></span></td>
+
+				<td><span
+					th:text="${#temporals.forms(board.createdDate, 'yyyy-MM-dd HH.mm')}"></span>
+				</td>
+			</tr>
+			
+		</tbody>
+
+	</table>
+</body>
+</html>
