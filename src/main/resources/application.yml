@@ -6,8 +6,7 @@ spring:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
-  thymeleaf:
-    cache:  false
+ 
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 ---
 
