@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+</head>
+<body>
+<!-- 	<form th:action="@{/user}" method="post"> -->
+	<form th:action="@{/UserFrom}" method="post">
+		ID : <input type="text" name="id"> <br>
+		PW : <input type="password" name="pw"> <br>
+		<input type="radio" name="auth" value="ROLE_ADMIN, ROLE_USER"> admin
+		<input type="radio" name="auth" vlaue="ROLE_USER" checked> user <br>
+		<button type="submit">회원가입</button>
+	</form>
+</body>
+</html>
