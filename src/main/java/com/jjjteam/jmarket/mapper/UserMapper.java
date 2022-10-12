@@ -1,10 +1,12 @@
-package com.jjjteam.jmarket.mapper;
+package com.JJJTeam.Jmarket.mapper;
 
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jjjteam.jmarket.dto.UserDTO;
-import com.jjjteam.jmarket.sql.UserSQL;
+import com.JJJTeam.Jmarket.dto.UserDTO;
+import com.JJJTeam.Jmarket.sql.UserSQL;
+
+
 
 
 
