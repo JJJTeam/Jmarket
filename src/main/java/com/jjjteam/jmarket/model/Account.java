@@ -35,10 +35,10 @@ public class Account extends BaseEntity {
         this.password = passwordEncoder.encode(this.password);
     }
 
-//    @Builder
-//    public Account(String username, String password, UserRole role) {
-//        this.username = username;
-//        this.password = password;
-//        this.role = role;
-//    }
+    @Builder
+    public Account(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }
