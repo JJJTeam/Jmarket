@@ -38,7 +38,7 @@ public class ApplicationTest {
 		//given
 		accountRepository.save(
 				Account.builder()
-						.username("jjunpro")
+						.username("testUsername")
 						.password("1234")
 						.role(UserRole.USER)
 						.build()
@@ -49,7 +49,7 @@ public class ApplicationTest {
 
 		// then
 		Account account = userList.get(0);
-		assertThat(account.getUsername(), is("jjunpro"));
+		assertThat(account.getUsername(), is("testUsername"));
 		assertThat(account.getPassword(), is("1234"));
 		assertThat(account.getRole(), is(UserRole.USER));
 	}
