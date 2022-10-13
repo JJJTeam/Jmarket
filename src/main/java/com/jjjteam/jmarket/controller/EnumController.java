@@ -1,50 +1,35 @@
 package com.jjjteam.jmarket.controller;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
+import com.jjjteam.jmarket.constant.EnumMapper;
+import com.jjjteam.jmarket.constant.EnumValue;
+import com.jjjteam.jmarket.constant.UserRole;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jjjteam.jmarket.constant.EnumModel;
-import com.jjjteam.jmarket.constant.EnumValue;
-import com.jjjteam.jmarket.constant.UserRole;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor // EnumMapper 생성자 생략 가능
 public class EnumController {
+    private final EnumMapper enumMapper;
 
     @GetMapping("/enum")
     public Map<String, Object> getEnum() {
-        Map<String, Object> enums    = new LinkedHashMap<>();
-        Class<UserRole>userRole = UserRole.class;
+        Map<String, Object> enums = new LinkedHashMap<>();
+        Class<UserRole> userRole = UserRole.class;
         enums.put("userRole", userRole.getEnumConstants());
 
         return enums;
     }
-    @GetMapping("/value")
-    public Map<String, List<EnumValue>> getEnumValue() {
-        Map<String, List<EnumValue>> enumValues = new LinkedHashMap<>();
 
-        enumValues.put("userRole", toEnumValues(UserRole.class));
+    @GetMapping("/mapper")
+    public Map<String, List<EnumValue>> getMapper() {
 
-        return enumValues;
+        return enumMapper.getAll();
     }
 
-    private List<EnumValue> toEnumValues(Class<? extends EnumModel> e) {
-        /*
-         * Java8이 아닐경우
-         * List<EnumValue> enumValues = new ArrayList<>();
-         * for (EnumModel enumType : e.getEnumConstants()) {
-         *     enumValues.add(new EnumValue(enumType));
-         * }
-         * return enumValues;
-         */
-        return Arrays
-                .stream(e.getEnumConstants())
-                .map(EnumValue::new)
-                .collect(Collectors.toList());
-    }
 }
