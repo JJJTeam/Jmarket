@@ -18,17 +18,17 @@ import javax.annotation.PostConstruct;
 public class TestService implements CommandLineRunner, ApplicationListener<ContextClosedEvent>, InitializingBean, DisposableBean {
 
     @Autowired
-//    private AccountRepository accountRepository;
+    private AccountRepository accountRepository;
     @PostConstruct
     private void init(){
 //                System.out.println("빈이 완전히 생성된 후에 한번 수행될 ㅂ메서드에 붙입니다.");
-//        accountRepository.save(
-//                Account.builder()
-//                        .username("test")
-//                        .password("1234")
-//                        .role(UserRole.USER)
-//                        .build()
-//        );
+        accountRepository.save(
+                Account.builder()
+                        .username("test")
+                        .password("1234")
+                        .role(UserRole.USER)
+                        .build()
+        );
         // 테스트 유저 추가 메서드
 
     }
