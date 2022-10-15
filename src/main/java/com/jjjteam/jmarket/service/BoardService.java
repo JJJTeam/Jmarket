@@ -5,6 +5,8 @@ import com.jjjteam.jmarket.repository.BoardRepository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +43,10 @@ public class BoardService {
 	
 	public void delete(int idx) {
 		boardRepository.deleteById(idx);
+	}
+	
+	public Page<Board> list(int page){
+		return boardRepository.findAll(PageRequest.of(page, 3, Sort.by(Sort.Direction.DESC,"idx")));
 	}
 
 }

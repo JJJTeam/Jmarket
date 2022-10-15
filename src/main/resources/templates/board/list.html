@@ -30,21 +30,49 @@
 		</thead>
 
 
+<!-- 
+
+
+	<c:forEach var="b" items="${board.content }">
+		<div class="card m-2">
+			<div class="card-body">
+				<h4 class="card-title">${b.b_title }</h4>
+				<a href="/board/${b.b_no }" class="btn btn-primary">상세보기</a>
+			</div>
+		</div>
+	</c:forEach>
+	
+	
+	 -->
+
+
 		<tbody>
-		
-		<tr th:each= "board:${board}">
-		<td th:text="${board.idx}"></td>
-		<td><a th:href="@{/board/detail/{idx}(idx=${board.idx})}" th:text="${board.title}"></a></td>
-		
-		
-		<td th:text="${board.writer}"></td>
-		<td th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}"></td>	
-		 		
-		</tr>
-	
-	
+
+			<tr th:each="board:${board}">
+				<td th:text="${board.idx}"></td>
+				<td><a th:href="@{/board/detail/{idx}(idx=${board.idx})}"
+					th:text="${board.title}"></a></td>
+
+
+				<td th:text="${board.writer}"></td>
+				<td
+					th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+
+			</tr>
+
+
 		</tbody>
 	</table>
+
+
+	<div class="pagination">
+		<ul>
+			<li th:each="page: ${#numbers.sequence(0, totalPage -1)}"><a
+				th:href="@{/board/list(page=${pageStat.index})}"
+				th:text="${pageStat.index + 1}"></a>
+				</li>
+		</ul>
+	</div>
 
 </body>
 </html>

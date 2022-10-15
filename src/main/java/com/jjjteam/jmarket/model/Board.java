@@ -26,11 +26,10 @@ import java.time.LocalDateTime;
  *
  * */
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 @Entity
 public class Board{
 	
