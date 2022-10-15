@@ -1,39 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://wwww.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>회원리스트</title>
+<title>게시판 리스트</title>
 </head>
 <body>
 
-	<div class="contents" id="contents">
-		<table>
-
-			<thead>
-				<tr>
-					<th class="one wide">번호</th>
-					<th class="ten wide">글제목</th>
-					<th class="two wide">작성자</th>
-					<th class="three wide">작성일</th>
-				</tr>
-			</thead>
 
 
-			<tbody>
-
-				<tr th:each="board, index : ${boardList}">
-
-					<td><span th:text="${index.index}"></span></td>
-					<td><a href="@{'/list/' + ${board.id}} "></a></td>
-					<td><span th:text="${board.writer}"></span></td>
-					<td><span th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></span></td>
-				</tr>
-
-
-			</tbody>
-		</table>
-
+	<div>
+		<a href="/board/register" class="register">글쓰기 </a>
 	</div>
+
+	<table>
+		<colgroup>
+			<col width="50">
+			<col width="300">
+			<col width="150">
+			<col width="200">
+		</colgroup>
+
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+			</tr>
+		</thead>
+
+
+		<tbody>
+		
+		<tr th:each= "board:${board}">
+		<td th:text="${board.idx}"></td>
+		<td><a th:href="@{/board/detail/{idx}(idx=${board.idx})}" th:text="${board.title}"></a></td>
+		
+		
+		<td th:text="${board.writer}"></td>
+		<td th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}"></td>	
+		 		
+		</tr>
+	
+	
+		</tbody>
+	</table>
 
 </body>
 </html>
