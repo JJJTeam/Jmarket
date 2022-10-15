@@ -1,53 +1,66 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.*;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import java.security.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //테이블과 맵핑되는 Board클래스
-/*
- * 1.
- * lombok으로 getter,setter constructor를 생성하는데
- * JPA에서는 @NoArgsConstructor는 필수로 들어가 있어야 한다.
- * 
- * 2.
- * @Entity 애노테이션은 이 클래스가 @Entity라는걸 알려주기 위해 필수
- * 
- * 3.
- * @Id 애노테이션은 idx가 기본키라는걸 명시
- *
- * */
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-
+@NoArgsConstructor
+@Builder
+@Table(name = "board")
 @Entity
-public class Board{
+public class Board {
 	
 	@Id
-	@GeneratedValue
-	private int idx;
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다 ===> auto_increment
+	private int b_no;
 	
-	private String title;
-	private String content;
-	private String writer;
+	@ManyToOne(fetch = FetchType.EAGER) //기본패치전략, 반드시 들고와야하는 칼럼
+	@JoinColumn(name="cu_no")
+	private User user; // db에서는 안되지만 orm에서는 object를 사용할수있다
 	
+	@Column(nullable = false, length = 100)
+	private String b_title;
+	
+	@Lob //섬머노트 라이브러리로 <html>태그 섞여 디자인 될것이라 대용량데이터
+	private String b_content;
+	
+	private int b_ref;
+	private int b_step;
+	private int b_level;
 	
 	@CreationTimestamp
-	@Column(updatable = false)
-	private LocalDateTime createdAt;
+	private Timestamp b_created;
 	
-	@UpdateTimestamp
-	private LocalDateTime updatedAt;
+	private Date b_update;
+	
+	private int b_hit;
+	
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //테이블의 칼럼으로 생성하지 말아주세요, 반드시 갖고와주세요
+	private List<BoardComment> boardComment;
 	
 }
+
 

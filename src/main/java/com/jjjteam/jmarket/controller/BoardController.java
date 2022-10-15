@@ -2,7 +2,11 @@ package com.jjjteam.jmarket.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,69 +22,43 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/board")
-@RequiredArgsConstructor
 public class BoardController {
-
-	private final BoardService boardService;
-
-//	@GetMapping("/list")
-//	public String list(Model model, @RequestParam(required = false, defaultValue = "0", value = "page") int page) {
-//		Page<Board> listPage = boardService.list(page);
-//		int totalPage = listPage.getTotalPages();
-//		model.addAttribute("board", listPage.getContent());
-//		model.addAttribute("totalPage", totalPage);
-//		return "/board/list";
+	
+	@Autowired
+	private BoardService service;
+	
+//	@GetMapping("/")
+//	public String index(Model model, @PageableDefault(size = 3, direction = Sort.Direction.DESC) Pageable pageable) {
+//		Page<Board> paging = service.findAll(pageable);
+//		model.addAttribute("board",paging);
+//		// /WEB-INF/views/index.jsp
+//		return "index";
 //	}
 	
 
-	// 리스트
-	@GetMapping("/board/list")
-	public String list(Model model) {
-		model.addAttribute("board", boardService.list());
+	@GetMapping("/list")
+	public String list(Model model, @PageableDefault(size = 3, direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Board> paging = service.findAll(pageable);
+		model.addAttribute("board",paging);
+		// /WEB-INF/views/index.jsp
 		return "/board/list";
 	}
-
-	// 상세
-	@GetMapping("/detail/{idx}")
-	public String detail(@PathVariable int idx, Model model) {
-		model.addAttribute("board", boardService.detail(idx));
-		return "detail";
+	
+	@GetMapping("/saveForm")
+	public String saveForm() {
+		return "board/saveForm";
 	}
-
-	// 글 작성
-	@GetMapping("/register")
-	public String registerGet() {
-		return "/board/register";
+	
+	@GetMapping("/{b_no}")
+	public String findById(@PathVariable int b_no, Model model) {
+		model.addAttribute("board",service.findById(b_no));
+		return "board/detail";
 	}
-
-	// 글작성
-	@PostMapping("/register")
-	public String registerPost(Board board) {
-		boardService.register(board);
-		return "redirect:/board/list";
+	
+	@GetMapping("/{b_no}/updateForm")
+	public String updateForm(@PathVariable int b_no, Model model) {
+		model.addAttribute("board",service.findById(b_no));
+		return "board/updateForm";
 	}
-
-	// 글 수정
-	@GetMapping("/update/{idx}")
-	public String updateGet(@PathVariable int idx, Model model) {
-		model.addAttribute("board", boardService.detail(idx));
-		return "update";
-	}
-
-	// 글 수정
-	@PostMapping("/update")
-	public String updatePost(Board board) {
-
-		boardService.update(board);
-		return "redirect:/board/list";
-	}
-
-	// 글 삭제
-	@GetMapping("/delete/{idx}")
-	public String delete(@PathVariable int idx) {
-
-		boardService.delete(idx);
-		return "redirect:/board/list";
-	}
-
 }
+

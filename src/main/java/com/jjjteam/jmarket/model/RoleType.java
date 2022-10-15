@@ -1,5 +1,5 @@
 package com.jjjteam.jmarket.model;
 
-public class test {
-
+public enum RoleType {
+	USER,ADMIN
 }

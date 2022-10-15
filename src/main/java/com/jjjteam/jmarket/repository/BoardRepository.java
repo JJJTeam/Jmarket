@@ -13,8 +13,14 @@ import com.jjjteam.jmarket.model.Board;
  * 
  * 이 인터페이스를 이용해서 JPA를 custom도 할 수 있지만 여기서는 기본적인
  * CRUD만 할 거기 때문에 이상태로 
- * */
+ * 
+ * DAO 자동으로 bean등록이 되어 @Repository 생략가능
+ * 
+ */
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 
 	
 }
+
+
+

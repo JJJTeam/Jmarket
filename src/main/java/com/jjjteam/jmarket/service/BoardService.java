@@ -1,52 +1,66 @@
 package com.jjjteam.jmarket.service;
 
-import com.jjjteam.jmarket.model.Board;
-import com.jjjteam.jmarket.repository.BoardRepository;
+
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-/**
- * 
- * Service 단에서는 boardRepository를 이용해 데이터를 컨트롤
- * 등록,목록,상세보기,수정,삭제 
- * 
- */
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.jjjteam.jmarket.model.Board;
+import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.repository.BoardRepository;
+
+
 
 @Service
-@RequiredArgsConstructor
 public class BoardService {
 	
-	private final BoardRepository boardRepository;
+	@Autowired
+	private BoardRepository repository;
 	
-	public void register(Board board) {
-		boardRepository.save(board);
-	}
-	
-	//findAll을 할 때 idx를 기준으로 내림차순 정렬을 준것
-	public List<Board> list(){
-		return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "idx"));
-	}
-	
-	public Board detail(int idx) {
-		return boardRepository.findById(idx).orElse(null);
-	}
-	
-	public void update(Board board) {
-		boardRepository.save(board);
-	}
-	
-	public void delete(int idx) {
-		boardRepository.deleteById(idx);
-	}
-	
-	public Page<Board> list(int page){
-		return boardRepository.findAll(PageRequest.of(page, 3, Sort.by(Sort.Direction.DESC,"idx")));
+	@Transactional
+	public void save(Board board, User user) {
+		board.setB_hit(0);
+		board.setB_ref(board.getB_no());
+		board.setB_step(0);
+		board.setB_level(0);
+		board.setUser(user);
+		Board board2 = repository.save(board);
+		board.setB_ref(board2.getB_no());
+		repository.save(board);
 	}
 
+	@Transactional(readOnly = true)
+	public Page<Board> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Board findById(int b_no) {
+		return repository.findById(b_no).orElseThrow(()->{
+			return new IllegalArgumentException("글 상세보기 실패: 글번호를 찾을 수 없습니다!");
+			});
+	}
+	
+	@Transactional
+	public void deleteById(int b_no) {
+		repository.deleteById(b_no);
+	}
+	
+	@Transactional
+	public void update(int b_no, Board r_board) {
+		Board board = repository.findById(b_no)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글 찾기 실패: 글번호를 찾을 수 없습니다!");
+				}); //영속화 완료
+		board.setB_title(r_board.getB_title());
+		board.setB_content(r_board.getB_content()); 
+	} // 메소드가 끝날때 트랜잭션 종료. 영속화 되어있는 정보와 db정보를 비교하여(더티체킹) 따로 save() 호출안해도 자동 업데이트 하기위해 flush한다
+	
 }
