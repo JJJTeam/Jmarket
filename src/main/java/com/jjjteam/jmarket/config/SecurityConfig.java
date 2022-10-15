@@ -20,6 +20,7 @@ public class SecurityConfig {
 			.headers()
 			.frameOptions()
 			.disable();
+//		http.authorizeRequests().antMatchers("/**").permitAll().and().exceptionHandling();
 		return http.build();
 	}
 }

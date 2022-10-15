@@ -16,7 +16,7 @@ public class UserController {
 	
 	@Autowired private UserService userService;
 	
-	@GetMapping("/user/signInPage")
+	@GetMapping("/role_anonymous/signInPage")
 	public String toLoginPage() throws Exception {
 		
 		try {
@@ -25,10 +25,10 @@ public class UserController {
 			throw new Exception(e.getMessage()); 
 		}
 		
-		return "/user/signInPage";
+		return "/role_anonymous/signInPage";
 	}
 	
-	@GetMapping("/user/signUpPage")
+	@GetMapping("/role_anonymous/signUpPage")
 	public String toSignUpPage() throws Exception {
 		
 		try {
@@ -37,7 +37,7 @@ public class UserController {
 			throw new Exception(e.getMessage()); 
 		}
 		
-		return "/user/signUpPage";
+		return "/role_anonymous/signUpPage";
 	}
 	
 
