@@ -115,5 +115,31 @@
     //         }
     //     });
     // }
+
+    // $(".login-form button[type=submit]").click(login);
+    //
+    // function login(e) {
+    //     //원래 동작해야 할 이벤트를 중지 시킨다.
+    //     e.preventDefault();
+    //
+    //     //유저가 입력한 정보를 js 오브젝트로 만든다.
+    //     var data = {
+    //         'email' : $('#email').val(),
+    //         'password' : $('#password').val()
+    //     };
+    //
+    //     //위에서 만든 오브젝트를 json 타입으로 바꾼다.
+    //     var json = JSON.stringify(data);
+    //     var url = $(".login-form").attr("action");
+    //
+    //     $.ajax({
+    //         type : 'post',
+    //         url : url,
+    //         data : json,
+    //         contentType : "application/json; charset=utf-8",
+    //         error : onError,
+    //         success : onSuccess
+    //     });
+    // }
 </script>
 </html>
