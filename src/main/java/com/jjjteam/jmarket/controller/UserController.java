@@ -6,15 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jjjteam.jmarket.dto.UserDTO;
-import com.jjjteam.jmarket.service.UserService;
 
 
 
 @Controller
 public class UserController {
-	
-	@Autowired private UserService userService;
+
 	
 	@GetMapping("/role_anonymous/signInPage")
 	public String toLoginPage() throws Exception {
