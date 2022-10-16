@@ -5,18 +5,29 @@ import javax.validation.Valid;
 import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.payload.request.LoginRequest;
 import com.jjjteam.jmarket.payload.request.SignupRequest;
+import com.jjjteam.jmarket.payload.response.JwtResponse;
 import com.jjjteam.jmarket.payload.response.MessageResponse;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
+import com.jjjteam.jmarket.security.jwt.JwtUtils;
+import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -29,10 +40,11 @@ public class AuthController {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        log.info("@@@@@@@@@@@@@@@@@@");
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -85,5 +97,26 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles));
     }
 }
