@@ -16,21 +16,19 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${jjjteam.app.jwtSecret}")
+    @Value("${bezkoder.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${jjjteam.app.jwtExpirationMs}")
+    @Value("${bezkoder.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(UserDetailsImpl userPrincipal) {
+        return generateTokenFromUsername(userPrincipal.getUsername());
+    }
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
-        return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+    public String generateTokenFromUsername(String username) {
+        return Jwts.builder().setSubject(username).setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
@@ -56,4 +54,5 @@ public class JwtUtils {
 
         return false;
     }
+
 }

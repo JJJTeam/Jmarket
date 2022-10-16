@@ -13,11 +13,22 @@ spring:
     cache:  false
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
-# App Properties
-jjjteam:
+
+bezkoder:
   app:
     jwtSecret: bezKoderSecretKey
-    jwtExpirationMs: 86400000
+    jwtExpirationMs: 60000
+    jwtRefreshExpirationMs: 120000
+
+
+## App Properties
+#  bezkoder.app.jwtSecret= bezKoderSecretKey
+#  #bezkoder.app.jwtExpirationMs= 3600000
+#  #bezkoder.app.jwtRefreshExpirationMs= 86400000
+#
+#  ## For test
+#  bezkoder.app.jwtExpirationMs= 60000
+#  bezkoder.app.jwtRefreshExpirationMs= 120000
 
 
 ---
