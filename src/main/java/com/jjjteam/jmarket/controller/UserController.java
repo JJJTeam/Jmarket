@@ -6,17 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.jjjteam.jmarket.dto.UserDTO;
-import com.jjjteam.jmarket.service.UserService;
 
 
 
 @Controller
 public class UserController {
+
 	
-	@Autowired private UserService userService;
-	
-	@GetMapping("/user/signInPage")
+	@GetMapping("/role_anonymous/signInPage")
 	public String toLoginPage() throws Exception {
 		
 		try {
@@ -25,10 +22,10 @@ public class UserController {
 			throw new Exception(e.getMessage()); 
 		}
 		
-		return "/user/signInPage";
+		return "/role_anonymous/signInPage";
 	}
 	
-	@GetMapping("/user/signUpPage")
+	@GetMapping("/role_anonymous/signUpPage")
 	public String toSignUpPage() throws Exception {
 		
 		try {
@@ -37,7 +34,7 @@ public class UserController {
 			throw new Exception(e.getMessage()); 
 		}
 		
-		return "/user/signUpPage";
+		return "/role_anonymous/signUpPage";
 	}
 	
 

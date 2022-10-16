@@ -1,9 +1,10 @@
 package com.jjjteam.jmarket.test;
 
 
-import com.jjjteam.jmarket.constant.UserRole;
-import com.jjjteam.jmarket.model.Account;
-import com.jjjteam.jmarket.repository.AccountRepository;
+
+import com.jjjteam.jmarket.model.ERole;
+import com.jjjteam.jmarket.model.Role;
+import com.jjjteam.jmarket.repository.RoleRepository;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,16 @@ import javax.annotation.PostConstruct;
 public class TestService implements CommandLineRunner, ApplicationListener<ContextClosedEvent>, InitializingBean, DisposableBean {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private RoleRepository roleRepository;
+
+    private Role role;
     @PostConstruct
     private void init(){
 //                System.out.println("빈이 완전히 생성된 후에 한번 수행될 ㅂ메서드에 붙입니다.");
-        accountRepository.save(
-                Account.builder()
-                        .username("test")
-                        .password("1234")
-                        .role(UserRole.USER)
-                        .build()
-        );
-        // 테스트 유저 추가 메서드
+        roleRepository.save(new Role(ERole.ROLE_USER));
+        roleRepository.save(new Role(ERole.ROLE_MODERATOR));
+        roleRepository.save(new Role(ERole.ROLE_ADMIN));
+        // 권한내용을 DB에 넣어준다.
 
     }
     @Override
