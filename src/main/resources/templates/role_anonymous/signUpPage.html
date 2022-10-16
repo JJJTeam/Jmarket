@@ -54,7 +54,6 @@
 
 <script>
     function signUp() {
-        alert("tttt")
         var username = $("#username").val();
         // var mob = $("#mob").val();
         var password = $("#password").val();
@@ -91,16 +90,11 @@
                 type : "POST",
                 url : "/api/account",
                 contentType: 'application/json',
-                // data : {
-                //     username : $("#username").val(),
-                //     // mob : $("#mob").val(),
-                //     password : $("#password").val(),
-                //     // email : $("#email").val()
-                //
-                // },
                 data :JSON.stringify({
-                    "username" : "testUserName",
-                    "password" : "testPassWord"
+                    username : $("#username").val(),
+                    // mob : $("#mob").val(),
+                    password : $("#password").val(),
+                    // email : $("#email").val()
                 })
             });
         }
