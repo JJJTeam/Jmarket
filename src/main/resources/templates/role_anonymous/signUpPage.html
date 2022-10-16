@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+<h2>회원가입페이지입니다..2</h2>
+<!--<form action="/api/account" enctype="application/json" method="post">-->
+<!--    <input class="" id="username" lang="en" maxlength="20" name="username" placeholder="아이디를 입력해주세요." type="text">-->
+<!--    <input class="" id="password" lang="en" maxlength="255" name="password" placeholder="비밀번호 입력해주세요." type="text">-->
+<!--    <input class="btn btn_join" id="signUpBtn" type="submit" value="가입">-->
+<!--</form>-->
+
+<!--<div class="alert alert-success" role="alert"-->
+<!--     th:if="${successMessage}" th:text=${successMessage}>-->
+</div>
+<!--<form method="POST" th:action="@{/api/account}" th:object="${AccountFormDTO}">-->
+<form>
+    <div class="form-group">
+        <label for="username">User Name:</label>
+        <input class="form-control"
+               id="username" name="username" placeholder="Enter username"
+               type="text">
+<!--        <span data-placement="right" data-toggle="tooltip" th:errorclass="error"-->
+<!--              th:errors="*{username}" th:if="${#fields.hasErrors('username')}" title="*{username}">?</span>-->
+    </div>
+    <!--    <div class="form-group">-->
+    <!--        <label for="mob">Mob:</label> <input class="form-control" id="mob"-->
+    <!--                                             name="mob" placeholder="Enter mobile" type="text">-->
+    <!--        <span th:errorclass="error" th:errors="*{mob}" th:if="${#fields.hasErrors('mob')}"></span>-->
+
+    <!--    </div>-->
+    <div class="form-group">
+        <label for="password">User Password:</label> <input
+            class="form-control" id="password" name="password"
+            placeholder="Enter your password" type="text">
+<!--        <span th:errorclass="error" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></span>-->
+    </div>
+    <!--    <div class="form-group">-->
+    <!--        <label for="email">Email:</label> <input class="form-control" id="email"-->
+    <!--                                                 name="email" placeholder="Enter your email" type="text">-->
+    <!--        <span th:errorclass="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>-->
+    <!--    </div>-->
+    <button class="btn btn-primary btn-block" type="submit" onclick="signUp();">Submit</button>
+    <!--    <a href="./login">Click here to Login</a>-->
+</form>
+</body>
+
+<script>
+    function signUp() {
+        alert("tttt")
+        var username = $("#username").val();
+        // var mob = $("#mob").val();
+        var password = $("#password").val();
+        // var email = $("#email").val();
+        var mnlen = 3;
+        var mxlen = 20;
+        var checkval = 1;
+
+        /* if(username ==""){
+            $("#errorusername").text("Please Enter Username");
+            checkval=0;
+        }
+        else if (username.length<mnlen || username.length>mxlen){
+            $("#errorusername").text("Please input the username between " +mnlen+ " and " +mxlen+ " characters");
+            checkval=0;
+        } */
+        // if (mob == '') {
+        //     $("#errormob").text("Please Enter Mobile Number");
+        //     checkval = 0;
+        // }
+        if (password == '') {
+            $("#erroruserpassword").text("Please Enter Password");
+            checkval = 0;
+        }
+        // if (email == '') {
+        //     $("#erroremail").text("Please Enter the Email");
+        //     checkval = 0;
+        // } else if (checkEmail(email) == true) {
+        //
+        // }
+        if (checkval == 1) {
+
+            $.ajax({
+                type : "POST",
+                url : "/api/account",
+                contentType: 'application/json',
+                // data : {
+                //     username : $("#username").val(),
+                //     // mob : $("#mob").val(),
+                //     password : $("#password").val(),
+                //     // email : $("#email").val()
+                //
+                // },
+                data :JSON.stringify({
+                    "username" : "testUserName",
+                    "password" : "testPassWord"
+                })
+            });
+        }
+    }
+
+    // function checkEmail(email) {
+    //     var email = $('#email').val();
+    //     $.ajax({
+    //         type : "GET",
+    //         url : "./checkEmail/" + email,
+    //         success : function(data) {
+    //             if (data == true) {
+    //                 $("#erroremail").text("Email Already Exist");
+    //             }
+    //         },
+    //         fail : function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // }
+</script>
+</html>
