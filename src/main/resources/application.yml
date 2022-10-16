@@ -17,8 +17,10 @@ spring:
 bezkoder:
   app:
     jwtSecret: bezKoderSecretKey
-    jwtExpirationMs: 60000
-    jwtRefreshExpirationMs: 120000
+    jwtExpirationMs: 3600000
+    jwtRefreshExpirationMs: 86400000
+    jwtCookieName: bezkoder-jwt
+    jwtRefreshCookieName: bezkoder-jwt-refresh
 
 
 ## App Properties
