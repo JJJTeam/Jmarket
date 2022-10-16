@@ -1,9 +1,6 @@
 package com.jjjteam.jmarket.config;
 
-import com.jjjteam.jmarket.security.filter.FormLoginFilter;
-import com.jjjteam.jmarket.security.handler.FormLoginAuthenticationFailureHandler;
-import com.jjjteam.jmarket.security.handler.FormLoginAuthenticationSuccessHandler;
-import com.jjjteam.jmarket.security.provider.FormLoginAuthenticationProvider;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,11 +36,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final FormLoginAuthenticationSuccessHandler formLoginAuthenticationSuccessHandler;
-    private final FormLoginAuthenticationFailureHandler formLoginAuthenticationFailureHandler;
-
-    private final FormLoginAuthenticationProvider provider;
-
 //    @Bean
 //    public AuthTokenFilter authenticationJwtTokenFilter() {
 //        return new AuthTokenFilter();
@@ -60,15 +52,15 @@ public class SecurityConfig {
 //        return authProvider;
 //    }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+//        return authConfig.getAuthenticationManager();
+//    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -85,5 +77,18 @@ public class SecurityConfig {
 //
 //        return http.build();
 //    }
+
+        @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                    .csrf()
+                    .disable();
+
+            http
+                    .headers()
+                    .frameOptions()
+                    .disable();
+        return http.build();
+    }
 
 }
