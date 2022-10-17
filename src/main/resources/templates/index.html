@@ -13,12 +13,41 @@
   <link type="text/css" rel="stylesheet" th:href="@{/css/header.css}" />
   <link type="text/css" rel="stylesheet" th:href="@{/css/menu_1.css}" />
   <link type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
+
+  <style>
+    .event_ban_area > ul {
+      position: flex;
+    }
+    .event_ban_area ul > li {
+      display: inline-block;
+      align-items: center;
+      width: 20%;
+      height: 200px;
+      margin: 50px 20px;
+    }
+    .event_ban_area ul > li img {
+      padding: 50px 0;
+    }
+  </style>
+
 </head>
 
 <body>
-<!--<div th:replace="footer :: copy"></div>-->
 <div th:insert="/include/header.html"></div>
-  <h2>index.html 페이지 입니다.</h2>
+<!--<div th:insert="/include/header.html"></div>-->
+
+<section class="section-slide">
+  <div class="wrap-slick1">
+    <div class="slick1">
+      <div class="item-slick1"
+           style="background-image: url(static/images/main_001.jpg);"></div>
+
+      <div class="item-slick1"
+           style="background-image: url(static/images/main_001.jpg);"></div>
+    </div>
+  </div>
+</section>
+
   <a href="/user/signInPage"><span>로그인페이지</span></a>
 </body>
 

@@ -19,7 +19,18 @@ public class HomeController {
 			throw new Exception(e.getMessage()); 
 		}
 		
-		return "/index";
+		return "index";
+	}
+	@GetMapping("/index")
+	public String toLoginPage2() throws Exception {
+
+		try {
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
+		return "index";
 	}
 
 }

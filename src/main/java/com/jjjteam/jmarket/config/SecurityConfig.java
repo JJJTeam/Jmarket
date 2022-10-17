@@ -1,11 +1,9 @@
 package com.jjjteam.jmarket.config;
 
 
-
 import com.jjjteam.jmarket.security.jwt.AuthEntryPointJwt;
 import com.jjjteam.jmarket.security.jwt.AuthTokenFilter;
 import com.jjjteam.jmarket.security.services.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -91,12 +89,23 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/**/*").permitAll()
                 .antMatchers("/*").permitAll()
+                .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll()
+//                .antMatchers("/", "/css/**", "/scripts/**", "/plugin/**", "/fonts/**", "/vendor/**").permitAll()
+//                .antMatchers("/*").permitAll()
+//                .antMatchers("*").permitAll()
+//                .antMatchers("**").permitAll()
                 .anyRequest().authenticated();
+
 
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+//        http.authorizeRequests()
+//                .antMatchers("/*").permitAll()
+//                .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll();
 
         return http.build();
     }
