@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link type="text/css" rel="stylesheet" th:href="@{/css/common.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/main_1.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/header.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/menu_1.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
 </head>
 
 <body>
+<!--<div th:replace="footer :: copy"></div>-->
+<div th:insert="/include/header.html"></div>
   <h2>index.html 페이지 입니다.</h2>
   <a href="/user/signInPage"><span>로그인페이지</span></a>
 </body>
