@@ -8,17 +8,6 @@
 <!-- QuickMenu -->
 <div th:insert="/include/quickMenu.html"></div>
 
-<!-- 구글 로그인 SDK -->
-<meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<!-- 네이버 로그인 SDK -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-
-<!-- 카카오 로그인 SDK -->
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-
 
 <link rel="stylesheet" href="/css/member/joinForm.css"/>
 
@@ -28,7 +17,8 @@
     <h1>SHOP OOTD</h1>
 
     <div class="content">
-            <div class="signup-cont cont">
+<!--            <div class="signup-cont cont">-->
+      <div>
               <form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
                     style="height: 1000px;" name="fr" onsubmit="return check()">
 
@@ -38,7 +28,7 @@
                        required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" onkeyup="checkId(this)">
                 <input type="button" value="아이디중복확인" onclick="openIdChk()">
                 <input type="hidden" name="idDuplication" value="idUncheck">
-                <label for="text">ID</label><br><br>
+<!--                <label for="text">ID</label><br><br>-->
 
                 <b>비밀번호</b><b id="checkPasswdResult" class="tc"></b>
                 <input type="password" name="pass" id="password" class="inpt" required="required"
@@ -78,39 +68,20 @@
                 <label for="term">위 약관에 동의합니다.</label> <br>
 
                 <input type="submit" value="Sign up" class="submit">
-
               </form>
-
             </div>
-
     </div>
   </article>
 </section>
 <div style="height: 470px"></div>
 
 
-<script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/member/joinForm.js"/>
 <script type="text/javascript">
   var url = window.location.href;
   var hash = url.substring(url.indexOf("#") + 1);
 
-  $('.tabs .tab').click(function() {
-    if ($(this).hasClass('signin')) {
-      $('.tabs .tab').removeClass('active');
-      $(this).addClass('active');
-      $('.cont').hide();
-      $('.signin-cont').show();
-
-    }
-    if ($(this).hasClass('signup')) {
-      $('.tabs .tab').removeClass('active');
-      $(this).addClass('active');
-      $('.cont').hide();
-      $('.signup-cont').show();
-
-    }
-  });
   $('.container .bg').mousemove(
           function(e) {
             var amountMovedX = (e.pageX * -1 / 30);
@@ -124,11 +95,57 @@
     $('this').addClass('active');
     $('.cont').hide();
     $('.signup-cont').show();
-
   }
 
+  // function signUp() {
+  //   var username = $("#username").val();
+  //   // var mob = $("#mob").val();
+  //   var password = $("#password").val();
+  //   // var email = $("#email").val();
+  //   var mnlen = 3;
+  //   var mxlen = 20;
+  //   var checkval = 1;
+  //
+  //   /* if(username ==""){
+  //       $("#errorusername").text("Please Enter Username");
+  //       checkval=0;
+  //   }
+  //   else if (username.length<mnlen || username.length>mxlen){
+  //       $("#errorusername").text("Please input the username between " +mnlen+ " and " +mxlen+ " characters");
+  //       checkval=0;
+  //   } */
+  //   // if (mob == '') {
+  //   //     $("#errormob").text("Please Enter Mobile Number");
+  //   //     checkval = 0;
+  //   // }
+  //   if (password == '') {
+  //     $("#erroruserpassword").text("Please Enter Password");
+  //     checkval = 0;
+  //   }
+  //   // if (email == '') {
+  //   //     $("#erroremail").text("Please Enter the Email");
+  //   //     checkval = 0;
+  //   // } else if (checkEmail(email) == true) {
+  //   //
+  //   // }
+  //   if (checkval == 1) {
+  //
+  //     $.ajax({
+  //       type : "POST",
+  //       url : "/api/account",
+  //       contentType: 'application/json',
+  //       data :JSON.stringify({
+  //         username : $("#username").val(),
+  //         // mob : $("#mob").val(),
+  //         password : $("#password").val(),
+  //         // email : $("#email").val()
+  //       })
+  //     });
+  //   }
+  // }
 
 </script>
+
 </body>
 
 <div th:insert="/include/footer.html"></div>
