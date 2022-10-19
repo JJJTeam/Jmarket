@@ -28,5 +28,11 @@ public class Role {
     public Role(ERole name) {
         this.name = name;
     }
+    
+//2022.10.19 sujin추가    
+    public enum RoleType {
+    	USER,ADMIN
+    }
+
 
 }
