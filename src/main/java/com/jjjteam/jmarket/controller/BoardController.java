@@ -13,11 +13,13 @@ public class BoardController {
 	public String list() {
 		return "/board/list";
 	}
-
+	
 	// 게시판 글쓰기
 	@GetMapping("/register")
 	public String write() {
 		return "/board/register";
 	}
+	
+	//게시판 수정
 
 }
