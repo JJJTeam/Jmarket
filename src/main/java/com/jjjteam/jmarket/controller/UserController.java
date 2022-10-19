@@ -41,19 +41,6 @@ public class UserController {
 		
 		return "/user/signUpPage";
 	}
-	@PostMapping("/user/signUpProcess")
-	public String signUpProcess(UserDTO userDTO) throws Exception {
-		
-		try {
-			System.out.println(userDTO);
-			userService.signUp(userDTO);
-			
-
-		} catch (Exception e) {
-			throw new Exception(e.getMessage()); 
-		}
-		
-		return "/user/signUpPage";
-	}
+	
 
 }

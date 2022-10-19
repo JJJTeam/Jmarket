@@ -1,5 +1,6 @@
 package com.jjjteam.jmarket.repository;
 
-public class test {
 
-}
+//구DAO
+
+

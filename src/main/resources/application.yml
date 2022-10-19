@@ -6,16 +6,20 @@ spring:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
-  thymeleaf:
-    cache:  false
-<<<<<<< HEAD
+ 
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
-=======
-#mybatis:
-#  config-location: 
 
->>>>>>> 수진회원가입로그인만들브랜치생성
 ---
+
+#타임리프설정
+spring:
+    thymeleaf:
+        prefix : classpath:templates/
+        suffix : .html
+        cache : false
+
+---
+
 
 spring:
   config:
