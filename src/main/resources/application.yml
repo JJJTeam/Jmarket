@@ -4,13 +4,20 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
   thymeleaf:
     cache:  false
+  servlet:
+  multipart:
+    maxFileSize: 20MB
+    maxRequestSize: 100MB
+    
+itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 
