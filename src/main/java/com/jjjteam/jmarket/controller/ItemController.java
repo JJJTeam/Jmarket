@@ -21,11 +21,11 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 	
-	// 사이트 이동
-	@GetMapping("/item")
-	public String item() {
-		return "/item/itemForm";
-	}
+	// 사이트?
+	@GetMapping("/item/itemForm")
+ 	public String item() {
+ 		return "/item/itemForm";
+ 	}
 	
 	// 기존
 	@GetMapping("/item/new")
