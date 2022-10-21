@@ -28,11 +28,11 @@ public class ItemController {
 // 	}
 	
 	// 기존
-//	@GetMapping("/item/new")
-//	public String itemForm(Model model) {
-//		model.addAttribute("itemFormDTO", new ItemFormDTO());
-//		return "/item/itemForm";
-//	}
+	@GetMapping("/item/new")
+	public String itemForm(Model model) {
+		model.addAttribute("itemFormDTO", new ItemFormDTO());
+		return "item/itemForm";
+	}
 
 	@PostMapping("/item/new")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,

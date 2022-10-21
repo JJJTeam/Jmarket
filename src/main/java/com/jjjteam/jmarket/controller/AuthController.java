@@ -64,11 +64,6 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
     
-    @GetMapping("/item/new")
-	public String itemForm(Model model) {
-		model.addAttribute("itemFormDTO", new ItemFormDTO());
-		return "/item/itemForm";
-	}
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

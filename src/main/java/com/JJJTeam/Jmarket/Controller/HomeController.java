@@ -21,6 +21,7 @@ public class HomeController {
 		
 		return "index";
 	}
+	
 	@GetMapping("/index")
 	public String toLoginPage2() throws Exception {
 
