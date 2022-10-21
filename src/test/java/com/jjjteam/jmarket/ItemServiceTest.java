@@ -28,7 +28,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-@TestPropertySource(properties = { "spring.config.location=classpath:application.yml" })
+@TestPropertySource(properties = {"spring.config.location=classpath:application.yml" })
 public class ItemServiceTest {
 
 	@Autowired
@@ -45,7 +45,8 @@ public class ItemServiceTest {
 
 		// path 제일 앞에 경로를 /User로 수정함
 		for (int i = 0; i < 5; i++) {
-			String path = "/Users/jincrates/projects/upload/shop/item/";
+//			String path = "/Users/jincrates/projects/upload/shop/item/";
+			String path = "C:\\shop\\item";
 			String imageName = "image" + i + ".jpg";
 			MockMultipartFile multipartFile = new MockMultipartFile(path, imageName, "image/jpg",
 					new byte[] { 1, 2, 3, 4 });
