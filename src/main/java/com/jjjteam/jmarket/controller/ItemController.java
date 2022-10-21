@@ -21,18 +21,18 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 	
-	// 사이트?
-	@GetMapping("/item/itemForm")
- 	public String item() {
- 		return "/item/itemForm";
- 	}
+//	// 사이트?
+//	@GetMapping("/item/itemForm")
+// 	public String item() {
+// 		return "/item/itemForm";
+// 	}
 	
 	// 기존
-	@GetMapping("/item/new")
-	public String itemForm(Model model) {
-		model.addAttribute("itemFormDTO", new ItemFormDTO());
-		return "/item/itemForm";
-	}
+//	@GetMapping("/item/new")
+//	public String itemForm(Model model) {
+//		model.addAttribute("itemFormDTO", new ItemFormDTO());
+//		return "/item/itemForm";
+//	}
 
 	@PostMapping("/item/new")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,

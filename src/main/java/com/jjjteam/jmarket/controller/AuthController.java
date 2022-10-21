@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.exception.TokenRefreshException;
 import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.RefreshToken;
@@ -31,6 +32,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,11 +64,11 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
     
-    // 사이트 이동
-// 	@GetMapping("/item/itemForm")
-// 	public String item() {
-// 		return "/item/itemForm";
-// 	}
+    @GetMapping("/item/new")
+	public String itemForm(Model model) {
+		model.addAttribute("itemFormDTO", new ItemFormDTO());
+		return "/item/itemForm";
+	}
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
