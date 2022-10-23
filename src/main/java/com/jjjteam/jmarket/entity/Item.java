@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.entity;
 import javax.persistence.*;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,5 +43,13 @@ public class Item {
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
         this.itemSellStatus = itemSellStatus;
+    }
+    
+    public void updateItem(ItemFormDTO itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
 }
