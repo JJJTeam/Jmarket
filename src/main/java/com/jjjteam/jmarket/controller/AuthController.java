@@ -22,6 +22,7 @@ import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.jwt.JwtUtils;
 import com.jjjteam.jmarket.security.services.RefreshTokenService;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@Slf4j
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -92,6 +94,8 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@{}", signUpRequest);
+
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }

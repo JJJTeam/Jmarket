@@ -10,7 +10,7 @@
     <article class="half">
         <h1>SHOP OOTD</h1>
         <div class="content">
-            <form id="sighUpForm" style="height: 1000px;" onsubmit="signupFunction();">
+            <form id="sighUpForm" style="height: 1000px;">
                 <div id="re"></div>
                 <br>
 <!--                <b>아이디</b><b class="tc" id="checkIdResult"></b>-->
@@ -26,10 +26,10 @@
                        required="required" type="email">
                 <label for="email">e-mail</label>
                 <b>이름</b>
-                <input class="inpt" id="name" name="username" placeholder="닉네임을 입력하세요" required="required"
+                <input class="inpt" id="username" name="username" placeholder="닉네임을 입력하세요" required="required"
                        type="text">
-                <label for="name">Username</label><br>
-                <input class="submit" type="submit" value="Sign up">
+                <label for="username">Username</label><br>
+                <input class="submit" type="submit" value="Sign up" onclick="signupFunction()">
             </form>
         </div>
     </article>
@@ -38,7 +38,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="/js/member/signup.js.js"/>
+<script src="/js/member/signup.js"/>
 <script type="text/javascript">
     var url = window.location.href;
     var hash = url.substring(url.indexOf("#") + 1);

@@ -1,33 +1,25 @@
 
-jQuery('#sighUpForm').submit(
-    signupFunction()
-)
-
-
-
-
-
 function signupFunction(){
-
     alert("test")
-    // var dataParam = {
-    //     "username":  $("#username").val(),
-    //     "email":  $("#email").val(),
-    //     "password":  $("#password").val()
-    // }
-    // $.ajax({
-    //     type:'POST',
-    //     url:"/api/auth/signup",
-    //     data: JSON.stringify(dataParam),
-    //     contentType:"application/json;charset=utf=8"
-    // })
-    //     .done(function(resp){
-    //         alert(resp+"수정성공")
-    //         location.href='/list'
-    //     })
-    //     .fail(function(e){
-    //         alert(e+"수정실패")
-    //     })
+    let dataParam = {
+        "username": $("#username").val(),
+        "email": $("#email").val(),
+        "password": $("#password").val()
+    };
+    console.log(dataParam)
+    $.ajax({
+        type:'POST',
+        url:"/api/auth/signup",
+        data: JSON.stringify(dataParam),
+        contentType:"application/json;charset=utf=8"
+    })
+        .done(function(resp){
+            alert(resp+"수정성공")
+            // location.href='/list'
+        })
+        .fail(function(e){
+            alert(e+"수정실패")
+        })
 }
 
 
