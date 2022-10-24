@@ -1,6 +1,6 @@
 # local, dev, prod 공통 설정
 server:
-  port: 8080
+  port: 8081
 spring:
   jpa:
     hibernate:

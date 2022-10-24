@@ -1,12 +1,10 @@
 
 function signupFunction(){
-    alert("test")
     let dataParam = {
         "username": $("#username").val(),
         "email": $("#email").val(),
         "password": $("#password").val()
     };
-    console.log(dataParam)
     $.ajax({
         type:'POST',
         url:"/api/auth/signup",
@@ -14,8 +12,8 @@ function signupFunction(){
         contentType:"application/json;charset=utf=8"
     })
         .done(function(resp){
-            alert(resp+"수정성공")
-            // location.href='/list'
+            alert(resp+"가입을 축하합니다.")
+            location.href='/member/login'
         })
         .fail(function(e){
             alert(e+"수정실패")
