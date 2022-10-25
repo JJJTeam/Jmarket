@@ -1,4 +1,4 @@
-alert("test")
+
 function signinFunction(){
     let dataParam = {
         "username": $("#username").val(),

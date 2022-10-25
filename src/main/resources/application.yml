@@ -13,6 +13,9 @@ spring:
     cache:  false
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
+logging:
+  level:
+    root: info
 
 bezkoder:
   app:

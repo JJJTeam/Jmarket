@@ -92,10 +92,6 @@ public class SecurityConfig {
                 .antMatchers("/**/*").permitAll()
                 .antMatchers("/*").permitAll()
                 .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll()
-//                .antMatchers("/", "/css/**", "/scripts/**", "/plugin/**", "/fonts/**", "/vendor/**").permitAll()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("*").permitAll()
-//                .antMatchers("**").permitAll()
                 .anyRequest().authenticated();
 
 
@@ -103,9 +99,6 @@ public class SecurityConfig {
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-//        http.authorizeRequests()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll();
 
         return http.build();
     }

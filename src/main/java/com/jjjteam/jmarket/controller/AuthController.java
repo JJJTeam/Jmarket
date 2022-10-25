@@ -65,11 +65,17 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+        // 인증 객체 생성 - JJH
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        // log.info(authentication.toString());  -->>
+        // CONSOLE : UsernamePasswordAuthenticationToken [Principal=com.jjjteam.jmarket.security.services.UserDetailsImpl@75a0b981,
+        // Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]]  -JJH
+
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
@@ -94,8 +100,6 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@{}", signUpRequest);
-
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
