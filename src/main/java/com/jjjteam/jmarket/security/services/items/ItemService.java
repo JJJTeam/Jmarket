@@ -24,6 +24,8 @@ public class ItemService {
 	private final ItemRepository itemRepository;
 	private final ItemImgService itemImgService;
 	private final ItemImgRepository itemImgRepository;
+	private final ItemFormDTO itemFormDTO;
+	private final ItemImgDTO itemImgDTO;
 
 	public Long saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
 		// 상품 등록
@@ -47,33 +49,15 @@ public class ItemService {
         List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
 
         for (ItemImg itemImg : itemImgList) {
-            ItemImgDTO itemImgDto = ItemImgDTO.of(itemImg);
-            itemImgDtoList.add(itemImgDto);
+            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+            itemImgDtoList.add(itemImgDTO);
         }
 
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
-        ItemFormDTO itemFormDto = ItemFormDTO.of(item);
-        itemFormDto.setItemImgDtoList(itemImgDtoList);
+        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
+        itemFormDTO.setItemImgDtoList(itemImgDtoList);
 
-        return itemFormDto;
-    }
-	
-	
-	public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception {
-
-        if (!itemImgFile.isEmpty()) {
-            ItemImg savedItemImg = itemImgRepository.findById(itemImgId).orElseThrow(EntityNotFoundException::new);
-
-            //기존 이미지 삭제
-            if (!StringUtils.isEmpty(savedItemImg.getImgName())) {
-                fileService.deleteFile(itemImgLocation + "/" + savedItemImg.getImgName());
-            }
-
-            String oriImgName = itemImgFile.getOriginalFilename();
-            String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
-            String imgUrl = "/images/item/" + imgName;
-            savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
-        }
+        return itemFormDTO;
     }
 	
 	

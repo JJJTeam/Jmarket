@@ -6,13 +6,12 @@ import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.Builder;
 
 @ToString
 @Getter
-@NoArgsConstructor
+@Table(name="item")
 @Entity
 public class Item {
 	@Id

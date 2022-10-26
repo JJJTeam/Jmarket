@@ -13,10 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.security.services.items.ItemService;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Controller
 public class ItemController {
 
