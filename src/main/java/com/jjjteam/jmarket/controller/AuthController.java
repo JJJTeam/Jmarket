@@ -65,18 +65,33 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        // 인증 객체 생성 - JJH
+        // 인증 객체 생성 후 반환 - JJH
+        // Authentication 유저의 인증정보를 가지고 있는 객체
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
         // log.info(authentication.toString());  -->>
         // CONSOLE : UsernamePasswordAuthenticationToken [Principal=com.jjjteam.jmarket.security.services.UserDetailsImpl@75a0b981,
         // Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]]  -JJH
 
+        // SecurityContextHolder  authenticated인 사용자의 details 를 저장 --> 사용자를 인증을 여부를 저장함
+//        log.info("1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        log.info(String.valueOf(authentication.isAuthenticated()));  //true
+//        log.info(String.valueOf(authentication.getPrincipal()));  //com.jjjteam.jmarket.security.services.UserDetailsImpl@18528740
+//        log.info(String.valueOf(authentication.getCredentials()));  //null
+//        log.info(String.valueOf(authentication.getDetails()));  //null
+//        log.info(String.valueOf(authentication.getName()));  //test
+//        log.info("1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        log.info("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        log.info(String.valueOf(authentication.isAuthenticated()));  //true
+//        log.info(String.valueOf(authentication.getPrincipal()));  //com.jjjteam.jmarket.security.services.UserDetailsImpl@18528740
+//        log.info(String.valueOf(authentication.getCredentials()));  //null
+//        log.info(String.valueOf(authentication.getDetails()));  //null
+//        log.info(String.valueOf(authentication.getName()));  //test
+//        log.info("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
-
+        // userDetail에 인증정보를 저장
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);

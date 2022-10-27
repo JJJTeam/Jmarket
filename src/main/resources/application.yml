@@ -5,6 +5,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
@@ -14,8 +18,15 @@ spring:
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
+  file:
+    path: logs
   level:
-    root: info
+    root: debug
+    com:
+      jjjteam:
+        jmarket: trace
+#    root: trace
+
 
 bezkoder:
   app:
