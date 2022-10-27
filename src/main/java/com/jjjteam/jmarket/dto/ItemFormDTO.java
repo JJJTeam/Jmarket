@@ -59,7 +59,7 @@ public class ItemFormDTO {
 		return entity;
 	}
 
-	public ItemFormDTO of(Item entity) {
+	public static ItemFormDTO of(Item entity) {
 		ItemFormDTO dto = ItemFormDTO.builder()
 				.itemNm(entity.getItemNm())
 				.itemDetail(entity.getItemDetail())

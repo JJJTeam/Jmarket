@@ -24,8 +24,7 @@ public class ItemService {
 	private final ItemRepository itemRepository;
 	private final ItemImgService itemImgService;
 	private final ItemImgRepository itemImgRepository;
-	private final ItemFormDTO itemFormDTO;
-	private final ItemImgDTO itemImgDTO;
+
 
 	public Long saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
 		// 상품 등록
