@@ -18,8 +18,8 @@ spring:
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
-  file:
-    path: logs
+#  file:
+#    path: logs
   level:
     root: debug
     com:

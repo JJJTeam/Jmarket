@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -65,31 +66,13 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         // 인증 객체 생성 후 반환 - JJH
         // Authentication 유저의 인증정보를 가지고 있는 객체
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        // log.info(authentication.toString());  -->>
-        // CONSOLE : UsernamePasswordAuthenticationToken [Principal=com.jjjteam.jmarket.security.services.UserDetailsImpl@75a0b981,
-        // Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]]  -JJH
 
-        // SecurityContextHolder  authenticated인 사용자의 details 를 저장 --> 사용자를 인증을 여부를 저장함
-//        log.info("1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        log.info(String.valueOf(authentication.isAuthenticated()));  //true
-//        log.info(String.valueOf(authentication.getPrincipal()));  //com.jjjteam.jmarket.security.services.UserDetailsImpl@18528740
-//        log.info(String.valueOf(authentication.getCredentials()));  //null
-//        log.info(String.valueOf(authentication.getDetails()));  //null
-//        log.info(String.valueOf(authentication.getName()));  //test
-//        log.info("1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        log.info("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        log.info(String.valueOf(authentication.isAuthenticated()));  //true
-//        log.info(String.valueOf(authentication.getPrincipal()));  //com.jjjteam.jmarket.security.services.UserDetailsImpl@18528740
-//        log.info(String.valueOf(authentication.getCredentials()));  //null
-//        log.info(String.valueOf(authentication.getDetails()));  //null
-//        log.info(String.valueOf(authentication.getName()));  //test
-//        log.info("2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
         // userDetail에 인증정보를 저장
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -115,6 +98,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
@@ -166,6 +150,7 @@ public class AuthController {
 
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principle.toString() != "anonymousUser") {
             Long userId = ((UserDetailsImpl) principle).getId();
@@ -183,6 +168,7 @@ public class AuthController {
 
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(HttpServletRequest request) {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         String refreshToken = jwtUtils.getJwtRefreshFromCookies(request);
 
         if ((refreshToken != null) && (refreshToken.length() > 0)) {
