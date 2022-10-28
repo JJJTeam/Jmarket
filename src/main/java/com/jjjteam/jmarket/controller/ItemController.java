@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.security.services.items.ItemService;
+import com.jjjteam.jmarket.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -77,7 +77,7 @@ public class ItemController {
 
         return "item/itemForm";
     }
-	
+	//상품 등록
 	@PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDTO itemFormDto, BindingResult bindingResult
             , @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {

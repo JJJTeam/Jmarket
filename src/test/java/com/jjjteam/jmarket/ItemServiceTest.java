@@ -17,7 +17,7 @@ import com.jjjteam.jmarket.entity.Item;
 import com.jjjteam.jmarket.entity.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
-import com.jjjteam.jmarket.security.services.items.ItemService;
+import com.jjjteam.jmarket.service.ItemService;
 
 import javax.persistence.EntityNotFoundException;
 

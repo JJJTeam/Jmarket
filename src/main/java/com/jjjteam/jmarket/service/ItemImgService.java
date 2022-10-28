@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.security.services.items;
+package com.jjjteam.jmarket.service;
 
 import lombok.RequiredArgsConstructor;
 
