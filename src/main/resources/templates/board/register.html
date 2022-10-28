@@ -2,17 +2,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>공지사항</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
 </head>
+
 <body>
 
+	<h2 class="mb-3 border-bottom pb-2">질문등록</h2>
 	
-    <div class="layout">
-        <form action="/board/register" method="post">
-            <input name="title" type="text">
-            <textarea name="content"></textarea>
-            <button>작성</button>
-        </form>
-    </div>
+	<form th:action="@{/board/register_form}" method="post">
+	
+	<div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input type="text" th:field="*{subject}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+        
+        
+	</form>
+    
+    
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
