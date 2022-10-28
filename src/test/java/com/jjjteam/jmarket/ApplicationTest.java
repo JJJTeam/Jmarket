@@ -2,17 +2,19 @@ package com.jjjteam.jmarket;
 
 
 
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
-import java.util.List;
+import com.jjjteam.jmarket.model.Board;
+import com.jjjteam.jmarket.repository.BoardRepository;
 
-@RunWith(SpringRunner.class)
+import java.time.LocalDateTime;
+// @RunWith(SpringRunner.class)
+
+
 @SpringBootTest
 public class ApplicationTest {
 
@@ -48,4 +50,27 @@ public class ApplicationTest {
 //		assertThat(account.getPassword(), is("1234"));
 //		assertThat(account.getRole(), is(UserRole.USER));
 //	}
+	
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@Test
+	void testJpa() {
+		
+		Board b1 = new Board();
+		b1.setSubject("board에 잘들어가는지 체크1111111");
+		b1.setContent("안에 들어가는 content 체크까지 1111");
+		b1.setCreateDate(LocalDateTime.now());
+		this.boardRepository.save(b1);
+		
+		Board b2 = new Board();
+		b2.setSubject("board에 잘들어가는지 체크2222222");
+		b2.setContent("안에 들어가는 content 체크까지22222");
+		b2.setCreateDate(LocalDateTime.now());
+		this.boardRepository.save(b2);
+		
+	}
+	
+	
 }

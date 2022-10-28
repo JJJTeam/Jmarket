@@ -8,5 +8,8 @@ import com.jjjteam.jmarket.model.Board;
 //DAO
 //자동으로 bean등록이 되어 @Repository 생략가능
 public interface BoardRepository extends JpaRepository<Board, Integer>{
+
+	//이렇게생성하고, 테스트에서 내용물 잘 들어가는지 확인
+	
 	
 }
