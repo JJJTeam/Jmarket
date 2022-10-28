@@ -69,9 +69,13 @@ public class AuthController {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         // 인증 객체 생성 후 반환 - JJH
         // Authentication 유저의 인증정보를 가지고 있는 객체
+        log.info("test1");
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+                .authenticate(
+                        //아직 인증되지 않은 Authentication객체를 생성 - AbstractAuthenticationToken 상속 - Authentication 상속
+                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+                );
+        log.info("test2");
 
 
         // userDetail에 인증정보를 저장

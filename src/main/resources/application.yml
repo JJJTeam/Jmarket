@@ -27,7 +27,6 @@ logging:
         jmarket: trace
 #    root: trace
 
-
 bezkoder:
   app:
     jwtSecret: bezKoderSecretKey
@@ -61,7 +60,16 @@ server:
 spring:
   config:
     activate:
-      on-profile: name1
+      on-profile: jungho
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
 
 
 ---

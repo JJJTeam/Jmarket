@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 
+
+//springconfig의 filterChain 에 addFilterBefore으로 등록된 커스텀필터
 @Slf4j
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
