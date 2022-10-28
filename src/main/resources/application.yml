@@ -1,10 +1,10 @@
 # local, dev, prod 공통 설정
 server:
-  port: 8080
+  port: 8082
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     url: jdbc:mariadb://localhost:3306/portfolio
     username: root
