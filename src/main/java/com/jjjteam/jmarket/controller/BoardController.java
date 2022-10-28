@@ -27,10 +27,6 @@ import com.jjjteam.jmarket.service.BoardService;
 
 public class BoardController {
 	
-	@Autowired
-	   private BoardService boardService;
-
-	
 	
 	    
 }
