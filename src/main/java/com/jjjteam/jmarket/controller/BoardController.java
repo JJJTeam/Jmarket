@@ -1,6 +1,7 @@
 package com.jjjteam.jmarket.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -34,6 +35,7 @@ public class BoardController {
 	
 	//생성자주입
 	private final BoardRepository boardRepository;
+	private final BoardService boardService;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -43,16 +45,19 @@ public class BoardController {
 	}
 	
 	
-//	@RequestMapping(value="/board/detail/{id}")
-//	public String detail(Model model, @PathVariable("id")Integer id) {
-//		return "board_detail";
-//	}
+	@RequestMapping(value = "/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id) {
+		Board board = this.boardService.getBoard(id);
+
+		model.addAttribute("board", board);
+		return "board/board_detail";
+    }
 	
 	//게시물등록페이지 이동
 	
 //	@GetMapping("/register_form")
 //	public String registerForm(BoardForm boardForm) {
-//		return "/board/register";
+//		return "board/register";
 //	}
 	
 	//게시물등록

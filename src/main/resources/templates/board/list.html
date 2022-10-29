@@ -3,13 +3,12 @@
 	<h2>Hello Template</h2>
 	<!-- 질문등록버튼 생성  -->
 	<div class="mb-2">
-		<a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+		<a th:href="@{/board/register}" class="btn btn-primary">질문 등록하기</a>
 	</div>
 	<table class="table">
 		<thead class="table-dark">
 			<tr>
-				<th>제목 </th>
-			
+				<th>제목</th>
 				<th>작성일시</th>
 			</tr>
 		</thead>
@@ -20,15 +19,17 @@
             </td>
             <td th:text="${board.createDate}"></td>
         </tr> -->
-        
-        <tr th:each="board: ${boardList}">
-        <td th:text="${board.subject}"></td>
-        <td th:text="${board.createDate}"></td>
-        </tr>
+
+			<tr th:each="board: ${boardList}">
+			
+				<td><a th:href="@{|detail/${board.id}|}" th:text="${board.subject}"></a></td>
+
+				<td th:text="${board.createDate}"></td>
+			</tr>
 		</tbody>
 	</table>
 
-	
+
 
 
 </div>
