@@ -14,6 +14,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 	Board findBySubject(String subject);
 	Board findBySubjectAndContent(String subject, String content);
 	
+	
 	//페이징처리 아래에 로직 입력 
 	
 }
