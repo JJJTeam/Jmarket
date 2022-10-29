@@ -26,7 +26,7 @@ public class BoardService {
 	}
 	
 	
-	
+
 	//상세에 내용 보여주기 
 	public Board getBoard(Integer id) {
 		Optional<Board> board = this.boardRepository.findById(id);
@@ -37,22 +37,15 @@ public class BoardService {
 			throw new DataNotFoundException("board not found");
 		}
 		
-		
 	}
 	
-	//게시물 등록
-//	public void create(String subject, String content) {
-//		Board board = new Board();
-//		board.setSubject(subject);
-//		board.setContent(content);
-//		board.setCreateDate(LocalDateTime.now());
-//		this.boardRepository.save(board);
-//	}
-	
+	//공지사항 입력 후 저장 하는 로직
+	public void registerForm(String subject, String content) {
+		Board board = new Board();
+		board.setSubject(subject);
+		board.setContent(content);
+		board.setCreateDate(LocalDateTime.now());
+		this.boardRepository.save(board);
+	}
 
-	
-	//질문상세보기 리스트
-	
-	
-	
 }

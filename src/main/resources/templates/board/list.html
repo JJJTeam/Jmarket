@@ -3,7 +3,7 @@
 	<h2>Hello Template</h2>
 	<!-- 질문등록버튼 생성  -->
 	<div class="mb-2">
-		<a th:href="@{/board/register}" class="btn btn-primary">질문 등록하기</a>
+		<a th:href="@{board/register_form}" class="btn btn-primary">공지사항 등록하기</a>
 	</div>
 	<table class="table">
 		<thead class="table-dark">
@@ -13,17 +13,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- <tr th:each="board, index : ${BoardList}">
-            <td>
-                <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
-            </td>
-            <td th:text="${board.createDate}"></td>
-        </tr> -->
+		
 
 			<tr th:each="board: ${boardList}">
 			
 				<td><a th:href="@{|detail/${board.id}|}" th:text="${board.subject}"></a></td>
-
 				<td th:text="${board.createDate}"></td>
 			</tr>
 		</tbody>

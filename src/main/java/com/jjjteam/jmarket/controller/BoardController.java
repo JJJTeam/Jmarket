@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jjjteam.jmarket.effectiveness.BoardForm;
 import com.jjjteam.jmarket.model.Board;
@@ -53,22 +54,30 @@ public class BoardController {
 		return "board/board_detail";
     }
 	
-	//게시물등록페이지 이동
+	//게시물 등록 페이지 이동
+	@GetMapping("/register_form")
+	public String registerForm() {
+		return "board/register";
+	}
 	
-//	@GetMapping("/register_form")
-//	public String registerForm(BoardForm boardForm) {
-//		return "board/register";
-//	}
 	
-	//게시물등록
-//	@PostMapping("/register_form")
-//	public String registerForm(@Valid BoardForm boardForm, BindingResult bindingResult) {
-//		if(bindingResult.hasErrors()) {
-//			return "board/register";
-//		}
-//		this.boardService.create(boardForm.getSubject(), boardForm.getContent());
-//		return "";
-//	}
+	
+	@PostMapping("/register_form")
+	public String registerForm(@RequestParam String subject, @RequestParam String content) {
+	    // 게시판입력값 저장 로직 
+		this.boardService.registerForm(subject, content);	
+		return "redirect:/board/list"; //질문 저장 후 이동 
+	}
+	
+	
+	
+		
+		
+	
+	
+	
+	
+
 	
 	
 	    
