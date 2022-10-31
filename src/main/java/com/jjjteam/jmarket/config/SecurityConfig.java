@@ -102,7 +102,9 @@ public class SecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.addFilterBefore(authenticationJwtTokenFilter(), // 기존 존재하는 토큰을 확인, 없으면 통과, 있으면...
+                UsernamePasswordAuthenticationFilter.class); //
 
 
         return http.build();

@@ -70,20 +70,22 @@ public class AuthController {
         // 인증 객체 생성 후 반환 - JJH
         // Authentication 유저의 인증정보를 가지고 있는 객체
         log.info("test1");
-        Authentication authentication = authenticationManager
-                .authenticate(
+        Authentication authentication = authenticationManager.authenticate(
+                        // authenticationManager.authenticate : 인증되지 않은 Authentication객체를 인증된 인증되지 않은 Authentication객체 로 반환
                         //아직 인증되지 않은 Authentication객체를 생성 - AbstractAuthenticationToken 상속 - Authentication 상속
                         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
                 );
         log.info("test2");
 
+        UserDetailsImpl userDetails =
+                (UserDetailsImpl) authentication.getPrincipal(); //getPrincaipal UserDetails를 구현한 사용자 객체를 Return
 
-        // userDetail에 인증정보를 저장
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        ResponseCookie jwtCookie = 
+                jwtUtils.generateJwtCookie(userDetails);  //토큰을 만들어서 ResponseCookie 객체로 토큰내용을 담은 쿠키를 생성
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
-        List<String> roles = userDetails.getAuthorities().stream()
+        List<String> roles = userDetails.getAuthorities()  //  유저 권한을 가져옴
+                // 반복문으로(stream), 각각 권한을 가져온후( .map(item -> item.getAuthority())), 리스트형태로 반환(.collect(Collectors.toList()))
+                .stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
