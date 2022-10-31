@@ -1,7 +1,7 @@
 
 function signinFunction(){
     let dataParam = {
-        "username": $("#username").val(),
+        "userid": $("#userid").val(),
         "password": $("#password").val()
     };
     $.ajax({

@@ -64,6 +64,8 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -73,7 +75,7 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                         // authenticationManager.authenticate : 인증되지 않은 Authentication객체를 인증된 인증되지 않은 Authentication객체 로 반환
                         //아직 인증되지 않은 Authentication객체를 생성 - AbstractAuthenticationToken 상속 - Authentication 상속
-                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+                        new UsernamePasswordAuthenticationToken(loginRequest.getUserid(), loginRequest.getPassword())
                 );
         log.info("test2");
 
@@ -104,28 +106,32 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        int testcount = 0;
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUserid())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
-
+        log.info("{}",testcount++);
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+        User user = new User(signUpRequest.getUserid(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-
+        log.info("{}",testcount++);
         Set<String> strRoles = signUpRequest.getRole();
+        log.info("{}",testcount++);
         Set<Role> roles = new HashSet<>();
-
+        log.info("{}",testcount++);
         if (strRoles == null) {
+            log.info("1@@@@");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
+            log.info("2@@@@");
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":

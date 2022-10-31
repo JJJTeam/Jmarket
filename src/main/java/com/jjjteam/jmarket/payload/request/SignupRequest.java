@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 public class SignupRequest {
     @NotBlank
 //    @Size(min = 3, max = 20)
-    private String username;
+    private String userid;
 
     @NotBlank
     @Size(max = 50)

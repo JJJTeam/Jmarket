@@ -42,12 +42,12 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         // 권한내용을 DB에 넣어준다.
-        User user = new User("test","test@test",encoder.encode("test"));
-        Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
-        roles.add(userRole);
-        user.setRoles(roles);
-        userRepository.save(user);
+//        User user = new User("test","test@test",encoder.encode("test"));
+//        Set<Role> roles = new HashSet<>();
+//        Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
+//        roles.add(userRole);
+//        user.setRoles(roles);
+//        userRepository.save(user);
 
 
     }
