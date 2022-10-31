@@ -1,5 +1,9 @@
 package com.jjjteam.jmarket.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
@@ -17,6 +21,10 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "email")
         })
 @Slf4j
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +49,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+
+
     public User() {
     }
 
@@ -50,53 +61,53 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return id;
-    }
-
-    public void setId(Long id) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.id = id;
-    }
-
-    public String getUserid() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return userid;
-    }
-
-    public void setUsername(String username) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.userid = username;
-    }
-
-    public String getEmail() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return email;
-    }
-
-    public void setEmail(String email) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.email = email;
-    }
-
-    public String getPassword() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return password;
-    }
-
-    public void setPassword(String password) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.roles = roles;
-    }
+//    public Long getId() {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        this.id = id;
+//    }
+//
+//    public String getUserid() {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return userid;
+//    }
+//
+//    public void setUsername(String username) {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        this.userid = username;
+//    }
+//
+//    public String getEmail() {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        this.email = email;
+//    }
+//
+//    public String getPassword() {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        this.password = password;
+//    }
+//
+//    public Set<Role> getRoles() {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+//        this.roles = roles;
+//    }
 }
