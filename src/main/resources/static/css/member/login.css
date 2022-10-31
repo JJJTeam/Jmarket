@@ -16,7 +16,7 @@ body {
 
 body .container_member {
     position: relative;
-    /*height: 50%;*/
+    height: 50%;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -68,7 +68,7 @@ body .container_member .tabs .tab {
     cursor: pointer;
     letter-spacing: 0;
     border-bottom: 1px solid #d9d9d9;
-    -moz-user-select: none;
+    -moz-user-select: -moz-none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -121,7 +121,7 @@ body .container_member .content .more:nth-of-type(3) {
 body .container_member .content label {
     font-size: 1em;
     color: #263238;
-    -moz-user-select: none;
+    -moz-user-select: -moz-none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;

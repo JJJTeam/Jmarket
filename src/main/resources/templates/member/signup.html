@@ -1,103 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<!--<%@page import="java.math.BigInteger"%>-->
-<!--<%@page import="java.security.SecureRandom"%>-->
-<!--<%@page import="java.net.URLEncoder"%>-->
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"-->
-<!--pageEncoding="UTF-8"%>-->
 <div th:insert="/include/header.html"></div>
-<!-- QuickMenu -->
 <div th:insert="/include/quickMenu.html"></div>
-
-<link rel="stylesheet" href="/css/member/signup.css"/>
+<link href="/css/member/signup.css" rel="stylesheet"/>
 
 <body>
 <section class="container_member">
-  <article class="half">
-    <h1>SHOP OOTD</h1>
-
-    <div class="content">
-<!--            <div class="signup-cont cont">-->
-      <div>
-              <form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
-                    style="height: 1000px;" name="fr" onsubmit="return check()">
-
-                <div id="re"></div><br> <!-- onclick="dupCheck()" -->
-                <b>아이디</b><b id="checkIdResult" class="tc"></b>
-                <input type="text" name="id" id="id" class="inpt"
-                       required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" onkeyup="checkId(this)">
-                <input type="button" value="아이디중복확인" onclick="openIdChk()">
-                <input type="hidden" name="idDuplication" value="idUncheck">
-<!--                <label for="text">ID</label><br><br>-->
-
-                <b>비밀번호</b><b id="checkPasswdResult" class="tc"></b>
-                <input type="password" name="pass" id="password" class="inpt" required="required"
-                       placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요" onkeyup="checkPasswd(this)">
+    <article class="half">
+        <h1>SHOP OOTD</h1>
+        <div class="content">
+            <form id="sighUpForm" style="height: 1000px;">
+                <div id="re"></div>
+                <br>
+<!--                <b>아이디</b><b class="tc" id="checkIdResult"></b>-->
+<!--                <input class="inpt" id="id" name="id" onkeyup="checkId(this)"-->
+<!--                       placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" required="required" type="text">-->
+                <b>비밀번호</b><b class="tc" id="checkPasswdResult"></b>
+                <input class="inpt" id="password" name="pass"
+                       placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요"
+                       required="required" type="password">
                 <label for="password">Password</label>
-
-                <b>비밀번호 재확인</b><b id="checkPasswdResult2" class="tc"> </b>
-                <input type="password" name="pass2" id="password2" class="inpt" required="required"
-                       placeholder="비밀번호를 한번 더 입력하세요" onkeyup="checkPasswd2(this)">
-                <label for="password">Password</label><br>
-
                 <b>이메일</b>
-                <input type="email" name="email" id="email" class="inpt"
-                       required="required" placeholder="이메일을 입력하세요">
+                <input class="inpt" id="email" name="email" placeholder="이메일을 입력하세요"
+                       required="required" type="email">
                 <label for="email">e-mail</label>
-
                 <b>이름</b>
-                <input type="text" name="username" id="name" class="inpt" required="required"
-                       placeholder="닉네임을 입력하세요">
-                <label for="name">Username</label><br>
-
-                <b>프로필사진</b>
-                <input type="file" name="img" id="img" class="inpt"
-                       required="required" placeholder="프로필 사진을 첨부하세요">
-                <label for="img">Image</label>
-
-                <b>전화번호</b><b id="checkPhoneResult" class="tc"></b>
-                <input type="text" name="phone" id="phone" class="inpt" required="required"
-                       placeholder="연락처는 숫자만 입력하세요" onkeyup="checkPhone(this)">
-                <label for="phone">Phone Number</label> <br>
-
-                <div class="term" style="padding-top: 30px;">
-                  <iframe width="100%" src="member/term.jsp"> </iframe>
-                </div>
-
-                <br> <input type="checkbox" id="term" class="checkbox" required="required">
-                <label for="term">위 약관에 동의합니다.</label> <br>
-
-                <input type="submit" value="Sign up" class="submit">
-              </form>
-            </div>
-    </div>
-  </article>
+                <input class="inpt" id="username" name="username" placeholder="닉네임을 입력하세요" required="required"
+                       type="text">
+                <label for="username">Username</label><br>
+                <input class="submit" type="submit" value="Sign up" onclick="signupFunction()">
+            </form>
+        </div>
+    </article>
 </section>
 <div style="height: 470px"></div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="/js/member/joinForm.js"/>
+<script src="/js/member/signup.js"/>
 <script type="text/javascript">
-  var url = window.location.href;
-  var hash = url.substring(url.indexOf("#") + 1);
+    var url = window.location.href;
+    var hash = url.substring(url.indexOf("#") + 1);
 
-  $('.container .bg').mousemove(
-          function(e) {
+    $('.container .bg').mousemove(
+        function (e) {
             var amountMovedX = (e.pageX * -1 / 30);
             var amountMovedY = (e.pageY * -1 / 9);
             $(this).css('background-position',
-                    amountMovedX + 'px ' + amountMovedY + 'px');
-          });
-  if (hash == "signup") {
-    $(this).hasClass('signup')
-    $('.tabs .tab').removeClass('active');
-    $('this').addClass('active');
-    $('.cont').hide();
-    $('.signup-cont').show();
-  }
-
-
-
+                amountMovedX + 'px ' + amountMovedY + 'px');
+        });
+    if (hash == "signup") {
+        $(this).hasClass('signup')
+        $('.tabs .tab').removeClass('active');
+        $('this').addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    }
 </script>
 
 </body>

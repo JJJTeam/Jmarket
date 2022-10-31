@@ -1,8 +1,12 @@
 package com.jjjteam.jmarket.payload.response;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 
+
+@Slf4j
 public class UserInfoResponse {
     private Long id;
     private String username;
@@ -10,6 +14,7 @@ public class UserInfoResponse {
     private List<String> roles;
 
     public UserInfoResponse(Long id, String username, String email, List<String> roles) {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         this.id = id;
         this.username = username;
         this.email = email;
