@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "userid"),
                 @UniqueConstraint(columnNames = "email")
         })
 @Slf4j
@@ -24,7 +24,7 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-    private String username;
+    private String userid;
 
     @NotBlank
     @Size(max = 50)
@@ -45,7 +45,7 @@ public class User {
     }
 
     public User(String username, String email, String password) {
-        this.username = username;
+        this.userid = username;
         this.email = email;
         this.password = password;
     }
@@ -60,14 +60,14 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getUserid() {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return username;
+        return userid;
     }
 
     public void setUsername(String username) {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.username = username;
+        this.userid = username;
     }
 
     public String getEmail() {
