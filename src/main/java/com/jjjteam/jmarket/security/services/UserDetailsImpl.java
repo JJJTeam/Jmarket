@@ -50,7 +50,7 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getUserid(),
+                user.getUserId(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities);

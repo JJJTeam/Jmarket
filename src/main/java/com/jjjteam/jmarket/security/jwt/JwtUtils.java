@@ -47,7 +47,7 @@ public class JwtUtils {
 
     public ResponseCookie generateJwtCookie(User user) {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        String jwt = generateTokenFromUsername(user.getUserid());
+        String jwt = generateTokenFromUsername(user.getUserId());
         return generateCookie(jwtCookie, jwt, "/api");
     }
 
