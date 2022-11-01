@@ -102,7 +102,7 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         int testcount = 0;
         log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
-        if (userRepository.existsByUserid(signUpRequest.getUserid())) {
+        if (userRepository.existsByUserId(signUpRequest.getUserid())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
