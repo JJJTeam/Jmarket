@@ -47,13 +47,16 @@ bezkoder:
 
 
 ---
-
+logging:
+ level:
+  root: debug
+ 
 spring:
   config:
     activate:
       on-profile: sujin
-server:
-  port: 8082
+
+ 
 
 ---
 
