@@ -5,6 +5,7 @@ import javax.persistence.*;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
+import com.jjjteam.jmarket.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.Builder;
@@ -50,5 +51,20 @@ public class Item {
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
+    // 상품 주문 -> 상품 재고 감소 로직 생성
+    public void removeStock(int stockNumber){
+
+        int restStock = this.stockNumber - stockNumber; // stockNumber: 상품의 재고 수량 restStock: 주문 후 남은 재고 수량
+
+        if(restStock<0){ // 상품 재고가 주문 수량보다 작을 경우, 재고 부족 예외 발생
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock; // 주문 후 남은 재고 수량 = 상품의 현재 재고 값
+    }
+
+    // 주문 취소 시 상품 개수 늘림
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
     }
 }
