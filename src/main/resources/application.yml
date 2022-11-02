@@ -15,6 +15,14 @@ spring:
     password: JJJTeam
   thymeleaf:
     cache:  false
+  multipart:
+    maxFileSize: 20MB
+    maxRequestSize: 100MB
+    
+# itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+# uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
+itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
