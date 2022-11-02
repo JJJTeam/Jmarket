@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,9 +62,8 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     private LocalDate userRegisterDateTime; //회원가입시간
 //  private String UserRegisterIp;          //가입 ip
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_address_id")
-    private List<UserAddress> userAddresses;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<UserAddress> userAddresses = new ArrayList<>();
 
     public User() {
     }

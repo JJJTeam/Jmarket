@@ -29,6 +29,10 @@ public class UserAddress {  // 카멜표기법으로 , db저장은 스네이크 
     @Column(unique = true)
     private boolean defaultAddress;
 
+    @ManyToOne
+    @JoinColumn(name = "user_table_id")
+    private User user;
+
 
 
     public UserAddress() {
