@@ -352,7 +352,8 @@
     <div class="content">
             <div class="signup-cont cont">
               <form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
-                    style="height: 1000px;" name="fr" onsubmit="return check()">
+                    style="height: 1000px;" name="fr">
+                 <!-- 오류때문에 form 안에 onsubmit="return check()" 삭제 -->
 
                 <div id="re"></div><br> <!-- onclick="dupCheck()" -->
                 <b>아이디</b><b id="checkIdResult" class="tc"></b>
