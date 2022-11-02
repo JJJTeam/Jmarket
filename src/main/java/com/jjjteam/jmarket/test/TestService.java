@@ -6,8 +6,10 @@ import com.jjjteam.jmarket.controller.AuthController;
 import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.model.UserAddress;
 import com.jjjteam.jmarket.payload.request.SignupRequest;
 import com.jjjteam.jmarket.repository.RoleRepository;
+import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -35,6 +37,9 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserAddressRepository userAddressRepository;
+
     @PostConstruct
     private void init(){
 //                System.out.println("빈이 완전히 생성된 후에 한번 수행될 ㅂ메서드에 붙입니다.");
@@ -42,13 +47,30 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         // 권한내용을 DB에 넣어준다.
-        User user = new User("test","test@test",encoder.encode("test"));
+//        User user = new User("test","test@test",encoder.encode("test"));
+        User user = User.builder()
+                .userId("test")
+                .email("test@test")
+                .password(encoder.encode("test"))
+                .build();
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
         roles.add(userRole);
         user.setRoles(roles);
         userRepository.save(user);
-
+//        userAddressRepository.save(
+//                UserAddress.builder()
+//                        .address("test8")
+//                        .user(userRepository.getReferenceById(1L))
+//                        .build()
+//        );
+//        userAddressRepository.save(
+//                UserAddress.builder()
+//                        .defaultAddress(true)
+//                        .address("test9")
+//                        .user(userRepository.getReferenceById(1L))
+//                        .build()
+//        );
 
     }
     @Override

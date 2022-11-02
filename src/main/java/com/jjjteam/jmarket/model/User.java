@@ -1,8 +1,16 @@
 package com.jjjteam.jmarket.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -13,18 +21,21 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "userid"),
                 @UniqueConstraint(columnNames = "email")
         })
-@Slf4j
-public class User {
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
+public class User {  // 카멜표기법으로 , db저장은 스네이크 표기법
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
     @Size(max = 20)
-    private String username;
+    private String userId;
 
     @NotBlank
     @Size(max = 50)
@@ -41,62 +52,19 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    private String userName;
+    private String userPhoneNumber;
+    private byte userSex;                   //성별
+    private Date userBirthDate;             //회원생년월일
+    private byte userReceiveEmail;          //이메일수신여부
+    private byte userReceiveSms;            //문자수신여부
+    private byte userSmsCert;               // 문자 인증 여부
+    private LocalDate userRegisterDateTime; //회원가입시간
+//  private String UserRegisterIp;          //가입 ip
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<UserAddress> userAddresses = new ArrayList<>();
+
     public User() {
-    }
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Long getId() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return id;
-    }
-
-    public void setId(Long id) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.id = id;
-    }
-
-    public String getUsername() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return username;
-    }
-
-    public void setUsername(String username) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.username = username;
-    }
-
-    public String getEmail() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return email;
-    }
-
-    public void setEmail(String email) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.email = email;
-    }
-
-    public String getPassword() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return password;
-    }
-
-    public void setPassword(String password) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.roles = roles;
     }
 }

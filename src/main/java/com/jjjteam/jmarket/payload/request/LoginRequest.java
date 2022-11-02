@@ -7,19 +7,19 @@ import javax.validation.constraints.NotBlank;
 @Slf4j
 public class LoginRequest {
     @NotBlank
-    private String username;
+    private String userid;
 
     @NotBlank
     private String password;
 
-    public String getUsername() {
+    public String getUserid() {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return username;
+        return userid;
     }
 
-    public void setUsername(String username) {
+    public void setUserid(String userid) {
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        this.username = username;
+        this.userid = userid;
     }
 
     public String getPassword() {

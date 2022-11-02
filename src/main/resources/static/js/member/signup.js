@@ -1,7 +1,7 @@
 
 function signupFunction(){
     let dataParam = {
-        "username": $("#username").val(),
+        "userid": $("#userid").val(),
         "email": $("#email").val(),
         "password": $("#password").val()
     };
