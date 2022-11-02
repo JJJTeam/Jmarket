@@ -1,18 +1,39 @@
 # local, dev, prod 공통 설정
 server:
-  port: 8080
+  port: 8081
 spring:
   jpa:
     hibernate:
       ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
     username: root
     password: JJJTeam
   thymeleaf:
     cache:  false
+  multipart:
+    maxFileSize: 20MB
+    maxRequestSize: 100MB
+    
+# itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+# uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
+itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
+uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
+logging:
+#  file:
+#    path: logs
+  level:
+    root: debug
+    com:
+      jjjteam:
+        jmarket: trace
+#    root: trace
 
 bezkoder:
   app:
@@ -34,20 +55,32 @@ bezkoder:
 
 
 ---
-
+logging:
+ level:
+  root: debug
+ 
 spring:
   config:
     activate:
       on-profile: sujin
-server:
-  port: 8082
+
+ 
 
 ---
 
 spring:
   config:
     activate:
-      on-profile: name1
+      on-profile: jungho
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
 
 
 ---

@@ -4,6 +4,7 @@ package com.jjjteam.jmarket.config;
 import com.jjjteam.jmarket.security.jwt.AuthEntryPointJwt;
 import com.jjjteam.jmarket.security.jwt.AuthTokenFilter;
 import com.jjjteam.jmarket.security.services.UserDetailsServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         // securedEnabled = true,
         // jsr250Enabled = true,
         prePostEnabled = true)
-
+@Slf4j
 public class SecurityConfig {
 
     @Autowired
@@ -46,6 +47,7 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
         authProvider.setUserDetailsService(userDetailsService);
@@ -62,11 +64,13 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         return new BCryptPasswordEncoder();
     }
 
@@ -84,6 +88,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -92,20 +97,15 @@ public class SecurityConfig {
                 .antMatchers("/**/*").permitAll()
                 .antMatchers("/*").permitAll()
                 .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll()
-//                .antMatchers("/", "/css/**", "/scripts/**", "/plugin/**", "/fonts/**", "/vendor/**").permitAll()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("*").permitAll()
-//                .antMatchers("**").permitAll()
                 .anyRequest().authenticated();
 
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-//        http.authorizeRequests()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll();
+        http.addFilterBefore(authenticationJwtTokenFilter(), // 기존 존재하는 토큰을 확인, 없으면 통과, 있으면...
+                UsernamePasswordAuthenticationFilter.class); //
+
 
         return http.build();
     }

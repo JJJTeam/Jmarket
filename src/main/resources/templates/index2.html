@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link type="text/css" rel="stylesheet" th:href="@{/css/common.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/main_1.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/header.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/menu_1.css}" />
+  <link type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
+
+
+  <style>
+    .event_ban_area > ul {
+      display: flex;
+    }
+    .event_ban_area ul > li {
+      display: inline-block;
+      align-items: center;
+      width: 20%;
+      height: 200px;
+      margin: 50px 20px;
+    }
+    .event_ban_area ul > li img {
+      padding: 50px 0;
+    }
+  </style>
+
+</head>
+
+<body>
+<div th:insert="/include/header.html"></div>
+<div th:insert="/include/quickMenu_index.html"></div>
+
+
+<section class="section-slide">
+  <div class="wrap-slick1">
+    <div class="slick1">
+      <div class="item-slick1"
+           style="background-image: url(/images/main_001.jpg);"></div>
+
+      <div class="item-slick1"
+           style="background-image: url(/images/main_002.jpg);"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<a href="/user/signInPage"><span>로그인페이지</span></a>
+
+
+<script type="text/javascript">
+  // 북마크버튼 클릭시(북마크 추가 또는 북마크 제거)
+  function checkBook(num){
+    var member_id = '<%=member_id%>';
+    if(member_id=='null'){
+      if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+        return;
+      }else{
+        location.href='MemberLoginForm.mo';
+      }
+    }else{
+      $.ajax({
+        url: "CommBook.co",
+        type: "POST",
+        data: {
+          num: num,
+        },
+        success: function () {
+          var path = $('.bookimg'+num).children("img");
+          path.attr("src",function(index,attr){
+            if(attr.match('before')){
+              swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
+              return attr.replace("before","after");
+            }else{
+              swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
+              return attr.replace("after","before");
+            }
+          });
+          bookmarkCount(num);
+        },
+      });
+    }
+  }
+  // 게시글 북마크 수
+  function bookmarkCount(num) {
+    var articleNum = num;
+    $.ajax({
+      url: "CommBookCount.co",
+      type: "POST",
+      data: {
+        num: articleNum
+      },
+      success : function(json) {
+        var img = "images/icons/bookmark_after.png";
+        var jsonP = JSON.parse(json);
+        var book = "북마크 "+jsonP.total;
+        if(!num){
+          for(key in jsonP.list){
+            var num = jsonP.list[key][key];
+            $(".bookimg"+num).children().attr("src",img);
+          }
+        }
+        $(".bookCount"+articleNum).html(book);
+      },
+    })
+  };
+  bookmarkCount();
+</script>
+
+
+<div th:insert="/include/footer.html"></div>
+</body>
+
+</html>

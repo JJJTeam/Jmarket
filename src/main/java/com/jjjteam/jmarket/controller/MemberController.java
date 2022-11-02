@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
 	
-	@GetMapping("/loginForm")
+	@GetMapping("/login")
 	public String ToLoginPage() throws Exception {
-		return "/member/loginForm";
+		return "/member/login";
 	}
 	
-	@GetMapping("/joinForm")
+	@GetMapping("/signup")
 	public String ToJoinPage() throws Exception {
-		return "/member/joinForm";
+		return "/member/signup";
 	}
 	
 
