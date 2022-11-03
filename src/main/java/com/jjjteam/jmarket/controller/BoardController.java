@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/board")
 public class BoardController {
 	
+	
 	//생성자주입
 	private final BoardRepository boardRepository;
 	private final BoardService boardService;
