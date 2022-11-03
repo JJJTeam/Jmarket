@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.jjjteam.jmarket.DataNotFoundException;
 import com.jjjteam.jmarket.model.Board;
+import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -44,13 +45,14 @@ public class BoardService {
 		
 	}
 	
-	//공지사항 입력 후 저장 하는 로직
+	//공지사항 입력 후 저장 하는 로직 , 게시판글쓸때 작성자 넣기 
 	public void registerForm(String subject, String content) {
 		Board board = new Board();
 		
 		board.setSubject(subject);
 		board.setContent(content);
 		board.setCreateDate(LocalDateTime.now());
+		//board.setAuthor(user);
 		this.boardRepository.save(board);
 	}
 	
