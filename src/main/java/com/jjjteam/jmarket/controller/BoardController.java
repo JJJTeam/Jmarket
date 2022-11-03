@@ -2,6 +2,7 @@ package com.jjjteam.jmarket.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -31,12 +32,21 @@ public class BoardController {
 	private final BoardService boardService;
 	
 	
+//	@RequestMapping("/list")
+//	public String list(Model model) {
+//		List<Board> boardList = this.boardRepository.findAll();
+//		model.addAttribute("boardList", boardList);
+//		return "board/list";
+//	}
+	
+	//페이징처리 이동하는 로직
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<Board> boardList = this.boardRepository.findAll();
-		model.addAttribute("boardList", boardList);
+	public String list(Model model, @RequestParam(value="page",defaultValue="0") int page) {
+		Page<Board> paging = this.boardService.getList(page);
+		model.addAttribute("paging", paging);
 		return "board/list";
 	}
+	
 	
 	
 	@RequestMapping(value = "/detail/{id}")
@@ -61,6 +71,10 @@ public class BoardController {
 		this.boardService.registerForm(subject, content);	
 		return "redirect:/board/list"; //질문 저장 후 이동 
 	}
+	
+	
+	
+	
 	
 	
 

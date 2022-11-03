@@ -1,9 +1,14 @@
 package com.jjjteam.jmarket.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jjjteam.jmarket.DataNotFoundException;
@@ -47,6 +52,16 @@ public class BoardService {
 		board.setContent(content);
 		board.setCreateDate(LocalDateTime.now());
 		this.boardRepository.save(board);
+	}
+	
+	
+	//페이징 처리 로직, 작성일시 리스트역순으로 보여지게끔 
+	public Page<Board> getList(int page){
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("createDate"));
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+		return this.boardRepository.findAll(pageable);
+		
 	}
 
 }
