@@ -45,7 +45,7 @@ public class BoardService {
 		
 	}
 	
-	//공지사항 입력 후 저장 하는 로직 , 게시판글쓸때 작성자 넣기 
+	//공지사항 입력 후 저장 하는 로직 , 게시판글쓸때 작성자 넣기 ,파일 업로드 
 	public void registerForm(String subject, String content) {
 		Board board = new Board();
 		
@@ -65,5 +65,7 @@ public class BoardService {
 		return this.boardRepository.findAll(pageable);
 		
 	}
+	
+	//파일처리 
 
 }
