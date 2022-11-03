@@ -42,6 +42,7 @@ public class BoardService {
 	//공지사항 입력 후 저장 하는 로직
 	public void registerForm(String subject, String content) {
 		Board board = new Board();
+		
 		board.setSubject(subject);
 		board.setContent(content);
 		board.setCreateDate(LocalDateTime.now());

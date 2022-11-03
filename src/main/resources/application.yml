@@ -62,21 +62,13 @@ logging:
 server:
   port: 8082
   
+
 spring:
   config:
     activate:
-      on-profile: sujin
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: false
+      on-profile: sujin       
   datasource:
-    url: jdbc:mysql://localhost:3306/portfolio
-    username: root
-    password: 1234   
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
 
 
 ---

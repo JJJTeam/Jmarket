@@ -30,6 +30,7 @@ public class BoardController {
 	private final BoardRepository boardRepository;
 	private final BoardService boardService;
 	
+	
 	@RequestMapping("/list")
 	public String list(Model model) {
 		List<Board> boardList = this.boardRepository.findAll();
