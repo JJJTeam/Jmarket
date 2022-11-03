@@ -6,6 +6,7 @@ import com.jjjteam.jmarket.repository.BoardRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
+import com.jjjteam.jmarket.service.BoardService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -37,19 +38,18 @@ class JmarketApplicationTest {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	private BoardService boardService;
 
 	@Test
 	void testJpa() {
-		Board b1 = new Board();
-		b1.setSubject("board에 잘들어가는지 체크1111111");
-		b1.setContent("안에 들어가는 content 체크까지 1111");
-		b1.setCreateDate(LocalDateTime.now());
-		this.boardRepository.save(b1);
 		
-		Board b2 = new Board();
-		b2.setSubject("board에 잘들어가는지 체크2222222");
-		b2.setContent("안에 들어가는 content 체크까지22222");
-		b2.setCreateDate(LocalDateTime.now());
-		this.boardRepository.save(b2);
+		for(int i =1; i<=300; i++) {
+			String subject =String.format("테스트데이터 : ${{%03d}", i);
+			String content= "내용무 ";
+
+			this.boardService.registerForm(subject, content);
+		}
 	}
+	
+	
 }
