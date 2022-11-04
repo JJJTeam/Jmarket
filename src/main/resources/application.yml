@@ -29,7 +29,7 @@ logging:
 #  file:
 #    path: logs
   level:
-    root: debug
+    root: info
     com:
       jjjteam:
         jmarket: trace
