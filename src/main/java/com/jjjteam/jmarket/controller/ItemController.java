@@ -33,13 +33,13 @@ public class ItemController {
 // 	}
 	
 	// 기존
-	@GetMapping("/item/new")
+	@GetMapping("/item/itemForm")
 	public String itemForm(Model model) {
 		model.addAttribute("itemFormDTO", new ItemFormDTO());
 		return "item/itemForm";
 	}
 
-	@PostMapping("/item/new")
+	@PostMapping("/item/itemFrom")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
