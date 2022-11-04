@@ -19,16 +19,11 @@ import lombok.Setter;
 public class BoardDTO {
   
 	
-	private Integer id;
-	
-	private String subject;
-	
-	private String content;
-	
-	private LocalDateTime createDate;
-	
-	
-    private String userId;
+//	private Integer id;
+//	private String subject;
+//	private String content;
+//	private LocalDateTime createDate;
+//    private String userId;
 
 
 	
