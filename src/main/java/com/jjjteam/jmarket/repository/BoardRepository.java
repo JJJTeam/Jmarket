@@ -1,5 +1,7 @@
 package com.jjjteam.jmarket.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 	Board findBySubjectAndContent(String subject, String content);
 	
 	
-	//페이징처리 아래에 로직 입력 
+	//페이징처리 아래에 로직 입력
+	Page<Board> findAll(Pageable pageable);
 	
 }

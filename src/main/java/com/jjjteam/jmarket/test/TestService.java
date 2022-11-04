@@ -42,7 +42,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
 
     @PostConstruct
     private void init(){
-//                System.out.println("빈이 완전히 생성된 후에 한번 수행될 ㅂ메서드에 붙입니다.");
+//                System.out.println("빈이 완전히 생성된 후에 한번 수행될 메서드에 붙입니다.");
         roleRepository.save(new Role(ERole.ROLE_USER));
         roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
