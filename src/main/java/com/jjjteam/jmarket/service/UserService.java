@@ -1,35 +1,19 @@
 package com.jjjteam.jmarket.service;
 
 
-import com.jjjteam.jmarket.model.ERole;
-import com.jjjteam.jmarket.model.Role;
-import com.jjjteam.jmarket.model.User;
-import com.jjjteam.jmarket.payload.request.SignupRequest;
-import com.jjjteam.jmarket.payload.response.MessageResponse;
-import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-import com.jjjteam.jmarket.security.jwt.JwtUtils;
-import com.jjjteam.jmarket.security.services.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
-
-
 
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
+
+    private final UserRepository userRepository;
 
 //    @Autowired
 //    AuthenticationManager authenticationManager;
@@ -50,11 +34,8 @@ public class UserService {
 //    RefreshTokenService refreshTokenService;
 
     @Transactional
-    public Boolean existsByUserId(String userid){
-
-
-
-        return true;
+    public Boolean existsByUserId(String userid) {
+        return userRepository.existsByUserId(userid);
     }
 
 
