@@ -14,6 +14,8 @@ import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.jwt.JwtUtils;
 import com.jjjteam.jmarket.security.services.RefreshTokenService;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
+import com.jjjteam.jmarket.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/auth")
 @Slf4j
+@RequiredArgsConstructor
 public class AuthController {
 
     @Autowired
@@ -58,6 +61,10 @@ public class AuthController {
 
     @Autowired
     RefreshTokenService refreshTokenService;
+
+    private final UserService userService;
+
+
     
 
 
@@ -101,8 +108,8 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        int testcount = 0;
         log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
+
         if (userRepository.existsByUserId(signUpRequest.getUserid())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
@@ -197,5 +204,61 @@ public class AuthController {
         }
 
         return ResponseEntity.badRequest().body(new MessageResponse("Refresh Token is empty!"));
+    }
+    @PostMapping("/signup2")
+    public ResponseEntity<?> registerUser2(@Valid @RequestBody SignupRequest signUpRequest) {
+        log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        userService.registerUser(signUpRequest);
+
+        if (userRepository.existsByUserId(signUpRequest.getUserid())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        User user = User.builder()
+                .userId(signUpRequest.getUserid())
+                .email(signUpRequest.getEmail())
+                .password(encoder.encode(signUpRequest.getPassword()))
+                .build();
+        Set<String> strRoles = signUpRequest.getRole();
+
+        Set<Role> roles = new HashSet<>();
+
+        if (strRoles == null) {
+
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(userRole);
+        } else {
+
+            strRoles.forEach(role -> {
+                switch (role) {
+                    case "admin":
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(adminRole);
+
+                        break;
+                    case "mod":
+                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(modRole);
+
+                        break;
+                    default:
+                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(userRole);
+                }
+            });
+        }
+
+        user.setRoles(roles);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }
