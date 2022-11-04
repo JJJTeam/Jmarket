@@ -2,8 +2,8 @@ package com.jjjteam.jmarket.test;
 
 
 
+import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.controller.AuthController;
-import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;

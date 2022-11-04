@@ -1,7 +1,8 @@
 package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.constant.OrderStatus;
-import com.jjjteam.jmarket.entity.Order;
+import com.jjjteam.jmarket.model.Order;
+
 import lombok.Getter;
 import lombok.Setter;
 

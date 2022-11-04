@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.model;
+package com.jjjteam.jmarket.constant;
 
 public enum ERole {
     ROLE_USER,

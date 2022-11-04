@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
-import com.jjjteam.jmarket.entity.Item;
+import com.jjjteam.jmarket.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;

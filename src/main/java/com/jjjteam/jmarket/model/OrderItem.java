@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.entity;
+package com.jjjteam.jmarket.model;
 
 import com.jjjteam.jmarket.constant.OrderStatus;
 import lombok.Getter;

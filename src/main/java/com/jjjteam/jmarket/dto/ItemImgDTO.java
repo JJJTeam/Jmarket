@@ -1,6 +1,6 @@
 package com.jjjteam.jmarket.dto;
 
-import com.jjjteam.jmarket.entity.ItemImg;
+import com.jjjteam.jmarket.model.ItemImg;
 
 import lombok.Builder;
 import lombok.Data;

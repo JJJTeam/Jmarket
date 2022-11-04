@@ -1,6 +1,7 @@
 package com.jjjteam.jmarket.dto;
 
-import com.jjjteam.jmarket.entity.OrderItem;
+import com.jjjteam.jmarket.model.OrderItem;
+
 import lombok.Getter;
 import lombok.Setter;
 

@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.entity.Item;
-import com.jjjteam.jmarket.entity.ItemImg;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.service.ItemService;

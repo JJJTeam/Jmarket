@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
-import com.jjjteam.jmarket.entity.Item;
+import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.repository.ItemRepository;
 
 @SpringBootTest
