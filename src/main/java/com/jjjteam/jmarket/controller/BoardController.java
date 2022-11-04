@@ -72,19 +72,19 @@ public class BoardController {
 	}
 	
 	
-	
+	//@AuthenticationPrincipal UserDetailsImpl userDetailsImpl
 	@PostMapping("/register_form")
-	public String registerForm(@RequestParam String subject, @RequestParam String content, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+	public String registerForm(@RequestParam String subject, @RequestParam String content) {
 			
 	    // 게시판입력값 저장 로직 
-		//this.boardService.registerForm(subject, content);
+		this.boardService.registerForm(subject, content);
 		
 //		User siteUser = this.userRepository.findByUserId(userDetailsImpl.getUsername()).get();
 //		System.out.println("@@@@ id : "+ siteUser.getEmail());
-		System.out.println("@@@@@@@@@@@@"+userDetailsImpl.getUsername());
+		//System.out.println("@@@@@@@@@@@@"+userDetailsImpl.getUsername());
 		
-//		return "redirect:/board/list"; //질문 저장 후 이동 
-		return "index";
+		return "redirect:/board/list"; //질문 저장 후 이동 
+		
 	}
 	
 	
