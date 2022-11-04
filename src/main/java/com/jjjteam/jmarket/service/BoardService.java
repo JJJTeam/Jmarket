@@ -30,8 +30,7 @@ public class BoardService {
 	public List<Board> getList(){
 		return this.boardRepository.findAll();
 	}
-	
-	
+
 
 	//상세에 내용 보여주기 
 	public Board getBoard(Integer id) {
