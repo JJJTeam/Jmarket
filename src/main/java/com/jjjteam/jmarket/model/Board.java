@@ -31,7 +31,7 @@ public class Board {
 	
 	
 	//게시판에 글쓰기 추가
-	@OneToOne
+	@ManyToOne
 	private User author;
 
 
