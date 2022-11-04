@@ -27,12 +27,13 @@ public class Board {
 	
 	@Column(columnDefinition ="TEXT")
 	private String content;
+	
 	private LocalDateTime createDate;
 	
 	
-	//게시판에 글쓰기 추가
+	//게시판에 글쓴이 추가
 	@ManyToOne
-	private User author;
+	private User user;
 
 
 	
