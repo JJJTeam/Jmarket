@@ -16,12 +16,10 @@ import com.jjjteam.jmarket.entity.ItemImg;
 import com.jjjteam.jmarket.entity.Member;
 import com.jjjteam.jmarket.entity.Order;
 import com.jjjteam.jmarket.entity.OrderItem;
-import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.MemberRepository;
 import com.jjjteam.jmarket.repository.OrderRepository;
-import com.jjjteam.jmarket.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
