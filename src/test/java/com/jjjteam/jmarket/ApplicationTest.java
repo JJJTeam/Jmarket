@@ -9,8 +9,7 @@ import com.jjjteam.jmarket.repository.BoardRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +24,7 @@ import java.util.Set;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class ApplicationTest {
 
@@ -47,12 +46,12 @@ public class ApplicationTest {
 //		accountRepository.deleteAll();
 //	}
 //
-	@Test
+
 	public void userInsert() {
 
 	}
 
-	@Test
+
 	public void userAddressInsert() {
 
 		userAddressRepository.save(UserAddress.builder().address("test8").user(userRepository.getReferenceById(1L)).build());
@@ -62,7 +61,7 @@ public class ApplicationTest {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	@Test
+
 	void testJpa() {
 		Board b1 = new Board();
 		b1.setSubject("board에 잘들어가는지 체크1111111");
