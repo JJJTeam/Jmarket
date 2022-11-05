@@ -46,6 +46,7 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     @Size(max = 120)
     private String password;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -63,6 +64,7 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
 //  private String UserRegisterIp;          //가입 ip
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @Builder.Default
     private List<UserAddress> userAddresses = new ArrayList<>();
 
     public User() {
