@@ -42,7 +42,8 @@ public class JwtUtils {
 
         log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
         log.info("jwt 토큰 값 : {} ",jwt);  //header "alg" : "HS512",
-        return generateCookie(jwtCookie, jwt, "/api");
+//        return generateCookie(jwtCookie, jwt, "/api");
+        return generateCookie(jwtCookie, jwt, "/");
     }
 
     public ResponseCookie generateJwtCookie(User user) {
