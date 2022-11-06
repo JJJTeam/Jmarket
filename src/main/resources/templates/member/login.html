@@ -29,6 +29,13 @@
                     </div>
                 </form>
         </div>
+        <div th:if="${#authorization.expr('isAuthenticated()')}">
+            <h2 th:text="${#authentication.name}">Name</h2>
+            <a href="/logout" th:href="@{/logout}">Logout</a>
+        </div>
+        <div th:unless="${#authorization.expr('isAuthenticated()')}">
+            <a href="/login" th:href="@{/login}">Login</a>
+        </div>
     </article>
 </section>
 <script src="/js/member/login.js"/>
