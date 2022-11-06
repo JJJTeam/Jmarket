@@ -61,28 +61,17 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
-        // 인증 객체 생성 후 반환 - JJH
-        // Authentication 유저의 인증정보를 가지고 있는 객체
-        log.info("test1");
-        Authentication authentication = authenticationManager.authenticate(
-                // authenticationManager.authenticate : 인증되지 않은 Authentication객체를 인증된 인증되지 않은 Authentication객체 로 반환
-                //아직 인증되지 않은 Authentication객체를 생성 - AbstractAuthenticationToken 상속 - Authentication 상속
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserid(), loginRequest.getPassword()));
-        log.info("test2");
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal(); //getPrincaipal UserDetails를 구현한 사용자 객체를 Return
-
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);  //토큰을 만들어서 ResponseCookie 객체로 토큰내용을 담은 쿠키를 생성
-
-        List<String> roles = userDetails.getAuthorities()  //  유저 권한을 가져옴
-                // 반복문으로(stream), 각각 권한을 가져온후( .map(item -> item.getAuthority())), 리스트형태로 반환(.collect(Collectors.toList()))
+        UserDetailsImpl userDetails = userService.authenticateUser(loginRequest);
+        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        List<String> roles = userDetails.getAuthorities()
                 .stream().map(item -> item.getAuthority()).collect(Collectors.toList());
-
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
-
         ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(refreshToken.getToken());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
+                .body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
