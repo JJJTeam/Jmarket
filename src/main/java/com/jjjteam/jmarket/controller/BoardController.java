@@ -31,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/board")
 public class BoardController {
 	
-	
 	//생성자주입
 	private final BoardRepository boardRepository;
 	private final BoardService boardService;
@@ -54,6 +53,11 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		return "board/list";
 	}
+	
+
+	
+	
+	
 	
 	
 	
@@ -79,9 +83,6 @@ public class BoardController {
 	    // 게시판입력값 저장 로직 
 		this.boardService.registerForm(subject, content);
 		
-//		User siteUser = this.userRepository.findByUserId(userDetailsImpl.getUsername()).get();
-//		System.out.println("@@@@ id : "+ siteUser.getEmail());
-		//System.out.println("@@@@@@@@@@@@"+userDetailsImpl.getUsername());
 		
 		return "redirect:/board/list"; //질문 저장 후 이동 
 		

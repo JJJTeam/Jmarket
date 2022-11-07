@@ -25,29 +25,30 @@ public class Board {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch= FetchType.EAGER) //기본패치전략,반드시 들고와야함 
+	//@ManyToOne(fetch= FetchType.EAGER) //기본패치전략,반드시 들고와야함 
 	//@JoinColumn(name="id") //role 아이디 => 관리자아이디 
 	//private Role roles; //db에서는 안되지만 ORM에서는 object를 사용할수잇음 
 	
-	@JoinColumn(name="id") //role 아이디 => 관리자아이디 
-    private User users; //db에서는 안되지만 ORM에서는 object를 사용할수잇음 
+	//@JoinColumn(name="id") //role 아이디 => 관리자아이디 
+    //private User users; //db에서는 안되지만 ORM에서는 object를 사용할수잇음 
 		
 	
 	
 	@Column(length =200)
-	private String b_title;
+	//private String title;
+	private String subject;
 	
 	//@Column(columnDefinition ="TEXT")
 	@Lob // 섬머노트 라이브러리로 <html>태그 섞여 디자인 될것이니 대용량데이터 
-	private String b_content;
+	private String content;
 	
-	private LocalDateTime b_createDate;
+	private LocalDateTime createDate;
 	
 	
 	//게시판에 글쓴이 추가
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="userId")
-	private User user;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name="userId")
+//	private User user;
 
 
 	

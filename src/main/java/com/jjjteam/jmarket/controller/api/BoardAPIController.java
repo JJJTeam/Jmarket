@@ -8,9 +8,9 @@ import com.jjjteam.jmarket.service.BoardService;
 @RestController
 public class BoardAPIController {
 	
-	@Autowired
-	private BoardService boardService;
-	
+//	@Autowired
+//	private BoardService boardService;
+//	
 	
 
 }
