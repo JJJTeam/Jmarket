@@ -1,8 +1,8 @@
 package com.jjjteam.jmarket.service;
 
 
+import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
-import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.dto.payload.request.LoginRequest;
@@ -29,17 +29,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final AuthenticationManager authenticationManager;
-
-
-
-//    @Transactional
-//    public UserDetailsImpl authenticateUser(LoginRequest loginRequest) {
-//        log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
-//        return (UserDetailsImpl) authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(loginRequest.getUserid(), loginRequest.getPassword())).getPrincipal();
-//    }
-
 
     @Transactional
     public Boolean existsByUserId(String userId) {
@@ -64,8 +53,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-    @Transactional
-    public Boolean Transactionaltest(String userId) {
-        return userRepository.existsByUserId(userId);
-    }
 }
