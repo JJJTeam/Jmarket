@@ -33,7 +33,7 @@ public class MemberController {
 		return "/member/signup";
 	}
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
+	public ResponseEntity<?> registerUser(SignUpRequest signUpRequest) {
 		if (userService.existsByUserId(signUpRequest.getUserid())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
 		}
