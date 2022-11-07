@@ -114,14 +114,14 @@ public class SecurityConfig {
 
         //URL 인증여부 설정.
         http.authorizeRequests()
-                .antMatchers( "/member/signup", "/", "/member/login", "/css/**","/js/**","/images/**","/fonts/**", "/vendor/**").permitAll()
+                .antMatchers( "/signup", "/", "/login", "/css/**","/js/**","/images/**","/fonts/**", "/vendor/**").permitAll()
                 //@Secured("ROLE_ADMIN")으로 대체
 //                .antMatchers("/api/admin").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
         //로그인 관련 설정.
         http.formLogin()
-                .loginPage("/member/login")
+                .loginPage("/login")
                 .loginProcessingUrl("/login") //Post 요청
                 .defaultSuccessUrl("/")
                 .failureUrl("/user/login?error")

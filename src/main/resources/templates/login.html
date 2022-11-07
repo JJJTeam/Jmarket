@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="/include/header.html"></div>
+<div th:replace="/include/header.html"></div>
 
 
 <body>
@@ -19,8 +19,7 @@
         <button type="submit" class="btn btn-primary">로그인</button>
     </form>
 </div>
-<script src="/js/member/login.js"/>
-<div th:insert="/include/footer.html"></div>
+<div th:replace="/include/footer.html"></div>
 </body>
 
 

@@ -1,7 +1,4 @@
 <head>
-    <title>SHOP OOTD</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -43,16 +40,25 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
             </form>
-
+            <span th:if="${#authorization.expr('isAuthenticated()')}">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        <span th:text="${#authentication.name}">//인증된유저이름</span>님
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/member/mypageAddress">배송지관리</a></li>
+                        <li><a class="dropdown-item" href="#">Link 2</a></li>
+                        <li><a class="dropdown-item" href="#">Link 3</a></li>
+                    </ul>
+                </div>
+            </span>
             <div class="text-end">
                 <button type="button" class="btn btn-outline-light me-2">
                     <span th:if="${#authorization.expr('isAuthenticated()')}">
-                        <a href="/logout" class="nav-link px-2 text-white">
-                            로그아웃(<span th:text="${#authentication.name}"></span>)
-                        </a>
+                        <a href="/logout" class="nav-link px-2 text-white">로그아웃</a>
                     </span>
                     <span th:unless="${#authorization.expr('isAuthenticated()')}">
-                        <a href="/member/login" class="nav-link px-2 text-white">로그인</a>
+                        <a href="/login" class="nav-link px-2 text-white">로그인</a>
                     </span>
                 </button>
                 <button type="button" class="btn btn-warning"><a href="/member/signup" class="nav-link px-2 text-white">회원가입</a></button>
