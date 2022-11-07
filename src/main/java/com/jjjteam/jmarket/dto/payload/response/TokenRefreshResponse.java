@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.payload.response;
+package com.jjjteam.jmarket.dto.payload.response;
 
 public class TokenRefreshResponse {
     private String accessToken;

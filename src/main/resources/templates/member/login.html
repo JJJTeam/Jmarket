@@ -2,38 +2,24 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:insert="/include/header.html"></div>
-<div th:insert="/include/quickMenu.html"></div>
-<link href="/css/member/login.css" rel="stylesheet"/>
 
-<!--<%-->
-<!--// session 객체에 저장된 id 값이 존재할 경우-->
-<!--// "잘못된 접근입니다." 출력 후 메인페이지로 이동-->
-<!--if(session.getAttribute("id") != null) {-->
-<!--%>-->
-<!--<script>-->
-<!--  alert("잘못된 접근입니다.");-->
-<!--  location.href="./";-->
-<!--</script>-->
 
 <body>
-<section class="container_member">
-    <article class="half">
-        <h1>SHOP OOTD</h1>
-        <div class="content">
-                <form action="javascript:/funDetail()" method="post">
-                    <input class="inpt" id="userid" name="userid" placeholder="아이디를 입력해주세요" required="required" type="text">
-                    <input class="inpt" id="password" name="password" placeholder="비밀번호를 입력해주세요" required="required"
-                           type="password">
-                    <div class="submit-wrap">
-                        <input class="submit" type="submit" value="Sign up" onclick="signinFunction()">
-                    </div>
-                </form>
+<div class="container">
+    <h2>로그인 form</h2>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="username">사용자이름:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" value="">
         </div>
-    </article>
-</section>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div>
 <script src="/js/member/login.js"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 <div th:insert="/include/footer.html"></div>
 </body>
 

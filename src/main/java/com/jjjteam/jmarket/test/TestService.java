@@ -6,8 +6,6 @@ import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.controller.AuthController;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
-import com.jjjteam.jmarket.model.UserAddress;
-import com.jjjteam.jmarket.payload.request.SignupRequest;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;

@@ -2,64 +2,36 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:insert="/include/header.html"></div>
-<div th:insert="/include/quickMenu.html"></div>
-<link href="/css/member/signup.css" rel="stylesheet"/>
 
 <body>
-<section class="container_member">
-    <article class="half">
-        <h1>SHOP OOTD</h1>
-        <div class="content">
-            <form id="sighUpForm" style="height: 1000px;">
-                <div id="re"></div>
+<div class="container">
+    <h2>회원가입 form</h2>
+    <form method="post">
 
-                <br>
-                <b>아이디</b><b class="tc" id="checkIdResult"></b>
-                <input class="inpt" id="userid" name="userid" onkeyup=""
-                       placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" required="required" type="text">
-                <b>비밀번호</b><b class="tc" id="checkPasswdResult"></b>
-                <input class="inpt" id="password" name="password"
-                       placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요"
-                       required="required" type="password">
-                <label for="password">Password</label>
-                <b>이메일</b>
-                <input class="inpt" id="email" name="email" placeholder="이메일을 입력하세요"
-                       required="required" type="email">
-                <label for="email">e-mail</label>
-                <b>이름</b>
-                <input class="inpt" id="username" name="username" placeholder="닉네임을 입력하세요" required="required"
-                       type="text">
-                <label for="username">Username</label><br>
-                <input class="submit" type="submit" value="Sign up" onclick="signupFunction()">
-            </form>
+        <div class="form-group">
+            <label for="username">사용자이름:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" value="">
         </div>
-    </article>
-</section>
-<div style="height: 470px"></div>
+        <div class="form-group">
+            <label for="password1">비밀번호:</label>
+            <input type="password" class="form-control" id="password1" placeholder="Enter password1" name="password1" value="">
+        </div>
+        <div class="form-group">
+            <label for="password2">비밀번호 확인:</label>
+            <input type="password" class="form-control" id="password2" placeholder="Enter password2" name="password2" >
+        </div>
+        <div class="form-group">
+            <label for="email">이메일:</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="">
+        </div>
+
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+</div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script src="/js/member/signup.js"/>
-<!--<script type="text/javascript">-->
-<!--    var url = window.location.href;-->
-<!--    var hash = url.substring(url.indexOf("#") + 1);-->
-
-<!--    $('.container .bg').mousemove(-->
-<!--        function (e) {-->
-<!--            var amountMovedX = (e.pageX * -1 / 30);-->
-<!--            var amountMovedY = (e.pageY * -1 / 9);-->
-<!--            $(this).css('background-position',-->
-<!--                amountMovedX + 'px ' + amountMovedY + 'px');-->
-<!--        });-->
-<!--    if (hash == "signup") {-->
-<!--        $(this).hasClass('signup')-->
-<!--        $('.tabs .tab').removeClass('active');-->
-<!--        $('this').addClass('active');-->
-<!--        $('.cont').hide();-->
-<!--        $('.signup-cont').show();-->
-<!--    }-->
-<!--</script>-->
-
 </body>
 
 <div th:insert="/include/footer.html"></div>

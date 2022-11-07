@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.payload.request;
+package com.jjjteam.jmarket.dto.payload.request;
 
 
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 
 @Getter
 @Setter
-public class SignupRequest {
+public class SignUpRequest {
     @NotBlank
 //    @Size(min = 3, max = 20)
     private String userid;
