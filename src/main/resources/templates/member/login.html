@@ -2,12 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:insert="/include/header.html"></div>
-<div th:insert="/include/quickMenu.html"></div>
+
 
 <body>
 <div class="container">
     <h2>로그인 form</h2>
-    <form action="/login/" method="post">
+    <form action="/login" method="post">
         <div class="form-group">
             <label for="username">사용자이름:</label>
             <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" value="">

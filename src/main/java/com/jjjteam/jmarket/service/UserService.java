@@ -29,16 +29,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
+//    private final AuthenticationManager authenticationManager;
 
 
 
-    @Transactional
-    public UserDetailsImpl authenticateUser(LoginRequest loginRequest) {
-        log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
-        return (UserDetailsImpl) authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserid(), loginRequest.getPassword())).getPrincipal();
-    }
+//    @Transactional
+//    public UserDetailsImpl authenticateUser(LoginRequest loginRequest) {
+//        log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
+//        return (UserDetailsImpl) authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(loginRequest.getUserid(), loginRequest.getPassword())).getPrincipal();
+//    }
 
 
     @Transactional
