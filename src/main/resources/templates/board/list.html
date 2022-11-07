@@ -26,15 +26,17 @@
 			   
 				<td><a th:href="@{|detail/${board.id}|}" th:text="${board.subject}"></a></td>
 				<!-- 글쓴이추가 -->
-				<td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
+				<!-- <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td> -->
 				<td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 			</tr>
 		</tbody>
 	</table>
 	
 	
-	<!-- 페이징처리 시작 -->
 	
+	
+	
+	<!-- 페이징처리 시작 -->
 	<div th:if="${!paging.isEmpty()}">
 	
 	  <ul class="pagination justify-content-center">

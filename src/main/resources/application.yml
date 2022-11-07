@@ -29,7 +29,7 @@ logging:
 #  file:
 #    path: logs
   level:
-    root: debug
+    root: info
     com:
       jjjteam:
         jmarket: trace
@@ -71,7 +71,8 @@ spring:
     hibernate:
       ddl-auto: create  
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
+    
 
 
 ---
