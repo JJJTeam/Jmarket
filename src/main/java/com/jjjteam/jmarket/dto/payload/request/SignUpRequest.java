@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.payload.request;
+package com.jjjteam.jmarket.dto.payload.request;
 
 
 import lombok.Getter;

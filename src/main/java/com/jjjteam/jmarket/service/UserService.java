@@ -1,11 +1,11 @@
 package com.jjjteam.jmarket.service;
 
 
+import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
 import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
-import com.jjjteam.jmarket.payload.request.LoginRequest;
-import com.jjjteam.jmarket.payload.request.SignUpRequest;
+import com.jjjteam.jmarket.dto.payload.request.LoginRequest;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
