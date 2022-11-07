@@ -72,6 +72,7 @@ spring:
       ddl-auto: create  
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
+    
 
 
 ---
