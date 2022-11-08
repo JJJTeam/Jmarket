@@ -30,6 +30,7 @@ public class UserAddressDTO {
         defaultAddress=userAddress.getDefaultAddress();
         user=userAddress.getUser();
         postCode=userAddress.getPostCode();
+        addressPhoneNumber=userAddress.getAddressPhoneNumber();
 //        orderItems = order.getOrderItems().stream()
 //                .map(OrderItemDto::new)
 //                .collect(Collectors.toList());
