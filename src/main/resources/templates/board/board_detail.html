@@ -6,7 +6,8 @@
 </head>
 <body>
 <h2 th:text="${board.subject}"></h2>
-<div th:text="${board.content}"></div>
+<!-- text말고 utext 사용하면 태그 없이 뷰단에 보여짐  -->
+<div th:utext="${board.content}"></div>
 <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
 
 </body>
