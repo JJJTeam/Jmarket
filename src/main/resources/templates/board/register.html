@@ -27,15 +27,15 @@
 				name="subject" id="subject" class="form-control">
 		</div>
 
-		<div class="mb-3">
+		<!-- <div class="mb-3">
 			<label for="content" class="form-label">내용 </label>
 			<textarea name="content" class="form-control"></textarea>
-		</div>
+		</div> -->
 		
 		<!-- 에디터로 글쓰기 하는 부분 -->
 		<div class="form-group">
 			<label for="content">content:</label>
-			<textarea class="form-control summernote" rows="5" id="content"></textarea>
+			<textarea class="form-control summernote" rows="5" id="summernote"name="content"></textarea>
 		</div>
 		
 
@@ -44,7 +44,7 @@
 
 
 <script>
-	$('.summernote').summernote({
+	$('#summernote').summernote({
 		placeholder : "Enter content", //안에 들어갈 내용 미리보기
 		focus: true, // 에디터 로딩후 포커스를 맞출지 여부
 		lang:"ko-KR", // 한글설정 
