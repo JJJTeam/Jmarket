@@ -33,7 +33,7 @@
             <div class="form-group">
                 <span th:if="${userAddress.defaultAddress} == true">
                     <label>기본배송지입니다.</label>
-                    <input type="hidden"  name="checkboxValue" th:value="${userAddress.defaultAddress}">
+                    <input type="hidden"  name="defaultAddress" th:value="${userAddress.defaultAddress}">
                 </span>
                 <span th:unless="${userAddress.defaultAddress} == true">
                     <label for="defaultAddress">기본배송지로 저장:</label>

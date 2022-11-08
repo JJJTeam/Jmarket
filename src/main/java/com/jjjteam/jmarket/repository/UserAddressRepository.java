@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserAddressRepository extends JpaRepository<UserAddress, Long> {
@@ -16,9 +17,14 @@ public interface UserAddressRepository extends JpaRepository<UserAddress, Long> 
 
     UserAddress findByUserIdAndId(Long userId, Long Id);
 
-    UserAddress findByPostCodeAndAddressAndUserIdAndDefaultAddressAndId(String postCode, String address, Long userId, Boolean defaultAddress,Long id);
+//    UserAddress findByPostCodeAndAddressAndUserIdAndDefaultAddressAndId(String postCode, String address, Long userId, Boolean defaultAddress,Long id);
 
 
+    Optional<UserAddress> findByIdAndUserId(Long id,Long userId);
 
+    Optional<UserAddress> findByIdAndUserIdAndPostCode(Long id, Long userId, String postCode);
 
+    Optional<UserAddress> findByIdAndUserIdAndPostCodeAndAddress(Long id, Long userId, String postCode, String address);
+
+    Optional<UserAddress> findByIdAndUserIdAndPostCodeAndAddressAndDefaultAddress(Long id, Long userId, String postCode, String address, Boolean defaultAddress);
 }

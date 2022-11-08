@@ -25,22 +25,18 @@ public class UserAddressService {
     @Transactional
     public void updateUserAddress(UserAddressDTO userAddressDTO, Long userId){
 
-        UserAddress userAddress = userAddressRepository.
-                findByPostCodeAndAddressAndUserIdAndDefaultAddressAndId(userAddressDTO.getPostCode(),userAddressDTO.getAddress(),userId,userAddressDTO.getDefaultAddress(),userAddressDTO.getId());
-
-        log.info("{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@{}@",userAddressDTO.getPostCode(),userAddressDTO.getAddress(),userId,userAddressDTO.getDefaultAddress(),userAddressDTO.getId());
-        log.info(userAddress.toString());
+        UserAddress userAddress = userAddressRepository.findByIdAndUserIdAndPostCodeAndAddress(
+                userAddressDTO.getId(),userId,userAddressDTO.getPostCode(),userAddressDTO.getAddress()
+        ).get();
         if (null!=userAddress){
-            if (userAddressDTO.getDefaultAddress()){
-                clearDefaultAddress();
-            }
-            log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            log.info("{}",userAddressDTO.getDefaultAddress());
-            log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            userAddress.setAddressDetail(userAddressDTO.getAddressDetail());
-            userAddress.setAddressPhoneNumber(userAddressDTO.getAddressPhoneNumber());
-            userAddress.setDefaultAddress(userAddressDTO.getDefaultAddress());
-            userAddress.setPerson(userAddressDTO.getPerson());
+//            if (userAddressDTO.getDefaultAddress()){
+//                clearDefaultAddress();
+//                log.info("{}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",userAddressDTO.getDefaultAddress());
+////                userAddress.setDefaultAddress(true);
+//            }
+//            userAddress.setAddressDetail(userAddressDTO.getAddressDetail());
+//            userAddress.setAddressPhoneNumber(userAddressDTO.getAddressPhoneNumber());
+//            userAddress.setPerson(userAddressDTO.getPerson());
             userAddressRepository.save(userAddress);
         }
 

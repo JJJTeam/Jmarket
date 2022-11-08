@@ -34,28 +34,6 @@ public class MemberController {
 	private final UserRepository userRepository;
 	private final UserAddressRepository userAddressRepository;
 
-	@GetMapping("/member/shipping-address")
-	public String ToShippingAddress() {
-		return "/member/shippingAddress";
-	}
-	@PostMapping("/member/shipping-address")
-	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO,
-	Boolean checkboxValue) {
-
-		userAddressService.saveNewAddress(userAddressDTO, checkboxValue, userDetails.getId());
-		return "redirect:/member/mypageAddress";
-	}
-	@GetMapping("/member/shipping-address/update")
-	public String ToUpdateAddressForm(@RequestParam(value="addressNo") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
-		UserAddressDTO userAddressDTO = userAddressService.loadAddressByUserAndId(id,userDetails.getId());
-		model.addAttribute("userAddress",userAddressDTO);
-		return "/member/updateAddress";
-	}
-	@PostMapping("/member/shipping-address/update")
-	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
-		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
-		return "redirect:/member/mypageAddress";
-	}
 
 	@GetMapping("/member/mypageAddress")
 	public String ToMyPageAddressList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
