@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="/include/header.html"></div>
+	<h2>상품리스트</h2>
+	<div class="mb-2">
+		<a th:href="@{/item/itemForm}" class="btn btn-primary">상품 등록하기</a>
+	</div>
+
+	<div>
+	<ul>
+		<li th:each="item : ${ItemListDTO}">
+			<div></div>
+			<div>
+				<p th:text="${item.itemNm}"></p>
+				<p th:text="${item.itemDetail}"></p>
+				<p th:text="${item.price}"></p>
+			</div>
+		</li>
+	</ul>
+	</div>
+	<div th:replace="/include/footer.html"></div>
+</body>
+</html>
