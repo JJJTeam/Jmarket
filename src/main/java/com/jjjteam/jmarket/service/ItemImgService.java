@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
-import com.jjjteam.jmarket.entity.ItemImg;
+import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 
 @RequiredArgsConstructor

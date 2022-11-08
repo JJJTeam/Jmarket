@@ -10,10 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.ItemImgDTO;
-import com.jjjteam.jmarket.dto.ItemSearchDTO;
-import com.jjjteam.jmarket.dto.MainItemDTO;
-import com.jjjteam.jmarket.entity.Item;
-import com.jjjteam.jmarket.entity.ItemImg;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
 

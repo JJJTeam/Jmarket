@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jjjteam.jmarket.entity.Item;
+import com.jjjteam.jmarket.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 	

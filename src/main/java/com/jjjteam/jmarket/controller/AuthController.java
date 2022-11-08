@@ -1,7 +1,7 @@
 package com.jjjteam.jmarket.controller;
 
+import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.exception.TokenRefreshException;
-import com.jjjteam.jmarket.model.ERole;
 import com.jjjteam.jmarket.model.RefreshToken;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;

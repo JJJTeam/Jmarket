@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.entity;
+package com.jjjteam.jmarket.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;

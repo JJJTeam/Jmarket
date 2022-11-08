@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.jjjteam.jmarket.constant.ERole;
+
 @Entity
 @Table(name = "roles")
 public class Role {
