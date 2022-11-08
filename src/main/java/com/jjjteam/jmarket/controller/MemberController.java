@@ -4,14 +4,21 @@ package com.jjjteam.jmarket.controller;
 
 import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
 import com.jjjteam.jmarket.dto.payload.response.MessageResponse;
+import com.jjjteam.jmarket.model.UserAddress;
+import com.jjjteam.jmarket.security.services.UserDetailsImpl;
+import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 
 @Controller
@@ -19,20 +26,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
 	private final UserService userService;
+	private final UserAddressService userAddressService;
 
 	@GetMapping("/login")
-	public String ToLoginPage() throws Exception {
+	public String ToLoginPage() {
 		return "/login";
 	}
 
 	@GetMapping("/signup")
-	public String ToJoinPage() throws Exception {
+	public String ToJoinPage() {
 		return "/signup";
 	}
 
 	@GetMapping("/member/mypageAddress")
 	@Secured("ROLE_USER")
-	public String ToypageAddress() throws Exception {
+	public String ToPageAddress(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		List<UserAddress> addressList = userAddressService.findByUserId(userDetails.getId());
+		model.addAttribute("addressList",addressList);
 		return "/member/mypageAddress";
 	}
 	@PostMapping("/member/signup")

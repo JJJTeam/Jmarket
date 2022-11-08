@@ -16,19 +16,19 @@
                 <th scope="col">주소</th>
                 <th scope="col">받으실 분</th>
                 <th scope="col">연락처</th>
-                <th scope="col">배송유형</th>
+                <th scope="col">기본배송지</th>
                 <th scope="col">수정</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+            <tr th:each="address : ${addressList}">
+                <td>선택</td>
+                <td th:text="${address.address}"></td>
+                <td th:text="${address.person}"></td>
+                <td th:text="${address.addressPhoneNumber}"></td>
+                <td th:text="${address.defaultAddress}"></td>
             </tr>
+
 
             </tbody>
         </table>
