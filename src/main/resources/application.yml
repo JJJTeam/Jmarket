@@ -6,9 +6,9 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
@@ -62,20 +62,22 @@ logging:
 server:
   port: 8082
   
-
 spring:
   config:
     activate:
       on-profile: sujin
   jpa:
     hibernate:
-      ddl-auto: create  
+      ddl-auto: create
+    show-sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
 
 
 ---
-
+logging:
+  level:
+    root: info
 spring:
   config:
     activate:
@@ -83,10 +85,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+    show-sql: false
+
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
 

@@ -23,6 +23,11 @@ public class UserAddressService {
     public List<UserAddress> findByUserId(Long userID) {
         return userAddressRepository.findByUserId(userID);
     }
+    @Transactional
+    public void addUserAddress(UserAddress userAddress){
+        userAddressRepository.save(userAddress);
+
+    }
 
 
 }

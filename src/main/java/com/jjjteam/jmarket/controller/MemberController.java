@@ -2,9 +2,12 @@ package com.jjjteam.jmarket.controller;
 
 
 
+import com.jjjteam.jmarket.dto.UserAddressDTO;
 import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
 import com.jjjteam.jmarket.dto.payload.response.MessageResponse;
 import com.jjjteam.jmarket.model.UserAddress;
+import com.jjjteam.jmarket.repository.UserAddressRepository;
+import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
@@ -27,6 +30,8 @@ public class MemberController {
 
 	private final UserService userService;
 	private final UserAddressService userAddressService;
+	private final UserRepository userRepository;
+	private final UserAddressRepository userAddressRepository;
 
 	@GetMapping("/login")
 	public String ToLoginPage() {
@@ -36,6 +41,33 @@ public class MemberController {
 	@GetMapping("/signup")
 	public String ToJoinPage() {
 		return "/signup";
+	}
+
+
+	@GetMapping("/member/shipping-address")
+	public String ToShippingAddress() {
+		return "/member/shippingAddress";
+	}
+	@PostMapping("/member/shipping-address")
+	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO,
+	Boolean checkboxValue) {
+
+		if (checkboxValue == true){
+			UserAddress userAddress = userAddressRepository.findByDefaultAddress(true);
+			userAddress.setDefaultAddress(null);
+			userAddressRepository.save(userAddress);
+		}
+		System.out.println(checkboxValue);
+		userAddressService.addUserAddress(
+				UserAddress.builder()
+						.address(userAddressDTO.getAddress())
+						.addressDetail(userAddressDTO.getAddressDetail())
+						.person(userAddressDTO.getPerson())
+						.defaultAddress(checkboxValue)
+						.addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
+						.user(userRepository.findById(userDetails.getId()).get())
+						.build());
+		return "redirect:/member/mypageAddress";
 	}
 
 	@GetMapping("/member/mypageAddress")
