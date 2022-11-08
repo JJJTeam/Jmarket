@@ -2,8 +2,12 @@ package com.jjjteam.jmarket.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.jjjteam.jmarket.dto.ItemSearchDTO;
+import com.jjjteam.jmarket.dto.MainItemDTO;
 import com.jjjteam.jmarket.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
@@ -22,4 +26,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // orderBy 조건 + 가격 조건?
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
+
+//	Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable);
+//
+//	Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable);
 }

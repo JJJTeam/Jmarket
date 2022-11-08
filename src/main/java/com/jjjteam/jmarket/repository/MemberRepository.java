@@ -1,6 +1,6 @@
 package com.jjjteam.jmarket.repository;
 
-import com.jjjteam.jmarket.entity.Member;
+import com.jjjteam.jmarket.model.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {

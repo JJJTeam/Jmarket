@@ -1,6 +1,6 @@
 package com.jjjteam.jmarket.repository;
 
-import com.jjjteam.jmarket.entity.Order;
+import com.jjjteam.jmarket.model.Order;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
