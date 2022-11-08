@@ -44,13 +44,12 @@ public class ItemController {
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
 		if (bindingResult.hasErrors()) {
-			System.out.println("1번 if문 오류");
 			return "item/itemForm";
 		}
 
 		if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
 			model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
-			System.out.println("2번 if문 오류");
+			
 			return "item/itemForm";
 		}
 
@@ -89,10 +88,10 @@ public class ItemController {
             return "item/itemForm";
         }
 
-//        if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
-//            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
-//            return "item/itemForm";
-//        }
+        if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
+            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
+            return "item/itemForm";
+        }
 
         try {
             itemService.saveItem(itemFormDTO, itemImgFileList);
@@ -101,7 +100,8 @@ public class ItemController {
             return "item/itemForm";
         }
 
-        return "redirect:/";
+//        return "redirect:/";
+        return "item/itemList";
     }
 
 }
