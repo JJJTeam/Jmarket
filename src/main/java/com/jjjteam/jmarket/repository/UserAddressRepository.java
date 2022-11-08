@@ -15,4 +15,5 @@ public interface UserAddressRepository extends JpaRepository<UserAddress, Long> 
 
     UserAddress findByDefaultAddress(Boolean checkboxValue);
 
+
 }

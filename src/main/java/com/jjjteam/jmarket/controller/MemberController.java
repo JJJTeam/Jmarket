@@ -52,21 +52,12 @@ public class MemberController {
 	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO,
 	Boolean checkboxValue) {
 
+
 		if (checkboxValue == true){
-			UserAddress userAddress = userAddressRepository.findByDefaultAddress(true);
-			userAddress.setDefaultAddress(null);
-			userAddressRepository.save(userAddress);
+			userAddressService.clearDefaultAddress();
 		}
-		System.out.println(checkboxValue);
-		userAddressService.addUserAddress(
-				UserAddress.builder()
-						.address(userAddressDTO.getAddress())
-						.addressDetail(userAddressDTO.getAddressDetail())
-						.person(userAddressDTO.getPerson())
-						.defaultAddress(checkboxValue)
-						.addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
-						.user(userRepository.findById(userDetails.getId()).get())
-						.build());
+		userAddressService.saveNewAddress(userAddressDTO, checkboxValue, userDetails.getId());
+
 		return "redirect:/member/mypageAddress";
 	}
 
