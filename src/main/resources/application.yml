@@ -67,6 +67,11 @@ spring:
   config:
     activate:
       on-profile: sujin
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+            
   jpa:
     hibernate:
       ddl-auto: create  
