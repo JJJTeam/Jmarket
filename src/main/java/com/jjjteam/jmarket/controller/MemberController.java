@@ -17,32 +17,20 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
+@Secured("ROLE_USER")
 public class MemberController {
 
 	private final UserService userService;
 	private final UserAddressService userAddressService;
 	private final UserRepository userRepository;
 	private final UserAddressRepository userAddressRepository;
-
-	@GetMapping("/login")
-	public String ToLoginPage() {
-		return "/login";
-	}
-
-	@GetMapping("/signup")
-	public String ToJoinPage() {
-		return "/signup";
-	}
-
 
 	@GetMapping("/member/shipping-address")
 	public String ToShippingAddress() {
@@ -51,20 +39,25 @@ public class MemberController {
 	@PostMapping("/member/shipping-address")
 	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO,
 	Boolean checkboxValue) {
-
-
-		if (checkboxValue == true){
-			userAddressService.clearDefaultAddress();
-		}
+		if (checkboxValue == true){userAddressService.clearDefaultAddress();}
 		userAddressService.saveNewAddress(userAddressDTO, checkboxValue, userDetails.getId());
-
 		return "redirect:/member/mypageAddress";
 	}
+	@GetMapping("/member/shipping-address/update")
+	public String ToUpdateAddressForm(@RequestParam(value="addressNo") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails,Model model ) {
+		UserAddress userAddress = userAddressRepository.findByUserIdAndId(userDetails.getId(),id);
+		model.addAttribute("userAddress",userAddress);
+		return "/member/updateAddress";
+	}
+//	@PostMapping("/member/shipping-address/update")
+//	public String ToUpdateAddressProcess(@RequestParam(value="addressNo") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails ) {
+//		userAddressService.updateUserAddress(id,userDetails.getId());
+//		return "";
+//	}
 
 	@GetMapping("/member/mypageAddress")
-	@Secured("ROLE_USER")
 	public String ToPageAddress(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-		List<UserAddress> addressList = userAddressService.findByUserId(userDetails.getId());
+		List<UserAddressDTO> addressList = userAddressService.findByUserId(userDetails.getId());
 		model.addAttribute("addressList",addressList);
 		return "/member/mypageAddress";
 	}

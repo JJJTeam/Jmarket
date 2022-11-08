@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<div th:replace="/include/header.html"></div>
+
+<div class="container d-flex flex-row">
+    <div th:replace="/member/mypageSidebar.html"></div>
+    <div style="width: 100%">
+        <form method="post" action="/member/shipping-address">
+            <div class="form-group" >
+                <label for="postcode">우편번호:</label>
+                <input type="text" class="form-control" id="postcode" readonly th:value="${userAddress.postCode}" >
+            </div>
+            <div class="form-group">
+                <label for="address">주소:</label>
+                <input type="address" class="form-control" id="address" readonly th:value="${userAddress.address}">
+            </div>
+            <div class="form-group">
+                <label for="addressDetail">상세주소:</label>
+                <input type="text" class="form-control" id="addressDetail" readonly th:value="${userAddress.addressDetail}">
+            </div>
+            <div class="form-group">
+                <label for="person">받는사람이름:</label>
+                <input type="text" class="form-control" id="person" placeholder="이름을입력해주세요" name="person" th:value="${userAddress.person}">
+            </div>
+            <div class="form-group">
+                <label for="addressPhoneNumber">받는사람전화번호:</label>
+                <input type="text" class="form-control" id="addressPhoneNumber" placeholder="전화번호" name="addressPhoneNumber" th:value="${userAddress.addressPhoneNumber}">
+            </div>
+            <div class="form-group">
+                <label for="defaultAddressTest">기본배송지:</label>
+                <input type="checkbox"  id="defaultAddressTest"  name="checkboxValue" >
+            </div>
+            <button type="submit" class="btn btn-primary">주소등록</button>
+        </form>
+    </div>
+</div>
+<div th:replace="/include/footer.html"></div>
+
+</body>
+

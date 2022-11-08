@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,20 +24,22 @@ public class UserAddressService {
     private final UserRepository userRepository;
 
     @Transactional
-    public List<UserAddress> findByUserId(Long userID) {
-        return userAddressRepository.findByUserId(userID);
+    public void updateUserAddress(Long id, Long userId){
+
+    }
+
+    @Transactional
+    public List<UserAddressDTO> findByUserId(Long userID) {
+        List<UserAddress> userAddresses = userAddressRepository.findByUserId(userID);
+        return userAddresses.stream().map(UserAddressDTO::new).collect(Collectors.toList());
     }
     @Transactional
-    public void addUserAddress(UserAddress userAddress){
-        userAddressRepository.save(userAddress);
-
-    }
-
     public void clearDefaultAddress() {
         UserAddress userAddress = userAddressRepository.findByDefaultAddress(true);
         userAddress.setDefaultAddress(null);
         userAddressRepository.save(userAddress);
     }
+    @Transactional
     public void saveNewAddress(UserAddressDTO userAddressDTO, Boolean checkboxValue, Long userId) {
         userAddressRepository.save(
                 UserAddress.builder()
@@ -46,6 +49,7 @@ public class UserAddressService {
                         .defaultAddress(checkboxValue)
                         .addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
                         .user(userRepository.findById(userId).get())
+                        .postCode(userAddressDTO.getPostCode())
                         .build());
     }
 }

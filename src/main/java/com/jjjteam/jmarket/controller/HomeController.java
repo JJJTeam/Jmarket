@@ -10,29 +10,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class HomeController {
 
+	@GetMapping("/login")
+	public String ToLoginPage() {
+		return "/login";
+	}
 
+	@GetMapping("/signup")
+	public String ToJoinPage() {
+		return "/signup";
+	}
 
 	// 사이트?
 	@GetMapping("/item/itemForm")
-	public String item() throws Exception{
-		try {
-
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
+	public String item(){
 		return "item/itemForm";
 	}
 	
 
 	@GetMapping("/")
-	public String toLoginPage() throws Exception {
-
-		try {
-
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-
+	public String toLoginPage() {
 		return "index";
 	}
 

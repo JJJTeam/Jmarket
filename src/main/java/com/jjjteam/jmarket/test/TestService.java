@@ -63,6 +63,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
                         .addressPhoneNumber("010-4343-7575")
                         .user(userRepository.getReferenceById(1L))
                         .person("우리집 고양이")
+                        .postCode("1234")
                         .defaultAddress(true)
                         .build());
         userAddressRepository.save(
@@ -72,6 +73,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
                         .addressPhoneNumber("010-4343-1324")
                         .user(userRepository.getReferenceById(1L))
                         .person("개똥이")
+                        .postCode("1234")
                         .defaultAddress(null)
                         .build());
         userAddressRepository.save(
@@ -82,6 +84,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
                         .user(userRepository.getReferenceById(1L))
                         .person("하나무라")
                         .defaultAddress(null)
+                        .postCode("1234")
                         .build());
         userAddressRepository.save(
                 UserAddress.builder()
@@ -90,6 +93,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
                         .addressPhoneNumber("010-413-1324")
                         .user(userRepository.getReferenceById(1L))
                         .person("하라")
+                        .postCode("1234")
                         .defaultAddress(null)
                         .build());
 
