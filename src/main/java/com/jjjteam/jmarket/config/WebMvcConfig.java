@@ -19,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	 */	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**")
-				.addResourceLocations(uploadPath);
+		registry.addResourceHandler("/images/**")	// uploadPath 경로들/~
+				.addResourceLocations(uploadPath);	// 로컬에 저장된 파일을 읽어 올 root 경로 설정
 	}
 }

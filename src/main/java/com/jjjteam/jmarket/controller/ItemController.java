@@ -33,13 +33,13 @@ public class ItemController {
 // 	}
 	
 	// 기존
-	@GetMapping("/item/new")
+	@GetMapping("/item/itemForm")
 	public String itemForm(Model model) {
 		model.addAttribute("itemFormDTO", new ItemFormDTO());
 		return "item/itemForm";
 	}
 
-	@PostMapping("/item/new")
+	@PostMapping("/item/itemFrom")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
@@ -62,37 +62,38 @@ public class ItemController {
 		return "redirect:/";
 	}
 	
-	//상품 수정
-	@GetMapping(value = "/item/{itemId}")
-    public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
-
-        try {
-            ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
-            model.addAttribute("itemFormDto", itemFormDto);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("itemFormDto", new ItemFormDTO());
-            return "item/itemForm";
-        }
-
-        return "item/itemForm";
-    }
+//	//상품 수정
+//	@GetMapping(value = "/item/{itemId}")
+//    public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
+//
+//        try {
+//            ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
+//            model.addAttribute("itemFormDto", itemFormDto);
+//        } catch (EntityNotFoundException e) {
+//            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+//            model.addAttribute("itemFormDto", new ItemFormDTO());
+//            return "item/itemForm";
+//        }
+//
+//        return "item/itemForm";
+//    }
+	
 	//상품 등록
-	@PostMapping(value = "/admin/item/{itemId}")
-    public String itemUpdate(@Valid ItemFormDTO itemFormDto, BindingResult bindingResult
+	@PostMapping(value = "/item/{itemId}")
+    public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult
             , @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "item/itemForm";
         }
 
-        if (itemImgFileList.get(0).isEmpty() && itemFormDto.getId() == null) {
-            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
-            return "item/itemForm";
-        }
+//        if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
+//            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
+//            return "item/itemForm";
+//        }
 
         try {
-            itemService.saveItem(itemFormDto, itemImgFileList);
+            itemService.saveItem(itemFormDTO, itemImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "item/itemForm";
