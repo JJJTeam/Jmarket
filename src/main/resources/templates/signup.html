@@ -6,20 +6,171 @@
 <body>
 <div class="container">
     <h2>회원가입 form</h2>
-    <form method="post" action="/member/signup">
-        <div class="form-group" >
-            <label for="username">사용자이름:</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username" name="userid" value="">
+    <form action="/member/signup" method="post">
+        <div class="form-group">
+            <label for="userid">아이디:</label>
+            <input class="form-control" id="userid" name="userid" placeholder="Enter userid" type="text" value="">
+            <button class="btn btn-primary" type="button">중복확인(미구현)</button>
         </div>
         <div class="form-group">
-            <label for="password1">비밀번호:</label>
-            <input type="password" class="form-control" id="password1" placeholder="Enter password" name="password" value="">
+            <label for="password">비밀번호:</label>
+            <input class="form-control" id="password" name="password" placeholder="Enter password" type="password"
+                   value="">
+        </div>
+        <div class="form-group">
+            <label for="password2">비밀번호확인(미구현):</label>
+            <input class="form-control" id="password2" name="password2" placeholder="Enter password" type="password2"
+                   value="">
+        </div>
+        <div class="form-group">
+            <label for="userName">이름:</label>
+            <input class="form-control" id="userName" name="userName" placeholder="Enter userName" type="text" value="">
         </div>
         <div class="form-group">
             <label for="email">이메일:</label>
-            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="">
+            <input class="form-control" id="email" name="email" placeholder="Enter email" type="text" value="">
+            <button class="btn btn-primary" type="button">중복확인(미구현)</button>
         </div>
-        <button type="submit" class="btn btn-primary">회원가입</button>
+        <div class="form-group">
+            <label for="userPhoneNumber">휴대폰:</label>
+            <input class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="Enter userPhoneNumber"
+                   type="text" value="">
+            <button class="btn btn-primary" type="button">인증번호받기(미구현)</button>
+        </div>
+        <div class="form-group">
+            <label for="#">주소(미구현):</label>
+            <input class="form-control" id="#" name="#" placeholder="Enter #" type="text" value="">
+        </div>
+        <div class="form-group">
+            <div>성별(미구현)</div>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios1" name="exampleRadios" type="radio"
+                       value="option1">
+                <label class="form-check-label" for="exampleRadios1">
+                    남자
+                </label>
+            </span>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio"
+                       value="option1">
+                <label class="form-check-label" for="exampleRadios1">
+                    여자
+                </label>
+            </span>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios3" name="exampleRadios" type="radio"
+                       value="option1">
+                <label class="form-check-label" for="exampleRadios1">
+                    선택안함
+                </label>
+            </span>
+        </div>
+        <label for="my_year">생년월일(미구현)</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <input class="form-control" id="my_year" maxlength="4" name="my_year" placeholder="년도" type="text">
+                <span class="input-group-text">년</span>
+            </div>
+            <select class="custom-select" id="month" name="month">
+                <option value="1">1
+                </option>
+                <option value="2">2
+                </option>
+                <option value="3">3
+                </option>
+                <option value="4">4
+                </option>
+                <option value="5">5
+                </option>
+                <option value="6">6
+                </option>
+                <option value="7">7
+                </option>
+                <option value="8">8
+                </option>
+                <option value="9">9
+                </option>
+                <option value="10">10
+                </option>
+                <option value="11">11
+                </option>
+                <option value="12">12
+                </option>
+            </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="month">월</label>
+            </div>
+            <select class="custom-select" id="day" name="day">
+                <option selected="selected" value="1">1
+                </option>
+                <option value="2">2
+                </option>
+                <option value="3">3
+                </option>
+                <option value="4">4
+                </option>
+                <option value="5">5
+                </option>
+                <option value="6">6
+                </option>
+                <option value="7">7
+                </option>
+                <option value="8">8
+                </option>
+                <option value="9">9
+                </option>
+                <option value="10">10
+                </option>
+                <option value="11">11
+                </option>
+                <option value="12">12
+                </option>
+                <option value="13">13
+                </option>
+                <option value="14">14
+                </option>
+                <option value="15">15
+                </option>
+                <option value="16">16
+                </option>
+                <option value="17">17
+                </option>
+                <option value="18">18
+                </option>
+                <option value="19">19
+                </option>
+                <option value="20">20
+                </option>
+                <option value="21">21
+                </option>
+                <option value="22">22
+                </option>
+                <option value="23">23
+                </option>
+                <option value="24">24
+                </option>
+                <option value="25">25
+                </option>
+                <option value="26">26
+                </option>
+                <option value="27">27
+                </option>
+                <option value="28">28
+                </option>
+                <option value="29">29
+                </option>
+                <option value="30">30
+                </option>
+                <option value="31">31
+                </option>
+            </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="day">일</label>
+            </div>
+        </div>
+
+
+        <button class="btn btn-primary" type="submit">회원가입</button>
     </form>
 </div>
 
