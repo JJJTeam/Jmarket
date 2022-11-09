@@ -24,19 +24,17 @@ public class UserAddressService {
 
     @Transactional
     public void updateUserAddress(UserAddressDTO userAddressDTO, Long userId){
-
+        clearDefaultAddress();
         UserAddress userAddress = userAddressRepository.findByIdAndUserIdAndPostCodeAndAddress(
                 userAddressDTO.getId(),userId,userAddressDTO.getPostCode(),userAddressDTO.getAddress()
         ).get();
         if (null!=userAddress){
-//            if (userAddressDTO.getDefaultAddress()){
-//                clearDefaultAddress();
-//                log.info("{}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",userAddressDTO.getDefaultAddress());
-////                userAddress.setDefaultAddress(true);
-//            }
-//            userAddress.setAddressDetail(userAddressDTO.getAddressDetail());
-//            userAddress.setAddressPhoneNumber(userAddressDTO.getAddressPhoneNumber());
-//            userAddress.setPerson(userAddressDTO.getPerson());
+            if (userAddressDTO.getDefaultAddress()!=null){
+                userAddress.setDefaultAddress(true);
+            }
+            userAddress.setAddressDetail(userAddressDTO.getAddressDetail());
+            userAddress.setAddressPhoneNumber(userAddressDTO.getAddressPhoneNumber());
+            userAddress.setPerson(userAddressDTO.getPerson());
             userAddressRepository.save(userAddress);
         }
 

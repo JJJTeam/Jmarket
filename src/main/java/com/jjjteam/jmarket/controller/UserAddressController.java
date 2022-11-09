@@ -53,13 +53,7 @@ public class UserAddressController {
 	}
 	@PostMapping("/member/shipping-address/update")
 	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
-//		boolean test = userAddressDTO.getDefaultAddress();
-		boolean test = true;
-			if (test==true){
-                log.info("{}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",userAddressDTO.getDefaultAddress());
-//                userAddress.setDefaultAddress(true);
-            }
-//		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
+		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
 		return "redirect:/member/mypageAddress";
 	}
 }
