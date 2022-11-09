@@ -70,4 +70,10 @@ public class UserAddressService {
                         .postCode(userAddressDTO.getPostCode())
                         .build());
     }
+    @Transactional
+    public void dropUserAddress(Long id, Long userId) {
+        userAddressRepository.deleteByIdAndUserId(id,userId);
+
+    }
+
 }

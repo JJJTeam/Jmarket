@@ -35,6 +35,12 @@ public class UserAddressController {
 	private final UserAddressRepository userAddressRepository;
 
 
+	@GetMapping("/member/shipping-address/drop")
+	public String DropAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+		userAddressService.dropUserAddress(id,userDetails.getId());
+		return "redirect:/member/mypageAddress";
+	}
 	@GetMapping("/member/shipping-address")
 	public String ToShippingAddress() {
 		return "/member/shippingAddress";

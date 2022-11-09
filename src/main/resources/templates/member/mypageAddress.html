@@ -29,9 +29,7 @@
                 <td th:text="${address.person}"></td>
                 <td th:text="${address.addressPhoneNumber}"></td>
                 <td th:text="${address.defaultAddress}"></td>
-<!--                <td><a href="/member/shipping-address/update?addressNo="<span th:text="${address.id}"></span>수정</a></td>-->
                 <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
-
             </tr>
 
             </tbody>
