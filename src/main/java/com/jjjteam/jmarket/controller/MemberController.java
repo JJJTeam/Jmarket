@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class MemberController {
 		model.addAttribute("addressList",addressList);
 		return "/member/mypageAddress";
 	}
-	@PostMapping("/member/signup")
+	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(SignUpRequest signUpRequest) {
 		if (userService.existsByUserId(signUpRequest.getUserid())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
@@ -52,5 +53,12 @@ public class MemberController {
 		userService.registerUser(signUpRequest);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-
+	@GetMapping("/api/checkId")
+	@ResponseBody
+	public String checkId(@RequestParam(value="userId") String userId)
+	{
+		log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
+		log.info(userId);
+		return "테스트입니다.";
+	}
 }
