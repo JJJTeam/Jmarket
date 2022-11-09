@@ -17,7 +17,7 @@ public class HomeController {
 
 	@GetMapping("/signup")
 	public String ToJoinPage() {
-		return "/signup";
+		return "signup";
 	}
 
 	@GetMapping("/")
