@@ -8,7 +8,7 @@
 <div class="container d-flex flex-row">
     <div th:replace="/member/mypageSidebar.html"></div>
     <div style="width: 100%">
-      <div>배송지관리 <a href="#">배송지추가</a></div>
+      <div>배송지관리 <a href="/member/shipping-address">배송지추가</a></div>
         <table class="table">
             <thead>
             <tr>
@@ -23,12 +23,14 @@
             <tbody>
             <tr th:each="address : ${addressList}">
                 <td>선택</td>
-                <td th:text="${address.address}"></td>
+                <td>
+                    <span th:text="${address.address}"></span> <span th:text="${address.addressDetail}"></span>
+                </td>
                 <td th:text="${address.person}"></td>
                 <td th:text="${address.addressPhoneNumber}"></td>
                 <td th:text="${address.defaultAddress}"></td>
+                <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
             </tr>
-
 
             </tbody>
         </table>

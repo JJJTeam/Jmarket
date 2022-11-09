@@ -12,6 +12,6 @@ public class TokenRefreshException extends RuntimeException {
 
     public TokenRefreshException(String token, String message) {
         super(String.format("Failed for [%s]: %s", token, message));
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+        
     }
 }

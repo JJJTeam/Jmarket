@@ -18,7 +18,7 @@ public class UserInfoResponse {
     private List<String> roles;
 
     public UserInfoResponse(Long id, String userId, String email, List<String> roles) {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+        
         this.id = id;
         this.userId = userId;
         this.email = email;
