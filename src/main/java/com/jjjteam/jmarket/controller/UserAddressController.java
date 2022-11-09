@@ -40,9 +40,9 @@ public class UserAddressController {
 		return "/member/shippingAddress";
 	}
 	@PostMapping("/member/shipping-address")
-	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO,Boolean checkboxValue) {
-		log.info("{}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",userAddressDTO.getDefaultAddress());
-		userAddressService.saveNewAddress(userAddressDTO, checkboxValue, userDetails.getId());
+	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
+		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress();}
+		userAddressService.saveNewAddress(userAddressDTO, userDetails.getId());
 		return "redirect:/member/mypageAddress";
 	}
 	@GetMapping("/member/shipping-address/update")
@@ -53,6 +53,7 @@ public class UserAddressController {
 	}
 	@PostMapping("/member/shipping-address/update")
 	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
+		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress();}
 		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
 		return "redirect:/member/mypageAddress";
 	}

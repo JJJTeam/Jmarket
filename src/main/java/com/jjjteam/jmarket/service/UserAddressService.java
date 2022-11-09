@@ -24,7 +24,7 @@ public class UserAddressService {
 
     @Transactional
     public void updateUserAddress(UserAddressDTO userAddressDTO, Long userId){
-        clearDefaultAddress();
+
         UserAddress userAddress = userAddressRepository.findByIdAndUserIdAndPostCodeAndAddress(
                 userAddressDTO.getId(),userId,userAddressDTO.getPostCode(),userAddressDTO.getAddress()
         ).get();
@@ -58,15 +58,13 @@ public class UserAddressService {
         }
     }
     @Transactional
-    public void saveNewAddress(UserAddressDTO userAddressDTO, Boolean checkboxValue, Long userId) {
-        if (userAddressDTO.getDefaultAddress() == true){clearDefaultAddress();}
+    public void saveNewAddress(UserAddressDTO userAddressDTO, Long userId) {
         userAddressRepository.save(
                 UserAddress.builder()
                         .address(userAddressDTO.getAddress())
                         .addressDetail(userAddressDTO.getAddressDetail())
                         .person(userAddressDTO.getPerson())
-//                        .defaultAddress(checkboxValue)
-//                        .defaultAddress(userAddressDTO.getDefaultAddress())
+                        .defaultAddress(userAddressDTO.getDefaultAddress())
                         .addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
                         .user(userRepository.findById(userId).get())
                         .postCode(userAddressDTO.getPostCode())
