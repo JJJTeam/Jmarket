@@ -2,6 +2,7 @@ package com.jjjteam.jmarket.model;
 
 import javax.persistence.*;
 
+import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
@@ -34,15 +35,15 @@ public class Item {
     private String itemDetail;  //상품 상세설명
 
     @Enumerated(EnumType.STRING)
-    private ItemSellStatus itemSellStatus;  //상품 판매 상태
+    private ClothingItems clothingItems;  //상품 판매 상태
 
     @Builder
-    public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus) {
+    public Item(String itemNm, int price, int stockNumber, String itemDetail, ClothingItems clothingItems) {
         this.itemNm = itemNm;
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
-        this.itemSellStatus = itemSellStatus;
+        this.clothingItems = clothingItems;
     }
     
     public void updateItem(ItemFormDTO itemFormDto) {
@@ -50,7 +51,7 @@ public class Item {
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
-        this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.clothingItems = itemFormDto.getClothingItems();
     }
     // 상품 주문 -> 상품 재고 감소 로직 생성
     public void removeStock(int stockNumber){

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.model.Item;
 
@@ -31,7 +32,7 @@ public class ItemFormDTO {
 	@NotNull(message = "재고는 필수 입력 값입니다.")
 	private Integer stockNumber;
 
-	private ItemSellStatus itemSellStatus;
+	private ClothingItems clothingItems;
 	
 	// 상품 저장 후 수정할 때 상품 이미지 정보를 저장하는 리스트
 	private List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
@@ -43,19 +44,19 @@ public class ItemFormDTO {
 
 	@Builder
 	public ItemFormDTO(String itemNm, Integer price, String itemDetail, Integer stockNumber,
-			ItemSellStatus itemSellStatus) {
+			ClothingItems clothingItems) {
 		this.itemNm = itemNm;
 		this.price = price;
 		this.itemDetail = itemDetail;
 		this.stockNumber = stockNumber;
-		this.itemSellStatus = itemSellStatus;
+		this.clothingItems = clothingItems;
 	}
 
 	public Item toEntity(ItemFormDTO dto) {
 		Item entity = Item.builder()
 				.itemNm(dto.itemNm)
 				.itemDetail(dto.itemDetail)
-				.itemSellStatus(dto.itemSellStatus)
+				.clothingItems(dto.clothingItems)
 				.price(dto.price)
 				.stockNumber(dto.stockNumber)
 				.build();
@@ -67,7 +68,7 @@ public class ItemFormDTO {
 		ItemFormDTO dto = ItemFormDTO.builder()
 				.itemNm(entity.getItemNm())
 				.itemDetail(entity.getItemDetail())
-				.itemSellStatus(entity.getItemSellStatus())
+				.clothingItems(entity.getClothingItems())
 				.price(entity.getPrice())
 				.stockNumber(entity.getStockNumber())
 				.build();
