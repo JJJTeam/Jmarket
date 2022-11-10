@@ -64,32 +64,32 @@ public class OrderService_backup {
 
 
     // 주문 목록을 조회하기 위한 로직
-    @Transactional(readOnly = true)
-    public Page<OrderHistDTO> getOrderList(String email, Pageable pageable) {
-
-        List<Order> orders = orderRepository.findOrders(email, pageable); // 주문 목록을 조회
-        Long totalCount = orderRepository.countOrder(email); // 주문 총 개수
-
-        List<OrderHistDTO> orderHistDtos = new ArrayList<>();
-
-        for (Order order : orders) {
-            OrderHistDTO orderHistDto = new OrderHistDTO(order);
-            List<OrderItem> orderItems = order.getOrderItems();
-
-            for (OrderItem orderItem : orderItems) { // entity -> dto
-
-                ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
-                        (orderItem.getItem().getId(), "Y"); // 대표상품인지 보는거 (상품 이력 페이지에 출력해야 하니까)
-                OrderItemDTO orderItemDto =
-                        new OrderItemDTO(orderItem, itemImg.getImgUrl()); // entity-> dto
-                orderHistDto.addOrderItemDto(orderItemDto);
-            }
-
-            orderHistDtos.add(orderHistDto);
-        }
-
-        return new PageImpl<OrderHistDTO>(orderHistDtos, pageable, totalCount);
-    }
+//    @Transactional(readOnly = true)
+//    public Page<OrderHistDTO> getOrderList(String email, Pageable pageable) {
+//
+//        List<Order> orders = orderRepository.findOrders(email, pageable); // 주문 목록을 조회
+//        Long totalCount = orderRepository.countOrder(email); // 주문 총 개수
+//
+//        List<OrderHistDTO> orderHistDtos = new ArrayList<>();
+//
+//        for (Order order : orders) {
+//            OrderHistDTO orderHistDto = new OrderHistDTO(order);
+//            List<OrderItem> orderItems = order.getOrderItems();
+//
+//            for (OrderItem orderItem : orderItems) { // entity -> dto
+//
+//                ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
+//                        (orderItem.getItem().getId(), "Y"); // 대표상품인지 보는거 (상품 이력 페이지에 출력해야 하니까)
+//                OrderItemDTO orderItemDto =
+//                        new OrderItemDTO(orderItem, itemImg.getImgUrl()); // entity-> dto
+//                orderHistDto.addOrderItemDto(orderItemDto);
+//            }
+//
+//            orderHistDtos.add(orderHistDto);
+//        }
+//
+//        return new PageImpl<OrderHistDTO>(orderHistDtos, pageable, totalCount);
+//    }
 
 
     // DB 에 있는 email 과 주문자 email 대조함
