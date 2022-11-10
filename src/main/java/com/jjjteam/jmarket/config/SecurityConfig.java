@@ -1,6 +1,5 @@
 package com.jjjteam.jmarket.config;
 
-
 import com.jjjteam.jmarket.security.jwt.AuthEntryPointJwt;
 import com.jjjteam.jmarket.security.jwt.AuthTokenFilter;
 import com.jjjteam.jmarket.security.services.UserDetailsServiceImpl;
@@ -20,13 +19,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
-        prePostEnabled = true)
+		// securedEnabled = true,
+		// jsr250Enabled = true,
+		prePostEnabled = true)
 @Slf4j
 public class SecurityConfig {
 
@@ -69,11 +67,12 @@ public class SecurityConfig {
 //        return authConfig.getAuthenticationManager();
 //    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(),
+				Thread.currentThread().getStackTrace()[1].getMethodName());
+		return new BCryptPasswordEncoder();
+	}
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
@@ -87,9 +86,10 @@ public class SecurityConfig {
 //		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 //	}
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        log.info("현재클래스{}, 현재 메소드{}",Thread.currentThread().getStackTrace()[1].getClassName(),Thread.currentThread().getStackTrace()[1].getMethodName());
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(),
+				Thread.currentThread().getStackTrace()[1].getMethodName());
 //        http.cors().and().csrf().disable()
 //                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -108,35 +108,29 @@ public class SecurityConfig {
 //        http.addFilterBefore(authenticationJwtTokenFilter(), // 기존 존재하는 토큰을 확인, 없으면 통과, 있으면...
 //                UsernamePasswordAuthenticationFilter.class); //
 
+		// csrf 사용안함
+		http.csrf().disable();
 
-        //csrf 사용안함
-        http.csrf().disable();
-
-        //URL 인증여부 설정.
-        http.authorizeRequests()
-                .antMatchers( "/signup", "/", "/login", "/css/**","/js/**","/images/**","/fonts/**", "/vendor/**").permitAll()
-                //@Secured("ROLE_ADMIN")으로 대체
+		// URL 인증여부 설정.
+		http.authorizeRequests()
+				.antMatchers("/signup", "/", "/login", "/css/**", "/js/**", "/images/**", "/fonts/**", "/vendor/**")
+				.permitAll()
+				// @Secured("ROLE_ADMIN")으로 대체
 //                .antMatchers("/api/admin").hasRole("ADMIN")
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
+				.anyRequest().permitAll();
 
-        //로그인 관련 설정.
-        http.formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login") //Post 요청
-                .defaultSuccessUrl("/")
-                .failureUrl("/user/login?error")
-                .permitAll();
+		// 로그인 관련 설정.
+		http.formLogin().loginPage("/login").loginProcessingUrl("/login") // Post 요청
+				.defaultSuccessUrl("/").failureUrl("/user/login?error").permitAll();
 
-        //로그아웃 설정
-        http.logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+		// 로그아웃 설정
+		http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
-        //비인가자 요청시 보낼 Api URI
-        http.exceptionHandling().accessDeniedPage("/forbidden");
+		// 비인가자 요청시 보낼 Api URI
+		http.exceptionHandling().accessDeniedPage("/forbidden");
 
-
-        return http.build();
-    }
+		return http.build();
+	}
 
 }
