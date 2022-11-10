@@ -70,4 +70,7 @@ public class UserService {
         return numStr;
     }
 
+    public boolean memberTelCount(String userPhoneNumber) {
+        return userRepository.existsByUserPhoneNumber(userPhoneNumber);
+    }
 }

@@ -13,6 +13,7 @@ import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,13 +21,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
-@Secured("ROLE_USER")
+
 @Slf4j
 public class MemberController {
 
@@ -35,7 +38,7 @@ public class MemberController {
 	private final UserRepository userRepository;
 	private final UserAddressRepository userAddressRepository;
 
-
+	@Secured("ROLE_USER")
 	@GetMapping("/member/mypageAddress")
 	public String ToMyPageAddressList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<UserAddressDTO> addressList = userAddressService.loadAddressListByUserId(userDetails.getId());
@@ -63,26 +66,24 @@ public class MemberController {
 	public boolean checkEmail(@RequestParam(value="email") String email){
 		return userService.existsByEmail(email);
 	}
-	@PostMapping("phoneAuth")
+	@PostMapping("/api/phoneAuth")
 	@ResponseBody
-	public Boolean phoneAuth(String tel) {
-
+	public Boolean phoneAuth(@RequestBody String userPhoneNumber,HttpSession session) {
 		try { // 이미 가입된 전화번호가 있으면
-			if(userService.memberTelCount(tel) > 0)
+			if(userService.memberTelCount(userPhoneNumber))
 				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		String code = userService.sendRandomMessage(tel);
+		String code = userService.sendRandomMessage(userPhoneNumber);
 		session.setAttribute("rand", code);
-
 		return false;
 	}
 
 	@PostMapping("phoneAuthOk")
 	@ResponseBody
-	public Boolean phoneAuthOk() {
+	public Boolean phoneAuthOk(HttpSession session, HttpServletRequest request) {
+
 		String rand = (String) session.getAttribute("rand");
 		String code = (String) request.getParameter("code");
 

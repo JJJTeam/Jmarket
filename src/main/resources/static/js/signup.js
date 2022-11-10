@@ -27,6 +27,21 @@ function checkEmail(){
             alert("error")
         })
 }
+function phoneAuth(){
+    $.ajax({
+        type:'POST',
+        url:"/api/phoneAuth",
+        data: JSON.stringify($("#userPhoneNumber").val()),
+        dataType:"json",
+        contentType:"application/json;charset=utf=8"
+    })
+        .done(function(resp){
+            resp ? $("#phoneCheck").html("전화테스트1") : $("#phoneCheck").html("전화테스트2.");
+        })
+        .fail(function(e){
+            alert("error")
+        })
+}
 
 // function check() {
 //     var name = document.getElementsByName("mname")[0];

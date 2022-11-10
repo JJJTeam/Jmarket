@@ -13,23 +13,27 @@ import java.util.Base64;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+@Slf4j
 public class Naver_Sens_V2 {
     @SuppressWarnings("unchecked")
     public void send_msg(String tel, String rand) {
-        String hostNameUrl = "https://sens.apigw.ntruss.com";     		// 호스트 URL
-        String requestUrl= "/sms/v2/services/";                   		// 요청 URL
-        String requestUrlType = "/messages";                      		// 요청 URL
-        String accessKey = "";                     						// 개인 인증키
-        String secretKey = "";  										// 2차 인증을 위해 서비스마다 할당되는 service secret
-        String serviceId = "";        									// 프로젝트에 할당된 SMS 서비스 ID
-        String method = "POST";											// 요청 method
-        String timestamp = Long.toString(System.currentTimeMillis()); 	// current timestamp (epoch)
+        String hostNameUrl = "https://sens.apigw.ntruss.com";// 호스트 URL
+        String requestUrl= "/sms/v2/services/";// 요청 URL
+        String requestUrlType = "/messages";// 요청 URL
+        String accessKey = "b84mL1tPK7JNKG0N8Cic";// 개인 인증키
+//        String secretKey = "6c57b211b27b458fa553fad2830fffe2";// 2차 인증을 위해 서비스마다 할당되는 service secret
+        String secretKey = "1NF7mGMQZXOmFWcLfktJR3hjkpF5p4xWBXpla1gS";// 2차 인증을 위해 서비스마다 할당되는 service secret
+        String serviceId = "ncp:sms:kr:263781166659:practice";// 프로젝트에 할당된 SMS 서비스 ID
+        String method = "POST";// 요청 method
+        String timestamp = Long.toString(System.currentTimeMillis());// current timestamp (epoch)
         requestUrl += serviceId + requestUrlType;
         String apiUrl = hostNameUrl + requestUrl;
 
+        log.info(tel.replaceAll("\"", ""));
         // JSON 을 활용한 body data 생성
 
         JSONObject bodyJson = new JSONObject();
@@ -37,14 +41,15 @@ public class Naver_Sens_V2 {
         JSONArray  toArr = new JSONArray();
 
         toJson.put("content","Jmarket 본인인증 ["+rand+"]");		// 난수와 함께 전송
-        toJson.put("to",tel);
+        toJson.put("to",tel.replaceAll("\"", ""));
         toArr.add(toJson);
 
         bodyJson.put("type","sms");	// 메시지 Type (sms | lms)
         bodyJson.put("contentType","COMM");
         bodyJson.put("countryCode","82");
-        bodyJson.put("from","");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.
+        bodyJson.put("from","01032347578");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.
         bodyJson.put("messages", toArr);
+        bodyJson.put("content", "Web발신");
 
 
         String body = bodyJson.toJSONString();
