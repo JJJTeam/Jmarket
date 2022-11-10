@@ -63,4 +63,36 @@ public class MemberController {
 	public boolean checkEmail(@RequestParam(value="email") String email){
 		return userService.existsByEmail(email);
 	}
+	@PostMapping("phoneAuth")
+	@ResponseBody
+	public Boolean phoneAuth(String tel) {
+
+		try { // 이미 가입된 전화번호가 있으면
+			if(userService.memberTelCount(tel) > 0)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String code = userService.sendRandomMessage(tel);
+		session.setAttribute("rand", code);
+
+		return false;
+	}
+
+	@PostMapping("phoneAuthOk")
+	@ResponseBody
+	public Boolean phoneAuthOk() {
+		String rand = (String) session.getAttribute("rand");
+		String code = (String) request.getParameter("code");
+
+		System.out.println(rand + " : " + code);
+
+		if (rand.equals(code)) {
+			session.removeAttribute("rand");
+			return false;
+		}
+
+		return true;
+	}
 }
