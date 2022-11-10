@@ -55,10 +55,7 @@ public class MemberController {
 	}
 	@GetMapping("/api/checkId")
 	@ResponseBody
-	public String checkId(@RequestParam(value="userId") String userId)
-	{
-		log.info("현재클래스{}, 현재 메소드{}", Thread.currentThread().getStackTrace()[1].getClassName(), Thread.currentThread().getStackTrace()[1].getMethodName());
-		log.info(userId);
-		return "테스트입니다.";
+	public boolean checkId(@RequestParam(value="userId") String userId)	{
+		return userService.existsByUserId(userId);
 	}
 }

@@ -1,35 +1,19 @@
 
+
+//userId=$("#userid").val()
 function checkId(){
-    let dataParam = {
-        "userId": $("#userid").val()
-    };
     $.ajax({
             type:'GET',
             url:"/api/checkId",
-            data: JSON.stringify(dataParam),
-            contentType:"application/json;charset=utf=8"
+            data: { userId: $("#userid").val() }
         })
         .done(function(resp){
-            alert("가입을 축하합니다.")
-            console.log(resp)
+            resp ? $("#idCheck").html("사용중인 아이디입니다.") : $("#idCheck").html("사용가능한 아이디입니다.");
         })
         .fail(function(e){
             alert(e+"수정실패")
         })
 }
-
-
-// $(document).ready(function() {
-//     $("#checkId").click(function() {
-//         $.ajax({
-//             type:'GET',
-//             url:"/api/checkId",
-//             data: JSON.stringify({
-//                 "userId": $("#userid").val()
-//             }),
-//             contentType:"application/json;charset=utf=8"
-//         })
-
 
 
         // let mid = $("#mid").val();
@@ -38,9 +22,9 @@ function checkId(){
         //     dataType : "json",
         //     success : function(result) {
         //         if (result) {
-        //             $("#idcheck").html("사용중인 아이디입니다.");
+        //             $("#idCheck").html("사용중인 아이디입니다.");
         //         } else {
-        //             $("#idcheck").html("사용가능한 아이디입니다.");
+        //             $("#idCheck").html("사용가능한 아이디입니다.");
         //         }
         //     }
         // });
