@@ -44,6 +44,7 @@ public class UserService {
 
     @Transactional
     public void registerUser(SignUpRequest signUpRequest) {
+
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         User user = User.builder()
@@ -65,7 +66,7 @@ public class UserService {
         }
         System.out.println("회원가입 문자 인증 => " + numStr);
 
-        message.send_msg(tel, numStr);
+//        message.send_msg(tel, numStr);
 
         return numStr;
     }

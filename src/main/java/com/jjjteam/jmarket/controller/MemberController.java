@@ -37,6 +37,9 @@ public class MemberController {
 	private final UserAddressService userAddressService;
 	private final UserRepository userRepository;
 	private final UserAddressRepository userAddressRepository;
+	private boolean phoneAuth = false;
+	private String phoneNumberTemp;
+	private String phoneNumberAuth;
 
 	@Secured("ROLE_USER")
 	@GetMapping("/member/mypageAddress")
@@ -46,15 +49,30 @@ public class MemberController {
 		return "/member/mypageAddress";
 	}
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(SignUpRequest signUpRequest) {
+	public String registerUser(SignUpRequest signUpRequest, Model model) {
+
+//		if(phoneNumberAuth.equals(signUpRequest.getUserPhoneNumber())){
+//			model.addAttribute("messege","잘못된 전호번호입니다.");
+//			return "signup";
+//		}
+//		if(phoneAuth){
+//			model.addAttribute("messege","인증되지 않은 전화번호입니다.");
+//			return "signup";
+//		}
+
 		if (userService.existsByUserId(signUpRequest.getUserid())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+			model.addAttribute("messege","Username is already taken!.");
+			return "signup";
 		}
 		if (userService.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already taken!"));
+			model.addAttribute("messege","Email is already taken.");
+			return "signup";
 		}
+		log.info("@@@@@@@@@@@@@@@@@@");
 		userService.registerUser(signUpRequest);
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		log.info("@@@@@@@@@@@@@@@@@@");
+		model.addAttribute("messege","회원가입 축하합니다.");
+		return "signup";
 	}
 	@GetMapping("/api/checkId")
 	@ResponseBody
@@ -69,6 +87,7 @@ public class MemberController {
 	@PostMapping("/api/phoneAuth")
 	@ResponseBody
 	public Boolean phoneAuth(@RequestBody String userPhoneNumber,HttpSession session) {
+		phoneNumberTemp = userPhoneNumber;
 		try { // 이미 가입된 전화번호가 있으면
 			if(userService.memberTelCount(userPhoneNumber))
 				return true;
@@ -83,6 +102,7 @@ public class MemberController {
 	@PostMapping("/api/phoneAuthOk")
 	@ResponseBody
 	public Boolean phoneAuthOk(HttpSession session, HttpServletRequest request) {
+		phoneAuth = false;
 
 
 
@@ -90,12 +110,12 @@ public class MemberController {
 		String code = (String) request.getParameter("code");
 
 		System.out.println(rand + " : " + code);
-
 		if (rand.equals(code)) {
 			session.removeAttribute("rand");
+			phoneAuth = true;
+			phoneNumberAuth= phoneNumberTemp;
 			return false;
 		}
-
 		return true;
 	}
 }
