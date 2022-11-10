@@ -58,4 +58,9 @@ public class MemberController {
 	public boolean checkId(@RequestParam(value="userId") String userId)	{
 		return userService.existsByUserId(userId);
 	}
+	@GetMapping("/api/checkEmail")
+	@ResponseBody
+	public boolean checkEmail(@RequestParam(value="email") String email){
+		return userService.existsByEmail(email);
+	}
 }

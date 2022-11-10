@@ -11,26 +11,23 @@ function checkId(){
             resp ? $("#idCheck").html("사용중인 아이디입니다.") : $("#idCheck").html("사용가능한 아이디입니다.");
         })
         .fail(function(e){
-            alert(e+"수정실패")
+            alert("error")
+        })
+}
+function checkEmail(){
+    $.ajax({
+        type:'GET',
+        url:"/api/checkEmail",
+        data: { email: $("#email").val() }
+    })
+        .done(function(resp){
+            resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
+        })
+        .fail(function(e){
+            alert("error")
         })
 }
 
-
-        // let mid = $("#mid").val();
-        // $.ajax({
-        //     // url : "/api/checkId/" + mid,
-        //     dataType : "json",
-        //     success : function(result) {
-        //         if (result) {
-        //             $("#idCheck").html("사용중인 아이디입니다.");
-        //         } else {
-        //             $("#idCheck").html("사용가능한 아이디입니다.");
-        //         }
-        //     }
-        // });
-//     });
-// });
-//
 // function check() {
 //     var name = document.getElementsByName("mname")[0];
 //     var id = document.getElementsByName("mid")[0];
