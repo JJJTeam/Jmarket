@@ -80,9 +80,11 @@ public class MemberController {
 		return false;
 	}
 
-	@PostMapping("phoneAuthOk")
+	@PostMapping("/api/phoneAuthOk")
 	@ResponseBody
 	public Boolean phoneAuthOk(HttpSession session, HttpServletRequest request) {
+
+
 
 		String rand = (String) session.getAttribute("rand");
 		String code = (String) request.getParameter("code");

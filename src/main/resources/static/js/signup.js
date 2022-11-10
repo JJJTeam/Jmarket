@@ -1,6 +1,3 @@
-
-
-//userId=$("#userid").val()
 function checkId(){
     $.ajax({
             type:'GET',
@@ -41,7 +38,23 @@ function phoneAuth(){
         .fail(function(e){
             alert("error")
         })
+}function phoneAuthOk(){
+    //userPhoneCode
+    $.ajax({
+        type:'POST',
+        url:"/api/phoneAuthOk",
+        data:'code='+$('#code').val()
+        // dataType:"json",
+        // contentType:"application/json;charset=utf=8"
+    })
+        .done(function(resp){
+            resp ? $("#phoneCheck").html("전화테스트3") : $("#phoneCheck").html("전화테스트4.");
+        })
+        .fail(function(e){
+            alert("error")
+        })
 }
+
 
 // function check() {
 //     var name = document.getElementsByName("mname")[0];
