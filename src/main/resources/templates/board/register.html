@@ -24,8 +24,9 @@
 
 	<h2 class="">게시판 등록</h2>
 
-	<form th:action="@{/board/register_form}" method="post"
-		enctype="multipart/form-data">
+	<form th:action="@{/board/register_form}" method="post">
+
+
 
 		<div class="mb-3">
 			<label for="subject" class="form-label">제목 </label> <input
@@ -40,58 +41,31 @@
 		<!-- 에디터로 글쓰기 하는 부분 -->
 		<div class="form-group">
 			<label for="content">content:</label>
-			<textarea class="form-control summernote" rows="5" id="summernote"
-				name="content"></textarea>
+			<!-- <textarea class="form-control summernote" rows="5" id="summernote"
+				name="content"></textarea> -->
+			<textarea name="contents" class="form-control" id="contents"
+				th:field="*{content}"></textarea>
+
+
 		</div>
 
 
 		<input type="submit" value="저장하기" class="btn btn-primary my-2">
 	</form>
-
-
+	
+	
 	<script>
-	 $('#summernote').summernote({
-		placeholder : "Enter content", //안에 들어갈 내용 미리보기
-		focus: true, // 에디터 로딩후 포커스를 맞출지 여부
-		lang:"ko-KR", // 한글설정 
-		tabsize : 2, 
-		height : 300, //높이
-		
-	
-	//콜백 함수
-            callbacks : { 
-            	onImageUpload : function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-            uploadSummernoteImageFile(files[i],
-            this);
-            		}
-            	}
-            }
-		
-	}); 
-	 
-	 function uploadSummernoteImageFile(file, el) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "uploadSummernoteImageFile",
-				contentType : false,
-				enctype : 'multipart/form-data',
-				processData : false,
-				success : function(data) {
-					$(el).summernote('editor.insertImage', data.url);
-				}
-			});
-		}
-	 
-	
-	
-	
-	
-</script>
+		var ckeditor_config = {
+			filebrowserUploadMethod : 'form',
+			
+			filebrowserUploadUrl : "/board/register_form/imageUpload",
+			extraPlugins : 'autogrow',
+		};
+
+		CKEDITOR.replace("contents", ckeditor_config);
+	</script>
+
+
 	<script src="/js/board.js"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
