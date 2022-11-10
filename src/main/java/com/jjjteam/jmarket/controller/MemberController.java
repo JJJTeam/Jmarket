@@ -68,11 +68,8 @@ public class MemberController {
 			model.addAttribute("messege","Email is already taken.");
 			return "signup";
 		}
-		log.info("@@@@@@@@@@@@@@@@@@");
 		userService.registerUser(signUpRequest);
-		log.info("@@@@@@@@@@@@@@@@@@");
-		model.addAttribute("messege","회원가입 축하합니다.");
-		return "signup";
+		return "/index";
 	}
 	@GetMapping("/api/checkId")
 	@ResponseBody
