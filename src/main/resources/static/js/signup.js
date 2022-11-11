@@ -1,6 +1,3 @@
-
-
-//userId=$("#userid").val()
 function checkId(){
     $.ajax({
             type:'GET',
@@ -8,7 +5,7 @@ function checkId(){
             data: { userId: $("#userid").val() }
         })
         .done(function(resp){
-            resp ? $("#idCheck").html("사용중인 아이디입니다.") : $("#idCheck").html("사용가능한 아이디입니다.");
+            resp ? $("#idCheck").html("사용가능한 아이디입니다.") : $("#idCheck").html("사용중인 아이디입니다.");
         })
         .fail(function(e){
             alert("error")
@@ -21,12 +18,43 @@ function checkEmail(){
         data: { email: $("#email").val() }
     })
         .done(function(resp){
-            resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
+            resp ? $("#emailCheck").html("사용가능한 이메일입니다.") : $("#emailCheck").html("사용중인 이메일입니다.");
         })
         .fail(function(e){
             alert("error")
         })
 }
+function phoneAuth(){
+    $.ajax({
+        type:'POST',
+        url:"/api/phoneAuth",
+        data: JSON.stringify($("#userPhoneNumber").val()),
+        dataType:"json",
+        contentType:"application/json;charset=utf=8"
+    })
+        .done(function(resp){
+            resp ? $("#phoneCheck").html("전화테스트1") : $("#phoneCheck").html("전화테스트2.");
+        })
+        .fail(function(e){
+            alert("error")
+        })
+}function phoneAuthOk(){
+    //userPhoneCode
+    $.ajax({
+        type:'POST',
+        url:"/api/phoneAuthOk",
+        data:'code='+$('#code').val()
+        // dataType:"json",
+        // contentType:"application/json;charset=utf=8"
+    })
+        .done(function(resp){
+            resp ? $("#phoneCheck").html("전화테스트3") : $("#phoneCheck").html("전화테스트4.");
+        })
+        .fail(function(e){
+            alert("error")
+        })
+}
+
 
 // function check() {
 //     var name = document.getElementsByName("mname")[0];

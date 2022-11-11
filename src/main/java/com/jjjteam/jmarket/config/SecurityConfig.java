@@ -117,7 +117,8 @@ public class SecurityConfig {
                 .antMatchers( "/signup", "/", "/login", "/css/**","/js/**","/images/**","/fonts/**", "/vendor/**").permitAll()
                 //@Secured("ROLE_ADMIN")으로 대체
 //                .antMatchers("/api/admin").hasRole("ADMIN")
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
+        .anyRequest().permitAll();
 
         //로그인 관련 설정.
         http.formLogin()
