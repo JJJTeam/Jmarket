@@ -15,11 +15,7 @@ import javax.validation.constraints.*;
 @Setter
 @ToString
 public class SignUpRequest {
-//    @NotBlank
-//    @Size(max = 50)
-//    @Email
-//    @Size(min = 6, max = 40)
-//"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?=\\S+$).{8,20}$"
+
     @NotBlank(message = "아이디를 입력해주세요")
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "아이디를 4-20자로 입력해주세요(특수문자불가능)")
     private String userid;
