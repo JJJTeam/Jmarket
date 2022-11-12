@@ -52,6 +52,9 @@ public class UserService {
                 .email(signUpRequest.getEmail())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
                 .roles(roles)
+                .userBirthDate(signUpRequest.getUserBirthDate())
+                .userName(signUpRequest.getUserName())
+                .userSex(signUpRequest.getUserSex())
                 .build();
         userRepository.save(user);
     }

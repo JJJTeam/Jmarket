@@ -62,20 +62,21 @@ public class MemberController {
 		log.info("signUpRequest.getUserPhoneNumber() : {}",signUpRequest.getUserPhoneNumber());
 		log.info("phoneAuth: {}",phoneAuth);
 		log.info("checkId: {}",checkId);
+		log.info("checkEmail: {}",checkEmail);
 
 		if(bindingResult.hasErrors()){
 			return "signup";
 		}
 //		리펙터링 필요,
-		if(checkEmail!=null){
+		if(checkEmail==null){
 			model.addAttribute("messege","이메일 중복확인을 해주세요");
 			return "signup";
 		}
-		if(checkId!=null){
+		if(checkId==null){
 			model.addAttribute("messege","아이디 중복확인을 해주세요.");
 			return "signup";
 		}
-		if(phoneAuth!=null){
+		if(phoneAuth==null){
 			model.addAttribute("messege","전화번호 인증을 해주세요");
 			return "signup";
 		}
@@ -103,7 +104,7 @@ public class MemberController {
 			model.addAttribute("messege","Email is already taken.");
 			return "signup";
 		}
-//		userService.registerUser(signUpRequest);
+		userService.registerUser(signUpRequest);
 		return "/index";
 	}
 	@GetMapping("/api/checkId")

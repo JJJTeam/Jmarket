@@ -9,7 +9,8 @@
     <form th:action="@{/signup}" th:object="${signUpRequest}" method="POST">
         <div class="form-group">
             <label for="userid">아이디:</label>
-            <input type="text" class="form-control" th:field="*{userid}"  th:classappend="${#fields.hasErrors('userid')} ? 'error(에러시클래스부여)'" placeholder="Enter userid"/>
+            <input type="text" class="form-control" th:field="*{userid}"   placeholder="아이디를 4-20자로 입력해주세요"
+                   th:classappend="${#fields.hasErrors('userid')} ? 'error(에러시클래스부여)'"/>
             <div th:each="msg : ${#fields.errors('userid')}">
                 <p th:text="${msg}"></p>
             </div>
@@ -18,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="password">비밀번호:</label>
-            <input class="form-control" th:field="*{password}" placeholder="Enter password" type="password"
+            <input class="form-control" th:field="*{password}" placeholder="비밀번호는 영문 대문자 소문자 숫자 특수문자의 최소 1개씩 8 이상으로 입력해주세요" type="password"
                    value="">
             <div th:each="msg : ${#fields.errors('password')}">
                 <p th:text="${msg}"></p>
@@ -47,9 +48,9 @@
         </div>
         <div class="form-group">
             <label for="userPhoneNumber">휴대폰:</label>
-            <input class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="Enter userPhoneNumber"
+            <input class="form-control" th:field="*{userPhoneNumber}" placeholder="숫자만 입력해주세요"
                    type="text">
-            <button class="btn btn-primary" type="button" onclick="phoneAuth()">인증번호받기</button>
+            <button class="btn btn-primary" type="button" th:field="${code}" onclick="phoneAuth()">인증번호받기</button>
             <span id="phoneCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
                 <input type="text" name="code" id="code">
                 <button type="button" onclick="phoneAuthOk()">확인</button>
@@ -59,7 +60,7 @@
             <input class="form-control" id="#" name="#" placeholder="Enter #" type="text" value="">
         </div>
         <div class="form-group">
-            <div>성별(미구현)</div>
+            <div>성별(DTO랑 맵핑은됨)</div>
             <span class="form-check">
                 <input checked class="form-check-input" id="exampleRadios1" name="userSex" type="radio"
                        value=1>
@@ -82,7 +83,7 @@
                 </label>
             </span>
         </div>
-        <label for="userBirthDate">생년월일(미구현)</label>
+        <label for="userBirthDate">생년월일(DTO에 맵핑은됨)</label>
         <input type="date" th:field="*{userBirthDate}">
         <button class="btn btn-primary" type="submit">회원가입</button>
 <!--        <span th:text="${#messege}">이건 왜 안되지??</span>-->
