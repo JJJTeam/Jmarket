@@ -2,12 +2,10 @@ package com.jjjteam.jmarket.test;
 
 
 
-import com.jjjteam.jmarket.controller.AuthController;
-import com.jjjteam.jmarket.model.ERole;
+import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;
-import com.jjjteam.jmarket.payload.request.SignupRequest;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
@@ -42,7 +40,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
 
     @PostConstruct
     private void init(){
-//                System.out.println("빈이 완전히 생성된 후에 한번 수행될 ㅂ메서드에 붙입니다.");
+//                System.out.println("빈이 완전히 생성된 후에 한번 수행될 메서드에 붙입니다.");
         roleRepository.save(new Role(ERole.ROLE_USER));
         roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
@@ -58,19 +56,46 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         roles.add(userRole);
         user.setRoles(roles);
         userRepository.save(user);
-//        userAddressRepository.save(
-//                UserAddress.builder()
-//                        .address("test8")
-//                        .user(userRepository.getReferenceById(1L))
-//                        .build()
-//        );
-//        userAddressRepository.save(
-//                UserAddress.builder()
-//                        .defaultAddress(true)
-//                        .address("test9")
-//                        .user(userRepository.getReferenceById(1L))
-//                        .build()
-//        );
+        userAddressRepository.save(
+                UserAddress.builder()
+                        .address("서울 한강중심")
+                        .addressDetail("403호")
+                        .addressPhoneNumber("010-4343-7575")
+                        .user(userRepository.getReferenceById(1L))
+                        .person("우리집 고양이")
+                        .postCode("1234")
+                        .defaultAddress(true)
+                        .build());
+        userAddressRepository.save(
+                UserAddress.builder()
+                        .address("부산광역시 행복동 행복아파트")
+                        .addressDetail("123403호")
+                        .addressPhoneNumber("010-4343-1324")
+                        .user(userRepository.getReferenceById(1L))
+                        .person("개똥이")
+                        .postCode("1234")
+                        .defaultAddress(null)
+                        .build());
+        userAddressRepository.save(
+                UserAddress.builder()
+                        .address("주소테스트3")
+                        .addressDetail("1203호")
+                        .addressPhoneNumber("010-4123-1324")
+                        .user(userRepository.getReferenceById(1L))
+                        .person("하나무라")
+                        .defaultAddress(null)
+                        .postCode("1234")
+                        .build());
+        userAddressRepository.save(
+                UserAddress.builder()
+                        .address("주소테스트4")
+                        .addressDetail("12호")
+                        .addressPhoneNumber("010-413-1324")
+                        .user(userRepository.getReferenceById(1L))
+                        .person("하라")
+                        .postCode("1234")
+                        .defaultAddress(null)
+                        .build());
 
     }
     @Override

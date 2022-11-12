@@ -1,7 +1,8 @@
 package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.constant.OrderStatus;
-import com.jjjteam.jmarket.entity.Order;
+import com.jjjteam.jmarket.model.Order;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,10 +25,10 @@ public class OrderHistDTO {
     private String orderDate; //주문날짜
     private OrderStatus orderStatus; //주문 상태
 
-    private List<OrderHistDTO> orderItemDtoList = new ArrayList<>();
+    private List<OrderItemDTO> orderItemDtoList = new ArrayList<>();
 
     //주문 상품리스트
-    public void addOrderItemDto(OrderHistDTO orderItemDto){ // '현재 주문한 상품 정보' 를 주문 상품 리스트에 담음음
+    public void addOrderItemDto(OrderItemDTO orderItemDto){ // '현재 주문한 상품 정보' 를 주문 상품 리스트에 담음음
        orderItemDtoList.add(orderItemDto);
     }
 }

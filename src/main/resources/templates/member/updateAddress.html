@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<div th:replace="/include/header.html"></div>
+
+<div class="container d-flex flex-row">
+    <div th:replace="/member/mypageSidebar.html"></div>
+    <div style="width: 100%">
+        <form method="post" action="/member/shipping-address/update">
+            <div class="form-group" >
+                <label for="postcode">우편번호:</label>
+                <input type="text" class="form-control" id="postCode" readonly name="postCode" th:value="${userAddress.postCode}" >
+                <input type="hidden" readonly name="id" th:value="${userAddress.id}" >
+            </div>
+            <div class="form-group">
+                <label for="address">주소:</label>
+                <input type="address" class="form-control" id="address" readonly name="address" th:value="${userAddress.address}">
+            </div>
+            <div class="form-group">
+                <label for="addressDetail">상세주소:</label>
+                <input type="text" class="form-control" id="addressDetail" name="addressDetail" th:value="${userAddress.addressDetail}">
+            </div>
+            <div class="form-group">
+                <label for="person">받는사람이름:</label>
+                <input type="text" class="form-control" id="person" placeholder="이름을입력해주세요" name="person" th:value="${userAddress.person}">
+            </div>
+            <div class="form-group">
+                <label for="addressPhoneNumber">받는사람전화번호:</label>
+                <input type="text" class="form-control" id="addressPhoneNumber" placeholder="전화번호" name="addressPhoneNumber" th:value="${userAddress.addressPhoneNumber}">
+            </div>
+            <div class="form-group">
+                <span th:if="${userAddress.defaultAddress} == true">
+                    <label>기본배송지입니다.</label>
+                    <input type="hidden"  name="defaultAddress" th:value="${userAddress.defaultAddress}">
+                </span>
+                <span th:unless="${userAddress.defaultAddress} == true">
+                    <label for="defaultAddress">기본배송지로 저장:</label>
+                    <input type="checkbox"  id="defaultAddress"  name="defaultAddress">
+                </span>
+            </div>
+            <button type="submit" class="btn btn-primary">주소수정</button>
+            <button type="button" class="btn btn-success btn-sm _delete">삭제</button>
+        </form>
+    </div>
+</div>
+<div th:replace="/include/footer.html"></div>
+<script th:inline="javascript">
+
+
+    $("._delete").on("click", function () {
+        if (!confirm("정말삭제하시겠습니까?")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+        } else {
+
+            location.href = '/member/shipping-address/drop?addressNo=[[${userAddress.id}]]'
+        }})
+
+</script>
+
+</body>
+

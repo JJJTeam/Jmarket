@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.test.context.support.WithMockUser;
+
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.entity.Item;
-import com.jjjteam.jmarket.entity.ItemImg;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.service.ItemService;
@@ -58,7 +58,7 @@ public class ItemServiceTest {
 
 	@Test
 	@DisplayName("상품 등록 테스트")
-	@WithMockUser(username = "admin", roles = "ADMIN")
+//	@WithMockUser(username = "admin", roles = "ADMIN")
 	public void saveItem() throws Exception {
 		ItemFormDTO itemFormDto = ItemFormDTO.builder()
 				.itemNm("테스트 상품입니다.")

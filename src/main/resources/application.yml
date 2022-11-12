@@ -6,11 +6,11 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
     username: root
     password: JJJTeam
   thymeleaf:
@@ -29,7 +29,7 @@ logging:
 #  file:
 #    path: logs
   level:
-    root: debug
+    root: info
     com:
       jjjteam:
         jmarket: trace
@@ -57,17 +57,28 @@ bezkoder:
 ---
 logging:
  level:
-  root: debug
- 
+  root: info
+
+server:
+  port: 8082
+  
 spring:
   config:
     activate:
       on-profile: sujin
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
+    
 
- 
 
 ---
-
+logging:
+  level:
+    root: info
 spring:
   config:
     activate:
@@ -75,10 +86,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+    show-sql: false
+
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
 
