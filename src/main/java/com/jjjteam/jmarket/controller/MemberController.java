@@ -39,11 +39,11 @@ public class MemberController {
 	private final UserAddressService userAddressService;
 	private final UserRepository userRepository;
 	private final UserAddressRepository userAddressRepository;
-	private Boolean phoneAuth = false;
+	private Boolean phoneAuth = null;
 	private String phoneNumberTemp;
 	private String phoneNumberAuth;
-	private Boolean checkId = false;
-	private Boolean checkEmail = false;
+	private Boolean checkId = null;
+	private Boolean checkEmail = null;
 
 	@Secured("ROLE_USER")
 	@GetMapping("/member/mypageAddress")
@@ -56,7 +56,7 @@ public class MemberController {
 
 
 	@PostMapping("/signup")
-	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult) {
+	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model) {
 		log.info(signUpRequest.toString());
 		log.info("phoneNumberAuth : {}",phoneNumberAuth);
 		log.info("signUpRequest.getUserPhoneNumber() : {}",signUpRequest.getUserPhoneNumber());
@@ -67,30 +67,42 @@ public class MemberController {
 			return "signup";
 		}
 //		리펙터링 필요,
-//		if(checkEmail!=true){
-//			model.addAttribute("messege","중복된 이메일입니다.");
-//			return "signup";
-//		}
-//		if(checkId!=true){
-//			model.addAttribute("messege","중복된 아이디입니다.");
-//			return "signup";
-//		}
-//		if(phoneAuth!=true){
-//			model.addAttribute("messege","인증되지 않은 전화번호입니다.2");
-//			return "signup";
-//		}
-//		if(!signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth)){
-//			model.addAttribute("messege","인증되지 않은 전화번호입니다.");
-//			return "signup";
-//		}
-//		if (userService.existsByUserId(signUpRequest.getUserid())) {
-//			model.addAttribute("messege","Username is already taken!.");
-//			return "signup";
-//		}
-//		if (userService.existsByEmail(signUpRequest.getEmail())) {
-//			model.addAttribute("messege","Email is already taken.");
-//			return "signup";
-//		}
+		if(checkEmail!=null){
+			model.addAttribute("messege","이메일 중복확인을 해주세요");
+			return "signup";
+		}
+		if(checkId!=null){
+			model.addAttribute("messege","아이디 중복확인을 해주세요.");
+			return "signup";
+		}
+		if(phoneAuth!=null){
+			model.addAttribute("messege","전화번호 인증을 해주세요");
+			return "signup";
+		}
+		if(checkEmail!=true){
+			model.addAttribute("messege","중복된 이메일입니다.");
+			return "signup";
+		}
+		if(checkId!=true){
+			model.addAttribute("messege","중복된 아이디입니다.");
+			return "signup";
+		}
+		if(phoneAuth!=true){
+			model.addAttribute("messege","인증되지 않은 전화번호입니다.2");
+			return "signup";
+		}
+		if(!signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth)){
+			model.addAttribute("messege","인증되지 않은 전화번호입니다.");
+			return "signup";
+		}
+		if (userService.existsByUserId(signUpRequest.getUserid())) {
+			model.addAttribute("messege","Username is already taken!.");
+			return "signup";
+		}
+		if (userService.existsByEmail(signUpRequest.getEmail())) {
+			model.addAttribute("messege","Email is already taken.");
+			return "signup";
+		}
 //		userService.registerUser(signUpRequest);
 		return "/index";
 	}
