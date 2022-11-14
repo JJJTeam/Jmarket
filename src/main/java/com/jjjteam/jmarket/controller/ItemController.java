@@ -39,7 +39,6 @@ public class ItemController {
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
 		if (bindingResult.hasErrors()) {
-			
 			return "item/itemForm";
 		}
 
@@ -51,6 +50,7 @@ public class ItemController {
 		try {
 			itemService.saveItem(itemFormDTO, itemImgFileList);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@성공했습니다.");
+			
 		} catch (Exception e) {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+e);
 			model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
@@ -58,7 +58,7 @@ public class ItemController {
 		}
 
 //		return "redirect:/";
-		return "item/itemList";
+		return "redirect:/item/itemList";
 	}
 	
 //	//상품 수정
@@ -77,7 +77,7 @@ public class ItemController {
 //        return "item/itemForm";
 //    }
 	
-	//상품 등록
+	//상품
 	@PostMapping(value = "/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult
             , @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
