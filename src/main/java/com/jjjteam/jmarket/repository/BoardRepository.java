@@ -13,8 +13,8 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
 
 	//이렇게생성하고, 테스트에서 내용물 잘 들어가는지 확인
 	
-	Board findBySubject(String subject);
-	Board findBySubjectAndContent(String subject, String content);
+	Board findBySubject(Board board);
+	//Board findBySubjectAndContent(String subject, String content);
 	
 	
 	//페이징처리 아래에 로직 입력

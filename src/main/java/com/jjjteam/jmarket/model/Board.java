@@ -41,6 +41,7 @@ public class Board {
 	//@Column(columnDefinition ="TEXT")
 	@Lob // 섬머노트 라이브러리로 <html>태그 섞여 디자인 될것이니 대용량데이터 
 	private String content;
+
 	
 	private LocalDateTime createDate;
 	

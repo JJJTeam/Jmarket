@@ -82,12 +82,12 @@ public class BoardController {
 			
 	    // 게시판입력값 저장 로직 
 		this.boardService.registerForm(subject, content);
-		
-		
 		return "redirect:/board/list"; //질문 저장 후 이동 
 		
 	}
 	
+	
+	//파일
 	
 	
 	
