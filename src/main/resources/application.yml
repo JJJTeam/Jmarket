@@ -10,7 +10,7 @@ spring:
 #      hibernate:
 #        format_sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
   thymeleaf:
@@ -66,6 +66,11 @@ spring:
   config:
     activate:
       on-profile: sujin
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+            
   jpa:
     hibernate:
       ddl-auto: create

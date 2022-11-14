@@ -33,7 +33,6 @@ public class Board {
     //private User users; //db에서는 안되지만 ORM에서는 object를 사용할수잇음 
 		
 	
-	
 	@Column(length =200)
 	//private String title;
 	private String subject;
@@ -41,14 +40,15 @@ public class Board {
 	//@Column(columnDefinition ="TEXT")
 	@Lob // 섬머노트 라이브러리로 <html>태그 섞여 디자인 될것이니 대용량데이터 
 	private String content;
+
 	
 	private LocalDateTime createDate;
 	
 	
-	//게시판에 글쓴이 추가
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="userId")
-//	private User user;
+	//게시판에 글쓴이 추가,
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_name")
+	private User user; // db에서는 안되지만 orm에서는 object를 사용할수있다
 
 
 	

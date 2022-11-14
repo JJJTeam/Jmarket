@@ -5,7 +5,7 @@ function checkId(){
             data: { userId: $("#userid").val() }
         })
         .done(function(resp){
-            resp ? $("#idCheck").html("사용가능한 아이디입니다.") : $("#idCheck").html("사용중인 아이디입니다.");
+            resp ? $("#idCheck").html("사용중인 아이디입니다.") : $("#idCheck").html("사용가능한 아이디입니다.");
         })
         .fail(function(e){
             alert("error")
@@ -18,7 +18,7 @@ function checkEmail(){
         data: { email: $("#email").val() }
     })
         .done(function(resp){
-            resp ? $("#emailCheck").html("사용가능한 이메일입니다.") : $("#emailCheck").html("사용중인 이메일입니다.");
+            resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
         })
         .fail(function(e){
             alert("error")
@@ -33,13 +33,13 @@ function phoneAuth(){
         contentType:"application/json;charset=utf=8"
     })
         .done(function(resp){
-            resp ? $("#phoneCheck").html("전화테스트1") : $("#phoneCheck").html("전화테스트2.");
+            resp ? $("#phoneCheck").html("전화테스트1") : $("#phoneCheck").html("문자를 발송하였습니다.");
         })
         .fail(function(e){
             alert("error")
         })
-}function phoneAuthOk(){
-    //userPhoneCode
+}
+function phoneAuthOk(){
     $.ajax({
         type:'POST',
         url:"/api/phoneAuthOk",
@@ -48,10 +48,10 @@ function phoneAuth(){
         // contentType:"application/json;charset=utf=8"
     })
         .done(function(resp){
-            resp ? $("#phoneCheck").html("전화테스트3") : $("#phoneCheck").html("전화테스트4.");
+            resp ? $("#phoneCheck").html("잘못입력하셨습니다.") : $("#phoneCheck").html("인증완료");
         })
         .fail(function(e){
-            alert("error")
+            alert("인증을 다시 시도해 주세요")
         })
 }
 

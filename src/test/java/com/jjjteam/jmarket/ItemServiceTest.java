@@ -56,25 +56,6 @@ public class ItemServiceTest {
 		return multipartFileList;
 	}
 
-	@Test
-	@DisplayName("상품 등록 테스트")
-//	@WithMockUser(username = "admin", roles = "ADMIN")
-	public void saveItem() throws Exception {
-		ItemFormDTO itemFormDto = ItemFormDTO.builder()
-				.itemNm("테스트 상품입니다.")
-				.itemSellStatus(ItemSellStatus.SELL)
-				.itemDetail("테스트 상품 설명입니다.")
-				.price(1000)
-				.stockNumber(100)
-				.build();
-		List<MultipartFile> multipartFileList = createMultipartFiles();
-		Long itemId = itemService.saveItem(itemFormDto, multipartFileList);
 
-		List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-		Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
-
-		assertEquals(itemFormDto.getItemNm(), item.getItemNm());
-		assertEquals(multipartFileList.get(0).getOriginalFilename(), itemImgList.get(0).getOriImgName());
-	}
 
 }

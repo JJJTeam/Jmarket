@@ -19,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,15 +49,19 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         // 권한내용을 DB에 넣어준다.
 //        User user = new User("test","test@test",encoder.encode("test"));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         User user = User.builder()
                 .userId("test")
-                .email("test@test")
+                .email("test@test.com")
                 .password(encoder.encode("test"))
+                .roles(roles)
+                .userBirthDate(LocalDate.now())
+                .userName("유저이름")
+                .userSex((byte) 1)
+                .userPhoneNumber("010-3034-7578")
+                .userRegisterDateTime(LocalDateTime.now())
                 .build();
-        Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
-        roles.add(userRole);
-        user.setRoles(roles);
         userRepository.save(user);
         userAddressRepository.save(
                 UserAddress.builder()
