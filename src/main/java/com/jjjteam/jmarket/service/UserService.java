@@ -19,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,6 +67,8 @@ public class UserService {
                 .userBirthDate(signUpRequest.getUserBirthDate())
                 .userName(signUpRequest.getUserName())
                 .userSex(signUpRequest.getUserSex())
+                .userPhoneNumber(signUpRequest.getUserPhoneNumber())
+                .userRegisterDateTime(LocalDateTime.now())
                 .build();
         userRepository.save(user);
     }

@@ -5,7 +5,7 @@ function checkId(){
             data: { userId: $("#userid").val() }
         })
         .done(function(resp){
-            resp ? $("#idCheck").html("사용가능한 아이디입니다.") : $("#idCheck").html("사용중인 아이디입니다.");
+            resp ? $("#idCheck").html("사용중인 아이디입니다.") : $("#idCheck").html("사용가능한 아이디입니다.");
         })
         .fail(function(e){
             alert("error")
@@ -18,7 +18,7 @@ function checkEmail(){
         data: { email: $("#email").val() }
     })
         .done(function(resp){
-            resp ? $("#emailCheck").html("사용가능한 이메일입니다.") : $("#emailCheck").html("사용중인 이메일입니다.");
+            resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
         })
         .fail(function(e){
             alert("error")
