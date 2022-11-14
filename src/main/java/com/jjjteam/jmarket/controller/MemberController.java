@@ -46,9 +46,6 @@ public class MemberController {
 	private boolean phoneAuth = false;
 	private String phoneNumberTemp;
 	private String phoneNumberAuth;
-	private Boolean checkId = null;
-	private Boolean checkEmail = null;
-
 
 	@Secured("ROLE_USER")
 	@GetMapping("/member/mypageAddress")
@@ -58,17 +55,10 @@ public class MemberController {
 		return "/member/mypageAddress";
 	}
 
-
-
 	@PostMapping("/signup")
 	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model) {
-
 		if(bindingResult.hasErrors()){return "signup";}
-		String checkIdMessege = ValidText.getValidText("checkId",userService.existsByUserId(signUpRequest.getUserid()));
-		String checkEmailMessege = ValidText.getValidText("checkEmail",userService.existsByEmail(signUpRequest.getEmail()));
-		String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&&signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth));
-		List<String> messege = Arrays.asList(checkIdMessege,checkEmailMessege,phoneAuthMessege);
-		List<String>resultMessege = messege.stream().filter(i -> !i.equals("pass")).collect(Collectors.toList());
+		List<String>resultMessege = userService.DoubleCheckTextList(signUpRequest,phoneAuth,phoneNumberAuth);
 		if(resultMessege.size()>0){
 			model.addAttribute("messege",resultMessege);
 			return "signup";
@@ -79,12 +69,12 @@ public class MemberController {
 	@GetMapping("/api/checkId")
 	@ResponseBody
 	public boolean checkId(@RequestParam(value="userId") String userId)	{
-		return checkId = !userService.existsByUserId(userId);
+		return !userService.existsByUserId(userId);
 	}
 	@GetMapping("/api/checkEmail")
 	@ResponseBody
 	public boolean checkEmail(@RequestParam(value="email") String email){
-		return checkEmail= !userService.existsByEmail(email);
+		return !userService.existsByEmail(email);
 	}
 	@PostMapping("/api/phoneAuth")
 	@ResponseBody
