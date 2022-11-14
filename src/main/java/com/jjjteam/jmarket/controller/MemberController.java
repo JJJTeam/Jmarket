@@ -62,16 +62,8 @@ public class MemberController {
 
 	@PostMapping("/signup")
 	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model) {
-		log.info(signUpRequest.toString());
-		log.info("phoneNumberAuth : {}",phoneNumberAuth);
-		log.info("signUpRequest.getUserPhoneNumber() : {}",signUpRequest.getUserPhoneNumber());
-		log.info("phoneAuth: {}",phoneAuth);
-		log.info("checkId: {}",checkId);
-		log.info("checkEmail: {}",checkEmail);
-		if(bindingResult.hasErrors()){
-			return "signup";
-		}
-//		리펙터링 필요,
+
+		if(bindingResult.hasErrors()){return "signup";}
 		String checkIdMessege = ValidText.getValidText("checkId",userService.existsByUserId(signUpRequest.getUserid()));
 		String checkEmailMessege = ValidText.getValidText("checkEmail",userService.existsByEmail(signUpRequest.getEmail()));
 		String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&&signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth));
@@ -81,43 +73,7 @@ public class MemberController {
 			model.addAttribute("messege",resultMessege);
 			return "signup";
 		}
-//		if(checkEmail==null){
-//			model.addAttribute("messege","이메일 중복확인을 해주세요");
-//			return "signup";
-//		}
-//		if(checkId==null){
-//			model.addAttribute("messege","아이디 중복확인을 해주세요.");
-//			return "signup";
-//		}
-//		if(phoneAuth){
-//			model.addAttribute("messege","전화번호 인증을 해주세요");
-//			return "signup";
-//		}
-//		if(checkEmail!=true){
-//			model.addAttribute("messege","중복된 이메일입니다.");
-//			return "signup";
-//		}
-//		if(checkId!=true){
-//			model.addAttribute("messege","중복된 아이디입니다.");
-//			return "signup";
-//		}
-//		if(phoneAuth!=true){
-//			model.addAttribute("messege","인증되지 않은 전화번호입니다.2");
-//			return "signup";
-//		}
-//		if(!signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth)){
-//			model.addAttribute("messege","인증되지 않은 전화번호입니다.");
-//			return "signup";
-//		}
-//		if (userService.existsByUserId(signUpRequest.getUserid())) {
-//			model.addAttribute("messege","Username is already taken!.");
-//			return "signup";
-//		}
-//		if (userService.existsByEmail(signUpRequest.getEmail())) {
-//			model.addAttribute("messege","Email is already taken.");
-//			return "signup";
-//		}
-//		userService.registerUser(signUpRequest);
+		userService.registerUser(signUpRequest);
 		return "/index";
 	}
 	@GetMapping("/api/checkId")
