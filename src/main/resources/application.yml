@@ -76,7 +76,7 @@ spring:
       ddl-auto: create
     show-sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     
 
 
