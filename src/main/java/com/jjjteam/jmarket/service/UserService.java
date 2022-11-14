@@ -2,6 +2,7 @@ package com.jjjteam.jmarket.service;
 
 
 import com.jjjteam.jmarket.constant.ERole;
+import com.jjjteam.jmarket.constant.ValidText;
 import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
@@ -18,9 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -40,6 +40,16 @@ public class UserService {
     @Transactional
     public Boolean existsByEmail(String userEmail) {
         return userRepository.existsByEmail(userEmail);
+    }
+
+    @Transactional
+    public List<String> DoubleCheckTextList(SignUpRequest signUpRequest,boolean phoneAuth, String phoneNumberAuth){
+        String checkIdMessege = ValidText.getValidText("checkId",userRepository.existsByUserId(signUpRequest.getUserid()));
+        String checkEmailMessege = ValidText.getValidText("checkEmail",userRepository.existsByEmail(signUpRequest.getEmail()));
+        String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&&signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth));
+        List<String> messege = Arrays.asList(checkIdMessege,checkEmailMessege,phoneAuthMessege);
+        List<String>resultMessege = messege.stream().filter(i -> !i.equals("pass")).collect(Collectors.toList());
+        return resultMessege;
     }
 
     @Transactional
