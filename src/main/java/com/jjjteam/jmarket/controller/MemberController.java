@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -75,13 +76,11 @@ public class MemberController {
 		String checkEmailMessege = ValidText.getValidText("checkEmail",userService.existsByEmail(signUpRequest.getEmail()));
 		String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&&signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth));
 		List<String> messege = Arrays.asList(checkIdMessege,checkEmailMessege,phoneAuthMessege);
-		messege.stream().filter(i -> !i.equals("pass")).forEach(j -> return "sighup");
-
-//		if(!messege.equals("pass")){
-//			model.addAttribute("messege",messege);
-//			return "signup";
-//		}
-
+		List<String>resultMessege = messege.stream().filter(i -> !i.equals("pass")).collect(Collectors.toList());
+		if(resultMessege.size()>0){
+			model.addAttribute("messege",resultMessege);
+			return "signup";
+		}
 //		if(checkEmail==null){
 //			model.addAttribute("messege","이메일 중복확인을 해주세요");
 //			return "signup";

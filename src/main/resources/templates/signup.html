@@ -91,9 +91,10 @@
     </form>
 </div>
 <script th:inline="javascript">
-    if ([[${messege}]] != null){
-        alert([[${messege}]]);
-    }
+    [# th:each="msg : ${messege}"]
+        alert([[${msg}]])
+    [/]
+
 </script>
 </body>
 <div th:replace="/include/footer.html"></div>
