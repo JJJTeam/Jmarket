@@ -10,7 +10,7 @@ spring:
 #      hibernate:
 #        format_sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
   thymeleaf:

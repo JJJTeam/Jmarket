@@ -1,5 +1,6 @@
 package com.jjjteam.jmarket.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jjjteam.jmarket.model.Board;
 import com.jjjteam.jmarket.model.User;
@@ -21,6 +22,7 @@ import com.jjjteam.jmarket.repository.BoardRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.BoardService;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,16 +55,10 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		return "board/list";
 	}
-	
 
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, @PathVariable("id") Integer id, Principal principal) {
 		Board board = this.boardService.getBoard(id);
 
 		model.addAttribute("board", board);
@@ -75,16 +71,28 @@ public class BoardController {
 		return "board/register";
 	}
 	
+//	@ResponseBody
+//	@PostMapping("/register_form") 
+//	public ResponseDTO<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
+//		service.save(board, principal.getUser());
+//		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+//	}
 	
-	//@AuthenticationPrincipal UserDetailsImpl userDetailsImpl
 	@PostMapping("/register_form")
-	public String registerForm(@RequestParam String subject, @RequestParam String content) {
-			
+	public String registerForm(Board board, @AuthenticationPrincipal UserDetailsImpl userDetails) {		
 	    // 게시판입력값 저장 로직 
-		this.boardService.registerForm(subject, content);
+		boardService.registerForm(board,userDetails.getId());
 		return "redirect:/board/list"; //질문 저장 후 이동 
-		
 	}
+	
+	
+	
+//	@PostMapping("/register_form")
+//	public String registerForm(@RequestParam String subject, @RequestParam String content) {		
+//	    // 게시판입력값 저장 로직 
+//		this.boardService.registerForm(subject, content);
+//		return "redirect:/board/list"; //질문 저장 후 이동 
+//	}
 	
 	
 	//파일
