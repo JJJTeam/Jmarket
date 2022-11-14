@@ -17,8 +17,6 @@ import javax.validation.constraints.*;
 @Setter
 @ToString
 public class SignUpRequest {
-
-
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
     private String userid;
     @Email
@@ -27,7 +25,6 @@ public class SignUpRequest {
     private String password;
     @Pattern(regexp = "^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$" , message = "잘못입력하셨습니다.(한글,영어만 가능)")
     private String userName;
-
     private String userPhoneNumber;
     private byte userSex;                   //성별  X
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -36,6 +33,5 @@ public class SignUpRequest {
     private Boolean userReceiveSms;            //문자수신여부  X
     private Boolean userSmsCert;               // 문자 인증 여부  X
     private LocalDateTime userRegisterDateTime; //회원가입시간  X
-
     private Set<String> role;
 }

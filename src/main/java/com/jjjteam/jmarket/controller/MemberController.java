@@ -31,12 +31,7 @@ public class MemberController {
 
 	private final UserService userService;
 	private final UserAddressService userAddressService;
-	private final UserRepository userRepository;
-	private final UserAddressRepository userAddressRepository;
 
-	private boolean phoneAuth = false;
-	private String phoneNumberTemp;
-	private String phoneNumberAuth;
 
 	@Secured("ROLE_USER")
 	@GetMapping("/member/mypageAddress")
@@ -47,13 +42,16 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model) {
+	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model,HttpSession session) {
 		if(bindingResult.hasErrors()){return "signup";}
-		List<String>DoubleCheckTextList = userService.DoubleCheckTextList(signUpRequest,phoneAuth,phoneNumberAuth);
+		List<String>DoubleCheckTextList = userService.DoubleCheckTextList(signUpRequest,
+				(boolean) session.getAttribute("phoneAuth"),(String) session.getAttribute("phoneNumberAuth"));
 		if(DoubleCheckTextList.size()>0){
 			model.addAttribute("messege",DoubleCheckTextList);
 			return "signup";
 		}
+		session.removeAttribute("phoneAuth");
+		session.removeAttribute("phoneNumberAuth");
 		userService.registerUser(signUpRequest);
 		return "/index";
 	}
@@ -70,7 +68,6 @@ public class MemberController {
 	@PostMapping("/api/phoneAuth")
 	@ResponseBody
 	public Boolean phoneAuth(@RequestBody String userPhoneNumber,HttpSession session) {
-		phoneNumberTemp = userPhoneNumber.replaceAll("\"","");
 		try { // 이미 가입된 전화번호가 있으면
 			if(userService.memberTelCount(userPhoneNumber))
 				return true;
@@ -79,22 +76,26 @@ public class MemberController {
 		}
 		String code = userService.sendRandomMessage(userPhoneNumber);
 		session.setAttribute("rand", code);
+		session.setAttribute("phoneAuth",false);
+		session.setAttribute("phoneNumberTemp",userPhoneNumber.replaceAll("\"",""));
 		return false;
 	}
 	@PostMapping("/api/phoneAuthOk")
 	@ResponseBody
 	public Boolean phoneAuthOk(HttpSession session, HttpServletRequest request) {
-		phoneAuth = false;
+
+
 		String rand = (String) session.getAttribute("rand");
 		String code = (String) request.getParameter("code");
 
 		System.out.println(rand + " : " + code);
 		if (rand.equals(code)) {
 			session.removeAttribute("rand");
-			phoneAuth = true;
-			phoneNumberAuth= phoneNumberTemp;
+			session.setAttribute("phoneAuth",true);
+			session.setAttribute("phoneNumberAuth",session.getAttribute("phoneNumberTemp"));
 			return false;
 		}
+		session.removeAttribute("phoneNumberTemp");
 		return true;
 	}
 }

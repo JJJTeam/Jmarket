@@ -20,7 +20,7 @@ public class BoardTest {
 	            String subject = String.format("테스트 데이터입니다:[%03d]", i);
 	            String content = "내용무";
 	            
-	            this.boardService.registerForm(subject, content);
+//	            this.boardService.registerForm(subject, content);
 	        }
 		
 	}
