@@ -23,10 +23,11 @@
 			
 			<!-- 번호 = 전체 게시물 개수 - (현재 페이지 * 페이지당 게시물 개수) - 나열 인덱스 -->
 			    <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-			   
+			  
 				<td><a th:href="@{|detail/${board.id}|}" th:text="${board.subject}"></a></td>
-				<!-- 글쓴이추가 -->
 				
+				<!-- 글쓴이추가 -->
+				<td><a th:text="${board.user}"></a></td>
 				<!-- <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td> -->
 				<td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 			</tr>

@@ -55,6 +55,7 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
+    
     @Transactional
     public String sendRandomMessage(String tel) {
         Naver_Sens_V2 message = new Naver_Sens_V2();
