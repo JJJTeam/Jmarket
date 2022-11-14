@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -70,7 +71,16 @@ public class MemberController {
 			return "signup";
 		}
 //		리펙터링 필요,
-		String messege = ValidText.getValidText("checkEmail",userService.existsByEmail(signUpRequest.getEmail()));
+		String checkIdMessege = ValidText.getValidText("checkId",userService.existsByUserId(signUpRequest.getUserid()));
+		String checkEmailMessege = ValidText.getValidText("checkEmail",userService.existsByEmail(signUpRequest.getEmail()));
+		String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&&signUpRequest.getUserPhoneNumber().equals(phoneNumberAuth));
+		List<String> messege = Arrays.asList(checkIdMessege,checkEmailMessege,phoneAuthMessege);
+		messege.stream().filter(i -> !i.equals("pass")).forEach(j -> return "sighup");
+
+//		if(!messege.equals("pass")){
+//			model.addAttribute("messege",messege);
+//			return "signup";
+//		}
 
 //		if(checkEmail==null){
 //			model.addAttribute("messege","이메일 중복확인을 해주세요");
