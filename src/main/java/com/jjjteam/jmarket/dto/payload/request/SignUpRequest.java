@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -30,11 +31,11 @@ public class SignUpRequest {
     private String userPhoneNumber;
     private byte userSex;                   //성별  X
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date userBirthDate;             //회원생년월일  X
+    private LocalDate userBirthDate;             //회원생년월일  X
     private Boolean userReceiveEmail;          //이메일수신여부  X
     private Boolean userReceiveSms;            //문자수신여부  X
     private Boolean userSmsCert;               // 문자 인증 여부  X
-    private LocalDate userRegisterDateTime; //회원가입시간  X
+    private LocalDateTime userRegisterDateTime; //회원가입시간  X
 
     private Set<String> role;
 }

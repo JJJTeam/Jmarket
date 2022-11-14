@@ -26,7 +26,6 @@ public enum ValidText {
     }
     // 타입, 번호를 기준으로 식별자 필터링
     public static ValidText getPokemon (String dataName, Boolean result) {
-        System.out.println("1@@@@@@@@@@@@@@@@@@@@@@");
         return Arrays.stream(ValidText.values())
                 .filter(x -> x.dataName.equals(dataName) && x.result == result)
                 .findAny()
@@ -35,7 +34,6 @@ public enum ValidText {
     }
     // 필터링된 식별자의 이름 반환
     public static String getValidText (String dataname, Boolean result) {
-        System.out.println("2@@@@@@@@@@@@@@@@@@@@@@");
         return getPokemon(dataname, result).getReturnMessege();
     }
     public String getReturnMessege() {
