@@ -33,7 +33,7 @@ public class MemberController {
 	private final UserAddressService userAddressService;
 
 
-	@Secured("ROLE_USER")
+	@Secured("USER")
 	@GetMapping("/member/mypageAddress")
 	public String ToMyPageAddressList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<UserAddressDTO> addressList = userAddressService.loadAddressListByUserId(userDetails.getId());

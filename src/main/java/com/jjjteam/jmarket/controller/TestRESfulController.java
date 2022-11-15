@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class TestRESfulController {
     @GetMapping("/all")
-    public String allAccess(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-//
-//        return "Public Content.";
-        return userDetails.getEmail();
+    public String allAccess() {
+        return "all contetn";
     }
 
 
