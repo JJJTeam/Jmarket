@@ -89,28 +89,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-//        http.cors().and().csrf().disable()
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-////                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-//                .authorizeRequests().antMatchers("/**").permitAll()
-//                .antMatchers("/api/test/**").permitAll()
-//                .antMatchers("/**/*").permitAll()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("/css/**","/js/**","/images/**","/fonts/**", "/vendor/**" ).permitAll()
-//                .anyRequest().authenticated();
-//
-//
-//        http.authenticationProvider(authenticationProvider());
-//
-//
-//        http.addFilterBefore(authenticationJwtTokenFilter(), // 기존 존재하는 토큰을 확인, 없으면 통과, 있으면...
-//                UsernamePasswordAuthenticationFilter.class); //
-
-
         //csrf 사용안함
-        http.csrf().disable();
+        http.csrf().disable();  //로그인 로그아웃 회원가입 CSRF 적용함
 
         //URL 인증여부 설정.
         http.authorizeRequests()
