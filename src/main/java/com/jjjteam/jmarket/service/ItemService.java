@@ -36,7 +36,6 @@ public class ItemService {
 //		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ saveItem 서비스 시작@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		// 상품 등록
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품등록 서비스 시작 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		Item item = itemFormDTO.toEntity(itemFormDTO);
 		itemRepository.save(item);
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ item :" + item);
@@ -45,14 +44,18 @@ public class ItemService {
 		// 이미지 등록
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이미지 등록 시작 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
+		
 		for (int i = 0, max = itemImgFileList.size(); i < max; i++) {
 			ItemImg itemImg = ItemImg.builder().item(item).repimgYn(i == 0 ? "Y" : "N").build();
 			
-			itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));			
+			itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+			
 		}
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이미지 등록 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return item.getId();
 	}
+	
+	
 	
 //	// 상품 수정하기를 위한 service
 //    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸기만 하는 service
