@@ -20,7 +20,7 @@ import lombok.Builder;
 @Entity
 public class Item {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id; //상품 코드
 
@@ -40,7 +40,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ClothingItems clothingItems;  //상품 판매 상태
     
-    
+     
     @OneToMany(mappedBy = "item")
 	private List<ItemImg> itemImgs;
     
