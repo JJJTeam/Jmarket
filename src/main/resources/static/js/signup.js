@@ -1,5 +1,3 @@
-
-
 let useridReg = /^[a-zA-Z0-9]{4,20}$/;
 let passwordReg =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=\S+$).{8,}$/;
 let userNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
@@ -50,7 +48,6 @@ $("#userPhoneNumber").keyup(function(e) {
 });
 
 function checkDoubleId(){
-    checkCount($("#userid").val(),4,20)
     $.ajax({
             type:'GET',
             url:"/api/checkId",
