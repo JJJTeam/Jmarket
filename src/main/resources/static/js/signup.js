@@ -1,4 +1,30 @@
-function checkId(){
+
+$("#userid").keyup(function(e) {
+    $("#idCheck").html(checkCount($("#userid").val(),4,20))
+
+    // var content = $(this).val();
+    // $("#textLengthCheck").val("(" + content.length + "/ 200)"); //실시간 글자수 카운팅
+    // if (content.length > 200) {
+    //     Alert("최대 200자까지 입력 가능합니다.");
+    //     $(this).val(content.substring(0, 200));
+    //     $('#textLengthCheck').html("(200 / 최대 200자)");
+    // }
+});
+function checkCount(text,a,b){
+    if (text.length<a&& b==0){
+        // alert(a+"자 이상 "+b+"자 이하로 입력해주시기 바랍니다.")
+        return a+"자 이상으로 입력해주시기 바랍니다.";
+    } else if (text.length<a||text.length>b){
+        // alert(a+"자 이상으로 입력해주시기 바랍니다.")
+        return a+"자 이상 "+b+"자 이하로 입력해주시기 바랍니다.";
+        ;
+    } else return ""
+}
+
+
+
+function checkDoubleId(){
+    checkCount($("#userid").val(),4,20)
     $.ajax({
             type:'GET',
             url:"/api/checkId",
@@ -11,7 +37,7 @@ function checkId(){
             alert("error")
         })
 }
-function checkEmail(){
+function checkDoubleEmail(){
     $.ajax({
         type:'GET',
         url:"/api/checkEmail",

@@ -14,7 +14,7 @@
             <div th:each="msg : ${#fields.errors('userid')}">
                 <p th:text="${msg}"></p>
             </div>
-            <button class="btn btn-primary" type="button" onclick="checkId()">중복확인</button>
+            <button class="btn btn-primary" type="button" onclick="checkDoubleId()">중복확인</button>
             <span id="idCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
         </div>
         <div class="form-group">
@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="email">이메일:</label>
             <input class="form-control" th:field="*{email}" placeholder="Enter email" type="text">
-            <button class="btn btn-primary" type="button" onclick="checkEmail()">중복확인</button>
+            <button class="btn btn-primary" type="button" onclick="checkDoubleEmail()">중복확인</button>
             <span id="emailCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
             <div th:each="msg : ${#fields.errors('email')}">
                 <p th:text="${msg}"></p>
