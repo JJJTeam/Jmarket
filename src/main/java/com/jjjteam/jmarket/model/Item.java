@@ -1,6 +1,9 @@
 package com.jjjteam.jmarket.model;
 
+import java.util.List;
+
 import javax.persistence.*;
+
 
 import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
@@ -36,14 +39,19 @@ public class Item {
 
     @Enumerated(EnumType.STRING)
     private ClothingItems clothingItems;  //상품 판매 상태
-
+    
+    
+    @OneToMany(mappedBy = "item")
+	private List<ItemImg> itemImgs;
+    
     @Builder
-    public Item(String itemNm, int price, int stockNumber, String itemDetail, ClothingItems clothingItems) {
+    public Item(String itemNm, int price, int stockNumber, String itemDetail, ClothingItems clothingItems, List<ItemImg> itemImgs) {
         this.itemNm = itemNm;
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
         this.clothingItems = clothingItems;
+        this.itemImgs = itemImgs;
     }
     
     public void updateItem(ItemFormDTO itemFormDto) {
