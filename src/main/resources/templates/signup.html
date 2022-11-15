@@ -24,19 +24,21 @@
             <div th:each="msg : ${#fields.errors('password')}">
                 <p th:text="${msg}"></p>
             </div>
+            <span id="passwordCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
         </div>
         <div class="form-group">
             <label for="password2">비밀번호확인(미구현):</label>
-            <input class="form-control" id="password2" name="password2" placeholder="Enter password" type="password2"
-                   value="">
+            <input class="form-control" id="password2" name="password2" placeholder="Enter password" type="password">
+            <span id="passwordCheck2" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
         </div>
         <div class="form-group">
             <label for="userName">이름:</label>
-            <input class="form-control" th:field="*{userName}" placeholder="Enter userName" type="text">
+            <input class="form-control" th:field="*{userName}" placeholder="한글,영어만 가능" type="text">
         </div>
         <div th:each="msg : ${#fields.errors('userName')}">
             <p th:text="${msg}"></p>
         </div>
+        <span id="userNameCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
         <div class="form-group">
             <label for="email">이메일:</label>
             <input class="form-control" th:field="*{email}" placeholder="Enter email" type="text">
@@ -45,6 +47,7 @@
             <div th:each="msg : ${#fields.errors('email')}">
                 <p th:text="${msg}"></p>
             </div>
+
         </div>
         <div class="form-group">
             <label for="userPhoneNumber">휴대폰:</label>
@@ -54,6 +57,7 @@
             <span id="phoneCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
                 <input type="text" name="code" id="code">
                 <button type="button" onclick="phoneAuthOk()">확인</button>
+
         </div>
         <div class="form-group">
             <label for="#">주소(미구현):</label>

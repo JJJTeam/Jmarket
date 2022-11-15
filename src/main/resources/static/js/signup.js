@@ -1,27 +1,53 @@
 
+
+let useridReg = /^[a-zA-Z0-9]{4,20}$/;
+let passwordReg =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=\S+$).{8,}$/;
+let userNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+let emailReg =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+let userPhoneNumberReg =/^[0-9]+$/i;
+
 $("#userid").keyup(function(e) {
-    $("#idCheck").html(checkCount($("#userid").val(),4,20))
-
-    // var content = $(this).val();
-    // $("#textLengthCheck").val("(" + content.length + "/ 200)"); //실시간 글자수 카운팅
-    // if (content.length > 200) {
-    //     Alert("최대 200자까지 입력 가능합니다.");
-    //     $(this).val(content.substring(0, 200));
-    //     $('#textLengthCheck').html("(200 / 최대 200자)");
-    // }
+    if (!useridReg.test((document.getElementById("userid").value))){
+        $("#idCheck").html("형식에 맞지 않습니다.")
+    } else {
+        $("#idCheck").html("")
+    }
 });
-function checkCount(text,a,b){
-    if (text.length<a&& b==0){
-        // alert(a+"자 이상 "+b+"자 이하로 입력해주시기 바랍니다.")
-        return a+"자 이상으로 입력해주시기 바랍니다.";
-    } else if (text.length<a||text.length>b){
-        // alert(a+"자 이상으로 입력해주시기 바랍니다.")
-        return a+"자 이상 "+b+"자 이하로 입력해주시기 바랍니다.";
-        ;
-    } else return ""
-}
-
-
+$("#password").keyup(function(e) {
+    if (!passwordReg.test((document.getElementById("password").value))){
+        $("#passwordCheck").html("형식에 맞지 않습니다.")
+    } else {
+        $("#passwordCheck").html("")
+    }
+});
+$("#password2").keyup(function(e) {
+    if ((document.getElementById("password").value)===(document.getElementById("password2").value)){
+        $("#passwordCheck2").html("")
+    } else {
+        $("#passwordCheck2").html("동일한 비밀번호를 입력해주시길 바랍니다.")
+    }
+});
+$("#userName").keyup(function(e) {
+    if (!userNameReg.test((document.getElementById("userName").value))){
+        $("#userNameCheck").html("형식에 맞지 않습니다.")
+    } else {
+        $("#userNameCheck").html("")
+    }
+});
+$("#email").keyup(function(e) {
+    if (!emailReg.test((document.getElementById("email").value))){
+        $("#emailCheck").html("형식에 맞지 않습니다.")
+    } else {
+        $("#emailCheck").html("")
+    }
+});
+$("#userPhoneNumber").keyup(function(e) {
+    if (!userPhoneNumberReg.test((document.getElementById("userPhoneNumber").value))){
+        $("#phoneCheck").html("숫자만 입력해주세요")
+    } else {
+        $("#phoneCheck").html("")
+    }
+});
 
 function checkDoubleId(){
     checkCount($("#userid").val(),4,20)
