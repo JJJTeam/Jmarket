@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.dto.payload.request;
+package com.jjjteam.jmarket.dto;
 
 
 import lombok.Getter;
@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
 @Getter
 @Setter
 @ToString
-public class SignUpRequest {
+public class UserDTO {
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
     private String userid;
     @Email

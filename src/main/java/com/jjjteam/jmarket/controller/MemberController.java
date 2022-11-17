@@ -3,9 +3,7 @@ package com.jjjteam.jmarket.controller;
 
 
 import com.jjjteam.jmarket.dto.UserAddressDTO;
-import com.jjjteam.jmarket.dto.payload.request.SignUpRequest;
-import com.jjjteam.jmarket.repository.UserAddressRepository;
-import com.jjjteam.jmarket.repository.UserRepository;
+import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
@@ -42,9 +40,9 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public String registerUser(@Valid SignUpRequest signUpRequest, BindingResult bindingResult, Model model,HttpSession session) {
+	public String registerUser(@Valid UserDTO userDTO, BindingResult bindingResult, Model model, HttpSession session) {
 		if(bindingResult.hasErrors()){return "signup";}
-		List<String>DoubleCheckTextList = userService.DoubleCheckTextList(signUpRequest,
+		List<String>DoubleCheckTextList = userService.DoubleCheckTextList(userDTO,
 				(boolean) session.getAttribute("phoneAuth"),(String) session.getAttribute("phoneNumberAuth"));
 		if(DoubleCheckTextList.size()>0){
 			model.addAttribute("messege",DoubleCheckTextList);
@@ -52,7 +50,7 @@ public class MemberController {
 		}
 		session.removeAttribute("phoneAuth");
 		session.removeAttribute("phoneNumberAuth");
-		userService.registerUser(signUpRequest);
+		userService.registerUser(userDTO);
 		return "/index";
 	}
 	@GetMapping("/api/checkId")
