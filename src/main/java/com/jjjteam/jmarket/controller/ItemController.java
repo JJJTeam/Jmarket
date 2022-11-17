@@ -54,7 +54,8 @@ public class ItemController {
 		} catch (Exception e) {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+e);
 			model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-			return "item/itemForm";
+			return "item/itemList";
+//			return "item/itemForm";
 		}
 
 //		return "redirect:/";

@@ -6,7 +6,9 @@ import javax.persistence.*;
 
 
 import com.jjjteam.jmarket.constant.ClothingItems;
+import com.jjjteam.jmarket.constant.ItemColor;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.constant.ItemSize;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import com.jjjteam.jmarket.exception.OutOfStockException;
@@ -26,6 +28,9 @@ public class Item {
 
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
+    
+    @Column(nullable = false)
+    private String itemIntroduction;  //상품 소개 (미들네임)
 
     @Column(name = "price", nullable = false)
     private int price;  //가격
@@ -38,15 +43,22 @@ public class Item {
     private String itemDetail;  //상품 상세설명
 
     @Enumerated(EnumType.STRING)
-    private ClothingItems clothingItems;  //상품 판매 상태
+    private ClothingItems clothingItems;  //상품 분류
+
+    @Enumerated(EnumType.STRING)
+    private ItemColor itemColor ;	//상품 색상
+
+    @Enumerated(EnumType.STRING)
+    private ItemSize itemSize;		//상품 사이즈
     
      
     @OneToMany(mappedBy = "item")
 	private List<ItemImg> itemImgs;
     
     @Builder
-    public Item(String itemNm, int price, int stockNumber, String itemDetail, ClothingItems clothingItems, List<ItemImg> itemImgs) {
+    public Item(String itemNm, String itemIntroduction,int price, int stockNumber, String itemDetail, ClothingItems clothingItems, List<ItemImg> itemImgs) {
         this.itemNm = itemNm;
+        this.itemIntroduction = itemIntroduction;
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
