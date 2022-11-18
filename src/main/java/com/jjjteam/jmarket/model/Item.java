@@ -13,11 +13,13 @@ import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import com.jjjteam.jmarket.exception.OutOfStockException;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.Builder;
 
 @ToString
 @Getter
+@Setter
 @Table(name="item")
 @Entity
 public class Item {
@@ -56,17 +58,33 @@ public class Item {
 	private List<ItemImg> itemImgs;
     
     @Builder
-    public Item(String itemNm, String itemIntroduction,int price, int stockNumber, String itemDetail, ClothingItems clothingItems, List<ItemImg> itemImgs) {
+    public Item(
+    		String itemNm, 
+    		String itemIntroduction,
+    		int price, 
+    		int stockNumber, 
+    		String itemDetail, 
+    		ClothingItems clothingItems,
+    		ItemSize itemSize,
+    		ItemColor itemColor, 
+    		List<ItemImg> itemImgs) {
         this.itemNm = itemNm;
         this.itemIntroduction = itemIntroduction;
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
         this.clothingItems = clothingItems;
+        this.itemSize = itemSize;
+        this.itemColor = itemColor;
         this.itemImgs = itemImgs;
     }
     
-    public void updateItem(ItemFormDTO itemFormDto) {
+    public Item() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
@@ -88,4 +106,5 @@ public class Item {
     public void addStock(int stockNumber){
         this.stockNumber += stockNumber;
     }
+
 }
