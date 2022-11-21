@@ -25,13 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Secured("ROLE_USER")
 @Slf4j
 public class UserAddressController {
-
-	private final UserService userService;
 	private final UserAddressService userAddressService;
-	private final UserRepository userRepository;
-	private final UserAddressRepository userAddressRepository;
-
-
 	@GetMapping("/member/shipping-address/drop")
 	public String DropAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
