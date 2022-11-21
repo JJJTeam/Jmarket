@@ -38,14 +38,14 @@ public class UserController {
 	public String ToMyPageAddressList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<UserAddressDTO> addressList = userAddressService.loadAddressListByUserId(userDetails.getId());
 		model.addAttribute("addressList",addressList);
-		return "/member/mypageAddress";
+		return "/mypage/mypageAddress";
 	}
 
 	@GetMapping("/info")
 	public String ToMyPageUserInfo(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<UserAddressDTO> addressList = userAddressService.loadAddressListByUserId(userDetails.getId());
 		model.addAttribute("addressList",addressList);
-		return "/member/mypageAddress";
+		return "/mypage/mypageAddress";
 	}
 
 
