@@ -3,15 +3,13 @@ package com.jjjteam.jmarket.model;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.exception.OutOfStockException;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @Builder
 public class Product {  // 카멜표기법으로 , db저장은 스네이크 표기법
     @Id
@@ -25,6 +23,7 @@ public class Product {  // 카멜표기법으로 , db저장은 스네이크 표�
     private String productColor;  //색상
     private int productSize;  //사이즈
     private int stockNumber;  //재고수량
+
     public Product() {
 
     }
