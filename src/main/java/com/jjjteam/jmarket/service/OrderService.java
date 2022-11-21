@@ -1,20 +1,14 @@
 package com.jjjteam.jmarket.service;
 
-import lombok.RequiredArgsConstructor; 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable; 
+import com.jjjteam.jmarket.model.OrderOld;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import com.jjjteam.jmarket.dto.OrderDTO;
-import com.jjjteam.jmarket.dto.OrderHistDTO;
-import com.jjjteam.jmarket.dto.OrderItemDTO;
 import com.jjjteam.jmarket.model.Item;
-import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.model.Member;
-import com.jjjteam.jmarket.model.Order;
 import com.jjjteam.jmarket.model.OrderItem;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
@@ -55,11 +49,11 @@ public class OrderService {
         orderItemList.add(orderItem);
 
         // order: 주문 엔티티
-        Order order = Order.createOrder(member, orderItemList); // member: 회원 정보 엔티티, orderItemList: 상품 리스트
-        orderRepository.save(order);
+        OrderOld orderOld = OrderOld.createOrder(member, orderItemList); // member: 회원 정보 엔티티, orderItemList: 상품 리스트
+        orderRepository.save(orderOld);
 
 
-        return order.getId(); // 생성한 주문 엔티티의 id 값 리턴!
+        return orderOld.getId(); // 생성한 주문 엔티티의 id 값 리턴!
     }
 
 
@@ -96,9 +90,9 @@ public class OrderService {
     @Transactional(readOnly = true)
     public boolean validateOrder(Long orderId, String email){
         Member curMember = memberRepository.findByEmail(email); // 유저 이메일 받아옴
-        Order order = orderRepository.findById(orderId) // 주문 데이터 받아오고
+        OrderOld orderOld = orderRepository.findById(orderId) // 주문 데이터 받아오고
                 .orElseThrow(EntityNotFoundException::new);
-        Member savedMember = order.getMember(); // 위의 주문을 한 유저의 정보를 받아옴
+        Member savedMember = orderOld.getMember(); // 위의 주문을 한 유저의 정보를 받아옴
 
         if(!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())){
             return false; // 그 둘이 같지 않으면은 false
@@ -109,9 +103,9 @@ public class OrderService {
 
     // 주문 취소하는 로직 구현 service
     public void cancelOrder(Long orderId){
-        Order order = orderRepository.findById(orderId)
+        OrderOld orderOld = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
-        order.cancelOrder();
+        orderOld.cancelOrder();
     }
 
     // 장바구니에서 주문할 상품 데이터를 전달받아서 주문 생성
@@ -129,10 +123,10 @@ public class OrderService {
             orderItemList.add(orderItem); // 밑에 담아줌
         }
 
-        Order order = Order.createOrder(member, orderItemList); // 회원이랑 주문할 상품 리스트들을 주문에 담음
-        orderRepository.save(order);
+        OrderOld orderOld = OrderOld.createOrder(member, orderItemList); // 회원이랑 주문할 상품 리스트들을 주문에 담음
+        orderRepository.save(orderOld);
 
-        return order.getId();
+        return orderOld.getId();
     }
 
 }
