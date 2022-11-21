@@ -1,11 +1,9 @@
 package com.jjjteam.jmarket.model;
 
-import com.jjjteam.jmarket.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -22,7 +20,7 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
 
     @ManyToOne (fetch = FetchType.LAZY) // 한 주문에 여러 아이템이 들어갈 수 있다.
     @JoinColumn(name = "order_id")
-    private Order order;
+    private OrderOld orderOld;
 
     private int orderPrice; // 주문가격
 

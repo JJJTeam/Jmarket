@@ -1,7 +1,7 @@
 package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.constant.OrderStatus;
-import com.jjjteam.jmarket.model.Order;
+import com.jjjteam.jmarket.model.OrderOld;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,10 +15,10 @@ import java.util.List;
 @Setter
 public class OrderHistDTO {
 
-    public OrderHistDTO(Order order){
-        this.orderId = order.getId();
-        this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.orderStatus = order.getOrderStatus();
+    public OrderHistDTO(OrderOld orderOld){
+        this.orderId = orderOld.getId();
+        this.orderDate = orderOld.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.orderStatus = orderOld.getOrderStatus();
     }
 
     private Long orderId; //주문아이디
