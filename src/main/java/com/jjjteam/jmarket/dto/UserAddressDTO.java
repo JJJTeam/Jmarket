@@ -22,6 +22,20 @@ public class UserAddressDTO {
     private Boolean defaultAddress;
     private User user;
 
+    public UserAddress toEntity(User user){
+        UserAddress userAddress = UserAddress.builder()
+                .id(id)
+                .postCode(postCode)
+                .address(address)
+                .addressDetail(addressDetail)
+                .addressPhoneNumber(addressPhoneNumber)
+                .person(person)
+                .defaultAddress(defaultAddress)
+                .user(user)
+                .build();
+        return userAddress;
+    }
+
     public UserAddressDTO(UserAddress userAddress) {
         id = userAddress.getId();
         address=userAddress.getAddress();
@@ -35,6 +49,7 @@ public class UserAddressDTO {
 //                .map(OrderItemDto::new)
 //                .collect(Collectors.toList());
     }
+
 
 
 }

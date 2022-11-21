@@ -51,21 +51,9 @@ public class UserService {
 
     @Transactional
     public void registerUser(UserDTO userDTO) {
-
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        User user = User.builder()
-                .userId(userDTO.getUserid())
-                .email(userDTO.getEmail())
-                .password(passwordEncoder.encode(userDTO.getPassword()))
-                .roles(roles)
-                .userBirthDate(userDTO.getUserBirthDate())
-                .userName(userDTO.getUserName())
-                .userSex(userDTO.getUserSex())
-                .userPhoneNumber(userDTO.getUserPhoneNumber())
-                .userRegisterDateTime(LocalDateTime.now())
-                .build();
-        userRepository.save(user);
+        userRepository.save(userDTO.toEntityForSave(roles));
     }
     
     @Transactional

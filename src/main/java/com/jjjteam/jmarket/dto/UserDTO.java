@@ -1,10 +1,14 @@
 package com.jjjteam.jmarket.dto;
 
 
+import com.jjjteam.jmarket.model.Role;
+import com.jjjteam.jmarket.model.User;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +19,10 @@ import javax.validation.constraints.*;
 @Getter
 @Setter
 @ToString
+@RequiredArgsConstructor
 public class UserDTO {
+
+    private final PasswordEncoder encoder;
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
     private String userid;
     @Email
@@ -33,4 +40,23 @@ public class UserDTO {
     private Boolean userSmsCert;               // 문자 인증 여부  X
     private LocalDateTime userRegisterDateTime; //회원가입시간  X
     private Set<String> role;
+
+    public User toEntityForSave(Set<Role> role){
+        User user = User.saveByBuilder()
+                .userId(userid)
+                .email(email)
+                .password(encoder.encode(password))
+                .userName(userName)
+                .userPhoneNumber(userPhoneNumber)
+                .userSex(userSex)
+                .userBirthDate(userBirthDate)
+                .userReceiveEmail(userReceiveEmail)
+                .userReceiveSms(userReceiveSms)
+                .userSmsCert(userSmsCert)
+                .userRegisterDateTime(userRegisterDateTime)
+                .roles(role)
+                .build();
+        return user;
+    }
+
 }
