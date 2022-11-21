@@ -50,7 +50,7 @@ public class UserController {
 	@PostMapping("/info")
 	public String CheckPassInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, String password,Model model){
 		if(encoder.matches(password, userDetails.getPassword())){
-			userService.
+
 			return "/mypage/modify";}
 		else {return "/mypage/passerror";}
 	}

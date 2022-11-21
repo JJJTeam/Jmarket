@@ -18,13 +18,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class UserAddressService {
-
     private final UserAddressRepository userAddressRepository;
     private final UserRepository userRepository;
-
     @Transactional
     public void updateUserAddress(UserAddressDTO userAddressDTO, Long userId){
-
         UserAddress userAddress = userAddressRepository.findByIdAndUserIdAndPostCodeAndAddress(
                 userAddressDTO.getId(),userId,userAddressDTO.getPostCode(),userAddressDTO.getAddress()
         ).get();
@@ -59,16 +56,17 @@ public class UserAddressService {
     }
     @Transactional
     public void saveNewAddress(UserAddressDTO userAddressDTO, Long userId) {
-        userAddressRepository.save(
-                UserAddress.builder()
-                        .address(userAddressDTO.getAddress())
-                        .addressDetail(userAddressDTO.getAddressDetail())
-                        .person(userAddressDTO.getPerson())
-                        .defaultAddress(userAddressDTO.getDefaultAddress())
-                        .addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
-                        .user(userRepository.findById(userId).get())
-                        .postCode(userAddressDTO.getPostCode())
-                        .build());
+        userAddressRepository.save(userAddressDTO.toEntity(userRepository.findById(userId).get()));
+//        userAddressRepository.save(
+//                UserAddress.builder()
+//                        .address(userAddressDTO.getAddress())
+//                        .addressDetail(userAddressDTO.getAddressDetail())
+//                        .person(userAddressDTO.getPerson())
+//                        .defaultAddress(userAddressDTO.getDefaultAddress())
+//                        .addressPhoneNumber(userAddressDTO.getAddressPhoneNumber())
+//                        .user(userRepository.findById(userId).get())
+//                        .postCode(userAddressDTO.getPostCode())
+//                        .build());
     }
     @Transactional
     public void dropUserAddress(Long id, Long userId) {
