@@ -20,7 +20,8 @@ public class UserDTO {
     private String userid;
     @Email
     private String email;
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?=\\S+$).{8,}$", message = "잘못입력하셨습니다.")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?=\\S+$).{8,}$", message = "잘못입력하셨습니다.")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,}$", message = "잘못입력하셨습니다.")
     private String password;
     @Pattern(regexp = "^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$" , message = "잘못입력하셨습니다.(한글,영어만 가능)")
     private String userName;
