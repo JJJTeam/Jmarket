@@ -6,8 +6,7 @@
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <h2>개인정보수정</h2>
-        <form action="/mypage/info" method="post">
-            <!--        <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>-->
+        <form action="#" method="post">
             <div class="form-group">
                 <label>아이디:</label>
                 <input  readonly type="text" class="form-control" th:value="${#authentication.name}">
