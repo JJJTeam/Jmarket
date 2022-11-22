@@ -20,7 +20,6 @@ public class UserAddressDTO {
     private Boolean defaultAddress;
     private User user;
 
-
     public UserAddress toEntity(User user){
         UserAddress userAddress = UserAddress.builder()
                 .id(id)
@@ -34,7 +33,7 @@ public class UserAddressDTO {
                 .build();
         return userAddress;
     }
-    //엔티티에서 DTO
+
     public UserAddressDTO(UserAddress userAddress) {
         id = userAddress.getId();
         address=userAddress.getAddress();
@@ -48,6 +47,7 @@ public class UserAddressDTO {
 //                .map(OrderItemDto::new)
 //                .collect(Collectors.toList());
     }
+
 
 
 }
