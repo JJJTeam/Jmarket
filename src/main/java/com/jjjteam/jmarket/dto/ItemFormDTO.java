@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.jjjteam.jmarket.constant.ClothingItems;
-import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.constant.*;
 import com.jjjteam.jmarket.model.Item;
 
 import java.util.ArrayList;
@@ -22,6 +21,9 @@ public class ItemFormDTO {
 
 	@NotBlank(message = "상품명은 필수 입력 값입니다.")
 	private String itemNm;
+	
+	@NotBlank(message = "상품설명은 필수 입력 값입니다.")
+	private String itemIntroduction;
 
 	@NotNull(message = "가격은 필수 입력 값입니다.")
 	private Integer price;
@@ -33,6 +35,10 @@ public class ItemFormDTO {
 	private Integer stockNumber;
 
 	private ClothingItems clothingItems;
+
+	private ItemSize itemSize;
+	
+	private ItemColor itemColor;
 	
 	// 상품 저장 후 수정할 때 상품 이미지 정보를 저장하는 리스트
 	private List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
@@ -43,18 +49,29 @@ public class ItemFormDTO {
 	private List<Long> itemImgIds = new ArrayList<>();
 
 	@Builder
-	public ItemFormDTO(String itemNm, Integer price, String itemDetail, Integer stockNumber,
-			ClothingItems clothingItems) {
+	public ItemFormDTO(
+			String itemNm,
+			String itemIntroduction,
+			Integer price, 
+			String itemDetail, 
+			Integer stockNumber,
+			ClothingItems clothingItems,
+			ItemSize itemSize,
+    		ItemColor itemColor) {
 		this.itemNm = itemNm;
-		this.price = price;
-		this.itemDetail = itemDetail;
-		this.stockNumber = stockNumber;
-		this.clothingItems = clothingItems;
+        this.itemIntroduction = itemIntroduction;
+        this.price = price;
+        this.stockNumber =stockNumber;
+        this.itemDetail = itemDetail;
+        this.clothingItems = clothingItems;
+        this.itemSize = itemSize;
+        this.itemColor = itemColor;
 	}
 
 	public Item toEntity(ItemFormDTO dto) {
 		Item entity = Item.builder()
 				.itemNm(dto.itemNm)
+				.itemIntroduction(dto.itemIntroduction)
 				.itemDetail(dto.itemDetail)
 				.clothingItems(dto.clothingItems)
 				.price(dto.price)
