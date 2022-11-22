@@ -41,31 +41,31 @@ public class UserController {
 		return "/mypage/address";
 	}
 
-	@GetMapping("/info")
+	@GetMapping("/modify")
 	public String ToMyPageInfo(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<UserAddressDTO> addressList = userAddressService.loadAddressListByUserId(userDetails.getId());
 		model.addAttribute("addressList",addressList);
-		return "/mypage/info";
+		return "/mypage/modify";
 	}
-	@PostMapping("/info")
-	public String CheckPassInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, String password,Model model){
-		if(encoder.matches(password, userDetails.getPassword())){return "/mypage/modify";}
-		else {return "/mypage/passerror";}
-	}
+//	@PostMapping("/info")
+//	public String CheckPassInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, String password,Model model){
+//		if(encoder.matches(password, userDetails.getPassword())){return "/mypage/modify";}
+//		else {return "/mypage/passerror";}
+//	}
 	@GetMapping("/change-email")
-	public String ToChangeEmail(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public String ToChangeEmail(@AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
 		return "/mypage/change-email";
 	}
 	@GetMapping("/change-password")
-	public String ToChangePassword(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public String ToChangePassword(Model model) {
 		return "/mypage/change-password";
 	}
 	@GetMapping("/change-phone-number")
-	public String ToChangePhoneNumber(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public String ToChangePhoneNumber(Model model) {
 		return "/mypage/change-phone-number";
 	}
 	@GetMapping("/delete-account")
-	public String ToDeleteAccount(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public String ToDeleteAccount(Model model) {
 		return "/mypage/delete-account";
 	}
 }
