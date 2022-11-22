@@ -46,9 +46,9 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     private String userPhoneNumber;
     private byte userSex;                   //성별
     private LocalDate userBirthDate;             //회원생년월일
-    private byte userReceiveEmail;          //이메일수신여부
-    private byte userReceiveSms;            //문자수신여부
-    private byte userSmsCert;               // 문자 인증 여부
+    private Boolean userReceiveEmail;          //이메일수신여부
+    private Boolean userReceiveSms;            //문자수신여부
+    private Boolean userSmsCert;               // 문자 인증 여부
     private LocalDateTime userRegisterDateTime; //회원가입시간
 //  private String UserRegisterIp;          //가입 ip
 
@@ -64,6 +64,23 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     @JoinColumn(name = "user_id")
     private List<CartItem> cartItems = new ArrayList<>();
 
+//    @Builder(builderClassName = "SaveByBuilder", builderMethodName = "saveByBuilder")
+//    @Builder
+//    public User(String userId, String email, String password, Set<Role> roles, String userName, String userPhoneNumber, byte userSex, LocalDate userBirthDate, Boolean userReceiveEmail, Boolean userReceiveSms, Boolean userSmsCert, LocalDateTime userRegisterDateTime, List<UserAddress> userAddresses) {
+//        this.userId = userId;
+//        this.email = email;
+//        this.password = password;
+//        this.roles = roles;
+//        this.userName = userName;
+//        this.userPhoneNumber = userPhoneNumber;
+//        this.userSex = userSex;
+//        this.userBirthDate = userBirthDate;
+//        this.userReceiveEmail = userReceiveEmail;
+//        this.userReceiveSms = userReceiveSms;
+//        this.userSmsCert = userSmsCert;
+//        this.userRegisterDateTime = userRegisterDateTime;
+//        this.userAddresses = userAddresses;
+//    }
 
     public User() {
     }
