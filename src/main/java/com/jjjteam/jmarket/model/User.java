@@ -1,9 +1,6 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -26,6 +23,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@ToString
 public class User {  // 카멜표기법으로 , db저장은 스네이크 표기법
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

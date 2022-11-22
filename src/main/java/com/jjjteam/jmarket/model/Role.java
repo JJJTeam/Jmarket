@@ -7,9 +7,11 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import com.jjjteam.jmarket.constant.ERole;
+import lombok.ToString;
 
 @Entity
 @Table(name = "roles")
+@ToString
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
