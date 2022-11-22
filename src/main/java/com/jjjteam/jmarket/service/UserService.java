@@ -67,6 +67,18 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
+    @Transactional
+    public Set<Role> returnRoleUserSet(){
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        return roles;
+    }
+    @Transactional
+    public Set<Role> returnRoleAdminSet(){
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        return roles;
+    }
     
     @Transactional
     public String sendRandomMessage(String tel) {

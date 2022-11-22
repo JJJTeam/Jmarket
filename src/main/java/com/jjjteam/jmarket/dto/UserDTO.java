@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import javax.validation.constraints.*;
 public class UserDTO {
 
     private final PasswordEncoder encoder;
+    private final UserService userService;
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
     private String userid;
     @Email
@@ -40,7 +42,17 @@ public class UserDTO {
     private Boolean userReceiveSms;            //문자수신여부  X
     private Boolean userSmsCert;               // 문자 인증 여부  X
     private LocalDateTime userRegisterDateTime; //회원가입시간  X
-    private Set<String> role;
+    private Set<Role> role;
+
+
+    public UserDTO setRoleUser(){
+        this.role=userService.returnRoleUserSet();
+        return this;
+    }
+    public UserDTO setRoleAdmin(){
+        this.role=userService.returnRoleAdminSet();
+        return this;
+    }
 
     public User toEntity(Set<Role> role){
         User user = User.builder()
