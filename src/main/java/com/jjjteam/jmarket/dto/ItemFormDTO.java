@@ -72,10 +72,12 @@ public class ItemFormDTO {
 		Item entity = Item.builder()
 				.itemNm(dto.itemNm)
 				.itemIntroduction(dto.itemIntroduction)
-				.itemDetail(dto.itemDetail)
-				.clothingItems(dto.clothingItems)
 				.price(dto.price)
 				.stockNumber(dto.stockNumber)
+				.itemDetail(dto.itemDetail)
+				.clothingItems(dto.clothingItems)
+				.itemSize(dto.itemSize)
+				.itemColor(dto.itemColor)
 				.build();
 
 		return entity;
@@ -84,10 +86,13 @@ public class ItemFormDTO {
 	public static ItemFormDTO of(Item entity) {
 		ItemFormDTO dto = ItemFormDTO.builder()
 				.itemNm(entity.getItemNm())
-				.itemDetail(entity.getItemDetail())
-				.clothingItems(entity.getClothingItems())
+				.itemIntroduction(entity.getItemIntroduction())
 				.price(entity.getPrice())
 				.stockNumber(entity.getStockNumber())
+				.itemDetail(entity.getItemDetail())
+				.clothingItems(entity.getClothingItems())
+				.itemSize(entity.getItemSize())
+				.itemColor(entity.getItemColor())
 				.build();
 
 		return dto;

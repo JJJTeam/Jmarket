@@ -27,6 +27,7 @@
 			<input type="hidden" th:field="*{id}">
 
 			<div class="form-group">
+			품목 : 
 				<select th:field="*{clothingItems}" class="custom-select">
 					<option value="short_sleeved_T_shirt">반소매티셔츠</option>
 					<option value="long_sleeved_T_shirt">긴소매티셔츠</option>
@@ -37,7 +38,27 @@
 					<option value="sweatshirt">맨투맨</option>
 				</select>
 			</div>
-
+			<br>
+			<div class="form-group">
+			색상 : 
+				<select th:field="*{itemColor}" class="custom-select">
+					<option value="BROWN">갈색</option>
+					<option value="BLACK">검은색</option>
+					<option value="WHITE">흰색</option>
+					<option value="NAVY">네이비색</option>
+				</select>
+			</div>
+			<br>
+			<div class="form-group">
+			사이즈 : 
+				<select th:field="*{itemSize}" class="custom-select">
+					<option value="XL">XL</option>
+					<option value="L">L</option>
+					<option value="M">M</option>
+					<option value="S">S</option>
+				</select>
+			</div>
+			<br>
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">상품명</span>
@@ -45,7 +66,14 @@
 				<input type="text" th:field="*{itemNm}" class="form-control"
 					placeholder="상품명을 입력해주세요">
 			</div>
-			<p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}"
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">상품설명</span>
+				</div>
+				<input type="text" th:field="*{itemIntroduction}" class="form-control"
+					placeholder="상품설명을 입력해주세요">
+			</div>
+			<p th:if="${#fields.hasErrors('itemIntroduction')}" th:errors="*{itemIntroduction}"
 				class="fieldError">Incorrect data</p>
 			<div class="input-group">
 				<div class="input-group-prepend">

@@ -34,20 +34,23 @@ public class ItemController {
 		return "item/itemForm";
 	}
 
-	@PostMapping(value="/item/itemFrom")
+	@PostMapping(value="/item/itemForm")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
-
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		if (bindingResult.hasErrors()) {
+			System.out.println("@@@@@@@@@@@@@@@@@ 1번째 오류 @@@@@@@@@@@@@@@@@@");
 			return "item/itemForm";
 		}
 
 		if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
+			System.out.println("@@@@@@@@@@@@@@@@@ 2번째 오류 @@@@@@@@@@@@@@@@@@");
 			model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
 			return "item/itemForm";
 		}
 
 		try {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@ 오류없이 서비스 시작 @@@@@@@@@@@@@@@@@@");
 			itemService.saveItem(itemFormDTO, itemImgFileList);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@성공했습니다.");
 			
