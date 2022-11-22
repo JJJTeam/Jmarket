@@ -50,7 +50,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
 //        User user = new User("test","test@test",encoder.encode("test"));
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        User user = User.saveByBuilder()
+        User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
                 .password("test")

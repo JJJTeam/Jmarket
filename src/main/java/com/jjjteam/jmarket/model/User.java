@@ -1,7 +1,6 @@
 package com.jjjteam.jmarket.model;
 
 
-import com.jjjteam.jmarket.dto.UserDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,12 +32,7 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     private String password;
     private String userName;
 
-    @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+
 
 
     private String userPhoneNumber;
@@ -49,13 +43,27 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     private Boolean userSmsCert;               // 문자 인증 여부
     private LocalDateTime userRegisterDateTime; //회원가입시간
 //  private String UserRegisterIp;          //가입 ip
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-    @Builder.Default
+//    @Builder.Default
     private List<UserAddress> userAddresses = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+//    @Builder.Default
+    private List<Order> order = new ArrayList<>();
 
-    @Builder(builderClassName = "SaveByBuilder", builderMethodName = "saveByBuilder")
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<CartItem> cartItems = new ArrayList<>();
+
+//    @Builder(builderClassName = "SaveByBuilder", builderMethodName = "saveByBuilder")
+    @Builder
     public User(String userId, String email, String password, Set<Role> roles, String userName, String userPhoneNumber, byte userSex, LocalDate userBirthDate, Boolean userReceiveEmail, Boolean userReceiveSms, Boolean userSmsCert, LocalDateTime userRegisterDateTime, List<UserAddress> userAddresses) {
         this.userId = userId;
         this.email = email;

@@ -43,7 +43,7 @@ public class UserDTO {
     private Set<String> role;
 
     public User toEntityForSave(Set<Role> role){
-        User user = User.saveByBuilder()
+        User user = User.builder()
                 .userId(userid)
                 .email(email)
                 .password(encoder.encode(password))
