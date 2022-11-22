@@ -49,9 +49,23 @@ public class UserController {
 	}
 	@PostMapping("/info")
 	public String CheckPassInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, String password,Model model){
-		if(encoder.matches(password, userDetails.getPassword())){
-
-			return "/mypage/modify";}
+		if(encoder.matches(password, userDetails.getPassword())){return "/mypage/modify";}
 		else {return "/mypage/passerror";}
+	}
+	@GetMapping("/change-email")
+	public String ToChangeEmail(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		return "/mypage/change-email";
+	}
+	@GetMapping("/change-password")
+	public String ToChangePassword(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		return "/mypage/change-password";
+	}
+	@GetMapping("/change-phone-number")
+	public String ToChangePhoneNumber(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		return "/mypage/change-phone-number";
+	}
+	@GetMapping("/delete-account")
+	public String ToDeleteAccount(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		return "/mypage/delete-account";
 	}
 }
