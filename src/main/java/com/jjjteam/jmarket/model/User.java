@@ -62,24 +62,6 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     @JoinColumn(name = "user_id")
     private List<CartItem> cartItems = new ArrayList<>();
 
-//    @Builder(builderClassName = "SaveByBuilder", builderMethodName = "saveByBuilder")
-//    @Builder
-//    public User(String userId, String email, String password, Set<Role> roles, String userName, String userPhoneNumber, byte userSex, LocalDate userBirthDate, Boolean userReceiveEmail, Boolean userReceiveSms, Boolean userSmsCert, LocalDateTime userRegisterDateTime, List<UserAddress> userAddresses) {
-//        this.userId = userId;
-//        this.email = email;
-//        this.password = password;
-//        this.roles = roles;
-//        this.userName = userName;
-//        this.userPhoneNumber = userPhoneNumber;
-//        this.userSex = userSex;
-//        this.userBirthDate = userBirthDate;
-//        this.userReceiveEmail = userReceiveEmail;
-//        this.userReceiveSms = userReceiveSms;
-//        this.userSmsCert = userSmsCert;
-//        this.userRegisterDateTime = userRegisterDateTime;
-//        this.userAddresses = userAddresses;
-//    }
-
     public User() {
     }
 }

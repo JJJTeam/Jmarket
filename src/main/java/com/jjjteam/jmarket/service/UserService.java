@@ -33,12 +33,10 @@ public class UserService {
     public Boolean existsByUserId(String userId) {
         return userRepository.existsByUserId(userId);
     }
-
     @Transactional
     public Boolean existsByEmail(String userEmail) {
         return userRepository.existsByEmail(userEmail);
     }
-
     @Transactional
     public List<String> DoubleCheckTextList(UserDTO userDTO, boolean phoneAuth, String phoneNumberAuth){
         String checkIdMessege = ValidText.getValidText("checkId",userRepository.existsByUserId(userDTO.getUserid()));
@@ -59,14 +57,12 @@ public class UserService {
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         return roles;
     }
-
     @Transactional
     public Set<Role> returnRoleAdminSet(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
         return roles;
     }
-    
     @Transactional
     public String sendRandomMessage(String tel) {
         Naver_Sens_V2 message = new Naver_Sens_V2();
@@ -86,5 +82,14 @@ public class UserService {
     public boolean memberTelCount(String userPhoneNumber) {
         return userRepository.existsByUserPhoneNumber(userPhoneNumber);
     }
+    public User returnUserDetailById(Long id){
+        return userRepository.findById(id).get();
+    }
+    public void changeUserEmail(Long id, String newEmail){
+        User user = userRepository.findById(id).get();
+        user.setEmail(newEmail);
+        userRepository.save(user);
+    }
+
 
 }

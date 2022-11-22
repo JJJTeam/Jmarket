@@ -53,8 +53,19 @@ public class UserController {
 //		else {return "/mypage/passerror";}
 //	}
 	@GetMapping("/change-email")
-	public String ToChangeEmail(@AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
+	public String ToChangeEmailPage(@AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
+		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-email";
+	}
+	@PostMapping("/change-email")
+	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,String newEmail, String inputPassword) {
+		if(encoder.matches(inputPassword, userDetails.getPassword())){
+			userService.changeUserEmail(userDetails.getId(),newEmail);
+			return "/index";
+		} else {
+			return "/mypage/passerror";
+		}
+
 	}
 	@GetMapping("/change-password")
 	public String ToChangePassword(Model model) {
