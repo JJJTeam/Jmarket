@@ -1,32 +1,29 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 
+@Entity
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@Entity
+@Table(name="cart_item")
 public class CartItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn
-    private User user;
-    @ManyToOne
-    @JoinColumn
-    private Product product;
-
-
-
-    public CartItem() {
-
-    }
+	@Id
+	@GeneratedValue
+	@Column(name="cart_item_id")
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="item_id")
+	private Item item;
+	
+	private int count;
+	
 }

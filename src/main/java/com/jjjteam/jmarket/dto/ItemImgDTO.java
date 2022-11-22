@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.dto;
+ package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.model.ItemImg;
 

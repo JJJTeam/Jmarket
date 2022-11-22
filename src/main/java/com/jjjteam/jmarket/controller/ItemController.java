@@ -26,11 +26,6 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 	
-//	// 사이트?
-//	@GetMapping("/item/itemForm")
-// 	public String item() {
-// 		return "/item/itemForm";
-// 	}
 	
 	// 기존
 	@GetMapping("/item/itemForm")
@@ -39,7 +34,7 @@ public class ItemController {
 		return "item/itemForm";
 	}
 
-	@PostMapping("/item/itemFrom")
+	@PostMapping(value="/item/itemFrom")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 
@@ -54,12 +49,17 @@ public class ItemController {
 
 		try {
 			itemService.saveItem(itemFormDTO, itemImgFileList);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@성공했습니다.");
+			
 		} catch (Exception e) {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+e);
 			model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-			return "item/itemForm";
+			return "item/itemList";
+//			return "item/itemForm";
 		}
 
-		return "redirect:/";
+//		return "redirect:/";
+		return "redirect:/item/itemList";
 	}
 	
 //	//상품 수정
@@ -78,7 +78,7 @@ public class ItemController {
 //        return "item/itemForm";
 //    }
 	
-	//상품 등록
+	//상품
 	@PostMapping(value = "/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult
             , @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
@@ -87,10 +87,10 @@ public class ItemController {
             return "item/itemForm";
         }
 
-//        if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
-//            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
-//            return "item/itemForm";
-//        }
+        if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
+            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
+            return "item/itemForm";
+        }
 
         try {
             itemService.saveItem(itemFormDTO, itemImgFileList);
@@ -99,7 +99,8 @@ public class ItemController {
             return "item/itemForm";
         }
 
-        return "redirect:/";
+//        return "redirect:/";
+        return "item/itemList";
     }
 
 }

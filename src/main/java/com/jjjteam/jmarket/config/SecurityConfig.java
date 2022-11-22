@@ -15,9 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
-        prePostEnabled = true)
+		// securedEnabled = true,
+		// jsr250Enabled = true,
+		prePostEnabled = true)
 @Slf4j
 public class SecurityConfig {
 
@@ -91,24 +91,17 @@ public class SecurityConfig {
 //                .anyRequest().authenticated();
         .anyRequest().permitAll();
 
-        //로그인 관련 설정.
-        http.formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login") //Post 요청
-                .defaultSuccessUrl("/")
-                .failureUrl("/user/login?error")
-                .permitAll();
+		// 로그인 관련 설정.
+		http.formLogin().loginPage("/login").loginProcessingUrl("/login") // Post 요청
+				.defaultSuccessUrl("/").failureUrl("/user/login?error").permitAll();
 
-        //로그아웃 설정
-        http.logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+		// 로그아웃 설정
+		http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
-        //비인가자 요청시 보낼 Api URI
-        http.exceptionHandling().accessDeniedPage("/forbidden");
+		// 비인가자 요청시 보낼 Api URI
+		http.exceptionHandling().accessDeniedPage("/forbidden");
 
-
-        return http.build();
-    }
+		return http.build();
+	}
 
 }

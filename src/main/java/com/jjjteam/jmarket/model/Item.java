@@ -1,27 +1,38 @@
 package com.jjjteam.jmarket.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
+
+import com.jjjteam.jmarket.constant.ClothingItems;
+import com.jjjteam.jmarket.constant.ItemColor;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.constant.ItemSize;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import com.jjjteam.jmarket.exception.OutOfStockException;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.Builder;
 
 @ToString
 @Getter
+@Setter
 @Table(name="item")
 @Entity
 public class Item {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id; //상품 코드
 
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
+    
+    @Column(nullable = false)
+    private String itemIntroduction;  //상품 소개 (미들네임)
 
     @Column(name = "price", nullable = false)
     private int price;  //가격
@@ -34,23 +45,52 @@ public class Item {
     private String itemDetail;  //상품 상세설명
 
     @Enumerated(EnumType.STRING)
-    private ItemSellStatus itemSellStatus;  //상품 판매 상태
+    private ClothingItems clothingItems;  //상품 분류
 
+    @Enumerated(EnumType.STRING)
+    private ItemColor itemColor ;	//상품 색상
+
+    @Enumerated(EnumType.STRING)
+    private ItemSize itemSize;		//상품 사이즈
+    
+     
+    @OneToMany(mappedBy = "item")
+	private List<ItemImg> itemImgs;
+    
     @Builder
-    public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus) {
+    public Item(
+    		String itemNm, 
+    		String itemIntroduction,
+    		int price, 
+    		int stockNumber, 
+    		String itemDetail, 
+    		ClothingItems clothingItems,
+    		ItemSize itemSize,
+    		ItemColor itemColor, 
+    		List<ItemImg> itemImgs) {
         this.itemNm = itemNm;
+        this.itemIntroduction = itemIntroduction;
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
-        this.itemSellStatus = itemSellStatus;
+        this.clothingItems = clothingItems;
+        this.itemSize = itemSize;
+        this.itemColor = itemColor;
+        this.itemImgs = itemImgs;
     }
     
-    public void updateItem(ItemFormDTO itemFormDto) {
+    public Item() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
+        this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
-        this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.clothingItems = itemFormDto.getClothingItems();
     }
     // 상품 주문 -> 상품 재고 감소 로직 생성
     public void removeStock(int stockNumber){
@@ -67,4 +107,5 @@ public class Item {
     public void addStock(int stockNumber){
         this.stockNumber += stockNumber;
     }
+
 }
