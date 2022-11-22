@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.ItemImgDTO;
+import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
 import com.jjjteam.jmarket.dto.MainItemDTO;
 import com.jjjteam.jmarket.model.Item;
@@ -92,6 +93,12 @@ public class ItemService {
         
         return item.getId();
     }
+	
+	//상품 조회 (test)
+	@Transactional
+	public Page<Item> loadItemList(ItemListDTO itemListDTO, Pageable pageable){
+		return itemRepository.getLoadItemList(itemListDTO, pageable);
+	}
 	
 //	// 상품 데이터 조회
 //    // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음
