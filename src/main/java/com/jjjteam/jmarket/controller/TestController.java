@@ -31,9 +31,22 @@ public class TestController {
 
 
 	private final UserService userService;
+	
+	
+	
 	@Autowired
 	RoleRepository roleRepository;
 
+	
+	@GetMapping("/addrole")
+	public String roleTest() {
+		roleRepository.save(new Role(ERole.ROLE_USER));
+		roleRepository.save(new Role(ERole.ROLE_MODERATOR));
+        roleRepository.save(new Role(ERole.ROLE_ADMIN));
+        return "index";
+	}
+	
+	
 	@GetMapping("/test2")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public String totestPage2(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails)  {
