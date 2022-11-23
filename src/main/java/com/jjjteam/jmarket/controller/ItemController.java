@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +18,7 @@ import com.jjjteam.jmarket.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
 
-
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -59,29 +60,42 @@ public class ItemController {
 		} catch (Exception e) {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+e);
 			model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
-			return "item/itemList";
-//			return "item/itemForm";
+			return "item/itemForm";
 		}
+		return "redirect:/";
 
-//		return "redirect:/";
-		return "redirect:/item/itemList";
 	}
 	
-	//상품 수정
-//	@GetMapping(value = "/item/{itemId}")
-//    public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
-//
-//        try {
-//            ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
-//            model.addAttribute("itemFormDto", itemFormDto);
-//        } catch (EntityNotFoundException e) {
-//            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-//            model.addAttribute("itemFormDto", new ItemFormDTO());
-//            return "item/itemForm";
-//        }
-//
-//        return "item/itemForm";
-//    }
+	
+	// 상품목록
+//	@GetMapping("/item/itemList")
+//	public String itemList(Model model) {
+//		model.addAttribute("itemListDTO", ne w ItemListDTO());
+//		return "item/itemList";
+//	}
+
+	@GetMapping("/item/itemList")
+	public String itemList() {
+		return "item/itemList";
+	} 
+	
+	
+	
+	//상품 상세보기
+	@GetMapping(value = "/item/{itemId}")
+    public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
+
+        try {
+            ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
+            model.addAttribute("itemFormDto", itemFormDto);
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
+            model.addAttribute("itemFormDto", new ItemFormDTO());
+            return "item/itemList";
+        }
+
+        return "item/itemDetail";
+    }
 	
 	//상품 수정?
 	@PostMapping(value = "/item/{itemId}")
@@ -104,8 +118,7 @@ public class ItemController {
             return "item/itemForm";
         }
 
-//        return "redirect:/";
-        return "item/itemList";
+        return "redirect:/";
     }
 	
 	

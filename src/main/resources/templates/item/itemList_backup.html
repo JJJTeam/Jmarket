@@ -9,19 +9,26 @@
 	<h2>상품리스트</h2>
 	<div class="mb-2">
 		<a th:href="@{/item/itemForm}" class="btn btn-primary">상품 등록하기</a>
-	</div>
+		
+		<table class="table">
+            <thead>
+            <tr>
+                <th scope="col">이미지</th>
+                <th scope="col">상품명</th>
+                <th scope="col">가격</th>
+            </thead>
+            <tbody>
+            <tr th:each="items : ${itemList}">
+                <td>
+                    <span th:text="${address.address}"></span> <span th:text="${address.addressDetail}"></span>
+                </td>
+                <td th:text="${items.itemNm}"></td>
+                <td th:text="${items.price}"></td>
+                <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
+            </tr>
 
-	<div>
-	<ul>
-		<li th:each="item : ${ItemListDTO}">
-			<div></div>
-			<div>
-				<p th:text="${item.itemNm}"></p>
-				<p th:text="${item.itemDetail}"></p>
-				<p th:text="${item.price}"></p>
-			</div>
-		</li>
-	</ul>
+            </tbody>
+        </table>
 	</div>
 	<div th:replace="/include/footer.html"></div>
 </body>

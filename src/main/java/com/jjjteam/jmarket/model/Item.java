@@ -45,6 +45,9 @@ public class Item {
     private String itemDetail;  //상품 상세설명
 
     @Enumerated(EnumType.STRING)
+    private ItemSellStatus itemSellStatus;  //상품 판매상태
+    
+    @Enumerated(EnumType.STRING)
     private ClothingItems clothingItems;  //상품 분류
 
     @Enumerated(EnumType.STRING)
@@ -64,6 +67,7 @@ public class Item {
     		int price, 
     		int stockNumber, 
     		String itemDetail, 
+    		ItemSellStatus itemSellStatus,
     		ClothingItems clothingItems,
     		ItemSize itemSize,
     		ItemColor itemColor, 
@@ -73,6 +77,7 @@ public class Item {
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
+        this.itemSellStatus = itemSellStatus;
         this.clothingItems = clothingItems;
         this.itemSize = itemSize;
         this.itemColor = itemColor;
