@@ -1,5 +1,6 @@
 let useridReg = /^[a-zA-Z0-9]{4,20}$/;
-let passwordReg =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=\S+$).{8,}$/;
+// let passwordReg =/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=\S+$).{8,}$/;
+let passwordReg =/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,}$/;
 let userNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
 let emailReg =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 let userPhoneNumberReg =/^[0-9]+$/i;

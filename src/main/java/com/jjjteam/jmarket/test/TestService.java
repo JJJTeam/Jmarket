@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,7 +53,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
-                .password(encoder.encode("test"))
+                .password("test")
                 .roles(roles)
                 .userBirthDate(LocalDate.now())
                 .userName("유저이름")
