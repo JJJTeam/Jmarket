@@ -67,7 +67,7 @@ spring:
       on-profile: jungho
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
 
   datasource:
