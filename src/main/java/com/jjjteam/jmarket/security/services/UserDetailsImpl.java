@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.jjjteam.jmarket.constant.Role;
+import com.jjjteam.jmarket.constant.Role_notUSE;
 import com.jjjteam.jmarket.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,14 +41,14 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
     public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> listtest = new ArrayList<>();
-        listtest.add(new SimpleGrantedAuthority(Role.USER.name()));
-        listtest.add(new SimpleGrantedAuthority(Role.ADMIN.name()));
-        List<GrantedAuthority> authorities = listtest;
-        
-//        List<GrantedAuthority> authorities = user.getRoles().stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-//                .collect(Collectors.toList());
+//        List<GrantedAuthority> listtest = new ArrayList<>();
+//        listtest.add(new SimpleGrantedAuthority(Role_notUSE.USER.name()));
+//        listtest.add(new SimpleGrantedAuthority(Role_notUSE.ADMIN.name()));
+//        List<GrantedAuthority> authorities = listtest;
+//
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .collect(Collectors.toList());
 
         return new UserDetailsImpl(
                 user.getId(),
