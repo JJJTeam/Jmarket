@@ -10,7 +10,7 @@ spring:
 #      hibernate:
 #        format_sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
     password: JJJTeam
   thymeleaf:
@@ -98,7 +98,23 @@ spring:
 
 
 ---
+logging:
+ level:
+  root: info
+
+server:
+  port: 8083
+  
 spring:
   config:
     activate:
-      on-profile: name2
+      on-profile: taekbu
+      
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
+
