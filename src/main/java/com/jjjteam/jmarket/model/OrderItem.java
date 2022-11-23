@@ -20,7 +20,7 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
 
     @ManyToOne (fetch = FetchType.LAZY) // 한 주문에 여러 아이템이 들어갈 수 있다.
     @JoinColumn(name = "order_id")
-    private OrderOld orderOld;
+    private Order order;
 
     private int orderPrice; // 주문가격
 
