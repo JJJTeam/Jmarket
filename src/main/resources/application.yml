@@ -7,7 +7,7 @@ spring:
       ddl-auto: create
     show-sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
     username: root
     password: JJJTeam
   thymeleaf:

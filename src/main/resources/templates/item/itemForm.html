@@ -27,6 +27,7 @@
 			<input type="hidden" th:field="*{id}">
 
 			<div class="form-group">
+			품목 : 
 				<select th:field="*{clothingItems}" class="custom-select">
 					<option value="short_sleeved_T_shirt">반소매티셔츠</option>
 					<option value="long_sleeved_T_shirt">긴소매티셔츠</option>
@@ -37,7 +38,30 @@
 					<option value="sweatshirt">맨투맨</option>
 				</select>
 			</div>
-
+			<br>
+			<div class="form-group">
+			색상 : 
+				<select th:field="*{itemColor}" class="custom-select">
+					<option value="BROWN">갈색</option>
+					<option value="BLACK">검은색</option>
+					<option value="WHITE">흰색</option>
+					<option value="NAVY">네이비색</option>
+				</select>
+			</div>
+			<br>
+			<div class="form-group">
+			사이즈 : 
+				<select th:field="*{itemSize}" class="custom-select">
+					<option value="XL">XL</option>
+					<option value="L">L</option>
+					<option value="M">M</option>
+					<option value="S">S</option>
+				</select>
+			</div>
+			<br>
+			
+			
+			<!-- 상품명 -->
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">상품명</span>
@@ -47,6 +71,21 @@
 			</div>
 			<p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}"
 				class="fieldError">Incorrect data</p>
+				
+			
+			<!-- 상품설명 -->
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">상품설명</span>
+				</div>
+				<input type="text" th:field="*{itemIntroduction}" class="form-control"
+					placeholder="상품설명을 입력해주세요">
+			</div>
+			<p th:if="${#fields.hasErrors('itemIntroduction')}" th:errors="*{itemIntroduction}"
+				class="fieldError">Incorrect data</p>
+			
+			
+			<!-- 가격 -->
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">가격</span>
@@ -56,7 +95,9 @@
 			</div>
 			<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
 				class="fieldError">Incorrect data</p>
-
+			
+			
+			<!-- 재고 -->
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">재고</span>
@@ -66,6 +107,9 @@
 			</div>
 			<p th:if="${#fields.hasErrors('stockNumber')}"
 				th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+			
+			
+			<!-- 상품상세내용 -->
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">상품 상세 내용</span>
@@ -76,8 +120,6 @@
 			<p th:if="${#fields.hasErrors('itemDetail')}"
 				th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
 
-
-			<!-- 여기까지는 잘 뜬다.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 
 			<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 등록할 수 있게 밑의 코드가 출력됨 -->

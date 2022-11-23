@@ -31,7 +31,7 @@ public class Item {
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
     
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String itemIntroduction;  //상품 소개 (미들네임)
 
     @Column(name = "price", nullable = false)
