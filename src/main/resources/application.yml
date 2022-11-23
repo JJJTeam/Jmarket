@@ -43,6 +43,7 @@ spring:
   config:
     activate:
       on-profile: sujin
+
   servlet:
     multipart:
       max-file-size: 50MB
@@ -55,7 +56,6 @@ spring:
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     
-
 
 ---
 logging:
