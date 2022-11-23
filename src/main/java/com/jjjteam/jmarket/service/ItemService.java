@@ -95,10 +95,10 @@ public class ItemService {
     }
 	
 	//상품 조회 (test)
-	@Transactional
-	public Page<Item> loadItemList(ItemListDTO itemListDTO, Pageable pageable){
-		return itemRepository.getLoadItemList(itemListDTO, pageable);
-	}
+//	@Transactional
+//	public Page<Item> loadItemList(ItemListDTO itemListDTO, Pageable pageable){
+//		return itemRepository.getLoadItemList(itemListDTO, pageable);
+//	}
 	
 //	// 상품 데이터 조회
 //    // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음

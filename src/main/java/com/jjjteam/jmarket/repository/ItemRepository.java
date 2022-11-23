@@ -13,9 +13,9 @@ import com.jjjteam.jmarket.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 	
-	// 상품id로 데이터 조회하기
-    List<Item> findByItemId(Long id);
-	
+//	// 상품id로 데이터 조회하기
+//    List<Item> findByItemId(Long id);
+
     // 상품명으로 데이터 조회하기
     List<Item> findByItemNm(String itemNm);
 
@@ -31,9 +31,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     // orderBy 조건 + 가격 조건?
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
     
-	Page<Item> getLoadItemList(ItemListDTO itemListDTO, Pageable pageable);
-	
-	Page<Item> getLoadItem(ItemListDTO itemListDTO, Pageable pageable);
+//	Page<Item> getLoadItemList(ItemListDTO itemListDTO, Pageable pageable);
+//	
+//	Page<Item> getLoadItem(ItemListDTO itemListDTO, Pageable pageable);
     
 //	Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable);
 //
