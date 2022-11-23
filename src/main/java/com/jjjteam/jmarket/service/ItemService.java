@@ -58,23 +58,25 @@ public class ItemService {
 	
 	// 상품 수정하기를 위한 service
     // 상품이랑, 상품이미지의 entity -> dto 로 바꾸기만 하는 service
-//	@Transactional(readOnly = true)
-//    public ItemFormDTO getItemDetail(Long itemId) {
-//
-//        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-//        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
-//
-//        for (ItemImg itemImg : itemImgList) {
-//            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
-//            itemImgDtoList.add(itemImgDTO);
-//        }
-//
-//        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
-//        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
-//        itemFormDTO.setItemImgDtoList(itemImgDtoList);
-//
-//        return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
-//    }
+	@Transactional(readOnly = true)
+    public ItemFormDTO getItemDetail(Long itemId) {
+
+        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
+
+        for (ItemImg itemImg : itemImgList) {
+            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+            itemImgDtoList.add(itemImgDTO);
+        }
+
+        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
+        itemFormDTO.setItemImgDtoList(itemImgDtoList);
+
+        return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
+    }
+	
+
 	
 	// 상품 데이터 수정
     // dto 로 변환된 상품이랑 상품이미지를 수정
@@ -94,11 +96,6 @@ public class ItemService {
         return item.getId();
     }
 	
-	//상품 조회 (test)
-//	@Transactional
-//	public Page<Item> loadItemList(ItemListDTO itemListDTO, Pageable pageable){
-//		return itemRepository.getLoadItemList(itemListDTO, pageable);
-//	}
 	
 //	// 상품 데이터 조회
 //    // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음

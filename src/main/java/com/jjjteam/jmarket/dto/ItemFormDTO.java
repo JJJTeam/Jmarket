@@ -34,6 +34,8 @@ public class ItemFormDTO {
 	@NotNull(message = "재고는 필수 입력 값입니다.")
 	private Integer stockNumber;
 
+	private ItemSellStatus itemSellStatus;
+	
 	private ClothingItems clothingItems;
 
 	private ItemSize itemSize;
@@ -55,6 +57,7 @@ public class ItemFormDTO {
 			Integer price, 
 			String itemDetail, 
 			Integer stockNumber,
+			ItemSellStatus itemSellStatus,
 			ClothingItems clothingItems,
 			ItemSize itemSize,
     		ItemColor itemColor) {
@@ -63,6 +66,7 @@ public class ItemFormDTO {
         this.price = price;
         this.stockNumber =stockNumber;
         this.itemDetail = itemDetail;
+        this.itemSellStatus = itemSellStatus;
         this.clothingItems = clothingItems;
         this.itemSize = itemSize;
         this.itemColor = itemColor;
@@ -75,6 +79,7 @@ public class ItemFormDTO {
 				.price(dto.price)
 				.stockNumber(dto.stockNumber)
 				.itemDetail(dto.itemDetail)
+				.itemSellStatus(dto.itemSellStatus)
 				.clothingItems(dto.clothingItems)
 				.itemSize(dto.itemSize)
 				.itemColor(dto.itemColor)
@@ -90,6 +95,7 @@ public class ItemFormDTO {
 				.price(entity.getPrice())
 				.stockNumber(entity.getStockNumber())
 				.itemDetail(entity.getItemDetail())
+				.itemSellStatus(entity.getItemSellStatus())
 				.clothingItems(entity.getClothingItems())
 				.itemSize(entity.getItemSize())
 				.itemColor(entity.getItemColor())
