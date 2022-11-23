@@ -3,10 +3,12 @@ package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,9 +22,8 @@ import javax.validation.constraints.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Slf4j
 public class UserDTO {
-
-    private final PasswordEncoder encoder;
     @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
     private String userid;
     @Email
@@ -40,13 +41,22 @@ public class UserDTO {
     private Boolean userReceiveSms;            //문자수신여부  X
     private Boolean userSmsCert;               // 문자 인증 여부  X
     private LocalDateTime userRegisterDateTime; //회원가입시간  X
-    private Set<String> role;
+    private Set<Role> role;
 
-    public User toEntityForSave(Set<Role> role){
+
+    public UserDTO setRole(Set<Role> roles){
+        this.role=roles;
+        return this;
+    }
+    public UserDTO setPassword(String password){
+        this.password = password;
+        return this;
+    }
+    public User toEntity(){
         User user = User.builder()
                 .userId(userid)
                 .email(email)
-                .password(encoder.encode(password))
+                .password(password)
                 .userName(userName)
                 .userPhoneNumber(userPhoneNumber)
                 .userSex(userSex)

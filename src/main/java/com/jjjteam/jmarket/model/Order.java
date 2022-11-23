@@ -12,9 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(	name = "orders",
-        uniqueConstraints = {
-        })
+@Table(	name = "orders")
 public class Order {  // 카멜표기법으로 , db저장은 스네이크 표기법
 
     @Id

@@ -9,6 +9,7 @@ import com.jjjteam.jmarket.model.UserAddress;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //서버 시작, 종료할때 실행하는 메서드
+@Slf4j
 @Service
 public class TestService implements CommandLineRunner, ApplicationListener<ContextClosedEvent>, InitializingBean, DisposableBean {
 
@@ -50,6 +52,8 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
 //        User user = new User("test","test@test",encoder.encode("test"));
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")

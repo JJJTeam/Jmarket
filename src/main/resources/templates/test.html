@@ -5,6 +5,62 @@
     <title>Title</title>
 </head>
 <body>
-<h2> test 입니다.</h2>
+<div class="container">
+    <h2>회원가입 form</h2>
+    <form th:action="@{/test}" action="/test" th:object="${userDTO}" method="POST">
+        <!--        <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>-->
+        <div class="form-group">
+            <label for="userid">아이디:</label>
+            <input type="text" class="form-control" name="userid" value="test3"/>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input class="form-control" name="password"  value="wjdgh7578@">
+        </div>
+        <div class="form-group">
+            <label for="userName">이름:</label>
+            <input class="form-control" name="userName" type="text" value="testname2">
+        </div>
+        <div class="form-group">
+            <label for="email">이메일:</label>
+            <input class="form-control" name="email" type="text" value="hodob86@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="userPhoneNumber">휴대폰:</label>
+            <input class="form-control" name="userPhoneNumber" type="text" value="010162257855">
+        </div>
+        <div class="form-group">
+            <label for="#">주소(미구현, 가입하고 등록하도록 해도 되죠?):</label>
+            <input class="form-control" id="#" name="#" placeholder="Enter #" type="text" value="">
+        </div>
+        <div class="form-group">
+            <div>성별(DTO랑 맵핑은됨)</div>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios1" name="userSex" type="radio"
+                       value=1>
+                <label class="form-check-label" for="exampleRadios1">
+                    남자
+                </label>
+            </span>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios2" name="userSex" type="radio"
+                       value=2>
+                <label class="form-check-label" for="exampleRadios1">
+                    여자
+                </label>
+            </span>
+            <span class="form-check">
+                <input checked class="form-check-input" id="exampleRadios3" name="userSex" type="radio"
+                       value=0>
+                <label class="form-check-label" for="exampleRadios1">
+                    선택안함
+                </label>
+            </span>
+        </div>
+        <button class="btn btn-primary" type="submit">회원가입</button>
+    </form>
+
+</div>
 </body>
+
 </html>
