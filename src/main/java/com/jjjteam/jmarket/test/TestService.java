@@ -57,7 +57,7 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
-                .password("test")
+                .password(encoder.encode("test"))
                 .roles(roles)
                 .userBirthDate(LocalDate.now())
                 .userName("유저이름")

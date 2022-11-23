@@ -1,6 +1,6 @@
 package com.jjjteam.jmarket.model;
 
-import com.jjjteam.jmarket.constant.Role;
+import com.jjjteam.jmarket.constant.Role_notUSE;
 import com.jjjteam.jmarket.dto.MemberFormDTO;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +32,7 @@ public class Member extends BaseEntity{
     private String address;
     
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role_notUSE roleNotUSE;
     
     public static Member createMember(MemberFormDTO memberFormDTO, PasswordEncoder passwordEncoder){
         
@@ -42,7 +42,7 @@ public class Member extends BaseEntity{
                 .address(memberFormDTO.getAddress())
                 .password( passwordEncoder.encode( memberFormDTO.getPassword() ) ) // BCryptPasswordEncoder Bean 을 파라미터로 넘겨서 비번을 암호화함
 //                .role(Role.USER)
-                .role(Role.ADMIN)
+                .roleNotUSE(Role_notUSE.ADMIN)
                 .build();
         
         return member;
