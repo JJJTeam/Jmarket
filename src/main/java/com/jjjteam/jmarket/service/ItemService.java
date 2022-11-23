@@ -57,7 +57,7 @@ public class ItemService {
 	}
 	
 	// 상품 수정하기를 위한 service
-    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸기만 하는 service
+    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
 	@Transactional(readOnly = true)
     public ItemFormDTO getItemDetail(Long itemId) {
 

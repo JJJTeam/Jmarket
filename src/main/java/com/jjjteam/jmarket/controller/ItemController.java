@@ -76,6 +76,7 @@ public class ItemController {
 
 	@GetMapping("/item/itemList")
 	public String itemList() {
+		System.out.println(itemService.itemList());
 		return "item/itemList";
 	} 
 	
