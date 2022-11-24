@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.controller;
+package com.jjjteam.jmarket.test;
 
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
