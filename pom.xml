@@ -127,14 +127,12 @@
 		</dependency>
 		<!-- 파일업로드를위한 의존성 추가 -->
 
-
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 			<!-- <version>3.0.4.RELEASE</version> -->
 		</dependency>
-		
-		
+
 		<!-- 화면으로부터 전달받은 DTO객체를 엔티티 객체로 변환하는 작업을 해야 하고, 엔티티 객체를 DTO 객체로 바꿔주는 작업 ??? -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>

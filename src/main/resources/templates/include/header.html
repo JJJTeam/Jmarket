@@ -1,3 +1,5 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -40,11 +42,22 @@
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
             </form>
-
-            <span th:if="${#authorization.expr('isAuthenticated()')}">
+            <span sec:authorize="hasRole('ROLE_USER')">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                         <span th:text="${#authentication.name}">//인증된유저이름</span>님
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/mypage/address">배송지관리</a></li>
+                        <li><a class="dropdown-item" href="/mypage/modify">개인정보수정</a></li>
+                        <li><a class="dropdown-item" href="#">Link 3</a></li>
+                    </ul>
+                </div>
+            </span>
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        관리자님상품등록하러가세요
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/mypage/address">배송지관리</a></li>
