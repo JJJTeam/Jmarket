@@ -39,7 +39,10 @@ public class SecurityConfig {
 
 		// 로그인 관련 설정.
 		http.formLogin().loginPage("/login").loginProcessingUrl("/login") // Post 요청
-				.defaultSuccessUrl("/").failureUrl("/user/login?error").permitAll();
+				.defaultSuccessUrl("/logihandler").failureUrl("/user/login?error")
+
+
+                .permitAll();
 
 		// 로그아웃 설정
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
