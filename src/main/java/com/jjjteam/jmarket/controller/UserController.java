@@ -86,12 +86,8 @@ public class UserController {
 //	}
 
 	@PostMapping("/change-email")
-	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, String newEmail, Model model , String inputPassword) {
-		if(!Pattern.matches("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", newEmail)){
-			model.addAttribute("msg","올바른형식으로 입력해주시기 바랍니다.");
-			model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
-			return "/mypage/change-email";
-		}
+	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, BindingResult bindingResult,String newEmail, Model model , String inputPassword) {
+		if(bindingResult.hasErrors()){return "index";}
 		if(encoder.matches(inputPassword, userDetails.getPassword())){
 			userService.changeUserEmail(userDetails.getId(),newEmail);
 			return "/index";
