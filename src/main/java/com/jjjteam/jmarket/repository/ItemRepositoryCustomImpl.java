@@ -11,12 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.QItem;
+import com.jjjteam.jmarket.model.QItemImg;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+
+
 
 /*
  * Querydsl 을 SpringDataJpa 와 함께 사용하기 위해서는 사용자 정의 repository 를 작성해야 함
@@ -65,7 +69,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 			dateTime = dateTime.minusMonths(6);
 		}
 		
-		return QItem.item.regTime.after(dataTime);
+		return QItem.item.regTime.after(dateTime);
 	}
 	
 	private BooleanExpression searchByLike(String searchBy, String searchQuery) {
@@ -96,7 +100,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 				.orderBy(QItem.item.id.desc())
 				.offset(pageable.getOffset()) // 데이터를 가지고 시작인덱스 지정
 				.limit(pageable.getPageSize()) // 한 번에 가지고 최대 개수 지정
-				.fetchResult();
+				.fetchResults();
 		
 		List<Item> content = results.getResults();
 		long total = results.getTotal();
@@ -107,6 +111,34 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 	//item like 검색
 	private BooleanExpression itemNmLike(String searchQuery) {
 		return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemNm.like("%"+ searchQuery +"%");
+	}
+
+
+	@Override
+	public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+		QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        QueryResults<ItemListDTO> results = queryFactory
+                .select(
+                        new QItemListDTO( // 원래는 entity 로 변환해줘야 하는데, mainitemdto 의 어노테이션 (QueryProjection)덕분에 dto 로 그냥 사용
+                                item.id,
+                                item.itemNm,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) // 내부 조인
+                .where(itemImg.repimgYn.eq("Y")) // 대표 상품인 경우에는 Y
+                .where(itemNmLike(itemSearchDTO.getSearchQuery()))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<ItemListDTO> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
 	}
 	
 }

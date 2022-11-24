@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.modelmapper.ModelMapper;
 
 import com.jjjteam.jmarket.constant.*;
 import com.jjjteam.jmarket.model.Item;

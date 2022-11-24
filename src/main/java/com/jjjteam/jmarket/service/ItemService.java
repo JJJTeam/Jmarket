@@ -12,7 +12,6 @@ import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.ItemImgDTO;
 import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
-import com.jjjteam.jmarket.dto.MainItemDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
@@ -105,9 +104,9 @@ public class ItemService {
     }
 
     // 메인 페이지에 보여줄 상품 데이테 조회
-//    @Transactional(readOnly = true)
-//    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
-//        return itemRepository.getMainItemPage(itemSearchDto, pageable);
-//    }
+    @Transactional(readOnly = true)
+    public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 	
 }

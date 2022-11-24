@@ -30,7 +30,9 @@
 	<h2>상품리스트</h2>
 	<div class="mb-2">
 		<a th:href="@{/item/itemForm}" class="btn btn-primary">상품 등록하기</a>
+		<form th:action="@{'/item/itemList/' + ${items.number}" role="form" method="get" th:object="${items}">
 		
+		</form>
 		<table class="table">
             <thead>
             <tr>
@@ -42,17 +44,33 @@
                 <th scope="col">상태</th>
             </thead>
             <tbody>
-            <tr th:each="items : ${itemList}">
-                <!-- <td>
-                    <span th:text="${address.address}"></span> <span th:text="${address.addressDetail}"></span>
-                </td> -->
-                <td th:text="${items.itemNm}"></td>
-                <td th:text="${items.price}"></td>
-                <!-- <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td> -->
+            <tr th:each="item, status: ${items.getContent()}">
+                <td th:text="${item.id}"></td>
+                <td>
+                	<a th:href="'/item/itemList/' + ${item.id}" th:text="${item.itemNm}"></a>
+                </td>
+                <td th:text="${item.price}"></td>
+                <!-- <td th:text="${item.createdBy}"></td>
+                <td th:text="${item.regTime}"></td> -->
+                <td></td>
+                <td></td>                
+                <td th:text="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
             </tr>
 
             </tbody>
         </table>
+	</div>
+	
+	<div th:with="start=${(items.number/maxPage)*maxPage + 1}, 
+	end = (${(items.totalPages == 0) ? 1 : (start + (maxPage -1) 
+	< items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+		<ul class="pagination justify-content-center">
+			<li class = "page-item" th:classappend="${items.first}?'disabled'">
+				<a th:onclick="'javascript:page(' + ${items.number - 1} +')'" aria-label='Previous' class="page-link">
+					<span aria-hidden='true'>Previous</span>
+				</a>
+			</li>
+		</ul>
 	</div>
 
 	
