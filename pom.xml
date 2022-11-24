@@ -70,23 +70,23 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<!-- 대용량 파일 처리 -->
-          <dependency>
-              <groupId>commons-io</groupId>
-              <artifactId>commons-io</artifactId>
-              <version>2.6</version>
-          </dependency>
-          
-          
-          <!-- commons-fileupload -->
-          <!-- multipart등을 사용할수 있음 -->
-          <dependency>
-              <groupId>commons-fileupload</groupId>
-              <artifactId>commons-fileupload</artifactId>
-              <version>1.3.1</version>
-          </dependency>	
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+
+		<!-- commons-fileupload -->
+		<!-- multipart등을 사용할수 있음 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
 
 
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
@@ -151,19 +151,44 @@
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 			<!-- <version>3.0.4.RELEASE</version> -->
 		</dependency>
-		
-		
-		<!-- 화면으로부터 전달받은 DTO객체를 엔티티 객체로 변환하는 작업을 해야 하고, 엔티티 객체를 DTO 객체로 바꿔주는 작업 ??? -->
+
+
+		<!-- 화면으로부터 전달받은 DTO객체를 엔티티 객체로 변환하는 작업을 해야 하고, 엔티티 객체를 DTO 객체로 바꿔주는 작업 
+			??? -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.3.9</version>	
+			<version>2.3.9</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+
+		<!-- Querydsl -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-core</artifactId>
+			<!-- <version>${querydsl.version}</version> -->
+		</dependency>
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<!-- <version>4.3.1</version> -->
+		</dependency>
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<!-- <version>4.3.1</version> -->
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
 
 
 	</dependencies>
@@ -182,6 +207,35 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<!--Qdomain -->
+			<!-- Querydsl 을 통해서 쿼리를 생성할 때 Qdomain 객체를 사용할 수 있음 -->
+			<plugin>
+				<groupId>org.bsc.maven</groupId>
+				<artifactId>maven-processor-plugin</artifactId>
+				<version>2.0.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+
+				<dependencies>
+					<dependency>
+						<groupId>com.mysema.maven</groupId>
+						<artifactId>apt-maven-plugin</artifactId>
+						<version>1.0.6</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
