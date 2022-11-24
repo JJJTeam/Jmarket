@@ -14,25 +14,26 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import java.util.List;
-
+import java.util.regex.Pattern;
 
 
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("mypage")
+@RequestMapping("/mypage")
 @Secured("ROLE_USER")
 @Controller
 public class UserController {
 
 	private final UserService userService;
 	private final UserAddressService userAddressService;
-	@Autowired
-	PasswordEncoder encoder;
 
-
+	private final PasswordEncoder encoder;
 
 	@GetMapping("/address")
 	public String ToMyPageAddressList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -57,16 +58,44 @@ public class UserController {
 		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-email";
 	}
+//	@PostMapping("/change-email")
+//	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,
+//									   @Valid String newEmail,BindingResult bindingResult, String inputPassword) {
+//		@Email String email = newEmail;
+//		if(bindingResult.hasErrors()){return "index";}
+//		if(encoder.matches(inputPassword, userDetails.getPassword())){
+//			userService.changeUserEmail(userDetails.getId(),newEmail);
+//			return "/index";
+//		} else {
+//			return "/mypage/passerror";
+//		}
+//	}
+//	@PostMapping("/change-email")
+//	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, String newEmail, Model model , String inputPassword) {
+//		if(!Pattern.matches("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", newEmail)){
+//			model.addAttribute("msg","올바른형식으로 입력해주시기 바랍니다.");
+//			model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
+//			return "/mypage/change-email";
+//		}
+//		if(encoder.matches(inputPassword, userDetails.getPassword())){
+//			userService.changeUserEmail(userDetails.getId(),newEmail);
+//			return "/index";
+//		} else {
+//			return "/mypage/passerror";
+//		}
+//	}
+
 	@PostMapping("/change-email")
-	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,String newEmail, String inputPassword) {
+	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, BindingResult bindingResult,String newEmail, Model model , String inputPassword) {
+		if(bindingResult.hasErrors()){return "index";}
 		if(encoder.matches(inputPassword, userDetails.getPassword())){
 			userService.changeUserEmail(userDetails.getId(),newEmail);
 			return "/index";
 		} else {
 			return "/mypage/passerror";
 		}
-
 	}
+
 	@GetMapping("/change-password")
 	public String ToChangePassword(Model model) {
 		return "/mypage/change-password";

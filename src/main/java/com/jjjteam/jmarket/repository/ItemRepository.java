@@ -16,6 +16,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 //	// 상품id로 데이터 조회하기
 //    List<Item> findByItemId(Long id);
 
+
     // 상품명으로 데이터 조회하기
     List<Item> findByItemNm(String itemNm);
 
