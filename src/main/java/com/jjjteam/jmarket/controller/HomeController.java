@@ -1,9 +1,14 @@
 package com.jjjteam.jmarket.controller;
 
+import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.dto.UserDTO;
+import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -24,6 +32,15 @@ public class HomeController {
 	@GetMapping("/login")
 	public String ToLoginPage() {
 		return "/login";
+	}
+	@GetMapping("/logihandler")
+	public String ToLoginHandler(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+		if(userDetails.getAuthorities().stream().map(x->x.toString()).collect(Collectors.toList()).contains(ERole.ROLE_ADMIN.name())){
+			return "/admin/index";
+		} else {
+			return "/index";
+		}
+
 	}
 
 	@GetMapping("/signup")
