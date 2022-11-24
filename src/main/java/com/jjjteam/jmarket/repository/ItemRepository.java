@@ -2,16 +2,22 @@ package com.jjjteam.jmarket.repository;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
-import com.jjjteam.jmarket.dto.ItemListDTO;
-import com.jjjteam.jmarket.dto.ItemSearchDTO;
-import com.jjjteam.jmarket.dto.MainItemDTO;
 import com.jjjteam.jmarket.model.Item;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+/*
+ * Querydsl 을 SpringDataJpa 와 함께 사용하기 위해서는 사용자 정의 repository 를 작성해야 함
+ * 사용자 정의 repository 는 총 3단계임
+ * 1. 사용자 정의 인터페이스 작성
+ * 2. 사용자 정의 인터페이스 구현 ***
+ * 3. Spring Data Jpa repository 에서 사용자 정의 인터페이스 상속 (ItemRepository)
+ */
+
+
+//3. ItemRepository 에서 ItemRepositoryCustom 상속
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
 	
 //	// 상품id로 데이터 조회하기
 //    List<Item> findByItemId(Long id);
@@ -32,11 +38,4 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     // orderBy 조건 + 가격 조건?
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
     
-//	Page<Item> getLoadItemList(ItemListDTO itemListDTO, Pageable pageable);
-//	
-//	Page<Item> getLoadItem(ItemListDTO itemListDTO, Pageable pageable);
-    
-//	Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable);
-//
-//	Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable);
 }

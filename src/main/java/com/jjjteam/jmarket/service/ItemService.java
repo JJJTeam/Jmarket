@@ -12,7 +12,6 @@ import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.ItemImgDTO;
 import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
-import com.jjjteam.jmarket.dto.MainItemDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.ItemImg;
 import com.jjjteam.jmarket.repository.ItemImgRepository;
@@ -57,7 +56,7 @@ public class ItemService {
 	}
 	
 	// 상품 수정하기를 위한 service
-    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸기만 하는 service
+    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
 	@Transactional(readOnly = true)
     public ItemFormDTO getItemDetail(Long itemId) {
 
@@ -97,17 +96,17 @@ public class ItemService {
     }
 	
 	
-//	// 상품 데이터 조회
-//    // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음
-//    @Transactional(readOnly = true) // 트랜젝션을 readOnly 로 설정할 경우, JPA 가 변경감지(더티체킹)를 수행하지 않아서 성능 향상됨 _데이터 수정이 일어나지 않기 때문에
-//    public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
-//        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
-//    }
-//
-//    // 메인 페이지에 보여줄 상품 데이테 조회
-//    @Transactional(readOnly = true)
-//    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
-//        return itemRepository.getMainItemPage(itemSearchDto, pageable);
-//    }
+	// 상품 데이터 조회
+    // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음
+    @Transactional(readOnly = true) // 트랜젝션을 readOnly 로 설정할 경우, JPA 가 변경감지(더티체킹)를 수행하지 않아서 성능 향상됨 _데이터 수정이 일어나지 않기 때문에
+    public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    // 메인 페이지에 보여줄 상품 데이테 조회
+    @Transactional(readOnly = true)
+    public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 	
 }
