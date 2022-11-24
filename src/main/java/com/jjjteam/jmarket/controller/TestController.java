@@ -3,7 +3,9 @@ package com.jjjteam.jmarket.controller;
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
+import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.RoleRepository;
+import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +40,12 @@ public class TestController {
 	@Autowired
 	RoleRepository roleRepository;
 
+	@Autowired
+	PasswordEncoder encoder;
+
+	@Autowired
+	UserRepository userRepository;
+
 	
 	@GetMapping("/addrole")
 	public String roleTest() {
@@ -44,6 +53,23 @@ public class TestController {
 		roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         return "index";
+	}
+	@GetMapping("/addadmin")
+	public String addAdmin() {
+		Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        log.info("roles : {}", roles);
+        User user = User.builder()
+                .userId("admin")
+                .email("test@test.com")
+                .password(encoder.encode("admin"))
+                .roles(roles)
+                .userName("운영자")
+                .build();
+        userRepository.save(user);
+
+		return "index";
 	}
 	
 	

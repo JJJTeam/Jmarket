@@ -2,6 +2,7 @@ package com.jjjteam.jmarket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,12 +33,14 @@ public class ItemController {
 	
 	// 기존
 	@GetMapping("/item/itemForm")
+	@Secured("ROLE_ADMIN")
 	public String itemForm(Model model) {
 		model.addAttribute("itemFormDTO", new ItemFormDTO());
 		return "item/itemForm";
 	}
 
 	@PostMapping(value="/item/itemForm")
+	@Secured("ROLE_ADMIN")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
