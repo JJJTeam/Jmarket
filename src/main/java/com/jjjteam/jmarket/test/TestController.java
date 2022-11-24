@@ -1,4 +1,4 @@
-package com.jjjteam.jmarket.controller;
+package com.jjjteam.jmarket.test;
 
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.dto.UserDTO;
