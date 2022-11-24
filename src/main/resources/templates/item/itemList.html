@@ -3,6 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#searchBtn").on("click",function(e){
+			e.preventDefault();
+			page(0);
+		});
+	});
+	
+	function page(page){
+		var searchDateType = $("#searchDateType").val();
+		var searchSellStatus = $("#searchSellStatus").val();
+		var searchBy = $("#seacrhBy").val();
+		var searchQuery = $("#searchQuery").val();
+		
+		location.href="/admin/items/" + page 
+		+ "?searchDateType" + searchDateType 
+		+ "&searchSellStatus" + searchSellStatus
+		+ "&searchBy" + searchBy
+		+ "&searchQuery" + searchQuery;
+	}
+</script>
 </head>
 <body>
 	<div th:replace="/include/header.html"></div>
@@ -16,6 +37,9 @@
                 <!-- <th scope="col">이미지</th> -->
                 <th scope="col">상품명</th>
                 <th scope="col">가격</th>
+                <th scope="col">등록자</th>
+                <th scope="col">등록일</th>
+                <th scope="col">상태</th>
             </thead>
             <tbody>
             <tr th:each="items : ${itemList}">

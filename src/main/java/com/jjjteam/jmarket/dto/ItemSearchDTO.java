@@ -24,7 +24,7 @@ public class ItemSearchDTO {
      */
     
  // 조회할 검색어를 저장할 변수
-//    private String searchQuery = "";
+    private String searchQuery = "";
     /*
     itemNm: 상품명 기준 검색
     createBy: 상품 등록자 아이디 검색
