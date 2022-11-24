@@ -8,6 +8,7 @@ import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserService;
+import com.jjjteam.jmarket.test.TestControllerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +35,14 @@ public class TestController {
 
 
 	private final UserService userService;
-	
-	
-	
-	@Autowired
-	RoleRepository roleRepository;
 
-	@Autowired
-	PasswordEncoder encoder;
+	private final RoleRepository roleRepository;
 
-	@Autowired
-	UserRepository userRepository;
+	private final TestControllerService testControllerService;
+
+	private final PasswordEncoder encoder;
+
+	private final UserRepository userRepository;
 
 	
 	@GetMapping("/addrole")
@@ -56,33 +54,18 @@ public class TestController {
 	}
 	@GetMapping("/addadmin")
 	public String addAdmin() {
-		Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        log.info("roles : {}", roles);
-        User user = User.builder()
-                .userId("admin")
-                .email("test@test.com")
-                .password(encoder.encode("admin"))
-                .roles(roles)
-                .userName("운영자")
-                .build();
-        userRepository.save(user);
-
+		testControllerService.addAdmin();
 		return "index";
 	}
-	
-	
-	@GetMapping("/test2")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public String totestPage2(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails)  {
-		model.addAttribute("model" , userDetails.getEmail());
-		return "test2";
+	@GetMapping("/addtest")
+	public String toAddTestUser()  {
+		testControllerService.addTestUser();
+		return "index";
 	}
+
 	@GetMapping("/test")
 	public String totestPage()  {
 		log.info(userService.returnRoleUserSet().toString());
-
 		return "test";
 	}
 
