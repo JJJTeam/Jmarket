@@ -1,13 +1,8 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,10 +11,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
-@Entity
+
 @Table(	name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "userid"),
@@ -29,24 +22,28 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @Builder
+@Entity
+@ToString
 public class User {  // 카멜표기법으로 , db저장은 스네이크 표기법
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
-    @Size(max = 20)
     private String userId;
-
-    @NotBlank
-    @Size(max = 50)
-    @Email
     private String email;
-
-    @NotBlank
-    @Size(max = 120)
     private String password;
+    private String userName;
 
+
+
+
+    private String userPhoneNumber;
+    private byte userSex;                   //성별
+    private LocalDate userBirthDate;             //회원생년월일
+    private Boolean userReceiveEmail;          //이메일수신여부
+    private Boolean userReceiveSms;            //문자수신여부
+    private Boolean userSmsCert;               // 문자 인증 여부
+    private LocalDateTime userRegisterDateTime; //회원가입시간
+//  private String UserRegisterIp;          //가입 ip
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -54,20 +51,20 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    private String userName;
-    private String userPhoneNumber;
-    private byte userSex;                   //성별
-    private LocalDate userBirthDate;             //회원생년월일
-    private byte userReceiveEmail;          //이메일수신여부
-    private byte userReceiveSms;            //문자수신여부
-    private byte userSmsCert;               // 문자 인증 여부
-    private LocalDateTime userRegisterDateTime; //회원가입시간
-//  private String UserRegisterIp;          //가입 ip
-
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-    @Builder.Default
+//    @Builder.Default
     private List<UserAddress> userAddresses = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+//    @Builder.Default
+    private List<Order> order = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<CartItem> cartItems = new ArrayList<>();
+
+
     public User() {
+
     }
 }

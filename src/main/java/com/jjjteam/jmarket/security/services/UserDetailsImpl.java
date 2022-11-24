@@ -37,13 +37,9 @@ public class UserDetailsImpl implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
-
-
     }
-
-
     public static UserDetailsImpl build(User user) {
-        
+
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());

@@ -6,9 +6,6 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     username: root
@@ -18,41 +15,21 @@ spring:
   multipart:
     maxFileSize: 20MB
     maxRequestSize: 100MB
-    
+  devtools:
+    restart:
+      enabled: true
 # itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
 # uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
-itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
-uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
+itemImgLocation: /Users/admin/projects/upload/shop/items # C:/item
+uploadPath: file:///Users/admin/projects/upload/shop/items  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
-#  file:
-#    path: logs
   level:
     root: info
     com:
       jjjteam:
         jmarket: trace
-#    root: trace
-
-bezkoder:
-  app:
-    jwtSecret: bezKoderSecretKey
-    jwtExpirationMs: 3600000
-    jwtRefreshExpirationMs: 86400000
-    jwtCookieName: bezkoder-jwt
-    jwtRefreshCookieName: bezkoder-jwt-refresh
-
-
-## App Properties
-#  bezkoder.app.jwtSecret= bezKoderSecretKey
-#  #bezkoder.app.jwtExpirationMs= 3600000
-#  #bezkoder.app.jwtRefreshExpirationMs= 86400000
-#
-#  ## For test
-#  bezkoder.app.jwtExpirationMs= 60000
-#  bezkoder.app.jwtRefreshExpirationMs= 120000
-
 
 ---
 logging:
@@ -66,6 +43,7 @@ spring:
   config:
     activate:
       on-profile: sujin
+
   servlet:
     multipart:
       max-file-size: 50MB
@@ -76,9 +54,8 @@ spring:
       ddl-auto: create
     show-sql: true
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarketsujin
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     
-
 
 ---
 logging:
@@ -90,15 +67,31 @@ spring:
       on-profile: jungho
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: false
+      ddl-auto: update
+    show-sql: true
 
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
 
 
 ---
+logging:
+ level:
+  root: info
+
+server:
+  port: 8083
+  
 spring:
   config:
     activate:
-      on-profile: name2
+      on-profile: taekbu
+      
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+
+  datasource:
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/board_jtb
+

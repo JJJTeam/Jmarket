@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.repository.ItemRepository;
 
@@ -24,9 +23,19 @@ public class ItemRepositoryTest {
                 .itemNm("테스트 상품")
                 .price(10000)
                 .itemDetail("테스트 상품 상세설명")
-                .itemSellStatus(ItemSellStatus.SELL)
                 .stockNumber(100)
                 .build();
+    	
+//    	Item item = new Item();
+//    	item.setItemNm("벨트 울 코트");
+//    	item.setItemIntroduction("울 혼방 소재 코트. 버튼 탭이 달린 긴소매 라펠 칼라 디자인. 같은 소재의 벨트 디테일. 앞면 파이핑 포켓.");
+//    	item.setPrice(259000);
+//    	item.setStockNumber(10);
+//    	item.setItemDetail("");
+//    	item.setClothingItems("sweater");
+//    	item.setItemSize("테스트상품");
+//    	item.setItemColor("테스트상품");
+    	
         Item savedItem = itemRepository.save(item);
         System.out.println(savedItem.toString());
     }
