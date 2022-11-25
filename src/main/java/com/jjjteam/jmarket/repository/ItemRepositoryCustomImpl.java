@@ -1,6 +1,5 @@
 package com.jjjteam.jmarket.repository;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -124,7 +123,6 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 	private BooleanExpression itemNmLike(String searchQuery) {
 		return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemNm.like("%"+ searchQuery +"%");
 	}
-
 
 	@Override
 	public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
