@@ -77,7 +77,7 @@ public class Order extends BaseEntity{  // 카멜표기법으로 , db저장은 �
     
     public int getTotalPrice() {
     	int totalPrice = 0;
-    	for(OrderItem orderItem : orderItem) {
+    	for(OrderItem orderItem : orderItems) {
     		totalPrice += orderItem.getTotalPrice();
     	}
     	return totalPrice;
