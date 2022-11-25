@@ -41,7 +41,7 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
 
     //주문 가격과 주문 수량을 곱해서 해당 상품을 주문한 총 가격을 계산하는 메서드
     public int getTotalPrice(){
-        return orderPrice*count; // 총 가격: 주문가격*주문수량
+        return orderPrice * count; // 총 가격: 주문가격*주문수량
     }
 
     // Item 클래스에서 주문 취소 시 주문 수량을 상품의 재고에 더해주는 로직
