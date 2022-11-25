@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class MemberController {
+public class UserController {
 
 	private final UserService userService;
 	private final UserAddressService userAddressService;
