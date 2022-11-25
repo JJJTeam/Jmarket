@@ -1,56 +1,43 @@
 package com.jjjteam.jmarket.test;
 
 
-
 import com.jjjteam.jmarket.constant.ERole;
+import com.jjjteam.jmarket.constant.ValidText;
+import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextClosedEvent;
+import com.jjjteam.jmarket.util.Naver_Sens_V2;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
-//서버 시작, 종료할때 실행하는 메서드
+
 @Service
-public class TestService implements CommandLineRunner, ApplicationListener<ContextClosedEvent>, InitializingBean, DisposableBean {
+@Slf4j
+@RequiredArgsConstructor
+public class TestControllerService {
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final UserAddressRepository userAddressRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder encoder;
 
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    UserAddressRepository userAddressRepository;
-
-    @PostConstruct
-    private void init(){
-//                System.out.println("빈이 완전히 생성된 후에 한번 수행될 메서드에 붙입니다.");
-        roleRepository.save(new Role(ERole.ROLE_USER));
-        roleRepository.save(new Role(ERole.ROLE_MODERATOR));
-        roleRepository.save(new Role(ERole.ROLE_ADMIN));
-        // 권한내용을 DB에 넣어준다.
-//        User user = new User("test","test@test",encoder.encode("test"));
+    public void addTestUser(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
@@ -105,21 +92,21 @@ public class TestService implements CommandLineRunner, ApplicationListener<Conte
                         .build());
 
     }
-    @Override
-    public void run(String... args) throws Exception{
-//        System.err.println("인터페이스 구현 메서드, 에플리케이션이 한번 실행될때 한번 실행됩");
+
+    public void addAdmin(){
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        log.info("roles : {}", roles);
+        User user = User.builder()
+                .userId("admin")
+                .email("test@test.com")
+                .password(encoder.encode("admin"))
+                .roles(roles)
+                .userName("운영자")
+                .build();
+        userRepository.save(user);
     }
-    @Override
-    public  void onApplicationEvent(ContextClosedEvent event){
-//        System.err.println("ApplicationListener<ContextClosedEvent> 인터페이스 구현 메서드 입니다. '애플리케이션'이 죽었을 때 '한 번' 실행됩니다.");
-//        System.err.println("이벤트 발생 시간(timestamp) : " + event.getTimestamp());
-    }
-    @Override
-    public void afterPropertiesSet() throws Exception{
-//        System.err.println("InitializingBean 인터페이스 구현 메서드입니다. TestService 'Bean'이 생성될 때 마다 호출되는 메서드 입니다.");
-    }
-    @Override
-    public void destroy() throws Exception{
-//        System.err.println("DisposableBean 인터페이스 구현 메서드입니다. TestService 'Bean'이 소멸될 때 마다 호출되는 메서드입니다");
-    }
+
+
 }
