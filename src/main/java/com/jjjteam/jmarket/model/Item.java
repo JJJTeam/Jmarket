@@ -12,9 +12,12 @@ import com.jjjteam.jmarket.constant.ItemSize;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 
 import com.jjjteam.jmarket.exception.OutOfStockException;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 @ToString
@@ -22,7 +25,10 @@ import lombok.Builder;
 @Setter
 @Table(name="item")
 @Entity
-public class Item {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Item extends BaseEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -60,38 +66,37 @@ public class Item {
     @OneToMany(mappedBy = "item")
 	private List<ItemImg> itemImgs;
     
-    @Builder
-    public Item(
-    		String itemNm, 
-    		String itemIntroduction,
-    		int price, 
-    		int stockNumber, 
-    		String itemDetail, 
-    		ItemSellStatus itemSellStatus,
-    		ClothingItems clothingItems,
-    		ItemSize itemSize,
-    		ItemColor itemColor, 
-    		List<ItemImg> itemImgs) {
-        this.itemNm = itemNm;
-        this.itemIntroduction = itemIntroduction;
-        this.price = price;
-        this.stockNumber =stockNumber;
-        this.itemDetail = itemDetail;
-        this.itemSellStatus = itemSellStatus;
-        this.clothingItems = clothingItems;
-        this.itemSize = itemSize;
-        this.itemColor = itemColor;
-        this.itemImgs = itemImgs;
-    }
-    
-    public Item() {
-		// TODO Auto-generated constructor stub
-	}
+//    @Builder
+//    public Item(
+//    		String itemNm, 
+//    		String itemIntroduction,
+//    		int price, 
+//    		int stockNumber, 
+//    		String itemDetail, 
+//    		ItemSellStatus itemSellStatus,
+//    		ClothingItems clothingItems,
+//    		ItemSize itemSize,
+//    		ItemColor itemColor, 
+//    		List<ItemImg> itemImgs) {
+//        this.itemNm = itemNm;
+//        this.itemIntroduction = itemIntroduction;
+//        this.price = price;
+//        this.stockNumber =stockNumber;
+//        this.itemDetail = itemDetail;
+//        this.itemSellStatus = itemSellStatus;
+//        this.clothingItems = clothingItems;
+//        this.itemSize = itemSize;
+//        this.itemColor = itemColor;
+//        this.itemImgs = itemImgs;
+//    }
+//    
+//    public Item() {
+//		// TODO Auto-generated constructor stub
+//	}
 
 
 	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
-        this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();

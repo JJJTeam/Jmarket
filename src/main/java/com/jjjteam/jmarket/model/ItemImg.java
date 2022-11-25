@@ -9,7 +9,6 @@ import lombok.ToString;
 
 @Getter 
 @ToString
-@NoArgsConstructor
 @Table(name = "item_img")
 @Entity
 public class ItemImg {
@@ -44,5 +43,6 @@ public class ItemImg {
         this.imgName = imgName;
         this.imgUrl = imgUrl;
     }
+
 
 }
