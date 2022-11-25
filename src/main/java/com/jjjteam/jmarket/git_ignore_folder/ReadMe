@@ -4,6 +4,8 @@ git ignore에 등록된 폴더입니다.
 
 git ignore이 적용이 안되면 캐시삭제를 해주세요
 
+[명령어창 여는 법] : git크라켄 -> Terminal 클릭
+
 명령어
 // 캐시를 모두 삭제
 git rm -r --cached .
