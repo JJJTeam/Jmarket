@@ -2,17 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-	<style>
-		.ck-editor__editable {
-			height: 400px;
-		}
-
-		.ck-content {
-			font-size: 15px;
-		}
-	</style>
 </head>
 <body>
 <div th:replace="/include/header.html"></div>
@@ -174,21 +164,9 @@
 </div>
 
 
-
 <div th:replace="/include/footer.html"></div>
 
 
-
-<script
-		src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script
-		src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-
-<script>
-	ClassicEditor.create(document.querySelector('#editor'), {
-		language : "ko"
-	});
-</script>
 
 <!-- 사용자 스크립트 추가 -->
 <script th:inline="javascript">
