@@ -9,7 +9,6 @@ import lombok.ToString;
 
 @Getter 
 @ToString
-@NoArgsConstructor
 @Table(name = "item_img")
 @Entity
 public class ItemImg {
@@ -30,19 +29,20 @@ public class ItemImg {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @Builder
-    public ItemImg(String imgName, String oriImgName, String imgUrl, String repimgYn, Item item) {
-        this.imgName = imgName;
-        this.oriImgName = oriImgName;
-        this.imgUrl = imgUrl;
-        this.repimgYn = repimgYn;
-        this.item = item;
-    }
+//    @Builder
+//    public ItemImg(String imgName, String oriImgName, String imgUrl, String repimgYn, Item item) {
+//        this.imgName = imgName;
+//        this.oriImgName = oriImgName;
+//        this.imgUrl = imgUrl;
+//        this.repimgYn = repimgYn;
+//        this.item = item;
+//    }
 
     public void updateItemImg(String oriImgName, String imgName, String imgUrl) {
         this.oriImgName = oriImgName;
         this.imgName = imgName;
         this.imgUrl = imgUrl;
     }
+
 
 }

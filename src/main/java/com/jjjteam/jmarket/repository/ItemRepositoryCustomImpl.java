@@ -13,6 +13,7 @@ import org.thymeleaf.util.StringUtils;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
+import com.jjjteam.jmarket.dto.QItemListDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.QItem;
 import com.jjjteam.jmarket.model.QItemImg;
