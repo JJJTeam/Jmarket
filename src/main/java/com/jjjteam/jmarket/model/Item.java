@@ -97,7 +97,6 @@ public class Item extends BaseEntity {
 
 	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
-        this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();

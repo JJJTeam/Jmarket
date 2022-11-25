@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,7 @@ public class ItemController {
 	
 	// 기존
 	@GetMapping("/item/itemForm")
+	@Secured("ROLE_ADMIN")
 	public String itemForm(Model model) {
 		model.addAttribute("itemFormDTO", new ItemFormDTO());
 		return "item/itemForm";
@@ -84,7 +86,7 @@ public class ItemController {
 	
 	
 	//상품 상세보기
-	@GetMapping(value = "/item/{itemId}")
+	@GetMapping(value = "/item/itemList/{itemId}")
     public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
 
         try {
