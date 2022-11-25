@@ -14,12 +14,12 @@ import org.springframework.data.repository.query.Param;
  * */
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-	@Query("select o from Order o " + "where o.user.email = :email " + "order by o.orderDate desc")
-	
-	//현재로그인한 사용자의 주문데이터를 페이징 조건에 맞춰서 조회 
-	List<Order> findOrders(@Param("email") String email, Pageable pageable );
-	
-	//현재 로그인한 회원의 주문개수가 몇 개인지 조회
-	Long countOrder(@Param("email") String email);
+//	@Query("select o from Order o " + "where o.user.email = :email " + "order by o.orderDate desc")
+//	
+//	//현재로그인한 사용자의 주문데이터를 페이징 조건에 맞춰서 조회 
+//	List<Order> findOrders(@Param("email") String email, Pageable pageable );
+//	
+//	//현재 로그인한 회원의 주문개수가 몇 개인지 조회
+//	Long countOrder(@Param("email") String email);
 	
 }

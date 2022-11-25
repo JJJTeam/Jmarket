@@ -79,18 +79,17 @@ public class OrderController {
 	
 	
 	//구매이력을 조회하는 호출하는 메서드
-	@GetMapping(value = {"/orders", "/orders/{page}"})
-    public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model){
-
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
-        Page<OrderHistDTO> ordersHistDtoList = orderService.getOrderList(principal.getName(), pageable);
-
-        model.addAttribute("orders", ordersHistDtoList);
-        model.addAttribute("page", pageable.getPageNumber());
-        model.addAttribute("maxPage", 5);
-
-        return "order/orderHist";
-    }
+//	@GetMapping(value= {"/orders", "orders/{page}"})
+//	public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model) {
+//		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,4);
+//		
+//		Page<OrderHistDTO> ordersHistDTOList = orderService.getOrderList(principal.getName(), pageable);
+//		model.addAttribute("orders", ordersHistDTOList);
+//		model.addAttribute("page", pageable.getPageNumber());
+//		model.addAttribute("maxPage",5);
+//		
+//		return "order/orderHist";
+//	}
 	
 	
 	
