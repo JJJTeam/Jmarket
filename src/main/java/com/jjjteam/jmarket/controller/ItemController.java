@@ -121,11 +121,15 @@ public class ItemController {
 	
 	@GetMapping(value={"/item/itemList" , "/item/itemList/{page}"})
 	public String ToItemList(ItemSearchDTO itemSearchDTO, @PathVariable("page") Optional<Integer> page, Model model) {
+		// 한 페이지 당 3개만 보여줄거임
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
-        Page<Item> items = itemService.getAdminItemPage(itemSearchDTO, pageable);
-        model.addAttribute("items", items);
-        model.addAttribute("itemSearchDTO", itemSearchDTO);
-        model.addAttribute("maxPage", 5);
+		// 0: 조회할 페이지 번호, 3: 한 번에 가지고 올 데이터 수
+        // url 에 페이지 번호가 있으면은 그 페이지를 보여주고, url 에 번호가 없으면 0 페이지 보여줌
+		
+		Page<Item> items = itemService.getAdminItemPage(itemSearchDTO, pageable);
+        model.addAttribute("items", items); // item: 조회한 상품 데이터
+        model.addAttribute("itemSearchDTO", itemSearchDTO); // 페이지 전환 시 기존 검색 조건을 유지한 채 이동할 수 있게 뷰에 전달
+        model.addAttribute("maxPage", 5); // 최대 5개의 이동할 페이지 번호를 보여줌줌
         return "item/itemList";
 	}
 
