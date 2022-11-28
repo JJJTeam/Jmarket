@@ -132,17 +132,17 @@ public class HomeController {
 	}
 
 	// index 뷰로 가기
-	@GetMapping(value = "/index2")
-	public String main(ItemSearchDTO itemSearchDTO, Optional<Integer> page, Model model) {
-		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
-		// 0: 조회할 페이지 번호, 3: 한 번에 가지고 올 데이터 수
-		// url 에 페이지 번호가 있으면은 그 페이지를 보여주고, url 에 번호가 없으면 0 페이지 보여줌
-
-		Page<ItemListDTO> items = itemService.getMainItemPage(itemSearchDTO, pageable);
-		model.addAttribute("items", items); // item: 조회한 상품 데이터
-		model.addAttribute("itemSearchDTO", itemSearchDTO); // 페이지 전환 시 기존 검색 조건을 유지한 채 이동할 수 있게 뷰에 전달
-		model.addAttribute("maxPage", 5); // 최대 5개의 이동할 페이지 번호를 보여줌줌
-		return "index";
-	}
+//	@GetMapping(value = "/index2")
+//	public String main(ItemSearchDTO itemSearchDTO, Optional<Integer> page, Model model) {
+//		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
+//		// 0: 조회할 페이지 번호, 3: 한 번에 가지고 올 데이터 수
+//		// url 에 페이지 번호가 있으면은 그 페이지를 보여주고, url 에 번호가 없으면 0 페이지 보여줌
+//
+//		Page<ItemListDTO> items = itemService.getMainItemPage(itemSearchDTO, pageable);
+//		model.addAttribute("items", items); // item: 조회한 상품 데이터
+//		model.addAttribute("itemSearchDTO", itemSearchDTO); // 페이지 전환 시 기존 검색 조건을 유지한 채 이동할 수 있게 뷰에 전달
+//		model.addAttribute("maxPage", 5); // 최대 5개의 이동할 페이지 번호를 보여줌줌
+//		return "index";
+//	}
 
 }
