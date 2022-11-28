@@ -1,8 +1,112 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		calculateToalPrice();
+		$("#count").change(function() {
+			calculateToalPrice();
+		});
+	});
+
+	function calculateToalPrice() {
+		var count = $("#count").val();
+		var count = $("#price").val();
+		var totalPrice = price * count;
+		$("#totalPrice").html(totalPrice + "원 ");
+
+	}
+
+	function calculateTotalPrice() {
+		var count = $("#count").val();
+		var price = $("#price").val();
+		var totalPrice = price * count;
+		$("#totalPrice").html(totalPrice + "원 ");
+	}
+
+	function order() {
+		//스프링 시큐리티를 사용할 경우 기본적으로 POST방식의 데이터 전송에는 CSRF 토큰 값이 필요하므로 해당 값들을 조회 
+		var token = $("meta[name=_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
+		var url = "/order";
+		// 주문 할 상품의 아이디와 주문수량 데이터를 전달할 객체를 생성
+		var paramData = {
+			itemId : $("#itemId").val(),
+			count : $("#count").val()
+		};
+
+		//서버에 보낼 주문 데이터를 json으로 지정
+		var param = JSON.stringify(paramData);
+
+		$.ajax({
+			url : url,
+			type : "POST",
+			//서버에 데이터를 보낼 형식을 json으로 지정 합니다.
+			contentType : "application/json",
+			data : param,
+			beforSend : function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			dataType : "json",
+			cache : false,
+			success : function(result, status) {
+				alert("주문이 완료되었습니다. ");
+				location.href = "/";
+			},
+			error : function(jqXHR, status, error) {
+				if (jqXHR.status == '401') {
+					alert("로그인후 이용해주세요.");
+					location.href = "/login";
+				} else {
+					alert(jqXHR.responseText);
+				}
+			}
+		});
+	}
+
+	function addCart() {
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf']").attr("content");
+
+		var url = "/cart";
+		var paramData = {
+			itemId : $("#itemId").val(),
+			count : $("#count").val()
+		};
+
+		var param = JSON.stringify(paramData);
+
+		$.ajax({
+			url : url,
+			type : "POST",
+			contentType : "application/json",
+			data : param,
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			dataType : "json",
+			cache : false,
+			success : function(result, status) {
+				alert("상품을 장바구니에 담았습니다.");
+				location.href = "/";
+			},
+			error : function(jqXHR, status, error) {
+				if (jqXHR.status == '401') {
+					alert("로그인 후 이용해주세요 ");
+					location.href = "/users/login";
+				} else {
+					alert(jqXHR.responseText);
+				}
+
+			}
+		})
+
+	}
+</script>
 </head>
 <body>
 	<div th:replace="/include/header.html"></div>
@@ -44,7 +148,7 @@
 					<h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
 				</div>
 				<div
-					th:if="${item.itemSellStatus == T(kr.co.codewiki.shoppingmall.constant.ItemSellStatus).SELL}"
+					th:if="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
 					class="text-right">
 					<button type="button"
 						class="btn btn-light border border-primary btn-lg"
@@ -59,7 +163,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div th:replace="/include/footer.html"></div>
+	<div th:replace="/include/footer.html"></div>
 </body>
 </html>
