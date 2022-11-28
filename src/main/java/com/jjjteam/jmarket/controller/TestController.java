@@ -1,6 +1,7 @@
 package com.jjjteam.jmarket.controller;
 
 import com.jjjteam.jmarket.constant.ERole;
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
@@ -62,6 +63,11 @@ public class TestController {
 	@GetMapping("/test")
 	public String totestPage()  {
 		return "test";
+	}
+	@GetMapping("/testadditem")
+	public String totestitemadd(Model model)  {
+		model.addAttribute("itemFormDTO", new ItemFormDTO());
+		return "test/itemForm";
 	}
 
 	@PostMapping("/test")

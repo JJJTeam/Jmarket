@@ -1,5 +1,6 @@
 package com.jjjteam.jmarket.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class ItemController {
@@ -49,6 +51,10 @@ public class ItemController {
 	@PostMapping(value="/item/itemForm")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+		log.info("ItemFormDTO : {}",itemFormDTO);
+		log.info("itemImgFileList : {}",itemImgFileList);
+		itemImgFileList.stream().forEach(x->log.info("{}",x));
+
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		if (bindingResult.hasErrors()) {
 			System.out.println("@@@@@@@@@@@@@@@@@ 1번째 오류 @@@@@@@@@@@@@@@@@@");
