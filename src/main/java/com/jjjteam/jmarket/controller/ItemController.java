@@ -44,7 +44,8 @@ public class ItemController {
 		model.addAttribute("itemFormDTO", new ItemFormDTO());
 		return "item/itemForm";
 	}
-
+	
+	
 	@PostMapping(value="/item/itemForm")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
@@ -73,9 +74,6 @@ public class ItemController {
 		return "redirect:/";
 
 	}
-	
-
-	
 	
 	
 	//상품 상세보기
@@ -128,8 +126,8 @@ public class ItemController {
 		// 0: 조회할 페이지 번호, 3: 한 번에 가지고 올 데이터 수
         // url 에 페이지 번호가 있으면은 그 페이지를 보여주고, url 에 번호가 없으면 0 페이지 보여줌
 		
-		Page<Item> items = itemService.getAdminItemPage(itemSearchDTO, pageable);
-        model.addAttribute("items", items); // item: 조회한 상품 데이터
+		Page<Item> items = itemService.getAdminItemPage(itemSearchDTO, pageable); // itemSearchDto: 조회 조건 pageable: 페이징 정보
+        model.addAttribute("items", items); // item: 조회한 상품 데이터 
         model.addAttribute("itemSearchDTO", itemSearchDTO); // 페이지 전환 시 기존 검색 조건을 유지한 채 이동할 수 있게 뷰에 전달
         model.addAttribute("maxPage", 5); // 최대 5개의 이동할 페이지 번호를 보여줌줌
         return "item/itemList";
