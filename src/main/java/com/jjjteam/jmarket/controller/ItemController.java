@@ -101,7 +101,7 @@ public class ItemController {
     }
 	
 	//상품 수정?
-//	@GetMapping(value = "/item/{itemId}")
+//	@PostMapping(value = "/item/itemList/{itemId}")
 //    public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult
 //            , @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model) {
 //
@@ -115,7 +115,7 @@ public class ItemController {
 //        }
 //
 //        try {
-//            itemService.saveItem(itemFormDTO, itemImgFileList);
+//            itemService.updateItem(itemFormDTO, itemImgFileList); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
 //        } catch (Exception e) {
 //            model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
 //            return "item/itemForm";
