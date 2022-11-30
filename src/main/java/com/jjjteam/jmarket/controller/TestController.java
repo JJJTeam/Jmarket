@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.controller;
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
+import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.service.UserService;
@@ -16,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,6 +47,7 @@ public class TestController {
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         return "index";
 	}
+	
 	@GetMapping("/addadmin")
 	public String addAdmin() {
 		testControllerService.addAdmin();
@@ -65,9 +70,11 @@ public class TestController {
 		userService.registerUser(userDTO);
 		return "/index";
 	}
-
-
-
+	
+	
+	
+	
+	
 
 
 }
