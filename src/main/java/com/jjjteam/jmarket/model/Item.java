@@ -30,7 +30,7 @@ import lombok.Builder;
 @Builder
 public class Item extends BaseEntity {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "item_id")
     private Long id; //상품 코드
 
