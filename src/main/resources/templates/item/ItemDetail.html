@@ -126,6 +126,7 @@
 					th:unless="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
 					class="badge btn-danger mgb-15"> 품절 </span>
 				<div class="h4" th:text="${item.itemNm}"></div>
+				<div class="h6" th:text="${item.itemIntroduction}"></div>		
 				<hr class="my-4">
 
 				<div class="text-right">
