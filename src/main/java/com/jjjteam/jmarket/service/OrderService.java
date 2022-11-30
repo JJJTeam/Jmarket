@@ -81,6 +81,7 @@ public class OrderService {
    }
    
    
+   
    @Transactional(readOnly=true)
    public boolean validateOrder(Long orderId, String email) {
 	   User curUser = userRepository.findByEmail(email);
@@ -93,11 +94,16 @@ public class OrderService {
 	   return true;	
    }
    
+   
+   
   
    public void cancelOrder(Long orderId){
        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
        order.cancelOrder();
    }
+   
+   
+   
    
    public Long orders(List<OrderDTO> orderDTOList, String email) {
 	   User user = userRepository.findByEmail(email);

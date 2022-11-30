@@ -56,8 +56,9 @@ spring:
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
     
-
 ---
+
+
 logging:
   level:
     root: info
