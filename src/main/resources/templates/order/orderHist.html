@@ -17,6 +17,8 @@
 	  var header = $("meta[name='_csrf_header']").attr("content");
 	  
 	  var url = "/order/" + orderId + "/cancel";
+	 
+	  // 취소할 주문번호를  파라미터로 넘겨줌
 	  var paramData = {
 			  orderId: orderId,
 	  };
@@ -35,6 +37,7 @@
 		  cache : false,
 		  success : function(result, status){
 			  alert("주문이 취소 되었습니다.");
+			  // 주문이 정상적으로 취소됐으면 리다이렉트로 현재페이지로 이동  
 			  location.href='/order/' + [[${page}]]; 
 		  },
 		  error : function(jqXHR, status, error){
