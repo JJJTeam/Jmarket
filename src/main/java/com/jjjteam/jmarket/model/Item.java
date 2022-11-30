@@ -1,3 +1,4 @@
+
 package com.jjjteam.jmarket.model;
 
 import java.util.List;
