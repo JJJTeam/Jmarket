@@ -12,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jjjteam.jmarket.dto.CartDetailDTO;
 import com.jjjteam.jmarket.dto.CartItemDTO;
 import com.jjjteam.jmarket.service.CartService;
 
@@ -55,6 +58,16 @@ public class CartController {
 		//결과값으로 생성된 장바구니 상품 아이디와 요쳥이 성공하였다는 HTTP 응답상태코드를 반환
 		return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
 	}
+	
+	
+	@GetMapping(value = "/cart")
+    public String orderHist(Principal principal, Model model){
+        List<CartDetailDTO> cartDetailList = cartService.getCartList(principal.getName());
+        model.addAttribute("cartItems", cartDetailList);
+        return "cart/cartList";
+    }
+	
+	
 	
 	
 	
