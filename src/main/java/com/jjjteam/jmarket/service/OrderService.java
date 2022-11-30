@@ -81,9 +81,10 @@ public class OrderService {
    }
    
    
-   
+   //주문취소하는 로직 
    @Transactional(readOnly=true)
    public boolean validateOrder(Long orderId, String email) {
+	  //현재로그인한 사용자와 주문자와 동일한지 검사 같을때는 true 반환
 	   User curUser = userRepository.findByEmail(email);
 	   Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
 	   User saveUser = order.getUser();
@@ -96,7 +97,7 @@ public class OrderService {
    
    
    
-  
+  //주문 취소상태로 변경하면 변경감지에 의해서 트랜잭션이 끝날 때 update 쿼리가 실행
    public void cancelOrder(Long orderId){
        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
        order.cancelOrder();
