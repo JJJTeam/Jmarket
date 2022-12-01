@@ -46,9 +46,10 @@
 					<!-- 이제 얘네가 반복문으로 데이터 출력함-->
 					<tr th:each="item, status: ${items.getContent()}">
 						<td th:text="${item.id}"></td>
-						<td><a th:href="'/item/'+${item.id}"	th:text="${item.itemNm}"></a></td>
-<!--						<td th:text="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL} ? '판매중' : '품절' "></td>-->
-						<td th:text="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)} ? '판매중' : '품절'"></td>
+						<td><a th:href="'/item/'+${item.id}"
+							th:text="${item.itemNm}"></a></td>
+						<td
+							th:text="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)} ? '판매중' : '품절'"></td>
 						<td th:text="${item.createdBy}">[구현중]</td>
 						<td th:text="${item.regTime}">[구현중]</td>
 						<td><a th:href="'item/itemList/'+${item.id}">수정</a></td>

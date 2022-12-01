@@ -27,8 +27,9 @@
 
 		<div class="d-flex detail-mt-md">
 			<div class="repImgDiv">
-				<!-- <img th:src="${item.itemImgDtoList[0].imgUrl}"
-					class="rounded repImg" th:alt="${item.itemNm}"> -->
+				<img th:src="${item.itemImgDtoList[0].imgUrl}"
+					class="rounded repImg" th:alt="${item.itemNm}">
+				
 			</div>
 			<div class="wd50">
 				<span
@@ -37,7 +38,7 @@
 					th:unless="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
 					class="badge btn-danger mgb-15"> 품절 </span>
 				<div class="h4" th:text="${item.itemNm}"></div>
-				<div class="h6" th:text="${item.itemIntroduction}"></div>
+				<div class="h7" th:text="${item.itemIntroduction}"></div>		
 				<hr class="my-4">
 
 				<div class="text-right">
