@@ -32,12 +32,17 @@ public class ItemImgService {
 		// 파일 업로드
 		if (!StringUtils.isEmpty(oriImgName)) {
 			imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
-			imgUrl = "C:/upload/shop/items/" + imgName;
-//			imgUrl = "/images/item/" + imgName;
+			imgUrl = "/images/item/" + imgName;
 			
 			// 상품 이미지 정보 저장
 			itemImg.updateItemImg(oriImgName, imgName, imgUrl);
 			itemImgRepository.save(itemImg);
+			
+			/*
+	        imgName : 실제 로컬에 저장된 상품 이미지 파일 이름
+	        oriImgName : 업로드했던 상품 이미지 파일 초기 이름
+	        imgUrl : 업로드 결과 로컬에 저장된 상품 이미지 파일을 불러올 경로
+	         */
 		}
 	}
 	

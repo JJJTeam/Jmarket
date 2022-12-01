@@ -25,7 +25,7 @@ spring:
 #uploadPath: file:///Users/admin/projects/upload/shop/items  #file:///C:/shop/
 
 itemImgLocation: /C:/upload/shop/items # C:/item
-uploadPath: file:///C:/upload/shop/items  #file:///C:/shop/
+uploadPath: file:///C:/upload/shop/  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
