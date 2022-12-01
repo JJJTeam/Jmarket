@@ -39,7 +39,7 @@ public class CartService {
 	
 	//카트추가하기
 	public Long addCart(CartItemDTO cartItemDTO, Long id ) { //징바구니에 담을 상품 엔티티를 조회
-		System.out.println("빨리 밥 먹고 싶다 @@@@@@@ㅋㅋㅋㅋㅋ");
+		System.out.println("@@@@@@@ㅋㅋㅋㅋㅋ");
 		Item item =itemRepository.findById(cartItemDTO.getItemId()).get();
 		System.out.println("item 111111:::  "  + item);
 		User user = userRepository.findById(id).orElseThrow(); //현재 로그인한 회원 엔티티 조회
@@ -55,9 +55,7 @@ public class CartService {
 		}
 		log.info(" cart2 : {}", cart);
 		
-//		//현재상품이 장바구니에 들어갔는지 확인
-//		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
-
+		//현재상품이 장바구니에 들어갔는지 확인
 		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
 		if(savedCartItem != null) {
 			savedCartItem.addCount(cartItemDTO.getCount());//장바구니에 있던 상품일 경우 기존 수량에 현재 장바구니에 담을 수량 만큼 더해준다.
@@ -71,7 +69,7 @@ public class CartService {
 		}
 	}
 	
-	
+	 //장바구니 뿌려주는 로직
 	   @Transactional(readOnly = true)
 	    public List<CartDetailDTO> getCartList(Long id){
 
