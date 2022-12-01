@@ -50,6 +50,9 @@ public class Item extends BaseEntity {
     @Lob
     @Column(nullable = false)
     private String itemDetail;  //상품 상세설명
+    
+    @Column(nullable = false)
+    private String repimg;  //상품 상세설명
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;  //상품 판매상태

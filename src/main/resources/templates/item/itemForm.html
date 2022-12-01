@@ -11,9 +11,21 @@
 
 
 	<div class="container container-mt">
+		<p class="h2">상품 등록</p>
+		<hr>
+		<br>
+		<div>
+			<h4>대표이미지</h4>
+			<img id="tartgetImg">
+		</div>
+		<br>
+		<button onclick="openTextFile()">Image File Open</button>
+
+		<br>
+		<hr>
+
 		<form method="post" enctype="multipart/form-data"
 			th:object="${itemFormDTO}">
-			<p class="h2">상품 등록</p>
 			<div style="margin-bottom: 25px;"></div>
 			<input type="hidden" th:field="*{id}">
 
@@ -135,6 +147,8 @@
 				</div>
 			</div>
 
+
+
 			<!-- </div>  -->
 
 			<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 수정할 수 있게 밑의 코드가 출력됨 -->
@@ -158,6 +172,7 @@
 			</div>
 
 		</form>
+
 	</div>
 
 
@@ -178,7 +193,6 @@
 			tabsize : 2,
 			height : 300
 		});
-
 	</script>
 	<script th:inline="javascript">
 		function bindDomEvent() {
@@ -201,6 +215,39 @@
 						// label 태그 안의 내용을 jquery 의 html 함수를 이용해서 파일명을 입력해준다.
 						$(this).siblings(".custom-file-label").html(fileName);
 					});
+		}
+	</script>
+	<script>
+		function openTextFile() {
+			var input = document.createElement("input");
+
+			input.type = "file";
+			input.accept = "image/*";
+			input.id = "uploadInput";
+
+			input.click();
+			input.onchange = function(event) {
+				processFile(event.target.files[0]);
+			};
+
+		}
+
+		function processFile(file) {
+			var reader = new FileReader();
+			alert(reader.result)
+
+			reader.onload = function() {
+
+				var result = reader.result;
+
+				alert(reader.result)
+				// output.innerText = result
+
+				document.getElementById('tartgetImg').setAttribute('src',
+						result);
+
+			};
+			reader.readAsDataURL(file);
 		}
 	</script>
 
