@@ -2,6 +2,7 @@ package com.jjjteam.jmarket.service;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,13 +28,16 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 @Transactional
 @Service
+@Slf4j
 public class ItemService {
 	private final ItemRepository itemRepository;
 	private final ItemImgService itemImgService;
 	private final ItemImgRepository itemImgRepository;
 
 
-	public Long saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
+//	public Long saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
+	public void saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
+		log.info("itmeDTO : {}",itemFormDTO.toString());
 //		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ saveItem 서비스 시작@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		// 상품 등록
@@ -57,7 +61,8 @@ public class ItemService {
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i)); // 리스트 형태로 이미지들 저장
         }
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이미지 등록 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		return item.getId();
+		log.info("item : {}", item.toString());
+//		return item.getId();
 	}
 	
 	// 상품 수정하기를 위한 service
