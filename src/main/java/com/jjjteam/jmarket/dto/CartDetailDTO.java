@@ -2,10 +2,11 @@ package com.jjjteam.jmarket.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter 
 @Setter
-
+@ToString
 public class CartDetailDTO {
 
     private Long cartItemId; //장바구니 상품 아이디
@@ -16,14 +17,14 @@ public class CartDetailDTO {
 
     private int count; //수량
 
-    private String imgUrl; //상품 이미지 경로
+    //private String imgUrl; //상품 이미지 경로
 
-    public CartDetailDTO(Long cartItemId, String itemNm, int price, int count, String imgUrl){
+    public CartDetailDTO(Long cartItemId, String itemNm, int price, int count){
         this.cartItemId = cartItemId;
         this.itemNm = itemNm;
         this.price = price;
         this.count = count;
-        this.imgUrl = imgUrl;
+        //this.imgUrl = imgUrl;
     }
 
 }

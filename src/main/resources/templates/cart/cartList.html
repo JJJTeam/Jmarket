@@ -10,6 +10,7 @@
 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 </head>
 
 <style>
@@ -39,7 +40,7 @@
 <body>
  <script th:inline="javascript">
     
-    //주문할 상품을 체크하거나 해제할 경ㅇ 총 주문 금액을 구하는 함수를 호출
+    //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
             $("input[name=cartChkBox]").change( function(){
                 getOrderTotalPrice();
@@ -280,9 +281,9 @@
                     <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
                 </td>
                 <td class="d-flex">
-                    <div class="repImgDiv align-self-center">
+                  <!--   <div class="repImgDiv align-self-center">
                         <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
-                    </div>
+                    </div> -->
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
                         <div class="fs18 font-weight-light">
