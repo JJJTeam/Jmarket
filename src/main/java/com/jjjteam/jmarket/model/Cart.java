@@ -12,11 +12,13 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Table(name="cart")
 @Entity
+@ToString
 public class Cart extends BaseEntity {
   @Id
   @Column(name="cart_id")
@@ -24,7 +26,7 @@ public class Cart extends BaseEntity {
   private Long id;
   
   @OneToOne(fetch= FetchType.LAZY)
-  @JoinColumn(name= "member_id")
+  @JoinColumn(name= "user_id")
   private User user;
   
   public static Cart createCart(User user) {

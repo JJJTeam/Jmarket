@@ -10,6 +10,7 @@
 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 </head>
 
 <style>
@@ -39,7 +40,7 @@
 <body>
  <script th:inline="javascript">
     
-    //주문할 상품을 체크하거나 해제할 경ㅇ 총 주문 금액을 구하는 함수를 호출
+    //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
             $("input[name=cartChkBox]").change( function(){
                 getOrderTotalPrice();
