@@ -45,8 +45,11 @@ public class ItemController {
 
 	// 상품등록 post
 	@PostMapping(value = "/item/itemForm")
-	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model,
+	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult,
+			Model model, String repimg2,
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+		log.info("itmeDTO : {}",itemFormDTO.toString());
+		log.info("repimg2 : {}",repimg2);
 		System.out.println(
 				"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		if (bindingResult.hasErrors()) {

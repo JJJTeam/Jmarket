@@ -28,6 +28,9 @@
 			th:object="${itemFormDTO}">
 			<div style="margin-bottom: 25px;"></div>
 			<input type="hidden" th:field="*{id}">
+			<input type="hidden" id="repimg" name="repimg">
+			<input type="text" id="repimg2" name="repimg2">
+			
 
 			<div class="form-group">
 				품목 : <select th:field="*{clothingItems}" class="custom-select">
@@ -241,7 +244,11 @@
 				var result = reader.result;
 
 				alert(reader.result)
-				// output.innerText = result
+				//repimg.innerText = result
+				$("#repimg").html(result)
+				$("#repimg2").html(result)
+				$('input[name=repimg]').attr('value',result);
+				$('input[name=repimg2]').attr('value',result);
 
 				document.getElementById('tartgetImg').setAttribute('src',
 						result);

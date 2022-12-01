@@ -4,6 +4,7 @@ package com.jjjteam.jmarket.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Getter 
 @Setter
+@ToString
 public class ItemFormDTO {
 
 	private Long id;
@@ -39,7 +41,7 @@ public class ItemFormDTO {
 	private Integer stockNumber;
 
 //	@NotNull(message = "재고는 필수 입력 값입니다.")
-//	private String regimg;
+	private String repimg;
 	
 	private ItemSellStatus itemSellStatus;
 	
