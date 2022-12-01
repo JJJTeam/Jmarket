@@ -2,14 +2,12 @@ package com.jjjteam.jmarket.model;
 
 import javax.persistence.*;
 
-import lombok.Builder;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
 @Getter 
-@ToString
-@NoArgsConstructor
+@Setter
 @Table(name = "item_img")
 @Entity
 public class ItemImg {
@@ -30,19 +28,20 @@ public class ItemImg {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @Builder
-    public ItemImg(String imgName, String oriImgName, String imgUrl, String repimgYn, Item item) {
-        this.imgName = imgName;
-        this.oriImgName = oriImgName;
-        this.imgUrl = imgUrl;
-        this.repimgYn = repimgYn;
-        this.item = item;
-    }
+//    @Builder
+//    public ItemImg(String imgName, String oriImgName, String imgUrl, String repimgYn, Item item) {
+//        this.imgName = imgName;
+//        this.oriImgName = oriImgName;
+//        this.imgUrl = imgUrl;
+//        this.repimgYn = repimgYn;
+//        this.item = item;
+//    }
 
     public void updateItemImg(String oriImgName, String imgName, String imgUrl) {
         this.oriImgName = oriImgName;
         this.imgName = imgName;
         this.imgUrl = imgUrl;
     }
+
 
 }

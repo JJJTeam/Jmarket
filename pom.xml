@@ -86,8 +86,11 @@
 
 
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
-			<scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 
 
@@ -133,7 +136,8 @@
 			<!-- <version>3.0.4.RELEASE</version> -->
 		</dependency>
 
-		<!-- 화면으로부터 전달받은 DTO객체를 엔티티 객체로 변환하는 작업을 해야 하고, 엔티티 객체를 DTO 객체로 바꿔주는 작업 ??? -->
+		<!-- 화면으로부터 전달받은 DTO객체를 엔티티 객체로 변환하는 작업을 해야 하고, 엔티티 객체를 DTO 객체로 바꿔주는 작업 
+			??? -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
@@ -144,8 +148,8 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
-		
+
+
 		<!-- 쿼리 설정 dsl -->
 		<dependency>
 			<groupId>com.querydsl</groupId>
@@ -176,13 +180,20 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+
 
 
 	</dependencies>
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -199,9 +210,9 @@
 			<!--Qdomain -->
 			<!-- Querydsl 을 통해서 쿼리를 생성할 때 Qdomain 객체를 사용할 수 있음 -->
 			<plugin>
-				<groupId>org.bsc.maven</groupId>
-				<artifactId>maven-processor-plugin</artifactId>
-				<version>2.0.5</version>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
 				<executions>
 					<execution>
 						<goals>
@@ -209,19 +220,21 @@
 						</goals>
 						<configuration>
 							<outputDirectory>target/generated-sources/java</outputDirectory>
-							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 						</configuration>
 					</execution>
 				</executions>
-
-				<dependencies>
-					<dependency>
-						<groupId>com.mysema.maven</groupId>
-						<artifactId>apt-maven-plugin</artifactId>
-						<version>1.0.6</version>
-					</dependency>
-				</dependencies>
 			</plugin>
+
+
+
+			<!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> 
+				<version>2.0.5</version> <executions> <execution> <goals> <goal>process</goal> 
+				</goals> <configuration> <outputDirectory>target/generated-sources/java</outputDirectory> 
+				<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor> </configuration> 
+				</execution> </executions> <dependencies> <dependency> <groupId>com.mysema.maven</groupId> 
+				<artifactId>apt-maven-plugin</artifactId> <version>1.0.6</version> </dependency> 
+				</dependencies> </plugin> -->
 
 
 		</plugins>
