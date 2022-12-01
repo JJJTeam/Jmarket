@@ -79,10 +79,11 @@ public class CartController {
 	
 	@GetMapping(value = "/cart")
     public String orderHist(@AuthenticationPrincipal UserDetailsImpl principal, Model model){
-        List<CartDetailDTO> cartDetailList = cartService.getCartList(principal.getId());
-        System.out.println("getCartList @@@@ "+ cartDetailList);
-        model.addAttribute("cartItems", cartDetailList);
         
+		List<CartDetailDTO> cartDetailList = cartService.getCartList(principal.getId());
+        
+        model.addAttribute("cartItems", cartDetailList);
+        System.out.println("getCartList @@@@ "+ cartDetailList.toString());
         return "cart/cartList";
     }
 	
