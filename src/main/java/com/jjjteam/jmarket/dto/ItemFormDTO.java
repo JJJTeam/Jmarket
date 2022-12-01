@@ -38,8 +38,8 @@ public class ItemFormDTO {
 	@NotNull(message = "재고는 필수 입력 값입니다.")
 	private Integer stockNumber;
 
-	@NotNull(message = "재고는 필수 입력 값입니다.")
-	private String regimg;
+//	@NotNull(message = "재고는 필수 입력 값입니다.")
+//	private String regimg;
 	
 	private ItemSellStatus itemSellStatus;
 	
