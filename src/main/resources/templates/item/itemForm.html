@@ -28,10 +28,11 @@
 			th:object="${itemFormDTO}">
 			<div style="margin-bottom: 25px;"></div>
 			<input type="hidden" th:field="*{id}">
-			<input type="text" id="repimg" value="" th:filed="*{repimg}">
-			<!-- <input type="text" id="repimg2" name="*{repimg2}"> -->
+			<!-- <input type="text" id="repimg" value="" th:filed="*{repimg}">
 			<p th:if="${#fields.hasErrors('repimg')}" th:errors="*{repimg}"
-				class="fieldError">Incorrect data</p>
+				class="fieldError">Incorrect data</p> -->
+			<input type="text" id="repimg" name="repimg">
+			
 			
 
 			<div class="form-group">
