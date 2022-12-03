@@ -12,7 +12,7 @@ public class OrderItemDTO {
 	private String itemNm; //상품명
 	private int count; //주문수량 
 	private int orderPrice; //상품가
-	private String imgUrl; //상품이미지경로
+	//private String imgUrl; //상품이미지경로
 	
 	
 	
@@ -24,7 +24,7 @@ public class OrderItemDTO {
 		this.itemNm = orderItem.getItem().getItemNm();
 		this.count = orderItem.getCount();
 		this.orderPrice = orderItem.getOrderPrice();
-		this.imgUrl =imgUrl;
+		//this.imgUrl =imgUrl;
 	}
 	
 	

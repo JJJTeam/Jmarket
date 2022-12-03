@@ -114,18 +114,24 @@ public class CartController {
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
     }
     
+    
     @PostMapping(value = "/cart/orders")
     public @ResponseBody ResponseEntity orderCartItem(@RequestBody CartOrderDTO cartOrderDTO, @AuthenticationPrincipal UserDetailsImpl principal){
-
+    	System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 1 ");
         List<CartOrderDTO> cartOrderDtoList = cartOrderDTO.getCartOrderDTOList();
+        System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 1: cartOrderDtoList : " + cartOrderDtoList );
 
         if(cartOrderDtoList == null || cartOrderDtoList.size() == 0){
-            return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
+        	System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 2 ");
+        	return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
         }
-
+        System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭2 메서드 아래  ");
+        
+        
         for (CartOrderDTO cartOrder : cartOrderDtoList) {
             if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getId())){
-                return new ResponseEntity<String>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);
+            	System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 3 ");
+            	return new ResponseEntity<String>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);
             }
         }
 

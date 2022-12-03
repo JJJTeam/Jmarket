@@ -64,7 +64,6 @@ public class OrderController {
 	
 	
 	//구매이력을 조회하는 호출하는 메서드
-
 	@GetMapping(value= {"/orders", "/orders/{page}"})
 	public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model) {
 		

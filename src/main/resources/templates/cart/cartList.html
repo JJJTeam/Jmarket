@@ -146,24 +146,27 @@
             });
         }
 
-        
-        //결제부분
+       
         function orders(){
             console.log("주문하기 ");
             var url = "/cart/orders";
 
             var dataList = new Array();
             var paramData = new Object();
+         
 
             $("input[name=cartChkBox]:checked").each(function() {
                 var cartItemId = $(this).val();
                 var data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
+                
             });
 
             paramData['cartOrderDtoList'] = dataList;
 
+            console.log(dataList); //현재 리스트에 아무것도 안담김
+            
             var param = JSON.stringify(paramData);
 
             $.ajax({
@@ -236,7 +239,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
     <h2 class="mb-4">
-        장바구니 목록
+        장바구니 목록f
     </h2>
 
     <div>
