@@ -124,12 +124,12 @@ public class CartController {
         }
 
         for (CartOrderDTO cartOrder : cartOrderDtoList) {
-            if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getName())){
+            if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getId())){
                 return new ResponseEntity<String>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);
             }
         }
 
-        Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
+        Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getId());
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
     

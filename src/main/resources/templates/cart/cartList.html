@@ -148,35 +148,8 @@
 
         
         //결제부분
-        function orders(){      	
-        	const data = {
-        			
-        	}
-        	
-        	IMP.init("imp25587836");
-    		IMP.request_pay({
-    			pg : "kcp",
-    			pay_method : "kakao",
-    			merchant_uid : "11-00ddd00011",
-    			name : "",
-    			amount : 500,
-    			buyer_email : "peekaboo32@gmail.com",
-    			buyer_name : "angela",
-    			buyer_tel : "010-4242-4242",
-    			buyer_addr : "부산",
-    			buyer_postcode : "01181"
-    			
-    		}, function(rsp) { // callback
-    			if (rsp.success) {  
-    			} else {
-    				alert("결제실패햇습니다. ~_~_~_~_");
-    			}
-    		}); 
-        	
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-
-            //주문하기버튼클릭시 맵핑되는주소  => CartController 맵핑되는 주소
+        function orders(){
+            console.log("주문하기 ");
             var url = "/cart/orders";
 
             var dataList = new Array();
@@ -192,6 +165,30 @@
             paramData['cartOrderDtoList'] = dataList;
 
             var param = JSON.stringify(paramData);
+
+            $.ajax({
+                url      : url,
+                type     : "POST",
+                contentType : "application/json",
+                data     : param,
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("주문이 완료 되었습니다.");
+                    location.href='/orders';
+                },
+                error : function(jqXHR, status, error){
+
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/login';
+                    } else{
+                        alert(jqXHR.responseJSON.message);
+                    }
+
+                }
+            });
+        
            
             
            //아임포트 결제 api연결

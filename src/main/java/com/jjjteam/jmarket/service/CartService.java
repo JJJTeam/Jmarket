@@ -125,7 +125,7 @@ public class CartService {
 	        cartItemRepository.delete(cartItem);
 	    }
 
-	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, String email){
+	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, Long id){
 	        List<OrderDTO> orderDTOList = new ArrayList<>();
 
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
@@ -139,7 +139,8 @@ public class CartService {
 	            orderDTOList.add(orderDTO);
 	        }
 
-	        Long orderId = orderService.orders(orderDTOList, email);
+	        
+	        Long orderId = orderService.orders(orderDTOList, id);
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
 	            CartItem cartItem = cartItemRepository
 	                            .findById(cartOrderDTO.getCartItemId())
