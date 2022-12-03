@@ -97,9 +97,9 @@ public class CartService {
 	     * 현재로그인한 회원과 해당 장바구니 상품을 저장한 회원이 같은지 검사하는 로직
 	     * */
 	    @Transactional(readOnly = true)
-	    public boolean validateCartItem(Long cartItemId, String email){
+	    public boolean validateCartItem(Long cartItemId, Long id){
 	    	//현재로그인한회원조회
-	        User curUser = userRepository.findByEmail(email);
+	        User curUser = userRepository.findById(id).get();
 	       //장바구니 상품을 저장한 회원을 조회
 	        CartItem cartItem = cartItemRepository.findById(cartItemId)
 	                .orElseThrow(EntityNotFoundException::new);
