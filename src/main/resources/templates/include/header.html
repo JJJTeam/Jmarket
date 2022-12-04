@@ -44,13 +44,18 @@
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                 <li></li>
                 <li><a href="/item/itemList" class="nav-link px-2 text-white">상품목록</a></li>
-                <li></li>
+               
+                 <li><a href="/cart" class="nav-link px-2 text-white" sec:authorize="isAuthenticated()">장바구니</a></li>
+                  <li><a href="/orders" class="nav-link px-2 text-white" sec:authorize="isAuthenticated()">구매이력</a></li>
+                 
                 <li><a href="/index2" class="nav-link px-2 text-white">상품목록2</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
             </form>
+            
+            
             <span sec:authorize="hasRole('ROLE_USER')">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">

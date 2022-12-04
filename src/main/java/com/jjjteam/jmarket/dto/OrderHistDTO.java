@@ -29,7 +29,7 @@ public class OrderHistDTO {
 	}
 	
 
-	private Long orderId; //주문아이
+	private Long orderId; //주문아이디
 	private String orderDate; //주문 날짜 
 	private OrderStatus orderStatus; //주문 상태 
     

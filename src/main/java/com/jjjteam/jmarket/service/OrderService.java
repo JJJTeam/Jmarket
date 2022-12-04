@@ -40,9 +40,9 @@ public class OrderService {
     private final ItemImgRepository itemImgRepository;
 
      
-   public Long order(OrderDTO orderDTO, String email) {
+   public Long order(OrderDTO orderDTO, Long id) {
 	   Item item = itemRepository.findById(orderDTO.getItemId()).orElseThrow(EntityNotFoundException::new);
-	   User user = userRepository.findByEmail(email);
+	   User user = userRepository.findById(id).get();
 	   
 	   List<OrderItem> orderItemList = new ArrayList<>();
 	   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount());
@@ -106,8 +106,8 @@ public class OrderService {
    
    
    
-   public Long orders(List<OrderDTO> orderDTOList, String email) {
-	   User user = userRepository.findByEmail(email);
+   public Long orders(List<OrderDTO> orderDTOList, Long id) {
+	   User user = userRepository.findById(id).get();
 	   List<OrderItem> orderItemList = new ArrayList<>();
 	   
 	   for(OrderDTO orderDTO : orderDTOList) {
