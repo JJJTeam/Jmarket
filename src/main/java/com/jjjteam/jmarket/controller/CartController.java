@@ -121,6 +121,7 @@ public class CartController {
         List<CartOrderDTO> cartOrderDtoList = cartOrderDTO.getCartOrderDTOList();
         System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 1: cartOrderDtoList : " + cartOrderDtoList );
 
+        
         if(cartOrderDtoList == null || cartOrderDtoList.size() == 0){
         	System.out.println("@@@@ cart 페이지에서 주문하기 버튼 클릭 2 ");
         	return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);

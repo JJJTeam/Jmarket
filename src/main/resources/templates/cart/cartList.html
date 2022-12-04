@@ -103,8 +103,7 @@
 
             $.ajax({
                 url      : url,
-                type     : "PATCH",
-                
+                type     : "PATCH", 
                 dataType : "json",
                 cache   : false,
                 success  : function(result, status){
@@ -148,7 +147,7 @@
 
        
         function orders(){
-            console.log("주문하기 ");
+           
             var url = "/cart/orders";
 
             var dataList = new Array();
@@ -160,15 +159,14 @@
                 var data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
-                
+                console.log("cartItemId :" + cartItemId);
             });
 
-            paramData['cartOrderDtoList'] = dataList;
-
-            console.log(dataList); //현재 리스트에 아무것도 안담김
-            
+            paramData['cartOrderDTOList'] = dataList;  
+            console.log("dataList :" + dataList);
             var param = JSON.stringify(paramData);
-
+            
+            
             $.ajax({
                 url      : url,
                 type     : "POST",
