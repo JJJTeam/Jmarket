@@ -9,7 +9,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class CartItemDTO {
 
 	//회원 한명 다 1개의 장바구니를 가지므로  해당회원의장바구니 생성 

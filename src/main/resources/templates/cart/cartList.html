@@ -162,10 +162,10 @@
                 console.log("cartItemId :" + cartItemId);
             });
 
-            paramData['cartOrderDTOList'] = dataList;  
-            console.log("dataList :" + dataList);
+            paramData['cartOrderDTOList'] = dataList;             
             var param = JSON.stringify(paramData);
             
+            console.log("dataList :" + JSON.stringify(dataList));
             
             $.ajax({
                 url      : url,
@@ -267,6 +267,7 @@
                   <!--   <div class="repImgDiv align-self-center">
                         <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
                     </div> -->
+                    
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
                         <div class="fs18 font-weight-light">
