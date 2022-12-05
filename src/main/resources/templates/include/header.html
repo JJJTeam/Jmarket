@@ -44,9 +44,11 @@
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                 <li></li>
                 <li><a href="/item/itemList" class="nav-link px-2 text-white">상품목록</a></li>
-               
-                 <li><a href="/cart" class="nav-link px-2 text-white" sec:authorize="isAuthenticated()">장바구니</a></li>
-                  <li><a href="/orders" class="nav-link px-2 text-white" sec:authorize="isAuthenticated()">구매이력</a></li>
+                <span sec:authorize="isAuthenticated()">
+                      <li><a href="/cart" class="nav-link px-2 text-white" >장바구니</a></li>
+                  <li><a href="/orders" class="nav-link px-2 text-white">구매이력</a></li>
+                </span>
+
                  
                 <li><a href="/index2" class="nav-link px-2 text-white">상품목록2</a></li>
             </ul>
