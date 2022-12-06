@@ -15,14 +15,14 @@ import org.springframework.data.repository.query.Param;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 	@Query("select o from Order o " +
-            "where o.user.email = :email " +
+            "where o.user.id = :id " +
             "order by o.orderDate desc"
     )
-    List<Order> findOrders(@Param("email") String email, Pageable pageable);
+    List<Order> findOrders(@Param("id") Long id, Pageable pageable);
 
     @Query("select count(o) from Order o " +
-            "where o.user.email = :email"
+            "where o.user.id = :id"
     )
-    Long countOrder(@Param("email") String email);
+    Long countOrder(@Param("id") Long id);
 
 }

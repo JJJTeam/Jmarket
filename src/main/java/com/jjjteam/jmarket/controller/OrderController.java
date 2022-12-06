@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,7 @@ import com.jjjteam.jmarket.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
@@ -65,13 +67,15 @@ public class OrderController {
 	
 	//구매이력을 조회하는 호출하는 메서드
 	@GetMapping(value= {"/orders", "/orders/{page}"})
-	public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model) {
+	public String orderHist(@PathVariable("page") Optional<Integer> page, @AuthenticationPrincipal UserDetailsImpl principal, Model model) {
 		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get(): 0, 4); //한번에 가져올 주문의 개수는 4개로 설정
 		
 		//현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달하여 화면에 전달할 주문 목록데이터를 리턴 값으로 받는다.
-		Page<OrderHistDTO> ordersHistDTOList = orderService.getOrderList(principal.getName(), pageable);
-		
+		Page<OrderHistDTO> ordersHistDTOList = orderService.getOrderList(principal.getId(), pageable);
+		log.warn("ordersHistDTOList : {} ",ordersHistDTOList);
+        log.warn("page : {} ",pageable.getPageNumber());
+
 		model.addAttribute("orders", ordersHistDTOList);
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage",5);
