@@ -67,7 +67,7 @@ public class CartController {
 			System.out.println(" id   121212w1212111:" + id);
 			//화면으로부터 넘어온 장바구니에 담을 정보와 현재 로그인한 회원의 이메일 정보를 이용하여 장바구니에 상품을 담는 로직을 호출
 			cartItemId = cartService.addCart(cartItemDTO, id);
-			System.out.println(" id   @@@:" + cartItemId);
+			System.out.println("cartItemDTO id   @@@  :" + cartItemId);
 			
 			
 		}catch(Exception e) {
