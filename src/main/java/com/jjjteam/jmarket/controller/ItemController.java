@@ -9,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +46,7 @@ public class ItemController {
 
 	// 상품등록 post
 	@PostMapping(value = "/item/itemForm")
-	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult,Model model) {
+	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model) {
 
 		System.out.println(
 				"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -53,7 +54,6 @@ public class ItemController {
 			System.out.println("@@@@@@@@@@@@@@@@@ 1번째 오류 @@@@@@@@@@@@@@@@@@");
 			return "item/itemForm";
 		}
-
 
 		try {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@ 오류없이 서비스 시작 @@@@@@@@@@@@@@@@@@");
@@ -104,41 +104,47 @@ public class ItemController {
 	}
 
 	// 상품 수정 get 페이지
-    @GetMapping(value = "/admin/item/{itemId}")
-    public String itemDtl(@PathVariable("itemId") Long itemId, Model model){
+	@GetMapping(value = "/admin/item/{itemId}")
+	public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
 
-        try {
-            ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
-            model.addAttribute("itemFormDTO", itemFormDto); // 조회한 상품 데이터를 model 에 담아서 뷰로 전달함
-        }
+		try {
+			ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
+			model.addAttribute("itemFormDTO", itemFormDto); // 조회한 상품 데이터를 model 에 담아서 뷰로 전달함
+		}
 
-        catch(EntityNotFoundException e){ // 상품 엔티티가 존재하지 않으면은 에러메세지 + 상품 등록페이지로 다시 ㄱㄱ
-            model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
-            model.addAttribute("itemFormDto", new ItemFormDTO());
-            return "item/itemForm";
-        }
+		catch (EntityNotFoundException e) { // 상품 엔티티가 존재하지 않으면은 에러메세지 + 상품 등록페이지로 다시 ㄱㄱ
+			model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
+			model.addAttribute("itemFormDto", new ItemFormDTO());
+			return "item/itemForm";
+		}
 
-        return "item/itemForm";
-    }
+		return "item/itemForm";
+	}
 
-    // 상품 수정 post
-    @PostMapping(value = "/admin/item/{itemId}")
-    public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model){
+	// 상품 수정 post
+	@PostMapping(value = "/admin/item/{itemId}")
+	public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model) {
 
-        // 상품 수정 시 필수 값이 없을 때 애러 발생
-        if(bindingResult.hasErrors()){
-            return "item/itemForm"; // 에러가 발생하면 상품 수정 get 페이지로 이동
-        }
+		// 상품 수정 시 필수 값이 없을 때 애러 발생
+		if (bindingResult.hasErrors()) {
+			return "item/itemForm"; // 에러가 발생하면 상품 수정 get 페이지로 이동
+		}
 
-       
-        try {// 상품 수정 로직 호출
-            itemService.updateItem(itemFormDTO); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
-        } catch (Exception e){
-            model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
-            return "item/itemForm";
-        }
+		try {// 상품 수정 로직 호출
+			itemService.updateItem(itemFormDTO); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
+			return "item/itemForm";
+		}
 
-        return "redirect:/"; // 메인 페이지로 리다이렉트
-    }
+		return "redirect:/"; // 메인 페이지로 리다이렉트
+	}
+
+	// 상품 삭제
+	@DeleteMapping(value = "/admin/item/delete/{itemId}")
+	public String delete(@PathVariable("itemId") Long id) {
+		itemService.deleteItem(id);
+		return "redirect:/";
+	}
 
 }

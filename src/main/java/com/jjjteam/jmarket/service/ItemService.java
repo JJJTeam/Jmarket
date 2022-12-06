@@ -93,5 +93,11 @@ public class ItemService {
     public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
+    
+    // 상품 삭제하기
+    @Transactional
+    public void deleteItem(Long id) {
+    	itemRepository.deleteById(id);
+    }
 	
 }
