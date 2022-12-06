@@ -123,20 +123,14 @@ public class ItemController {
 
     // 상품 수정 post
     @PostMapping(value = "/admin/item/{itemId}")
-    public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult,
-                             @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model){
+    public String itemUpdate(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model){
 
         // 상품 수정 시 필수 값이 없을 때 애러 발생
         if(bindingResult.hasErrors()){
             return "item/itemForm"; // 에러가 발생하면 상품 수정 get 페이지로 이동
         }
 
-        // 상품 수정 시 첫번째 이미지가 없으면 애러 발생 (첫 번째 이미지는 대표 상품 이미지여서 꼭 있어야함!)
-        if(itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null){
-            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값 입니다.");
-            return "item/itemForm";// 에러가 발생하면 상품 수정 get 페이지로 이동
-        }
-
+       
         try {// 상품 수정 로직 호출
             itemService.updateItem(itemFormDTO); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
         } catch (Exception e){

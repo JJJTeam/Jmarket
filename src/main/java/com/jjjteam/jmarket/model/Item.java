@@ -111,6 +111,7 @@ public class Item extends BaseEntity {
         this.itemSize = itemFormDto.getItemSize();
         this.repimg = itemFormDto.getRepimg();
     }
+	
     // 상품 주문 -> 상품 재고 감소 로직 생성
     public void removeStock(int stockNumber){
 
