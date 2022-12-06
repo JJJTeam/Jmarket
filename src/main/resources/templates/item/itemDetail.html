@@ -128,9 +128,11 @@
 					class="rounded repImg" th:alt="${item.itemNm}"> -->
 			</div>
 			<div class="wd50">
+				<img id="imgId" th:src="${item.repimg}" alt="첨부이미지" th:if="${item.repimg != null}" />
 				<span
 					th:if="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
-					class="badge badge-primary mgb-15"> 판매중 </span> <span
+					class="badge badge-primary mgb-15"> 판매중 </span>
+				<span
 					th:unless="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
 					class="badge btn-danger mgb-15"> 품절 </span>
 				<div class="h4" th:text="${item.itemNm}"></div>
