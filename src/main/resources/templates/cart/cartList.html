@@ -40,9 +40,12 @@
     </style>
     
 
-<div th:replace="/include/header.html"></div>
+<div th:replace="/include/header.html">
 
- <script th:inline="javascript">
+
+</div>
+
+ <script>
     
     //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
@@ -51,6 +54,8 @@
             });
         
         });
+    
+        
     
     
     //getOrderTotalPrice() 총 주문금액을 구하는 함수
@@ -265,9 +270,9 @@
                     <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
                 </td>
                 <td class="d-flex">
-                  <!--   <div class="repImgDiv align-self-center">
-                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
-                    </div> -->
+<!--                    <div class="repImgDiv align-self-center">-->
+<!--                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">-->
+<!--                    </div>-->
                     
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
@@ -308,7 +313,6 @@
 
     </div>
 
-</div>
 
 <div th:replace="/include/footer.html"></div>
 

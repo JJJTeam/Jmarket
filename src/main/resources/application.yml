@@ -28,6 +28,8 @@ itemImgLocation: /C:/upload/shop/items # C:/item
 uploadPath: file:///C:/upload/shop/  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
+
+
 logging:
   level:
     root: info
@@ -65,7 +67,10 @@ spring:
     show-sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
-    
+
+
+itemImgLocation: /Users/jeongsujin/shop/study/item
+uploadPath=file: /Users/jeongsujin/shop/study   
 ---
 
 
