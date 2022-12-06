@@ -43,26 +43,45 @@ public class ItemService {
 
     }
 	
-	// 상품 수정하기를 위한 service
+//	// 상품 수정하기를 위한 service
+//    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
+//	@Transactional(readOnly = true)
+//    public ItemFormDTO getItemDetail(Long itemId) {
+//
+//        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+//        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
+//
+//        for (ItemImg itemImg : itemImgList) {
+//            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+//            itemImgDtoList.add(itemImgDTO);
+//        }
+//
+//        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+//        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
+//        itemFormDTO.setItemImgDtoList(itemImgDtoList);
+//
+//        return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
+//    }
+	
+ // 상품 수정하기를 위한 service
     // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
 	@Transactional(readOnly = true)
     public ItemFormDTO getItemDetail(Long itemId) {
 
-        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
+//        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+//        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
 
-        for (ItemImg itemImg : itemImgList) {
-            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
-            itemImgDtoList.add(itemImgDTO);
-        }
+//        for (ItemImg itemImg : itemImgList) {
+//            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+//            itemImgDtoList.add(itemImgDTO);
+//        }
 
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
         ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
-        itemFormDTO.setItemImgDtoList(itemImgDtoList);
+//        itemFormDTO.setItemImgDtoList(itemImgDtoList);
 
         return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
     }
-	
 
 	
 	// 상품 데이터 수정
@@ -73,12 +92,12 @@ public class ItemService {
         Item item = itemRepository.findById(itemFormDto.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
 
-        List<Long> itemImgIds = itemFormDto.getItemImgIds();
+//        List<Long> itemImgIds = itemFormDto.getItemImgIds();
         
         //이미지 등록
-        for (int i = 0, max = itemImgFileList.size(); i < max; i++) {
-            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
-        }
+//        for (int i = 0, max = itemImgFileList.size(); i < max; i++) {
+//            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
+//        }
         
         return item.getId();
     }
