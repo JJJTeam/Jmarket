@@ -1,8 +1,7 @@
 package com.jjjteam.jmarket;
 
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
@@ -14,9 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.service.ItemService;
 
-import javax.persistence.EntityNotFoundException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
