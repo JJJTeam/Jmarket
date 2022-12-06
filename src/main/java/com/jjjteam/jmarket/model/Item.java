@@ -51,6 +51,10 @@ public class Item extends BaseEntity {
     @Column(nullable = false)
     private String itemDetail;  //상품 상세설명
 
+    @Lob
+    @Column(nullable = false)
+    private String repimg;  // 대표이미지
+
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;  //상품 판매상태
     
@@ -58,26 +62,26 @@ public class Item extends BaseEntity {
     private ClothingItems clothingItems;  //상품 분류
 
     @Enumerated(EnumType.STRING)
-    private ItemColor itemColor ;	//상품 색상
+    private ItemColor itemColor;	//상품 색상
 
     @Enumerated(EnumType.STRING)
     private ItemSize itemSize;		//상품 사이즈
-    
-     
-    @OneToMany(mappedBy = "item")
-	private List<ItemImg> itemImgs;
-    
+
+
+//    @OneToMany(mappedBy = "item")
+//	private List<ItemImg> itemImgs;
+
 //    @Builder
 //    public Item(
-//    		String itemNm, 
+//    		String itemNm,
 //    		String itemIntroduction,
-//    		int price, 
-//    		int stockNumber, 
-//    		String itemDetail, 
+//    		int price,
+//    		int stockNumber,
+//    		String itemDetail,
 //    		ItemSellStatus itemSellStatus,
 //    		ClothingItems clothingItems,
 //    		ItemSize itemSize,
-//    		ItemColor itemColor, 
+//    		ItemColor itemColor,
 //    		List<ItemImg> itemImgs) {
 //        this.itemNm = itemNm;
 //        this.itemIntroduction = itemIntroduction;
@@ -90,19 +94,24 @@ public class Item extends BaseEntity {
 //        this.itemColor = itemColor;
 //        this.itemImgs = itemImgs;
 //    }
-//    
+//
 //    public Item() {
 //		// TODO Auto-generated constructor stub
 //	}
 
-
 	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
+        this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
         this.clothingItems = itemFormDto.getClothingItems();
+        this.itemColor = itemFormDto.getItemColor();
+        this.itemSize = itemFormDto.getItemSize();
+        this.repimg = itemFormDto.getRepimg();
     }
+	
     // 상품 주문 -> 상품 재고 감소 로직 생성
     public void removeStock(int stockNumber){
 

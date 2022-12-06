@@ -18,15 +18,9 @@ spring:
   devtools:
     restart:
       enabled: true
-# itemImgLocation: /Users/jincrates/projects/upload/shop/item # C:/shop/item
-# uploadPath: file:///Users/jincrates/projects/upload/shop/  #file:///C:/shop/
-
-#itemImgLocation: /Users/admin/projects/upload/shop/items # C:/item
-#uploadPath: file:///Users/admin/projects/upload/shop/items  #file:///C:/shop/
-
-itemImgLocation: /C:/upload/shop/items # C:/item
-uploadPath: file:///C:/upload/shop/items  #file:///C:/shop/
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
+
+
 
 logging:
   level:
@@ -47,11 +41,17 @@ spring:
   config:
     activate:
       on-profile: sujin
+  devtools:
+    livereload:
+      enabled: true
+          
 
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+      
+
             
   jpa:
     hibernate:
@@ -59,7 +59,10 @@ spring:
     show-sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
-    
+
+
+itemImgLocation: /Users/jeongsujin/shop/study/item
+uploadPath=file: /Users/jeongsujin/shop/study   
 ---
 
 
@@ -94,7 +97,7 @@ spring:
       
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: false
 
   datasource:

@@ -4,13 +4,16 @@
 		
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>장바구니</title>
 
 
 
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<!-- <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+ -->
 </head>
+
+
 
 <style>
         .content-mg{
@@ -36,16 +39,23 @@
         }
     </style>
     
-<body>
- <script th:inline="javascript">
+
+<div th:replace="/include/header.html">
+
+
+</div>
+
+ <script>
     
-    //주문할 상품을 체크하거나 해제할 경ㅇ 총 주문 금액을 구하는 함수를 호출
+    //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
             $("input[name=cartChkBox]").change( function(){
                 getOrderTotalPrice();
             });
         
         });
+    
+        
     
     
     //getOrderTotalPrice() 총 주문금액을 구하는 함수
@@ -93,28 +103,21 @@
         
         
         function updateCartItemCount(cartItemId, count){
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-
+           
             var url = "/cartItem/" + cartItemId+"?count=" + count;
 
             $.ajax({
                 url      : url,
-                type     : "PATCH",
-                beforeSend : function(xhr){
-                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-                    xhr.setRequestHeader(header, token);
-                },
+                type     : "PATCH", 
                 dataType : "json",
                 cache   : false,
                 success  : function(result, status){
                     console.log("cartItem count update success");
                 },
                 error : function(jqXHR, status, error){
-
                     if(jqXHR.status == '401'){
                         alert('로그인 후 이용해주세요');
-                        location.href='/members/login';
+                        location.href='/login';
                     } else{
                         alert(jqXHR.responseJSON.message);
                     }
@@ -125,89 +128,79 @@
        
         function deleteCartItem(obj){
             var cartItemId = obj.dataset.id;
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-
             var url = "/cartItem/" + cartItemId;
-
             $.ajax({
                 url      : url,
                 type     : "DELETE",
-                beforeSend : function(xhr){
-                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-                    xhr.setRequestHeader(header, token);
-                },
                 dataType : "json",
                 cache   : false,
                 success  : function(result, status){
                 	alert("장바구니에서 삭제하였습니다.");
                     location.href='/cart';
                 },
+                
                 error : function(jqXHR, status, error){
-
                     if(jqXHR.status == '401'){
                         alert('로그인 후 이용해주세요');
-                        location.href='/members/login';
+                        location.href='/login';
                     } else{
                         alert(jqXHR.responseJSON.message);
                     }
-
                 }
             });
         }
 
-        
-        //결제부분
+       
         function orders(){
-        	
-        	const data = {
-        			
-        	}
-        	
-        	IMP.init("imp25587836");
-    		IMP.request_pay({
-    			pg : "kcp",
-    			pay_method : "kakao",
-    			merchant_uid : "11-00ddd00011",
-    			name : "",
-    			amount : 500,
-    			buyer_email : "peekaboo32@gmail.com",
-    			buyer_name : "angela",
-    			buyer_tel : "010-4242-4242",
-    			buyer_addr : "부산",
-    			buyer_postcode : "01181"
-    			
-    		}, function(rsp) { // callback
-    			if (rsp.success) {  
-    			} else {
-    				alert("결제실패햇습니다. ~_~_~_~_");
-    			}
-    		}); 
-        	
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-
-            //주문하기버튼클릭시 맵핑되는주소  => CartController 맵핑되는 주소
+           
             var url = "/cart/orders";
 
             var dataList = new Array();
             var paramData = new Object();
+         
 
             $("input[name=cartChkBox]:checked").each(function() {
                 var cartItemId = $(this).val();
                 var data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
+                console.log("cartItemId :" + cartItemId);
             });
 
-            paramData['cartOrderDtoList'] = dataList;
-
+            paramData['cartOrderDTOList'] = dataList;             
             var param = JSON.stringify(paramData);
+            
+            console.log("dataList :" + JSON.stringify(dataList));
+            
+            $.ajax({
+                url      : url,
+                type     : "POST",
+                contentType : "application/json",
+                data     : param,
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("주문이 완료 되었습니다.");
+
+                    location.href='/orders';
+                },
+                error : function(jqXHR, status, error){
+
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/login';
+                    } else{
+                        alert(jqXHR.responseJSON.error);
+                    }
+
+                }
+            });
+        
            
             
            //아임포트 결제 api연결
             
-    		IMP.init("imp25587836");
+    		/* IMP.init("imp25587836");
     		IMP.request_pay({
     			pg : "kcp",
     			pay_method : "card",
@@ -238,7 +231,7 @@
     			} else {
     				alert("결제실패햇습니다. ~_~_~_~_");
     			}
-    		});   
+    		});  */  
         
             
         } 
@@ -247,13 +240,10 @@
     </script>
 
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    
-
-
-	
+<!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+ -->	
     <h2 class="mb-4">
-        장바구니 목록
+        장바구니 목록f
     </h2>
 
     <div>
@@ -280,9 +270,10 @@
                     <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
                 </td>
                 <td class="d-flex">
-                    <div class="repImgDiv align-self-center">
-                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
-                    </div>
+<!--                    <div class="repImgDiv align-self-center">-->
+<!--                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">-->
+<!--                    </div>-->
+                    
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
                         <div class="fs18 font-weight-light">
@@ -322,8 +313,6 @@
 
     </div>
 
-</div>
 
+<div th:replace="/include/footer.html"></div>
 
-</body>
-</html>

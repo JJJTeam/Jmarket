@@ -1,10 +1,12 @@
 package com.jjjteam.jmarket.controller;
 
 import com.jjjteam.jmarket.constant.ERole;
+import com.jjjteam.jmarket.dto.CartDetailDTO;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.repository.CartItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.service.UserService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -40,6 +43,7 @@ public class TestController {
 
 	private final UserRepository userRepository;
 
+	private final CartItemRepository cartItemRepository;
 	
 	@GetMapping("/addrole")
 	public String roleTest() {
@@ -76,6 +80,15 @@ public class TestController {
 		userService.registerUser(userDTO);
 		return "/index";
 	}
+	
+	//@GetMapping("/test/jjjj")
+//	public String testRe() {
+//	    
+//		System.out.println(cartItemRepository.findCartDetailDtoList());
+//		
+//		
+//		return "/" ;
+//	}
 	
 	
 	
