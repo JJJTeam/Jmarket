@@ -32,8 +32,8 @@
 			<p th:if="${#fields.hasErrors('repimg')}" th:errors="*{repimg}"
 				class="fieldError">Incorrect data</p> -->
 			<input type="text" id="repimg" name="repimg">
-			
-			
+
+
 
 			<div class="form-group">
 				품목 : <select th:field="*{clothingItems}" class="custom-select">
@@ -172,9 +172,14 @@
 
 			<!-- 상품 아이디가 없는 경우(상품을 처음 등록하는 경우) 저장 로직을 호출하는 버튼을 보여줌 -->
 			<!-- <div th:if="${#strings.isEmpty(itemFormDTO.id)}" style="text-align: center"> -->
-			<div style="text-align: center">
+			<div th:if="${itemFormDTO.id} == null" style="text-align: center">
 				<button th:formaction="@{/item/itemForm}" type="submit"
 					class="btn btn-secondary">저장</button>
+			</div>
+			<div th:unless="${itemFormDTO.id} == null"
+				style="text-align: center">
+				<button th:formaction="@{'/admin/item/' + ${itemFormDTO.id} }"
+					type="submit" class="btn btn-secondary">수정</button>
 			</div>
 
 		</form>
@@ -250,7 +255,7 @@
 				//repimg.innerText = result
 				$("#repimg").html(result)
 				$("#repimg2").html(result)
-				$('input[id=repimg]').attr('value',result);
+				$('input[id=repimg]').attr('value', result);
 				//$('input[name=repimg2]').attr('value',result);
 
 				document.getElementById('tartgetImg').setAttribute('src',

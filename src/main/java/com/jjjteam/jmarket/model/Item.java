@@ -62,7 +62,7 @@ public class Item extends BaseEntity {
     private ClothingItems clothingItems;  //상품 분류
 
     @Enumerated(EnumType.STRING)
-    private ItemColor itemColor ;	//상품 색상
+    private ItemColor itemColor;	//상품 색상
 
     @Enumerated(EnumType.STRING)
     private ItemSize itemSize;		//상품 사이즈
@@ -102,10 +102,15 @@ public class Item extends BaseEntity {
 
 	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
+        this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
         this.clothingItems = itemFormDto.getClothingItems();
+        this.itemColor = itemFormDto.getItemColor();
+        this.itemSize = itemFormDto.getItemSize();
+        this.repimg = itemFormDto.getRepimg();
     }
     // 상품 주문 -> 상품 재고 감소 로직 생성
     public void removeStock(int stockNumber){

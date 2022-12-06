@@ -116,7 +116,7 @@ public class ItemController {
 
         try {
             ItemFormDTO itemFormDto = itemService.getItemDetail(itemId);
-            model.addAttribute("itemFormDto", itemFormDto); // 조회한 상품 데이터를 model 에 담아서 뷰로 전달함
+            model.addAttribute("itemFormDTO", itemFormDto); // 조회한 상품 데이터를 model 에 담아서 뷰로 전달함
         }
 
         catch(EntityNotFoundException e){ // 상품 엔티티가 존재하지 않으면은 에러메세지 + 상품 등록페이지로 다시 ㄱㄱ
