@@ -35,36 +35,6 @@ public class ItemService {
 	private final ItemImgRepository itemImgRepository;
 
 
-//	public Long saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
-//	public void saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
-//
-////		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ saveItem 서비스 시작@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//
-//		// 상품 등록
-//		Item item = itemFormDTO.createItem();
-//		itemRepository.save(item);
-////		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ item :" + item);
-//
-//
-//		// 이미지 등록
-//		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이미지 등록 시작 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//
-////		for(int i=0;i<itemImgFileList.size();i++){
-////            ItemImg itemImg = new ItemImg();
-////            itemImg.setItem(item);
-////
-////            if(i == 0)
-////                itemImg.setRepimgYn("Y"); // 첫번째 이미지를 대표 상품 이미지로 설정
-////            else
-////                itemImg.setRepimgYn("N");
-////
-////            itemImgService.saveItemImg(itemImg, itemImgFileList.get(i)); // 리스트 형태로 이미지들 저장
-////        }
-//		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이미지 등록 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-////		log.info("item : {}", item.toString());
-////		return item.getId();
-//	}
-
     public void saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
 
         // 상품 등록
