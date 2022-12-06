@@ -31,10 +31,6 @@ import javax.persistence.EntityNotFoundException;
 @Slf4j
 public class ItemService {
 	private final ItemRepository itemRepository;
-	private final ItemImgService itemImgService;
-
-
-
     public void saveItem(ItemFormDTO itemFormDTO) throws Exception {
         // 상품 등록
         Item item = itemFormDTO.createItem();
