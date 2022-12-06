@@ -7,15 +7,13 @@
 <title>Insert title here</title>
 
 
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+<!--<meta id="_csrf" name="_csrf" content="${_csrf.token}" />-->
+<!--<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />-->
 
 </head>
 <body>
 
 	<div th:replace="/include/header.html"></div>
-	
-	
 
 <script>
         $(document).ready(function () {
@@ -33,7 +31,7 @@
 		}
 
         function order() {
-        
+
 			var url = "/order";
 			var paramData = {
 				itemId : $("#itemId").val(),
@@ -47,7 +45,7 @@
 				type : "POST",
 				contentType : "application/json",
 				data : param,
-				
+
 				dataType : "json",
 				cache : false,
 				success : function(result, status) {
@@ -67,15 +65,15 @@
 			});
 		}
 
-   
+
         function addCart() {
            /* var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content"); */
 
-         
+
             let paramData = {
                 itemId: $("#itemId").val(),
-                count: $("#count").val() 
+                count: $("#count").val()
             };
             $.ajax({
                 url: "/cart",
@@ -88,21 +86,21 @@
                     alert("상품을 장바구니에 담았습니다.");
                     location.href = "/cart";
                 },
-                
+
                 error: function (jqXHR, status, error) {
-                	
+
                     if (jqXHR.status == '401') {
                         alert('로그인 후 이용해주세요');
                         location.href = '/login';
                     } else {
                         console.log(jqXHR.responseText);
-                    } 
+                    }
                 }
             });
         }
 
     </script>
-	
+
 
 	<div class="container container-mt">
 
@@ -115,9 +113,10 @@
 			</div>
 			<div class="wd50">
 				<span
-					th:if="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
-					class="badge badge-primary mgb-15"> 판매중 </span> <span
-					th:unless="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
+					th:if="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}"
+					class="badge badge-primary mgb-15"> 판매중 </span> 
+				<span
+					th:unless="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}"
 					class="badge btn-danger mgb-15"> 품절 </span>
 				<div class="h4" th:text="${item.itemNm}"></div>
 				<div class="h6" th:text="${item.itemIntroduction}"></div>
@@ -142,8 +141,7 @@
 					<h5>결제 금액</h5>
 					<h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
 				</div>
-				<div
-					th:if="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
+				<div					th:if="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}"
 					class="text-right">
 					<button type="button"
 						class="btn btn-light border border-primary btn-lg"
@@ -151,8 +149,7 @@
 					<button type="button" class="btn btn-primary btn-lg"
 						onclick="order()">주문하기</button>
 				</div>
-				<div
-					th:unless="${item.itemSellStatus == T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL}"
+				<div th:unless="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}"
 					class="text-right">
 					<button type="button" class="btn btn-danger btn-lg">품절</button>
 				</div>

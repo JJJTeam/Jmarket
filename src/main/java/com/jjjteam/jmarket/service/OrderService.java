@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 
 // 주문목록을 조회하는
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -54,10 +57,13 @@ public class OrderService {
    }
    
    @Transactional(readOnly = true)
-   public Page<OrderHistDTO> getOrderList(String email, Pageable pageable){
-	   
-	   List<Order> orders = orderRepository.findOrders(email, pageable);
-	   Long totalCount = orderRepository.countOrder(email);
+   public Page<OrderHistDTO> getOrderList(Long id, Pageable pageable){
+
+
+	   List<Order> orders = orderRepository.findOrders(id, pageable);
+	   log.warn("orders : {}", orders);
+	   Long totalCount = orderRepository.countOrder(id);
+	   log.warn("totalCount : {}", totalCount);
 	   
 	   List<OrderHistDTO> orderHistDTOs = new ArrayList<>();
 	   
@@ -66,10 +72,10 @@ public class OrderService {
 		 List<OrderItem> orderItems = order.getOrderItems();
 		
 		 for (OrderItem orderItem : orderItems) {
-             ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
-                     (orderItem.getItem().getId(), "Y");
-             OrderItemDTO orderItemDTO =
-                     new OrderItemDTO(orderItem, itemImg.getImgUrl());
+//             ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
+//                     (orderItem.getItem().getId(), "Y");
+//             OrderItemDTO orderItemDTO =                     new OrderItemDTO(orderItem, itemImg.getImgUrl());
+			 OrderItemDTO orderItemDTO = new OrderItemDTO(orderItem, "itemImg.getImgUrl()");
              orderHistDTO.addOrderItemDTO(orderItemDTO);
           }
 		 

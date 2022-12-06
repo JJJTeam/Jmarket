@@ -1,40 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout1}">
-<head>
-<meta name="_csrf" th:content="${_csrf.token}" />
-<meta name="_csrf_header" th:content="${_csrf.headerName}" />
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div th:replace="/include/header.html"></div>
 
-<!-- 사용자 스크립트 추가  -->
-<th:block layout:fragment="script">
 
-	<script th:inline="javascript">
+	<script>
   function cancelOrder(orderId){
-	 
-	 
+
+
 	  var url = "/order/" + orderId + "/cancel";
-	 
+
 	  // 취소할 주문번호를  파라미터로 넘겨줌
 	  var paramData = {
 			  orderId: orderId,
 	  };
-	  
+
 	  var param = JSON.stringify(paramData);
-	  
+
 	  $.ajax({
 		  url : url,
 		  type : "POST",
 		  contentType : "application/json",
 		  data : param,
-		 
+
 		  dataType : "json",
 		  cache : false,
 		  success : function(result, status){
 			  alert("주문이 취소 되었습니다.");
-			  // 주문이 정상적으로 취소됐으면 리다이렉트로 현재페이지로 이동  
-			  location.href='/orders/' + [[${page}]]; 
+			  // 주문이 정상적으로 취소됐으면 리다이렉트로 현재페이지로 이동
+			  location.href='/orders/' + [[${page}]];
 		  },
 		  error : function(jqXHR, status, error){
 			  if(jqXHR.status == '401'){
@@ -45,14 +39,13 @@
 			  }
 		  }
 	  });
-	  
-  } 
+
+  }
  </script>
 
-</th:block>
 
 
-<th:block layout:fragment="css">
+
 	<style>
 .content-mg {
 	margin-left: 30%;
@@ -87,10 +80,10 @@
 	font-size: 24px
 }
 </style>
-</th:block>
 
 
-<div layout:fragment="content" class="content-mg">
+
+<div>
 
 	<h2 class="mb-4">구매이력</h2>
 
@@ -100,31 +93,27 @@
 			<h4 th:text="${order.orderDate} + '주문'"></h4>
 
 			<div class="ml-3">
-				<th:block
-					th:if="${order.orderStatus == T(com.jjjteam.jmarket.constant.OrderStatus).ORDER}">
+				
+				
+				<div	th:if="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
 					<button type="button" class="btn btn-outline-secondary"
 						th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
-				</th:block>
+				</div>
 
-				<th:block
-					th:unless="${order.orderStatus == T(com.jjjteam.jmarket.constant.OrderStatus).ORDER}">
+				<div
+					th:unless="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
 					<h4>취소완료</h4>
-				</th:block>
+				</div>
 
 			</div>
+
 		</div>
 
 		<div class="card d-flex">
 			<div th:each="orderItem : ${order.orderItemDTOList}"
-				class="d-flex mb-3">
-
-				<div class="repImgDiv">
-					<img th:src="${orderItem.imgUrl}" class="rounded repImg"
-						th:alt="${orderItem.itemNum}">
-				</div>
+				class="d-flex mb-3">0
 
 				<div class="align-self-center w-75">
-					<span th:text="${orderItem.itemNum}" class="fs24 font-weight-bold"></span>
 					<div class="fs18 font-weight-light">
 						<span th:text="${orderItem.orderPrice} +'원'"></span> <span
 							th:text="${orderItem.count} +'개'"></span>
@@ -138,6 +127,7 @@
 	</div>
 
 
+
 	<div
 		th:with="start=${(orders.number/maxPage)*maxPage +1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage -1) < orders.totalPages ? start + (maxPage -1 ) : orders.totalPages)})">
 		<ul class="pagination justify-content-center">
@@ -148,23 +138,23 @@
 				class="page-link"> <span aria-hidden='true'>Previous</span>
 			</a>
 			</li>
-			
-			
+
+
 			<li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page-1}?'active':''">
                 <a th:href="@{'/orders/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
             </li>
-            
+
             <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
                 <a th:href="@{'/orders/' + ${orders.number+1}}" aria-label='Next' class="page-link">
                     <span aria-hidden='true'>Next</span>
                 </a>
             </li>
-            
-			
+
+
 		</ul>
 	</div>
 
 
 </div>
 
-</html>
+<div th:replace="/include/footer.html"></div>
