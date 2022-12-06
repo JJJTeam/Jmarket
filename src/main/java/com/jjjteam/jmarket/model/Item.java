@@ -66,22 +66,22 @@ public class Item extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ItemSize itemSize;		//상품 사이즈
-    
-     
-    @OneToMany(mappedBy = "item")
-	private List<ItemImg> itemImgs;
-    
+
+
+//    @OneToMany(mappedBy = "item")
+//	private List<ItemImg> itemImgs;
+
 //    @Builder
 //    public Item(
-//    		String itemNm, 
+//    		String itemNm,
 //    		String itemIntroduction,
-//    		int price, 
-//    		int stockNumber, 
-//    		String itemDetail, 
+//    		int price,
+//    		int stockNumber,
+//    		String itemDetail,
 //    		ItemSellStatus itemSellStatus,
 //    		ClothingItems clothingItems,
 //    		ItemSize itemSize,
-//    		ItemColor itemColor, 
+//    		ItemColor itemColor,
 //    		List<ItemImg> itemImgs) {
 //        this.itemNm = itemNm;
 //        this.itemIntroduction = itemIntroduction;
@@ -94,11 +94,10 @@ public class Item extends BaseEntity {
 //        this.itemColor = itemColor;
 //        this.itemImgs = itemImgs;
 //    }
-//    
+//
 //    public Item() {
 //		// TODO Auto-generated constructor stub
 //	}
-
 
 	public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();

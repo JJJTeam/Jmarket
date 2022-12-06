@@ -45,9 +45,7 @@ public class ItemController {
 
 	// 상품등록 post
 	@PostMapping(value = "/item/itemForm")
-	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult,
-			Model model,
-			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult,Model model) {
 
 		System.out.println(
 				"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -56,15 +54,10 @@ public class ItemController {
 			return "item/itemForm";
 		}
 
-		if (itemImgFileList.get(0).isEmpty() && itemFormDTO.getId() == null) {
-			System.out.println("@@@@@@@@@@@@@@@@@ 2번째 오류 @@@@@@@@@@@@@@@@@@");
-			model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값입니다.");
-			return "item/itemForm";
-		}
 
 		try {
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@ 오류없이 서비스 시작 @@@@@@@@@@@@@@@@@@");
-			itemService.saveItem(itemFormDTO, itemImgFileList);
+			itemService.saveItem(itemFormDTO);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@성공했습니다.");
 
 		} catch (Exception e) {
@@ -145,7 +138,7 @@ public class ItemController {
         }
 
         try {// 상품 수정 로직 호출
-            itemService.updateItem(itemFormDTO, itemImgFileList); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
+            itemService.updateItem(itemFormDTO); // itemFormDto: 상품 정보, itemImgFileList: 상품 이미지 정보들 리스트
         } catch (Exception e){
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "item/itemForm";

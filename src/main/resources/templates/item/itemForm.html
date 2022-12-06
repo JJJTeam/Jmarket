@@ -122,15 +122,6 @@
 			<p th:if="${#fields.hasErrors('stockNumber')}"
 				th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
 
-
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-			<!--		썸머노트-->
-
 			<!-- 상품상세내용 -->
 			<div class="form-group">
 				<label for="content">content:</label>
@@ -145,13 +136,13 @@
 			<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 등록할 수 있게 밑의 코드가 출력됨 -->
 			<!-- <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">  -->
 			<!-- 이미지 개수 5개로 제한 -->
-			<div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">
-				<div class="custom-file img-div">
-					<input type="file" class="custom-file-input" name="itemImgFile">
-					<!-- 몇번째 상품 이미지인지 출력 -->
-					<label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
-				</div>
-			</div>
+<!--			<div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">-->
+<!--				<div class="custom-file img-div">-->
+<!--					<input type="file" class="custom-file-input" name="itemImgFile">-->
+<!--					&lt;!&ndash; 몇번째 상품 이미지인지 출력 &ndash;&gt;-->
+<!--					<label class="custom-file-label" th:text="상품이미지 + ${num}"></label>-->
+<!--				</div>-->
+<!--			</div>-->
 
 
 

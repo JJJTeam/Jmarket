@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.dto.ItemImgDTO;
+
 import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
 import com.jjjteam.jmarket.model.Item;
-import com.jjjteam.jmarket.model.ItemImg;
-import com.jjjteam.jmarket.repository.ItemImgRepository;
+
+
 import com.jjjteam.jmarket.repository.ItemRepository;
 
 
@@ -31,12 +31,7 @@ import javax.persistence.EntityNotFoundException;
 @Slf4j
 public class ItemService {
 	private final ItemRepository itemRepository;
-	private final ItemImgService itemImgService;
-	private final ItemImgRepository itemImgRepository;
-
-
-    public void saveItem(ItemFormDTO itemFormDTO, List<MultipartFile> itemImgFileList) throws Exception {
-
+    public void saveItem(ItemFormDTO itemFormDTO) throws Exception {
         // 상품 등록
         Item item = itemFormDTO.createItem();
         itemRepository.save(item);
@@ -68,17 +63,8 @@ public class ItemService {
 	@Transactional(readOnly = true)
     public ItemFormDTO getItemDetail(Long itemId) {
 
-//        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-//        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
-
-//        for (ItemImg itemImg : itemImgList) {
-//            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
-//            itemImgDtoList.add(itemImgDTO);
-//        }
-
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
         ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
-//        itemFormDTO.setItemImgDtoList(itemImgDtoList);
 
         return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
     }
@@ -86,19 +72,11 @@ public class ItemService {
 	
 	// 상품 데이터 수정
     // dto 로 변환된 상품이랑 상품이미지를 수정
-	public Long updateItem(ItemFormDTO itemFormDto, List<MultipartFile> itemImgFileList) throws Exception {
+	public Long updateItem(ItemFormDTO itemFormDto) throws Exception {
 
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
-
-//        List<Long> itemImgIds = itemFormDto.getItemImgIds();
-        
-        //이미지 등록
-//        for (int i = 0, max = itemImgFileList.size(); i < max; i++) {
-//            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
-//        }
-        
         return item.getId();
     }
 	

@@ -16,7 +16,6 @@ import com.jjjteam.jmarket.dto.ItemSearchDTO;
 import com.jjjteam.jmarket.dto.QItemListDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.QItem;
-import com.jjjteam.jmarket.model.QItemImg;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -42,8 +41,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 		// EntityManager: JPAQueryFactory 의 생성자로 많이 사용
 		this.queryFactory = new JPAQueryFactory(em);
 	}
-	
-	
+
 	// BooleanExpression: where 절에서 사용할 수 있는 값을 지원해줌
 	
 	// 상품 판매 조건으로 조회
@@ -127,19 +125,17 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 	@Override
 	public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
 		QItem item = QItem.item;
-        QItemImg itemImg = QItemImg.itemImg;
-
         QueryResults<ItemListDTO> results = queryFactory
                 .select(
                         new QItemListDTO( // 원래는 entity 로 변환해줘야 하는데, mainitemdto 의 어노테이션 (QueryProjection)덕분에 dto 로 그냥 사용
                                 item.id,
                                 item.itemNm,
-                                itemImg.imgUrl,
                                 item.price)
                 )
-                .from(itemImg)
-                .join(itemImg.item, item) // 내부 조인
-                .where(itemImg.repimgYn.eq("Y")) // 대표 상품인 경우에는 Y
+				.from(item)
+//                .from(itemImg)
+//                .join(itemImg.item, item) // 내부 조인
+//                .where(itemImg.repimgYn.eq("Y")) // 대표 상품인 경우에는 Y
                 .where(itemNmLike(itemSearchDTO.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
