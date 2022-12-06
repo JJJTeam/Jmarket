@@ -18,11 +18,11 @@ import com.jjjteam.jmarket.dto.OrderDTO;
 import com.jjjteam.jmarket.dto.OrderHistDTO;
 import com.jjjteam.jmarket.dto.OrderItemDTO;
 import com.jjjteam.jmarket.model.Item;
-import com.jjjteam.jmarket.model.ItemImg;
+
 import com.jjjteam.jmarket.model.Order;
 import com.jjjteam.jmarket.model.OrderItem;
 import com.jjjteam.jmarket.model.User;
-import com.jjjteam.jmarket.repository.ItemImgRepository;
+
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.OrderRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
@@ -40,7 +40,7 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    private final ItemImgRepository itemImgRepository;
+
 
      
    public Long order(OrderDTO orderDTO, Long id) {

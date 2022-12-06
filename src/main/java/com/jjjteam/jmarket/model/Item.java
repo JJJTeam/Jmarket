@@ -67,10 +67,10 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ItemSize itemSize;		//상품 사이즈
     
-     
-    @OneToMany(mappedBy = "item")
-	private List<ItemImg> itemImgs;
-    
+
+//    @OneToMany(mappedBy = "item")
+//	private List<ItemImg> itemImgs;
+
 //    @Builder
 //    public Item(
 //    		String itemNm, 
