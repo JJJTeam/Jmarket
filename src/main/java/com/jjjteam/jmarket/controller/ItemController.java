@@ -141,10 +141,10 @@ public class ItemController {
 	}
 
 	// 상품 삭제
-	@DeleteMapping(value = "/admin/item/delete/{itemId}")
+	@GetMapping(value = "/admin/item/delete/{itemId}")
 	public String delete(@PathVariable("itemId") Long id) {
 		itemService.deleteItem(id);
-		return "redirect:/";
+		return "redirect:/item/itemList";
 	}
 
 }

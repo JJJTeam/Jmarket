@@ -98,6 +98,7 @@ public class ItemService {
     @Transactional
     public void deleteItem(Long id) {
     	itemRepository.deleteById(id);
+    	System.out.print("@@@@@@@@@@@@@@@@@@@@@@@@@@ 리파지토리 성공");
     }
 	
 }

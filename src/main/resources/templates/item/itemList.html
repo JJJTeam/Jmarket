@@ -40,6 +40,7 @@
 						<td>등록자</td>
 						<td>등록일</td>
 						<td></td>
+						<td></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,7 +53,8 @@
 							th:text="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)} ? '판매중' : '품절'"></td>
 						<td th:text="${item.createdBy}">[구현중]</td>
 						<td th:text="${item.regTime}">[구현중]</td>
-						<td><a th:href="'/admin/item/'+${item.id}">수정</a> | <a th:href="'/admin/item/delete/'+${item.id}">삭제</a></td>
+						<td><a th:href="'/admin/item/'+${item.id}">수정</a></td>
+						<td><a th:href="'/admin/item/delete/'+${item.id}">삭제</a></td>
 					</tr>
 				</tbody>
 			</table>
