@@ -57,6 +57,7 @@ public class CartService {
 		
 		//현재상품이 장바구니에 들어갔는지 확인
 		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
+		
 		if(savedCartItem != null) {
 			savedCartItem.addCount(cartItemDTO.getCount());//장바구니에 있던 상품일 경우 기존 수량에 현재 장바구니에 담을 수량 만큼 더해준다.
 			return savedCartItem.getId();
@@ -83,6 +84,7 @@ public class CartService {
 	        }
 	        
 	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());
+	       System.out.println("@@@ cartDetailDTOList : " + cartDetailDTOList);
 
 	        
 	        return cartDetailDTOList;
