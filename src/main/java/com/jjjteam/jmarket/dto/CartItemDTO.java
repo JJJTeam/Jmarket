@@ -1,6 +1,7 @@
 package com.jjjteam.jmarket.dto;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -17,5 +18,11 @@ public class CartItemDTO {
 	
 	@Min(value =1, message="최소 1개 이상 담아주세요.")
 	private int count;
+	
+	@NotBlank(message = "대표이미지는 필수입니다.")
+	private String repimg;
+	
+	
+	
 	
 }

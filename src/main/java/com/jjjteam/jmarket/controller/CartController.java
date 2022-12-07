@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jjjteam.jmarket.dto.CartDetailDTO;
 import com.jjjteam.jmarket.dto.CartItemDTO;
 import com.jjjteam.jmarket.dto.CartOrderDTO;
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.CartService;
 
@@ -67,8 +69,7 @@ public class CartController {
 			System.out.println(" id   121212w1212111:" + id);
 			//화면으로부터 넘어온 장바구니에 담을 정보와 현재 로그인한 회원의 이메일 정보를 이용하여 장바구니에 상품을 담는 로직을 호출
 			cartItemId = cartService.addCart(cartItemDTO, id);
-			System.out.println("cartItemDTO id   @@@  :" + cartItemId);
-			
+			System.out.println("cartItemDTO id   @@@  :" + cartItemId);	
 			
 		}catch(Exception e) {
 		System.out.print(" @@@@ e :" + e);
@@ -83,7 +84,6 @@ public class CartController {
     public String orderHist(@AuthenticationPrincipal UserDetailsImpl principal, Model model){
         
 		List<CartDetailDTO> cartDetailList = cartService.getCartList(principal.getId());
-        
         model.addAttribute("cartItems", cartDetailList);
         System.out.println("getCartList @@@@ "+ cartDetailList.toString());
         return "cart/cartList";
