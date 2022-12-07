@@ -13,6 +13,7 @@ public class OrderItemDTO {
 	private int count; //주문수량 
 	private int orderPrice; //상품가
 	//private String imgUrl; //상품이미지경로
+	private String repimg;
 	
 	
 	
@@ -20,9 +21,10 @@ public class OrderItemDTO {
 	 * OrderItemDTO 클래스의 생성자로 orderItem객체와 
 	 * 이미지 경로를 파라미터로 받아서 멤버변수로 값을 세팅 
 	 * */
-	public OrderItemDTO(OrderItem orderItem, String imgUrl) {
+	public OrderItemDTO(OrderItem orderItem, String repimg) {
 		this.itemNm = orderItem.getItem().getItemNm();
 		this.count = orderItem.getCount();
+		this.repimg = orderItem.getRepimg();
 		this.orderPrice = orderItem.getOrderPrice();
 		//this.imgUrl =imgUrl;
 	}

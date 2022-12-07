@@ -171,6 +171,7 @@
             var param = JSON.stringify(paramData);
             
             console.log("dataList :" + JSON.stringify(dataList));
+            console.log("param :" + JSON.stringify(param));
             
             $.ajax({
                 url      : url,
@@ -181,7 +182,6 @@
                 cache   : false,
                 success  : function(result, status){
                     alert("주문이 완료 되었습니다.");
-
                     location.href='/orders';
                 },
                 error : function(jqXHR, status, error){
@@ -190,7 +190,8 @@
                         alert('로그인 후 이용해주세요');
                         location.href='/login';
                     } else{
-                        alert(jqXHR.responseJSON.error);
+                       // alert(jqXHR.responseJSON.error);
+                       alert("Ddddd 실패 : : " + error);
                     }
 
                 }
