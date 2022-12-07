@@ -19,6 +19,7 @@ public class CartDetailDTO {
     
 	
     private int count; //수량
+    
 
     //private String imgUrl; //상품 이미지 경로
     
