@@ -18,6 +18,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long>{
 	@Query("select new com.jjjteam.jmarket.dto.CartDetailDTO(ci.id, i.itemNm, i.price, ci.count, i.repimg) " +
 			"from CartItem ci " +
 			"join ci.item i " +
+			
 			"where ci.cart.id = :cartId " +
 //			"and im.item.id = ci.item.id " +
 //			"and im.repimgYn = 'Y' " +

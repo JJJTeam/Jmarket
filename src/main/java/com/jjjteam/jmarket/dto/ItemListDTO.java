@@ -14,6 +14,7 @@ public class ItemListDTO {
 	
 	private Long id;
 	
+	//private String imgUrl;
 	private String itemNm;
 	
 	private Integer price;

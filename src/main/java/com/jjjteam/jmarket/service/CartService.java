@@ -38,7 +38,7 @@ public class CartService {
 	
 	
 	//카트추가하기
-	public Long addCart(CartItemDTO cartItemDTO, Long id ) { //징바구니에 담을 상품 엔티티를 조회
+	public Long addCart(CartItemDTO cartItemDTO, Long id) { //징바구니에 담을 상품 엔티티를 조회
 		System.out.println("@@@@@@@ㅋㅋㅋㅋㅋ");
 		Item item =itemRepository.findById(cartItemDTO.getItemId()).get();
 		System.out.println("item 111111:::  "  + item);
@@ -58,12 +58,14 @@ public class CartService {
 		//현재상품이 장바구니에 들어갔는지 확인
 		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
 		
+		System.out.println("@@@@  savedCartItem : " + savedCartItem);
+		
 		if(savedCartItem != null) {
 			savedCartItem.addCount(cartItemDTO.getCount());//장바구니에 있던 상품일 경우 기존 수량에 현재 장바구니에 담을 수량 만큼 더해준다.
 			return savedCartItem.getId();
 		}else {
 			//장바구니 엔티티, 상품 엔티티, 장바구니에 담을 상품 수량을 이용하여 CartItem엔티티 생성 
-			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount());
+			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount(),  cartItemDTO.getRepimg());
 			
 			cartItemRepository.save(cartItem);//장바구니에 들어갈 상품을 저장
 			return cartItem.getId();
@@ -145,6 +147,7 @@ public class CartService {
 
 	        
 	        Long orderId = orderService.orders(orderDTOList, id);
+	        
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
 	            CartItem cartItem = cartItemRepository
 	                            .findById(cartOrderDTO.getCartItemId())
