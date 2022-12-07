@@ -23,8 +23,6 @@ public class CartDetailDTO {
 
     //private String imgUrl; //상품 이미지 경로
     
-    @NotBlank(message = "대표이미지는 필수입니다.")
-	private String repimg;
     
 
     public CartDetailDTO(Long cartItemId, String itemNm, int price, int count, String repimg){
