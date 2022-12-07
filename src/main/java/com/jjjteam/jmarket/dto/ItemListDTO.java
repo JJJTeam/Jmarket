@@ -15,7 +15,6 @@ public class ItemListDTO {
 	private Long id;
 	
 	//private String imgUrl;
-	
 	private String itemNm;
 	
 	private Integer price;
@@ -25,7 +24,6 @@ public class ItemListDTO {
     public ItemListDTO(Long id, String itemNm, Integer price){
         this.id = id;
         this.itemNm = itemNm;
-      //  this.imgUrl = imgUrl;
         this.price = price;
     }
 

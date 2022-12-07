@@ -86,6 +86,7 @@ public class CartService {
 	        }
 	        
 	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());
+	       System.out.println("@@@ cartDetailDTOList : " + cartDetailDTOList);
 
 	        
 	        return cartDetailDTOList;
