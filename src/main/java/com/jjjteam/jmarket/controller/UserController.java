@@ -85,9 +85,6 @@ public class UserController {
 			return "/mypage/change-password";
 		}
 		if (encoder.matches(nowpassword, userDetails.getPassword())){
-			log.info("nowpassword : {}",nowpassword);
-			log.info("userDTO.getPassword() : {}",userDTO.getPassword());
-			log.info("userDetails.getPassword() : {}",userDetails.getPassword());
 			userService.changeUserPassword(userDetails.getId(),userDTO.getPassword());
 		}
 
@@ -116,5 +113,12 @@ public class UserController {
 	public String ToDeleteAccount(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/delete-account";
+	}
+	@PostMapping("/delete-account")
+	public String ToDeleteAccountProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,String password) {
+		if (encoder.matches(password, userDetails.getPassword())){
+			userService.deleteUserById(userDetails.getId());
+		}
+		return "/index";
 	}
 }
