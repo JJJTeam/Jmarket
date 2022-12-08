@@ -22,9 +22,10 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
     @ManyToOne (fetch = FetchType.LAZY) // 한 주문에 여러 아이템이 들어갈 수 있다.
     @JoinColumn(name = "order_id")
     private Order order;
-
     private int orderPrice; // 주문가격
     private int count; // 수량
+    
+    @Lob
     private String repimg;
 
 
@@ -42,6 +43,7 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
         return orderItem;
     }
 
+    
     //주문 가격과 주문 수량을 곱해서 해당 상품을 주문한 총 가격을 계산하는 메서드
     public int getTotalPrice(){
         return orderPrice * count; // 총 가격: 주문가격*주문수량

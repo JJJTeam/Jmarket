@@ -42,9 +42,10 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
 
-     
+    //주문할 상품 조회
    public Long order(OrderDTO orderDTO, Long id) {
 	   Item item = itemRepository.findById(orderDTO.getItemId()).orElseThrow(EntityNotFoundException::new);
+	   //현재로그인한 회원의 아이디를 이용해서 회원정보 ㅈ
 	   User user = userRepository.findById(id).get();
 	   
 	   List<OrderItem> orderItemList = new ArrayList<>();
