@@ -46,6 +46,11 @@ public class UserService {
         List<String>resultMessege = messege.stream().filter(i -> !i.equals("pass")).collect(Collectors.toList());
         return resultMessege;
     }
+    @Transactional
+    public String PhoneCheck(UserDTO userDTO, boolean phoneAuth, String phoneNumberAuth){
+        String phoneAuthMessege = ValidText.getValidText("phoneAuth",phoneAuth&& userDTO.getUserPhoneNumber().equals(phoneNumberAuth));
+        return phoneAuthMessege;
+    }
 
     @Transactional
     public void registerUser(UserDTO userDTO) {
@@ -88,6 +93,16 @@ public class UserService {
     public void changeUserEmail(Long id, String newEmail){
         User user = userRepository.findById(id).get();
         user.setEmail(newEmail);
+        userRepository.save(user);
+    }
+    public void changeUserPhoneNumber(Long id, String phoneNumber){
+        User user = userRepository.findById(id).get();
+        user.setUserPhoneNumber(phoneNumber);
+        userRepository.save(user);
+    }
+    public void changeUserPassword(Long id, String password){
+        User user = userRepository.findById(id).get();
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
 
