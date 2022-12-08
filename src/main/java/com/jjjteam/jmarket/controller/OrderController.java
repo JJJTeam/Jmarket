@@ -48,18 +48,14 @@ public class OrderController {
             for (FieldError fieldError : fieldErrors) {
                 sb.append(fieldError.getDefaultMessage());
             }
-
             return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
-
-     
-        Long id = principal.getId();
         Long orderId;
-
         try {
+            Long id = principal.getId();
             orderId = orderService.order(orderDTO, id);
         } catch(Exception e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
