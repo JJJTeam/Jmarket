@@ -68,7 +68,7 @@ public class OrderController {
 	//구매이력을 조회하는 호출하는 메서드
 	@GetMapping(value= {"/orders", "/orders/{page}"})
 	public String orderHist(@PathVariable("page") Optional<Integer> page, @AuthenticationPrincipal UserDetailsImpl principal, Model model) {
-		
+		System.out.println(" 구매이력을 조회하는 호출하는 메서드" );
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get(): 0, 4); //한번에 가져올 주문의 개수는 4개로 설정
 		
 		//현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달하여 화면에 전달할 주문 목록데이터를 리턴 값으로 받는다.
@@ -85,11 +85,10 @@ public class OrderController {
 	
 	//주문취소
 	@PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , Principal principal){
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , @AuthenticationPrincipal UserDetailsImpl principal){
 
-	
 		//자바스크립에서 취소할 주문 번호는 조작이 가능하므로 다른사람의 주문을 취소하지 못하도록 주문취소 권한을 검사
-        if(!orderService.validateOrder(orderId, principal.getName())){
+        if(!orderService.validateOrder(orderId, principal.getId().toString())){
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
 

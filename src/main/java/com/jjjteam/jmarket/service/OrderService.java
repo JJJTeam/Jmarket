@@ -42,14 +42,17 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
 
-     
+    //주문할 상품 조회
    public Long order(OrderDTO orderDTO, Long id) {
 	   Item item = itemRepository.findById(orderDTO.getItemId()).orElseThrow(EntityNotFoundException::new);
+	   //현재로그인한 회원의 아이디를 이용해서 회원정보 ㅈ
 	   User user = userRepository.findById(id).get();
 	   
 	   List<OrderItem> orderItemList = new ArrayList<>();
-	   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount());
+	   
+	   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount(), item.getRepimg() );
 	   orderItemList.add(orderItem);
+	   
 	   Order order = Order.createOrder(user, orderItemList);
 	   orderRepository.save(order);
 	   
@@ -75,7 +78,7 @@ public class OrderService {
 //             ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
 //                     (orderItem.getItem().getId(), "Y");
 //             OrderItemDTO orderItemDTO =                     new OrderItemDTO(orderItem, itemImg.getImgUrl());
-			 OrderItemDTO orderItemDTO = new OrderItemDTO(orderItem, "itemImg.getImgUrl()");
+			 OrderItemDTO orderItemDTO = new OrderItemDTO(orderItem, orderItem.getRepimg());
              orderHistDTO.addOrderItemDTO(orderItemDTO);
           }
 		 
@@ -119,7 +122,7 @@ public class OrderService {
 	   for(OrderDTO orderDTO : orderDTOList) {
 		   Item item = itemRepository.findById(orderDTO.getItemId()).orElseThrow(EntityNotFoundException::new);
 		   
-		   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount());
+		   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount() , item.getRepimg());
 		   orderItemList.add(orderItem); 
 	   }
 	   
