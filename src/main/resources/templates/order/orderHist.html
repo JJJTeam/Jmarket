@@ -111,10 +111,12 @@
 
 		<div class="card d-flex">
 			<div th:each="orderItem : ${order.orderItemDTOList}"
-				class="d-flex mb-3">0
+				class="d-flex mb-3">
 
 				<div class="align-self-center w-75">
 					<div class="fs18 font-weight-light">
+					
+					<img th:src="${orderItem.Repimg}" />
 						<span th:text="${orderItem.orderPrice} +'원'"></span> <span
 							th:text="${orderItem.count} +'개'"></span>
 					</div>

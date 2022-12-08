@@ -57,7 +57,10 @@ public class OrderService {
 	   orderRepository.save(order);
 	   
 	   return order.getId();
+   
    }
+
+   
    
    @Transactional(readOnly = true)
    public Page<OrderHistDTO> getOrderList(Long id, Pageable pageable){

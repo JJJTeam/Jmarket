@@ -33,6 +33,7 @@ public class Order extends BaseEntity { // 카멜표기법으로 , db저장은 �
 	private User user;
 
 	private LocalDateTime orderDate; // 주문일
+	private String repimg;
 
 	// 주문상태
 	@Enumerated(EnumType.STRING)
