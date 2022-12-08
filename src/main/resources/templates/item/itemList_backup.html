@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#searchBtn").on("click", function(e) {
+			e.preventDefault();
+			page(0);
+		});
+	});
+
+	function page(page) {
+		var searchDateType = $("#searchDateType").val();
+		var searchSellStatus = $("#searchSellStatus").val();
+		var searchBy = $("#seacrhBy").val();
+		var searchQuery = $("#searchQuery").val();
+
+		location.href = "/item/itemList/" + page + "?searchDateType"
+				+ searchDateType + "&searchSellStatus" + searchSellStatus
+				+ "&searchBy" + searchBy + "&searchQuery" + searchQuery;
+	}
+</script>
+</head>
+<body>
+	<div th:replace="/include/header.html"></div>
+
+	<div class="container container-mt">
+	<h2>상품리스트</h2>
+		<form th:action="@{'/item/itemList/' + ${items.number}}" role="form"
+			method="get" th:object="${items}">
+			<!-- 조회한 상품 데이터 view -->
+			<table class="table table-mb">
+				<thead>
+					<tr>
+						<td>상품아이디</td>
+						<td>상품명</td>
+						<td>상태</td>
+						<td>등록자</td>
+						<td>등록일</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- 이제 얘네가 반복문으로 데이터 출력함-->
+					<tr th:each="item, status: ${items.getContent()}">
+						<td th:text="${item.id}"></td>
+						<td><a th:href="'/item/'+${item.id}"
+							th:text="${item.itemNm}"></a></td>
+						<td
+							th:text="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)} ? '판매중' : '품절'"></td>
+						<td th:text="${item.createdBy}">[구현중]</td>
+						<td th:text="${item.regTime}">[구현중]</td>
+						<td><a th:href="'/admin/item/'+${item.id}">수정</a></td>
+						<td><a th:href="'/admin/item/delete/'+${item.id}">삭제</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+			<!-- 하단 페이지 정보 view -->
+			<div
+				th:with="start=${(items.number/maxPage)*maxPage + 1},
+    end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) 
+    < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+				<!--start= (현재 페이지 번호/ 보여줄 페이지 수)+1, end= start+(보여줄 페이지 수-1) -->
+
+				<ul class="pagination justify-content-center">
+
+					<li class="page-item" th:classappend="${items.first}?'disabled'">
+						<!-- 첫번째 페이지면은 '이전 페이지 보여주기 버튼' 비활성화--> <a
+						th:onclick="'javascript:page(' + ${items.number - 1} + ')'"
+						aria-label='Previous' class="page-link"> <!-- 이전 페이지 ㄱㄱ --> <span
+							aria-hidden='true'>Previous</span>
+					</a>
+
+					</li>
+
+					<li class="page-item"
+						th:each="page: ${#numbers.sequence(start, end)}"
+						th:classappend="${items.number eq page-1}?'active':''">
+						<!-- active 클래스 추가함. 왜냐면은 현재 페이지 일 때 색 넣어줄려고  --> <a
+						th:onclick="'javascript:page(' + ${page - 1} + ')'"
+						th:inline="text" class="page-link a-color">[[${page}]]</a>
+					</li>
+
+					<li class="page-item" th:classappend="${items.last}?'disabled'">
+						<!-- 마지막 페이지면은 '다음 페이지 보여주기 버튼' 비활성화 --> <a
+						th:onclick="'javascript:page(' + ${items.number + 1} + ')'"
+						aria-label='Next' class="page-link"> <!-- 다음 페이지 ㄱㄱ --> <span
+							aria-hidden='true'>Next</span>
+					</a>
+					</li>
+
+				</ul>
+			</div>
+
+		</form>
+	</div>
+
+	<div th:replace="/include/footer.html"></div>
+</body>
+</html>

@@ -130,6 +130,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                         new QItemListDTO( // 원래는 entity 로 변환해줘야 하는데, mainitemdto 의 어노테이션 (QueryProjection)덕분에 dto 로 그냥 사용
                                 item.id,
                                 item.itemNm,
+                                item.repimg,
                                 item.price)
                 )
 				.from(item)
