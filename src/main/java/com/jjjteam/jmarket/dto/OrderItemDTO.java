@@ -16,7 +16,6 @@ public class OrderItemDTO {
 	private String repimg;
 	
 	
-	
 	/*
 	 * OrderItemDTO 클래스의 생성자로 orderItem객체와 
 	 * 이미지 경로를 파라미터로 받아서 멤버변수로 값을 세팅 
