@@ -33,7 +33,7 @@ public class ItemService {
 	private final ItemRepository itemRepository;
     public void saveItem(ItemFormDTO itemFormDTO) throws Exception {
         // 상품 등록
-        Item item = itemFormDTO.createItem();
+        Item item = itemFormDTO.setRepTime().createItem();
         itemRepository.save(item);
 
     }
