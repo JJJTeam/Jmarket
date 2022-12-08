@@ -62,12 +62,8 @@ public class OrderService {
    @Transactional(readOnly = true)
    public Page<OrderHistDTO> getOrderList(Long id, Pageable pageable){
 
-
 	   List<Order> orders = orderRepository.findOrders(id, pageable);
-	   log.warn("orders : {}", orders);
 	   Long totalCount = orderRepository.countOrder(id);
-	   log.warn("totalCount : {}", totalCount);
-	   
 	   List<OrderHistDTO> orderHistDTOs = new ArrayList<>();
 	   
 	   for (Order order: orders) {
@@ -75,9 +71,6 @@ public class OrderService {
 		 List<OrderItem> orderItems = order.getOrderItems();
 		
 		 for (OrderItem orderItem : orderItems) {
-//             ItemImg itemImg = itemImgRepository.findByItemIdAndRepimgYn
-//                     (orderItem.getItem().getId(), "Y");
-//             OrderItemDTO orderItemDTO =                     new OrderItemDTO(orderItem, itemImg.getImgUrl());
 			 OrderItemDTO orderItemDTO = new OrderItemDTO(orderItem, orderItem.getRepimg());
              orderHistDTO.addOrderItemDTO(orderItemDTO);
           }
@@ -92,13 +85,13 @@ public class OrderService {
    
    //주문취소하는 로직 
    @Transactional(readOnly=true)
-   public boolean validateOrder(Long orderId, String email) {
+   public boolean validateOrder(Long orderId, Long id) {
 	  //현재로그인한 사용자와 주문자와 동일한지 검사 같을때는 true 반환
-	   User curUser = userRepository.findByEmail(email);
+	   User curUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 	   Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
 	   User saveUser = order.getUser();
 	   
-	   if(!StringUtils.equals(curUser.getEmail(), saveUser.getEmail())) {
+	   if(curUser.getId()!= saveUser.getId()) {
 		   return false;
 	   }
 	   return true;	
@@ -110,6 +103,7 @@ public class OrderService {
    public void cancelOrder(Long orderId){
        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
        order.cancelOrder();
+
    }
    
    

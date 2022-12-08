@@ -85,10 +85,10 @@ public class OrderController {
 	
 	//주문취소
 	@PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , @AuthenticationPrincipal UserDetailsImpl principal){
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , @AuthenticationPrincipal UserDetailsImpl userDetails){
 
 		//자바스크립에서 취소할 주문 번호는 조작이 가능하므로 다른사람의 주문을 취소하지 못하도록 주문취소 권한을 검사
-        if(!orderService.validateOrder(orderId, principal.getId().toString())){
+        if(!orderService.validateOrder(orderId,userDetails.getId())){
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
 
