@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.controller;
 
 
 import com.jjjteam.jmarket.dto.UserAddressDTO;
+import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import java.util.List;
@@ -58,38 +60,12 @@ public class UserController {
 		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-email";
 	}
-//	@PostMapping("/change-email")
-//	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,
-//									   @Valid String newEmail,BindingResult bindingResult, String inputPassword) {
-//		@Email String email = newEmail;
-//		if(bindingResult.hasErrors()){return "index";}
-//		if(encoder.matches(inputPassword, userDetails.getPassword())){
-//			userService.changeUserEmail(userDetails.getId(),newEmail);
-//			return "/index";
-//		} else {
-//			return "/mypage/passerror";
-//		}
-//	}
-//	@PostMapping("/change-email")
-//	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, String newEmail, Model model , String inputPassword) {
-//		if(!Pattern.matches("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", newEmail)){
-//			model.addAttribute("msg","올바른형식으로 입력해주시기 바랍니다.");
-//			model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
-//			return "/mypage/change-email";
-//		}
-//		if(encoder.matches(inputPassword, userDetails.getPassword())){
-//			userService.changeUserEmail(userDetails.getId(),newEmail);
-//			return "/index";
-//		} else {
-//			return "/mypage/passerror";
-//		}
-//	}
-
 	@PostMapping("/change-email")
-	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, BindingResult bindingResult,String newEmail, Model model , String inputPassword) {
+	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,@Valid UserDTO userDTO, BindingResult bindingResult) {
+		log.info(userDTO.toString());
 		if(bindingResult.hasErrors()){return "index";}
-		if(encoder.matches(inputPassword, userDetails.getPassword())){
-			userService.changeUserEmail(userDetails.getId(),newEmail);
+		if(encoder.matches(userDTO.getPassword(), userDetails.getPassword())){
+			userService.changeUserEmail(userDetails.getId(),userDTO.getEmail());
 			return "/index";
 		} else {
 			return "/mypage/passerror";
@@ -97,15 +73,52 @@ public class UserController {
 	}
 
 	@GetMapping("/change-password")
-	public String ToChangePassword(Model model) {
+	public String ToChangePassword(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
+		model.addAttribute("userDTO", userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-password";
 	}
+	@PostMapping("/change-password")
+	public String ToChangePasswordProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,@Valid UserDTO userDTO,
+										  BindingResult bindingResult, String nowpassword) {
+		if (bindingResult.hasErrors()) {
+			return "/mypage/change-password";
+		}
+		if (encoder.matches(nowpassword, userDetails.getPassword())){
+			userService.changeUserPassword(userDetails.getId(),userDTO.getPassword());
+		}
+
+		return "/index";
+	}
 	@GetMapping("/change-phone-number")
-	public String ToChangePhoneNumber(Model model) {
+	public String ToChangePhoneNumber(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-phone-number";
 	}
+	@PostMapping("/change-phone-number")
+	public String ToChangePhoneNumberProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserDTO userDTO,HttpSession session) {
+		String phoneAuth = userService.PhoneCheck(userDTO,(boolean) session.getAttribute("phoneAuth"),
+				(String) session.getAttribute("phoneNumberAuth"));
+		if (phoneAuth.equals("pass") && encoder.matches(userDTO.getPassword(), userDetails.getPassword())){
+			log.info("TEST@@");
+			userService.changeUserPhoneNumber(userDetails.getId(),(String) session.getAttribute("phoneNumberAuth"));
+		} else {
+			return "/mypage/passerror";
+		}
+		session.removeAttribute("phoneAuth");
+		session.removeAttribute("phoneNumberAuth");
+		return "/index";
+	}
 	@GetMapping("/delete-account")
-	public String ToDeleteAccount(Model model) {
+	public String ToDeleteAccount(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/delete-account";
+	}
+	@PostMapping("/delete-account")
+	public String ToDeleteAccountProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,String password) {
+		if (encoder.matches(password, userDetails.getPassword())){
+			userService.deleteUserById(userDetails.getId());
+		}
+		return "/index";
 	}
 }

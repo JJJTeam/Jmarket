@@ -22,8 +22,8 @@ import javax.validation.constraints.Email;
 @Setter
 @AllArgsConstructor
 @Builder
-@Entity
 @ToString
+@Entity
 public class User {  // 카멜표기법으로 , db저장은 스네이크 표기법
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,6 @@ public class User {  // 카멜표기법으로 , db저장은 스네이크 표기�
     private String email;
     private String password;
     private String userName;
-
-
-
-
     private String userPhoneNumber;
     private byte userSex;                   //성별
     private LocalDate userBirthDate;             //회원생년월일
