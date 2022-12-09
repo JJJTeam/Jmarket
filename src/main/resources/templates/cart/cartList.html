@@ -310,6 +310,17 @@
             총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
         </h2>
 
+
+        <tbody>
+        <tr>
+            <td>
+                <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
+            </td>
+            <td th:text="${defaultUserAddress.person}"></td>
+            <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
+        </tr>
+        </tbody>
+        <button type="button" >배송지변경</button>
         <div class="text-center mt-3">
             
             <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>

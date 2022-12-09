@@ -83,14 +83,7 @@ public class TestController {
 		return "/index";
 	}
 	
-	//@GetMapping("/test/jjjj")
-//	public String testRe() {
-//	    
-//		System.out.println(cartItemRepository.findCartDetailDtoList());
-//		
-//		
-//		return "/" ;
-//	}
+
 	
 	
 	
