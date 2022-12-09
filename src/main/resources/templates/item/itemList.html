@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/item}">
+      layout:decorate="~{layouts/items}">
+
+
 
 <th:block layout:fragment="script">
 <script type="text/javascript">
@@ -69,7 +71,7 @@ section#content div.goodsName a {
 </style>
 </th:block>
 
-	<div layout:fragment="item" class="container container-mt">
+	<div layout:fragment="items" class="container container-mt">
 		<h2>상품리스트</h2>
 		<ul>
 			<li th:each="item, status:${items.getContent()}">
