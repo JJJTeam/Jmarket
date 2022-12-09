@@ -29,7 +29,7 @@ public class UserAddressController {
 	@GetMapping("/member/shipping-address/drop")
 	public String DropAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		userAddressService.dropUserAddress(id,userDetails.getId());
-		return "redirect:/mypage/mypageAddress";
+		return "redirect:/mypage/address";
 	}
 	@GetMapping("/member/shipping-address")
 	public String ToShippingAddress() {
@@ -51,6 +51,6 @@ public class UserAddressController {
 	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
 		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress();}
 		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
-		return "redirect:/mypage/mypageAddress";
+		return "redirect:/mypage/address";
 	}
 }
