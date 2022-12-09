@@ -7,77 +7,26 @@
 <th:block layout:fragment="css">
     <style>
 
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none;
-}
-
-
-
-body {
-
-      height: 100%;
-         overflow-x: hidden;
-    
-}
-
-.cover-container {
-  max-width: 42em;
-}
-
-
-/*
- * Header
- */
-
-.nav-masthead .nav-link {
-  padding: .25rem 0;
-  font-weight: 700;
-  color: rgba(255, 255, 255, .5);
-  background-color: transparent;
-  border-bottom: .25rem solid transparent;
-}
-
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
-}
-
-.nav-masthead .nav-link + .nav-link {
-  margin-left: 1rem;
-}
-
-.nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
-}
   
     </style>
 </th:block>
 
 
-  <div layout:fragment="main" class=" text-center text-white">
+<main layout:fragment="main" class=" text-center text-white">
 
 
 
   
   
-  <div class="" style="height: 100vh;">
+  <div class="main-visual-wrap" >
   
-  <div style="
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-   ">
+ 
   
   <div class="visual-content"style="height: 100%;  overflow: hidden;  width: 100vw;">
   
 
     
-    <div class="visual-main-visual" style="height: 100%;
+    <div class="visual-img" style="height: 100%;
     position: relative;
     width: 100%;">
     
@@ -97,10 +46,10 @@ display: flex;flex-direction: column;
 justify-content: center;
 align-items : center;">
     
-       <div class="container">
+       <div class="container inner">
    
-    <h1>Cover your page.</h1>
-      <p class="lead">Cover is a one-page template for building simple and beautiful home pages. <br/>Download, edit the
+    <h1 lang="en">Cover your page.</h1>
+      <p class="lead" lang="en">Cover is a one-page template for building simple and beautiful home pages. <br/>Download, edit the
         text, and add your own fullscreen background photo to make it your own.</p>
       <p class="lead">
         <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
@@ -111,19 +60,56 @@ align-items : center;">
       
     </div>
     </div>
+    <!-- 1 -->
+   
+   
+   <div class="visual-content"style="height: 100%;  overflow: hidden;  width: 100vw;">
+  
+
+    
+    <div class="visual-img" style="height: 100%;
+    position: relative;
+    width: 100%;">
+    
+    
+    <img src="/images/main/main-visual2.jpeg" style="height: 100%;
+    position: relative;
+    width: 100%;
+    z-index: 0;" alt="logo"> 
+    
+    
+
+   
+    <div class="visual-text " style="position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+display: flex;flex-direction: column;
+justify-content: center;
+align-items : center;">
+    
+       <div class="container inner">
+   
+    <h1 lang="en">Cover your page.</h1>
+      <p class="lead" lang="en">Cover is a one-page template for building simple and beautiful home pages. <br/>Download, edit the
+        text, and add your own fullscreen background photo to make it your own.</p>
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+      </p>
+      </div>
+      <!-- text  -->
+      </div> 
+      
+    </div>
+    </div>
+    <!-- 2 -->
+    
+    
   </div>
     
-    </div>
-
-    </main>
-
-
-
-
-
-
-
- <div class="album py-5 bg-light" style="position:relative;">
+    
+    
+<!-- 상품리스트 메인에 뿌리기  -->
+ <div class="album py-5" style="position:relative;">
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -156,10 +142,7 @@ align-items : center;">
       </div>
       
       
+    </main>
     
     
     
-
-  
-  </div>
-

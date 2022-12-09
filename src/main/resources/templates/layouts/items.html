@@ -9,9 +9,13 @@
 
 <title>JMARKET</title>
 
+<!-- FAVICON  -->
+<link rel="icon" type="image/ico" sizes="16x16" href="/images/common/favicon.ico">
+
+
 <!-- COMMON CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/common.css}" rel="stylesheet">
 
 
 <!-- COMMON JS, Popper.js, and jQuery -->
@@ -20,24 +24,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-<!-- 필요에따라 사용 가능한  -->
 
-
-
-
-
-<th:block layout:fragment="script"></th:block>
-<th:block layout:fragment="css"></th:block>
-
+	
 
 </head>
 
 
 <body>
 
+
+<th:block layout:fragment="script"></th:block>
+<th:block layout:fragment="css"></th:block>
+
+
     <div th:replace="fragments/header::header"></div>
 
-    <div layout:fragment="item" class="item"></div>
+    <div layout:fragment="items" class="item"></div>
+
 
     <div th:replace="fragments/footer::footer"></div>
     
