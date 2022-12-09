@@ -69,7 +69,7 @@ section#content div.goodsName a {
 </style>
 </th:block>
 
-	<div class="container container-mt">
+	<div layout:fragment="item" class="container container-mt">
 		<h2>상품리스트</h2>
 		<ul>
 			<li th:each="item, status:${items.getContent()}">
