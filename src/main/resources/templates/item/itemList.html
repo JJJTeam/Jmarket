@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/item}">
+
+<th:block layout:fragment="script">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#searchBtn").on("click", function(e) {
@@ -22,6 +23,10 @@
 				+ "&searchBy" + searchBy + "&searchQuery" + searchQuery;
 	}
 </script>
+</th:block>
+
+
+<th:block layout:fragment="css">
 <style type="text/css">
 /* ul 점 없애기 */
 ul {
@@ -62,9 +67,7 @@ section#content div.goodsName a {
 	color: #000;
 }
 </style>
-</head>
-<body>
-	<div th:replace="/include/header.html"></div>
+</th:block>
 
 	<div class="container container-mt">
 		<h2>상품리스트</h2>
@@ -86,6 +89,6 @@ section#content div.goodsName a {
 		</ul>
 	</div>
 
-	<div th:replace="/include/footer.html"></div>
-</body>
+
+
 </html>
