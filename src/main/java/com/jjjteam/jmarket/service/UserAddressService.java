@@ -47,8 +47,13 @@ public class UserAddressService {
         return userAddresses.stream().map(UserAddressDTO::new).collect(Collectors.toList());
     }
     @Transactional
-    public void clearDefaultAddress() {
-        UserAddress userAddress = userAddressRepository.findByDefaultAddress(true);
+    public UserAddressDTO loadDefaultAddressByUserId(Long userid) {
+        UserAddress userAddresses = userAddressRepository.findByUserIdAndDefaultAddress(userid,true);
+        return new UserAddressDTO(userAddresses);
+    }
+    @Transactional
+    public void clearDefaultAddress(Long userid) {
+        UserAddress userAddress = userAddressRepository.findByUserIdAndDefaultAddress(userid,true);
         if (userAddress!=null){
             userAddress.setDefaultAddress(null);
             userAddressRepository.save(userAddress);

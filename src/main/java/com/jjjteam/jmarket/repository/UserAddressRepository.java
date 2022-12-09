@@ -14,6 +14,8 @@ import java.util.Optional;
 public interface UserAddressRepository extends JpaRepository<UserAddress, Long> {
     List<UserAddress> findByUserId(Long userId);
 
+    UserAddress findByUserIdAndDefaultAddress(Long userId, Boolean checkboxValue);
+
     UserAddress findByDefaultAddress(Boolean checkboxValue);
 
     UserAddress findByUserIdAndId(Long userId, Long Id);

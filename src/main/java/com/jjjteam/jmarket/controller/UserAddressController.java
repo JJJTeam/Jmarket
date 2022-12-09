@@ -37,7 +37,7 @@ public class UserAddressController {
 	}
 	@PostMapping("/member/shipping-address")
 	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
-		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress();}
+		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress(userDetails.getId());}
 		userAddressService.saveNewAddress(userAddressDTO, userDetails.getId());
 		return "redirect:/mypage/address";
 	}
@@ -49,7 +49,7 @@ public class UserAddressController {
 	}
 	@PostMapping("/member/shipping-address/update")
 	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
-		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress();}
+		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress(userDetails.getId());}
 		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
 		return "redirect:/mypage/address";
 	}
