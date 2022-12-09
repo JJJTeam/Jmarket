@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user}">
 
 
-<div th:replace="/include/header.html"></div>
 
-<body>
-<div class="container">
+
+
+<div layout:fragment="user" class="container sub-container" >
     <h2>회원가입 form</h2>
     <form th:action="@{/signup}" th:object="${userDTO}" method="POST">
         <div class="form-group">
@@ -91,12 +93,18 @@
     </form>
 
 </div>
+
+
+
+<th:block layout:fragment="script">
+
 <script th:inline="javascript">
     [# th:each="msg : ${messege}"]
         alert([[${msg}]])
     [/]
 
 </script>
-</body>
-<div th:replace="/include/footer.html"></div>
-<script src="/js/signup.js"></script>
+</th:block>
+
+
+

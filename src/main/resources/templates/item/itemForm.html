@@ -3,19 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/items}">
 
+<!-- 필요에따라 사용 가능한  -->
 <th:block layout:fragment="css">
-
+<style>
+</style>
 </th:block>
 
 
-	
-	
-
-<!-- 필요에따라 사용 가능한  -->
 
 
-
-	<div layout:fragment="items" class="container container-mt">
+	<div layout:fragment="items" class="container sub-container">
 	
 		<p class="h2">상품 등록</p>
 		<hr>
@@ -41,7 +38,7 @@
 
 
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				품목 : <select th:field="*{clothingItems}" class="custom-select">
 					<option value="short_sleeved_T_shirt">반소매티셔츠</option>
 					<option value="long_sleeved_T_shirt">긴소매티셔츠</option>
@@ -51,26 +48,26 @@
 					<option value="sweater">스웨터</option>
 					<option value="sweatshirt">맨투맨</option>
 				</select>
-			</div>
-			<br>
-			<div class="form-group">
+			</div> -->
+			
+			<!-- <div class="form-group">
 				색상 : <select th:field="*{itemColor}" class="custom-select">
 					<option value="BROWN">갈색</option>
 					<option value="BLACK">검은색</option>
 					<option value="WHITE">흰색</option>
 					<option value="NAVY">네이비색</option>
 				</select>
-			</div>
-			<br>
-			<div class="form-group">
+			</div> -->
+			
+			<!-- <div class="form-group">
 				사이즈 : <select th:field="*{itemSize}" class="custom-select">
 					<option value="XL">XL</option>
 					<option value="L">L</option>
 					<option value="M">M</option>
 					<option value="S">S</option>
 				</select>
-			</div>
-			<br>
+			</div> -->
+			
 			<div class="form-group">
 				판매상태 : <select th:field="*{itemSellStatus}" class="custom-select">
 					<option value="SELL">판매</option>
@@ -171,7 +168,7 @@
 			<!-- <div th:if="${#strings.isEmpty(itemFormDTO.id)}" style="text-align: center"> -->
 			<div th:if="${itemFormDTO.id} == null" style="text-align: center">
 				<button th:formaction="@{/item/itemForm}" type="submit"
-					class="btn btn-secondary">저장</button>
+					class="black-button">상품등록하기</button>
 			</div>
 			<div th:unless="${itemFormDTO.id} == null"
 				style="text-align: center">
