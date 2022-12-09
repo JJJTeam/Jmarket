@@ -26,9 +26,13 @@
 
 <!-- 필요에 따라 사용 가능한  -->
 
+
 <script th:src="@{/js/signup.js}"></script>
-<!-- <script src="@{/js/bootstrap.bundle.min.js}"></script>
- -->
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+
+
 
 <th:block layout:fragment="script"></th:block>
 <th:block layout:fragment="css"></th:block>
@@ -42,9 +46,10 @@
     <div th:replace="fragments/header::header"></div>
 
     <div layout:fragment="user"></div>
-
     <div th:replace="fragments/footer::footer"></div>
-    
+     
     </body>
+
+
 </html>
 
