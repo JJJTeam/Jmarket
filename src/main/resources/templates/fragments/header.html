@@ -25,8 +25,8 @@
         <ul class="nav col-12 justify-content-center">
         <li><a href="/item/itemList" class="nav-link link-dark">싱품목록</a></li>
         <li><a href="/item/itemForm" class="nav-link link-dark" sec:authorize="hasRole('ROLE_ADMIN')">상품등록</a></li>
-        <li><a href="#" class="nav-link link-dark" sec:authorize="isAuthenticated()">장바구니 </a></li>
-        <li><a href="#" class="nav-link link-dark" sec:authorize="isAuthenticated()">구매이력</a></li>
+        <li><a href="/cart" class="nav-link link-dark" sec:authorize="isAuthenticated()">장바구니 </a></li>
+        <li><a href="/orders" class="nav-link link-dark" sec:authorize="isAuthenticated()">구매이력</a></li>
         
         
      <li>   

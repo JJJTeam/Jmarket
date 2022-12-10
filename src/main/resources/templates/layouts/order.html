@@ -25,13 +25,9 @@
     
 <script th:src="@{/js/signup.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	
 
 
-<!-- 에디터부분 필요  -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    
-    
 </head>
 
 
@@ -45,7 +41,7 @@
 
     <div th:replace="fragments/header::header"></div>
 
-    <div layout:fragment="items"></div>
+    <div layout:fragment="order"></div>
 
 
     <div th:replace="fragments/footer::footer"></div>

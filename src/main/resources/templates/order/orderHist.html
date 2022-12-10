@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div th:replace="/include/header.html"></div>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/order}">
 
 
-	<script>
+<script>
   function cancelOrder(orderId){
 
 
@@ -44,9 +44,8 @@
  </script>
 
 
-
-
-	<style>
+<th:block layout:fragment="css">
+<style>
 .content-mg {
 	margin-left: 30%;
 	margin-right: 30%;
@@ -80,10 +79,11 @@
 	font-size: 24px
 }
 </style>
+</th:block>
 
 
+<div layout:fragment="order" class="container sub-container">
 
-<div>
 
 	<h2 class="mb-4">구매이력</h2>
 
@@ -159,4 +159,3 @@
 
 </div>
 
-<div th:replace="/include/footer.html"></div>

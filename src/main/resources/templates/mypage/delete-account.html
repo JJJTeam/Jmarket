@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<div th:replace="/include/header.html"></div>
-<div class="container d-flex flex-row">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
+
+
+
+<div layout:fragment="mypage" class="container sub-container">
+
+
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <h2>계정삭제        </h2>
@@ -18,8 +23,7 @@
     </form>
     </div>
 </div>
-<div th:replace="/include/footer.html"></div>
-
-</body>
 
 
+
+</html>

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/user}">
+      layout:decorate="~{layouts/mypage}">
 
-<div layout:fragment="user" class="container d-flex flex-row sub-container">
+
+<div layout:fragment="mypage" class="container sub-container">
+
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <h2>개인정보수정2222</h2>
