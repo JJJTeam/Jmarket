@@ -13,7 +13,7 @@
 
 
 body { height: 100%; overflow-x: hidden;}
-header{position: fixed; top: 0; left: 0; width: 100%; height: 200px;z-index: 999999;}
+header{position: fixed; top: 0; left: 0; width: 100%; height: 200px;z-index: 9;}
 .sub-container{margin-top: 13em;}
 
 
@@ -24,7 +24,10 @@ header{position: fixed; top: 0; left: 0; width: 100%; height: 200px;z-index: 999
 
 
 /*======================== button =============================*/
-
+button{
+	border:none;background: transparent;
+	
+}
 
 .btn-secondary,
 .btn-secondary:hover,
@@ -32,6 +35,7 @@ header{position: fixed; top: 0; left: 0; width: 100%; height: 200px;z-index: 999
   color: #333;
   text-shadow: none;
 }
+
 
 .black-button {
     background: #000;

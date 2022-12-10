@@ -30,25 +30,6 @@
 
 <th:block layout:fragment="css">
 <style type="text/css">
-/* ul 점 없애기 */
-ul {
-	list-style: none;
-}
-/* a 태그 파란색 및 밑줄제거  */
-a:link {
-	color: red;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: blue;
-	text-decoration: underline;
-}
 
 section#content ul li {
 	display: inline-block;
@@ -72,7 +53,7 @@ section#content div.goodsName a {
 </th:block>
 
 	<div layout:fragment="items" class="container sub-container">
-		<h2>상품리스트</h2>
+		
 		<ul>
 			<li th:each="item, status:${items.getContent()}">
 
@@ -84,8 +65,8 @@ section#content div.goodsName a {
 					</a>
 				</div>
 				<div class="goodsName">
-					<a th:href="'/item/'+${item.id}" th:text="${item.itemNm}"></a> <a
-						th:href="'/item/'+${item.id}" th:text="${item.price}+'원'"></a>
+					<a th:href="'/item/'+${item.id}" lang="en" th:text="${item.itemNm}"></a> <a
+						th:href="'/item/'+${item.id}" lang="en" th:text="${item.price}+'원'"></a>
 				</div>
 			</li>
 		</ul>

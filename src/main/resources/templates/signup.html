@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/user}">
+      layout:decorate="~{layouts/mypage}">
 
 
 
-<div layout:fragment="user" class="container sub-container" >
+<div layout:fragment="mypage" class="container sub-container" >
     <h2>회원가입 form</h2>
     <form th:action="@{/signup}" th:object="${userDTO}" method="POST">
         <div class="form-group">

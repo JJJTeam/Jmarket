@@ -105,7 +105,7 @@
 			<!-- 가격 -->
 			<div class="input-group">
 				<div class="input-group-prepend">
-					<span class="input-group-text">가격</span>
+					<span class="input-group-text" lang="en">가격</span>
 				</div>
 				<input type="number" th:field="*{price}" class="form-control"
 					placeholder="상품의 가격을 입력해주세요">
@@ -261,8 +261,8 @@
 				var canvas = document.createElement("canvas");
 				var ctx = canvas.getContext("2d");
 				ctx.drawImage(img, 0, 0);
-				var MAX_WIDTH = 100;
-				var MAX_HEIGHT = 100;
+				var MAX_WIDTH = 500;
+				var MAX_HEIGHT = 500;
 				var width = img.width;
 				var height = img.height;
 				img.onload = function (){
