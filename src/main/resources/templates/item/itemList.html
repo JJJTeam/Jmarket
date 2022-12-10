@@ -54,26 +54,36 @@ section#content div.goodsName a {
 
 	<div layout:fragment="items" class="container sub-container">
 		
-		<ul>
-			<li th:each="item, status:${items.getContent()}">
-
-				<div class="goodsThumb">
+		
+		
+		<div class="" style="padding:40px;">
+		
+		<ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		
+			<li class="col" th:each="item, status:${items.getContent()}">
+            <div class="">
+				
 				<a th:href="@{/item/}+${item.id}">
 				
 <!-- <a th:href="'/item/'+{item.id}"> -->
 					<img th:if="${item.repimg != null}" th:src="${item.repimg}" alt="상품이미지" id = "imgId" >
 					</a>
-				</div>
+				
 				<div class="goodsName">
 					<a th:href="'/item/'+${item.id}" lang="en" th:text="${item.itemNm}"></a> <a
 						th:href="'/item/'+${item.id}" lang="en" th:text="${item.price}+'원'"></a>
 				</div>
+				</div>
 			</li>
+			
+			
 		</ul>
 		
+		</div>
 		
 		
-					<!-- 하단 페이지 정보 view -->
+		
+	<!-- 하단 페이지 정보 view -->
 			<div
 				th:with="start=${(items.number/maxPage)*maxPage + 1},
     end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) 
