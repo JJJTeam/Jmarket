@@ -10,6 +10,91 @@
 </th:block>
 	
 	
+
+	
+	<div layout:fragment="items" class="container sub-container">
+		<input id="itemId" th:value="${item.id}" type="hidden">
+
+		<div class="detail-mt-md">
+         
+         <div class="d-flex">
+		
+			<div class="repImgDiv" style="width:50%">
+				<!-- <img th:src="${item.itemImgDtoList[0].imgUrl}"
+                class="rounded repImg" th:alt="${item.itemNm}"> -->
+				<img alt="첨부이미지" id="imgId" th:if="${item.repimg != null}"
+					th:src="${item.repimg}" />
+			</div>
+
+
+
+			<div class="wd50" style="margin-left:20px">
+
+				<span class="badge-primary mgb-15"
+					th:if="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
+					판매중 </span> <span class="badge btn-danger mgb-15"
+					th:unless="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
+					품절 </span>
+				<div class="h4" th:text="${item.itemNm}"></div>
+				<div class="h6" th:text="${item.itemIntroduction}"></div>
+				<hr class="my-4">
+
+				<div class="text-right">
+					<div class="text-left">
+						<input id="price" name="price" th:value="${item.price}"
+							type="hidden"> <span th:text="${item.price}" lang="en"></span>원
+					</div>
+					<div class="input-group w-50">
+						
+						<!-- <div class="input-group-prepend">
+							<span class="input-group-text">수량</span>
+						</div>
+						 -->
+						<input class="form-control" id="count" min="1" name="count"
+							type="number" value="1">
+							
+							
+							
+					</div>
+				</div>
+				<hr class="my-4">
+
+				<div class="text-right mgt-50">
+					<h5>결제 금액</h5>
+					<h3 class="font-weight-bold" id="totalPrice" name="totalPrice" lang="en"></h3>
+				</div>
+				<div class="text-right"
+					th:if="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
+					<button class="border-button"
+						onclick="addCart()" type="button">장바구니 담기</button>
+					<!-- <button class="btn btn-primary btn-lg" onclick="order()"
+						type="button">주문하기</button> -->
+				</div>
+				<div class="text-right"
+					th:unless="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
+					<button class="btn btn-danger btn-lg" type="button">품절</button>
+				</div>
+				
+			</div>
+			
+			</div>
+			
+		
+		
+		   <div class="border-top mt-30" style="    margin-top: 3em;">
+		   	<div style="margin-top: 2rem;"
+				 th:utext="${item.itemDetail}"></div>
+			
+			
+		   </div>
+		
+			
+			
+		</div>
+
+	</div>
+	
+	
 <th:block layout:fragment="script">
 <script th:inline="javascript">
 $(document).ready(function() {
@@ -94,88 +179,7 @@ function addCart() {
 </script>
 </th:block>
 	
-	<div layout:fragment="items" class="container sub-container">
-
-
-
-		<input id="itemId" th:value="${item.id}" type="hidden">
-
-
-
-		<div class="detail-mt-md">
-
-         
-         
-         <div class="d-flex">
-		
-			<div class="repImgDiv">
-				<!-- <img th:src="${item.itemImgDtoList[0].imgUrl}"
-                class="rounded repImg" th:alt="${item.itemNm}"> -->
-				<img alt="첨부이미지" id="imgId" th:if="${item.repimg != null}"
-					th:src="${item.repimg}" />
-			</div>
-
-
-			<div class="wd50">
-
-				<span class="badge-primary mgb-15"
-					th:if="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
-					판매중 </span> <span class="badge btn-danger mgb-15"
-					th:unless="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
-					품절 </span>
-				<div class="h4" th:text="${item.itemNm}"></div>
-				<div class="h6" th:text="${item.itemIntroduction}"></div>
-				<hr class="my-4">
-
-				<div class="text-right">
-					<div class="text-left">
-						<input id="price" name="price" th:value="${item.price}"
-							type="hidden"> <span th:text="${item.price}" lang="en"></span>원
-					</div>
-					<div class="input-group w-50">
-						
-						<!-- <div class="input-group-prepend">
-							<span class="input-group-text">수량</span>
-						</div>
-						 -->
-						<input class="form-control" id="count" min="1" name="count"
-							type="number" value="1">
-							
-							
-							
-					</div>
-				</div>
-				<hr class="my-4">
-
-				<div class="text-right mgt-50">
-					<h5>결제 금액</h5>
-					<h3 class="font-weight-bold" id="totalPrice" name="totalPrice" lang="en"></h3>
-				</div>
-				<div class="text-right"
-					th:if="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
-					<button class="btn-trans"
-						onclick="addCart()" type="button">장바구니 담기</button>
-					<!-- <button class="btn btn-primary btn-lg" onclick="order()"
-						type="button">주문하기</button> -->
-				</div>
-				<div class="text-right"
-					th:unless="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
-					<button class="btn btn-danger btn-lg" type="button">품절</button>
-				</div>
-				
-			</div>
-			
-			
-			
-			</div>
-			
-			
-			<div class="border-bottom mt-30"></div>
-				<div th:utext="${item.itemDetail}"></div>
-				
-		</div>
-
-	</div>
+	
 
 	
 </html>

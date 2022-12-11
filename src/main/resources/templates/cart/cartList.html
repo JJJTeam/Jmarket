@@ -279,11 +279,12 @@ function orders(){
                             <span class="input-group mt-2">
                                 <span th:id="'price_' + ${cartItem.cartItemId}"
                                       th:data-price="${cartItem.price}"
-                                      th:text="${cartItem.price} + '원'" class="align-self-center mr-2">
+                                      th:text="${cartItem.price} + '원'" class="align-self-center mr-2" lang="en">
                                 </span>
                                 <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
                                        th:value="${cartItem.count}" min="1"
-                                       onchange="changeCount(this)" class="form-control mr-2" >
+                                       onchange="changeCount(this)" class="form-control mr-2" lang="en" >
+                                       
                                 <button type="button" class="close" aria-label="Close">
                                     <span aria-hidden="true" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)">&times;</span>
                                 </button>
@@ -293,7 +294,7 @@ function orders(){
                 </td>
                 <td class="text-center align-middle">
                     <span th:id="'totalPrice_' + ${cartItem.cartItemId}"
-                          name="totalPrice" th:text="${cartItem.price * cartItem.count} + '원'">
+                          name="totalPrice" th:text="${cartItem.price * cartItem.count} + '원'" lang="en">
                     </span>
                 </td>
             </tr>
@@ -301,12 +302,12 @@ function orders(){
         </table>
 
         <h2 class="text-center">
-            총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
+            총 주문 금액 : <span id="orderTotalPrice" class="text-danger" lang="en">0원</span>
         </h2>
 
         <div class="text-center mt-3">
             
-            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+            <button type="button" class="border-button" onclick="orders()">주문하기</button>
             
         </div>
 
