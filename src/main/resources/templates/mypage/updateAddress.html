@@ -1,11 +1,15 @@
+
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
 
 
-<body>
-<div th:replace="/include/header.html"></div>
 
-<div class="container d-flex flex-row">
+
+
+<div layout:fragment="mypage" class="container sub-container">
+
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <form method="post" action="/member/shipping-address/update">
@@ -45,7 +49,8 @@
         </form>
     </div>
 </div>
-<div th:replace="/include/footer.html"></div>
+
+<th:block layout:fragment="script">
 <script th:inline="javascript">
 
 
@@ -59,5 +64,8 @@
 
 </script>
 
-</body>
+</th:block>
 
+
+
+</html>
