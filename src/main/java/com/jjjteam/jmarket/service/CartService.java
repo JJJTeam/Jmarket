@@ -103,8 +103,7 @@ public class CartService {
 	    public boolean validateCartItem(Long cartItemId, Long id){
 	    	//현재로그인한회원조회
 	        User curUser = userRepository.findById(id).get();
-	        
-	        
+
 	       //장바구니 상품을 저장한 회원을 조회
 	        CartItem cartItem = cartItemRepository.findById(cartItemId)
 	                .orElseThrow(EntityNotFoundException::new);
@@ -130,7 +129,7 @@ public class CartService {
 	        cartItemRepository.delete(cartItem);
 	    }
 
-	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, Long id){
+	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, Long id, Long addressNum){
 	        List<OrderDTO> orderDTOList = new ArrayList<>();
 
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
@@ -145,7 +144,7 @@ public class CartService {
 	        }
 
 	        
-	        Long orderId = orderService.orders(orderDTOList, id);
+	        Long orderId = orderService.orders(orderDTOList, id,addressNum);
 	        
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
 	            CartItem cartItem = cartItemRepository
