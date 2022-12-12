@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
+
 import java.util.List;
-import java.util.regex.Pattern;
+
 
 
 @RequiredArgsConstructor
