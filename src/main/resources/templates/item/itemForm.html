@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/items}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/items}">
 
 <!-- 필요에따라 사용 가능한  -->
 <th:block layout:fragment="css">
-<style>
+	<style>
 </style>
 </th:block>
 
 
 
 
-	<div layout:fragment="items" class="container sub-container">
-	
-		<p class="h2">상품 등록</p>
-		<hr>
-		<br>
-		<div>
-			<h4>대표이미지</h4>
+<div layout:fragment="items" class="container sub-container">
+
+	<h2 class="title">상품 등록</h2>
+
+
+
+	<div class="mb-4 mt-4">
+
+		<h4 class="sub-title">대표이미지</h4>
+
+		<button type="button" class="black-button" onclick="openTextFile()">이미지
+			업로드</button>
+
+		<div class="represen-image">
 			<img id="tartgetImg">
 		</div>
-		<br>
-		<button onclick="openTextFile()">Image File Open</button>
 
-		<br>
-		<hr>
+	</div>
 
-		<form method="post" enctype="multipart/form-data"
-			th:object="${itemFormDTO}">
-			<div style="margin-bottom: 25px;"></div>
-			<input type="hidden" th:field="*{id}">
-			<!-- <input type="text" id="repimg" value="" th:filed="*{repimg}">
+
+
+
+	<form method="post" enctype="multipart/form-data"
+		th:object="${itemFormDTO}">
+
+
+		<div style="margin-bottom: 25px;"></div>
+
+
+		<input type="hidden" th:field="*{id}">
+		<!-- <input type="text" id="repimg" value="" th:filed="*{repimg}">
 			<p th:if="${#fields.hasErrors('repimg')}" th:errors="*{repimg}"
 				class="fieldError">Incorrect data</p> -->
-			<input type="hidden" id="repimg" name="repimg">
+		<input type="hidden" id="repimg" name="repimg">
 
 
 
-			<!-- <div class="form-group">
+		<!-- <div class="form-group">
 				품목 : <select th:field="*{clothingItems}" class="custom-select">
 					<option value="short_sleeved_T_shirt">반소매티셔츠</option>
 					<option value="long_sleeved_T_shirt">긴소매티셔츠</option>
@@ -49,8 +60,8 @@
 					<option value="sweatshirt">맨투맨</option>
 				</select>
 			</div> -->
-			
-			<!-- <div class="form-group">
+
+		<!-- <div class="form-group">
 				색상 : <select th:field="*{itemColor}" class="custom-select">
 					<option value="BROWN">갈색</option>
 					<option value="BLACK">검은색</option>
@@ -58,8 +69,8 @@
 					<option value="NAVY">네이비색</option>
 				</select>
 			</div> -->
-			
-			<!-- <div class="form-group">
+
+		<!-- <div class="form-group">
 				사이즈 : <select th:field="*{itemSize}" class="custom-select">
 					<option value="XL">XL</option>
 					<option value="L">L</option>
@@ -67,322 +78,370 @@
 					<option value="S">S</option>
 				</select>
 			</div> -->
-			
-			<div class="form-group">
-				판매상태 : <select th:field="*{itemSellStatus}" class="custom-select">
-					<option value="SELL">판매</option>
-					<option value="SOLD_OUT">품절</option>
-				</select>
-			</div>
-			<br>
 
+		<div class="mb-4 mt-4">
+		<span>판매상태</span>
+			<select th:field="*{itemSellStatus}" class="form-select">
+				<option value="SELL">판매</option>
+				<option value="SOLD_OUT">품절</option>
+			</select>
+		</div>
 
-			<!-- 상품명 -->
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text">상품명</span>
-				</div>
-				<input type="text" th:field="*{itemNm}" class="form-control"
-					placeholder="상품명을 입력해주세요">
-			</div>
+		<!-- 상품명 -->
+		<div class="mb-4 mt-4">
+			<span>상품명</span> <input type="text" th:field="*{itemNm}"
+				class="form-input" placeholder="상품명을 입력해주세요" lang="en">
 			<p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}"
-				class="fieldError">Incorrect data</p>
+				class="fieldError pt-2">Incorrect data</p>
+
+		</div>
 
 
-			<!-- 상품설명 -->
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text">상품설명</span>
-				</div>
-				<input type="text" th:field="*{itemIntroduction}"
-					class="form-control" placeholder="상품설명을 입력해주세요">
+
+		<!-- 원래상품명  <div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text">상품명</span>
 			</div>
+			<input type="text" th:field="*{itemNm}" class="form-control"
+				placeholder="상품명을 입력해주세요">
+		</div>
+		<p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}"
+			class="fieldError">Incorrect data</p>  -->
+
+
+		<div class="mb-4 mt-4">
+			<span>상품설명</span> <input type="text" th:field="*{itemIntroduction}"
+				class="form-input" placeholder="상품설명을 입력해주세요">
+
 			<p th:if="${#fields.hasErrors('itemIntroduction')}"
 				th:errors="*{itemIntroduction}" class="fieldError">Incorrect
 				data</p>
 
+		</div>
 
-			<!-- 가격 -->
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text" lang="en">가격</span>
-				</div>
-				<input type="number" th:field="*{price}" class="form-control"
-					placeholder="상품의 가격을 입력해주세요">
+
+		<!-- 상품설명 -->
+		<!-- <div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text">상품설명</span>
 			</div>
+			<input type="text" th:field="*{itemIntroduction}"
+				class="form-control" placeholder="상품설명을 입력해주세요">
+		</div>
+		<p th:if="${#fields.hasErrors('itemIntroduction')}"
+			th:errors="*{itemIntroduction}" class="fieldError">Incorrect data</p>
+			 -->
+
+
+		<div class="mb-4 mt-4">
+			<span>가격</span> 
+			
+<input type="number" th:field="*{price}" class="form-input"
+				placeholder="상품의 가격을 입력해주세요" lang="en">
+				
 			<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-				class="fieldError">Incorrect data</p>
+			class="fieldError">Incorrect data</p>
+		</div>
 
 
-			<!-- 재고 -->
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text">재고</span>
-				</div>
-				<input type="number" th:field="*{stockNumber}" class="form-control"
-					placeholder="상품의 재고를 입력해주세요">
+
+		<!-- 가격 -->
+		<!-- <div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text" lang="en">가격</span>
 			</div>
-			<p th:if="${#fields.hasErrors('stockNumber')}"
-				th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+			<input type="number" th:field="*{price}" class="form-control"
+				placeholder="상품의 가격을 입력해주세요">
+		</div>
+		<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+			class="fieldError">Incorrect data</p> -->
 
-			<!-- 상품상세내용 -->
-			<div class="form-group">
-				<label for="content">content:</label>
-				<textarea class="form-control summernote" rows="5" id="content"
-					name="itemDetail"></textarea>
+
+<div class="mb-4 mt-4">
+			<span>재고</span> 
+			
+<input type="number" th:field="*{stockNumber}" class="form-input"
+				placeholder="상품의 재고를 입력해주세요" lang="en">
+								
+		<p th:if="${#fields.hasErrors('stockNumber')}"
+			th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+		</div>
+
+
+
+
+
+		<!-- 재고 -->
+		<!-- <div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text">재고</span>
 			</div>
+			<input type="number" th:field="*{stockNumber}" class="form-control"
+				placeholder="상품의 재고를 입력해주세요">
+		</div>
+		<p th:if="${#fields.hasErrors('stockNumber')}"
+			th:errors="*{stockNumber}" class="fieldError">Incorrect data</p> -->
 
-			<p th:if="${#fields.hasErrors('itemDetail')}"
-				th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
+		<!-- 상품상세내용 -->
+		
+		<div class="mb-4 mt-4">
+			<span class="form-input">상세설명 </span> 
+			<textarea class="summernote" rows="5" id="content"
+				name="itemDetail"></textarea>
+		</div>
+
+		<p th:if="${#fields.hasErrors('itemDetail')}"
+			th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
 
 
-			<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 등록할 수 있게 밑의 코드가 출력됨 -->
-			<!-- <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">  -->
-			<!-- 이미지 개수 5개로 제한 -->
-<!--			<div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">-->
-<!--				<div class="custom-file img-div">-->
-<!--					<input type="file" class="custom-file-input" name="itemImgFile">-->
-<!--					&lt;!&ndash; 몇번째 상품 이미지인지 출력 &ndash;&gt;-->
-<!--					<label class="custom-file-label" th:text="상품이미지 + ${num}"></label>-->
-<!--				</div>-->
-<!--			</div>-->
+		<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 등록할 수 있게 밑의 코드가 출력됨 -->
+		<!-- <div th:if="${#lists.isEmpty(itemFormDTO.itemImgDTOList)}">  -->
+		<!-- 이미지 개수 5개로 제한 -->
+		<!--			<div class="form-group" th:each="num: ${#numbers.sequence(1,5)}">-->
+		<!--				<div class="custom-file img-div">-->
+		<!--					<input type="file" class="custom-file-input" name="itemImgFile">-->
+		<!--					&lt;!&ndash; 몇번째 상품 이미지인지 출력 &ndash;&gt;-->
+		<!--					<label class="custom-file-label" th:text="상품이미지 + ${num}"></label>-->
+		<!--				</div>-->
+		<!--			</div>-->
 
 
 
-			<!-- </div>  -->
+		<!-- </div>  -->
 
-			<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 수정할 수 있게 밑의 코드가 출력됨 -->
-			<!-- <div th:if = "${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
+		<!-- 상품 이미지 정보를 담고 있는 리스트가 비어 있으면은 상품을 수정할 수 있게 밑의 코드가 출력됨 -->
+		<!-- <div th:if = "${not #lists.isEmpty(itemFormDTO.itemImgDTOList)}">
         <div class="form-group" th:each="itemImgDTO, status: ${itemFormDTO.itemImgDTOList}">
             <div class="custom-file img-div">
                 <input type="file" class="custom-file-input" name="itemImgFile">
                 <input type="hidden" name="itemImgIds" th:value="${itemImgDTO.id}"> -->
-			<!-- #strings.isEmpty + 삼항연산자 -->
-			<!--  저장된 이미지가 있으면 이미지 이름 출력, 없으면 '상품이미지'+번호를 출력 -->
-			<!--  <label class="custom-file-label" th:text="${not #strings.isEmpty(itemImgDTO.oriImgName)} ? ${itemImgDTO.oriImgName} : '상품이미지' + ${status.index+1}"></label>
+		<!-- #strings.isEmpty + 삼항연산자 -->
+		<!--  저장된 이미지가 있으면 이미지 이름 출력, 없으면 '상품이미지'+번호를 출력 -->
+		<!--  <label class="custom-file-label" th:text="${not #strings.isEmpty(itemImgDTO.oriImgName)} ? ${itemImgDTO.oriImgName} : '상품이미지' + ${status.index+1}"></label>
             </div>
         </div>
     </div>-->
 
-			<!-- 상품 아이디가 없는 경우(상품을 처음 등록하는 경우) 저장 로직을 호출하는 버튼을 보여줌 -->
-			<!-- <div th:if="${#strings.isEmpty(itemFormDTO.id)}" style="text-align: center"> -->
-			<div th:if="${itemFormDTO.id} == null" style="text-align: center">
-				<button th:formaction="@{/item/itemForm}" type="submit"
-					class="black-button">상품등록하기</button>
-			</div>
-			<div th:unless="${itemFormDTO.id} == null"
-				style="text-align: center">
-				<button th:formaction="@{'/admin/item/' + ${itemFormDTO.id} }"
-					type="submit" class="btn btn-secondary">수정</button>
-			</div>
-
-		</form>
+		<!-- 상품 아이디가 없는 경우(상품을 처음 등록하는 경우) 저장 로직을 호출하는 버튼을 보여줌 -->
+		<!-- <div th:if="${#strings.isEmpty(itemFormDTO.id)}" style="text-align: center"> -->
 		
 		
+		<div th:if="${itemFormDTO.id} == null" class="btn-wrap row">
+			<button th:formaction="@{/item/itemForm}" type="submit"
+				class="black-button">상품등록하기</button>
+		</div>
 		
-		
+		<div th:unless="${itemFormDTO.id} == null" style="text-align: center">
+			<button th:formaction="@{'/admin/item/' + ${itemFormDTO.id} }"
+				type="submit" class="btn btn-secondary">수정</button>
+		</div>
 
-<th:block layout:fragment="script">
+	</form>
 
 
 
-<script th:inline="javascript">
-	
-		$('.summernote').summernote({
-			placeholder : "Enter content",
-			tabsize : 2,
-			height : 300
-		});
-	</script>
-	
-	
 
-	
-	<script th:inline="javascript">
-		function bindDomEvent() {
-			$(".custom-file-input").on(
-					"change",
-					function() {
-						var fileName = $(this).val().split("\\").pop(); //이미지 파일명
-						var fileExt = fileName.substring(fileName
-								.lastIndexOf(".") + 1); // 확장자 추출
-						fileExt = fileExt.toLowerCase(); //소문자 변환
 
-						// 클라가 개발자도구로 밑의 세팅을 바꿀 수도 있어서 validation 해줘야함!!
-						if (fileExt != "jpg" && fileExt != "jpeg"
-								&& fileExt != "gif" && fileExt != "png"
-								&& fileExt != "bmp") {
-							alert("이미지 파일만 등록이 가능합니다.");
-							return;
-						}
+	<th:block layout:fragment="script">
 
-						// label 태그 안의 내용을 jquery 의 html 함수를 이용해서 파일명을 입력해준다.
-						$(this).siblings(".custom-file-label").html(fileName);
-					});
-		}
-	</script>
-	
-	
-	<script th:inline="javascript">
-		function openTextFile() {
-			var input = document.createElement("input");
 
-			input.type = "file";
-			input.accept = "image/*";
-			input.id = "uploadInput";
 
-			input.click();
-			input.onchange = function(event) {
-				processFile(event.target.files[0]);
-			};
-		}
-
-		function processFile(file) {
-			var reader = new FileReader();
-			reader.onload = function() {
-
-				var result = reader.result;
-
-				$("#repimg").html(result)
-				$("#repimg2").html(result)
-				$('input[id=repimg]').attr('value', result);
-
-				document.getElementById('tartgetImg').setAttribute('src',
-						result);
-			};
-			reader.readAsDataURL(file);
-		}
-
-		// function processFile(file) {
-		// 	var reader = new FileReader();
-		// 	reader.onload = function(e) {
-		// 		var img = document.createElement("img");
-		// 		img.src = e.target.result;
-		// 		var canvas = document.createElement("canvas");
-		// 		var ctx = canvas.getContext("2d");
-		// 		ctx.drawImage(img, 0, 0);
-		// 		var MAX_WIDTH = 500;
-		// 		var MAX_HEIGHT = "auto"
-		// 		var width = img.width;
-		// 		var height = img.height;
-		// 		img.onload = function (){
-		// 			width = img.width;
-		// 			height = img.height;
-		//
-		// 		if (width > height) {
-		// 			if (width > MAX_WIDTH) {
-		// 				height *= MAX_WIDTH / width;
-		// 				width = MAX_WIDTH;
-		// 			}
-		// 		} else {
-		// 			if (height > MAX_HEIGHT) {
-		// 				width *= MAX_HEIGHT / height;
-		// 				height = MAX_HEIGHT;
-		// 			}
-		// 		}
-		// 		// if (width > MAX_WIDTH) {
-		// 		// 	height *= MAX_WIDTH / width;
-		// 		// 	width = MAX_WIDTH;
-		// 		// }
-		// 		canvas.width = width;
-		// 		canvas.height = height;
-		// 		// canvas.width = 100;
-		// 		// canvas.height = 200;
-		// 		// var ctx = canvas.getContext("2d");
-		// 		ctx.drawImage(img, 0, 0, width, height);
-		// 		// ctx.drawImage(img, 0, 0, 100, 200);
-		// 		dataurl = canvas.toDataURL(file.type);
-		// 		document.getElementById('tartgetImg').src = dataurl;
-		// 		$("#repimg").html(dataurl)
-		// 		$("#repimg2").html(dataurl)
-		// 		$('input[id=repimg]').attr('value', dataurl);
-		// 		}
-		//
-		// 		// document.getElementById('tartgetImg').setAttribute('src',dataurl);
-		// 	};
-		// 	reader.readAsDataURL(file);
-		// }
-
-		$(document).ready(function() {
-
-			$('#imageFile').change(function(evt) {
-
-				var files = evt.target.files;
-				var file = files[0];
-
-				if (file) {
-					// var reader = new FileReader();
-					// reader.onload = function(e) {
-					// 	document.getElementById('preview').src = e.target.result;
-
-					// };
-
-					reader.readAsDataURL(file);
-				}
+		<script th:inline="javascript">
+			$('.summernote').summernote({
+				placeholder : "Enter content",
+				tabsize : 2,
+				height : 300
 			});
-		});
+		</script>
 
-		function ResizeImage() {
-			if (window.File && window.FileReader && window.FileList && window.Blob) {
 
-				var filesToUploads = document.getElementById('imageFile').files;
-				var file = filesToUploads[0];
-				if (file) {
 
-					var reader = new FileReader();
-					// Set the image once loaded into file reader
-					reader.onload = function(e) {
 
-						var img = document.createElement("img");
-						img.src = e.target.result;
+		<script th:inline="javascript">
+			function bindDomEvent() {
+				$(".custom-file-input").on(
+						"change",
+						function() {
+							var fileName = $(this).val().split("\\").pop(); //이미지 파일명
+							var fileExt = fileName.substring(fileName
+									.lastIndexOf(".") + 1); // 확장자 추출
+							fileExt = fileExt.toLowerCase(); //소문자 변환
 
-						var canvas = document.createElement("canvas");
-						var ctx = canvas.getContext("2d");
-						ctx.drawImage(img, 0, 0);
-
-						var MAX_WIDTH = 400;
-						var MAX_HEIGHT = 400;
-						var width = img.width;
-						var height = img.height;
-
-						if (width > height) {
-							if (width > MAX_WIDTH) {
-								height *= MAX_WIDTH / width;
-								width = MAX_WIDTH;
+							// 클라가 개발자도구로 밑의 세팅을 바꿀 수도 있어서 validation 해줘야함!!
+							if (fileExt != "jpg" && fileExt != "jpeg"
+									&& fileExt != "gif" && fileExt != "png"
+									&& fileExt != "bmp") {
+								alert("이미지 파일만 등록이 가능합니다.");
+								return;
 							}
-						} else {
-							if (height > MAX_HEIGHT) {
-								width *= MAX_HEIGHT / height;
-								height = MAX_HEIGHT;
-							}
-						}
-						canvas.width = width;
-						canvas.height = height;
-						var ctx = canvas.getContext("2d");
-						ctx.drawImage(img, 0, 0, width, height);
 
-						dataurl = canvas.toDataURL(file.type);
-						document.getElementById('output').src = dataurl;
-					}
-					reader.readAsDataURL(file);
-
-				}
-
-			} else {
-				alert('The File APIs are not fully supported in this browser.');
+							// label 태그 안의 내용을 jquery 의 html 함수를 이용해서 파일명을 입력해준다.
+							$(this).siblings(".custom-file-label").html(
+									fileName);
+						});
 			}
-		}
+		</script>
 
 
-	</script>
-	
-	
-</th:block>
-		
+		<script th:inline="javascript">
+			function openTextFile() {
+				var input = document.createElement("input");
 
-	</div>
+				input.type = "file";
+				input.accept = "image/*";
+				input.id = "uploadInput";
 
-	
+				input.click();
+				input.onchange = function(event) {
+					processFile(event.target.files[0]);
+				};
+			}
+
+			function processFile(file) {
+				var reader = new FileReader();
+				reader.onload = function() {
+
+					var result = reader.result;
+
+					$("#repimg").html(result)
+					$("#repimg2").html(result)
+					$('input[id=repimg]').attr('value', result);
+
+					document.getElementById('tartgetImg').setAttribute('src',
+							result);
+				};
+				reader.readAsDataURL(file);
+			}
+
+			// function processFile(file) {
+			// 	var reader = new FileReader();
+			// 	reader.onload = function(e) {
+			// 		var img = document.createElement("img");
+			// 		img.src = e.target.result;
+			// 		var canvas = document.createElement("canvas");
+			// 		var ctx = canvas.getContext("2d");
+			// 		ctx.drawImage(img, 0, 0);
+			// 		var MAX_WIDTH = 500;
+			// 		var MAX_HEIGHT = "auto"
+			// 		var width = img.width;
+			// 		var height = img.height;
+			// 		img.onload = function (){
+			// 			width = img.width;
+			// 			height = img.height;
+			//
+			// 		if (width > height) {
+			// 			if (width > MAX_WIDTH) {
+			// 				height *= MAX_WIDTH / width;
+			// 				width = MAX_WIDTH;
+			// 			}
+			// 		} else {
+			// 			if (height > MAX_HEIGHT) {
+			// 				width *= MAX_HEIGHT / height;
+			// 				height = MAX_HEIGHT;
+			// 			}
+			// 		}
+			// 		// if (width > MAX_WIDTH) {
+			// 		// 	height *= MAX_WIDTH / width;
+			// 		// 	width = MAX_WIDTH;
+			// 		// }
+			// 		canvas.width = width;
+			// 		canvas.height = height;
+			// 		// canvas.width = 100;
+			// 		// canvas.height = 200;
+			// 		// var ctx = canvas.getContext("2d");
+			// 		ctx.drawImage(img, 0, 0, width, height);
+			// 		// ctx.drawImage(img, 0, 0, 100, 200);
+			// 		dataurl = canvas.toDataURL(file.type);
+			// 		document.getElementById('tartgetImg').src = dataurl;
+			// 		$("#repimg").html(dataurl)
+			// 		$("#repimg2").html(dataurl)
+			// 		$('input[id=repimg]').attr('value', dataurl);
+			// 		}
+			//
+			// 		// document.getElementById('tartgetImg').setAttribute('src',dataurl);
+			// 	};
+			// 	reader.readAsDataURL(file);
+			// }
+
+			$(document).ready(function() {
+
+				$('#imageFile').change(function(evt) {
+
+					var files = evt.target.files;
+					var file = files[0];
+
+					if (file) {
+						// var reader = new FileReader();
+						// reader.onload = function(e) {
+						// 	document.getElementById('preview').src = e.target.result;
+
+						// };
+
+						reader.readAsDataURL(file);
+					}
+				});
+			});
+
+			function ResizeImage() {
+				if (window.File && window.FileReader && window.FileList
+						&& window.Blob) {
+
+					var filesToUploads = document.getElementById('imageFile').files;
+					var file = filesToUploads[0];
+					if (file) {
+
+						var reader = new FileReader();
+						// Set the image once loaded into file reader
+						reader.onload = function(e) {
+
+							var img = document.createElement("img");
+							img.src = e.target.result;
+
+							var canvas = document.createElement("canvas");
+							var ctx = canvas.getContext("2d");
+							ctx.drawImage(img, 0, 0);
+
+							var MAX_WIDTH = 400;
+							var MAX_HEIGHT = 400;
+							var width = img.width;
+							var height = img.height;
+
+							if (width > height) {
+								if (width > MAX_WIDTH) {
+									height *= MAX_WIDTH / width;
+									width = MAX_WIDTH;
+								}
+							} else {
+								if (height > MAX_HEIGHT) {
+									width *= MAX_HEIGHT / height;
+									height = MAX_HEIGHT;
+								}
+							}
+							canvas.width = width;
+							canvas.height = height;
+							var ctx = canvas.getContext("2d");
+							ctx.drawImage(img, 0, 0, width, height);
+
+							dataurl = canvas.toDataURL(file.type);
+							document.getElementById('output').src = dataurl;
+						}
+						reader.readAsDataURL(file);
+
+					}
+
+				} else {
+					alert('The File APIs are not fully supported in this browser.');
+				}
+			}
+		</script>
+
+
+	</th:block>
+
+
+</div>
+
+
 
 
 </html>

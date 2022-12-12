@@ -37,29 +37,30 @@
 					품절 </span>
 				<div class="h4" th:text="${item.itemNm}"></div>
 				<div class="h6" th:text="${item.itemIntroduction}"></div>
-				<hr class="my-4">
-
-				<div class="text-right">
-					<div class="text-left">
+				
+				
+				
+				
+					<div class="">
 						<input id="price" name="price" th:value="${item.price}"
 							type="hidden"> <span th:text="${item.price}" lang="en"></span>원
 					</div>
-					<div class="input-group w-50">
+					
+					<div class="d-flex">
 						
-						<!-- <div class="input-group-prepend">
-							<span class="input-group-text">수량</span>
-						</div>
-						 -->
-						<input class="form-control" id="count" min="1" name="count"
-							type="number" value="1">
+						
+						
+						<label>수량 </label>
+						<input class="form-input" id="count" min="1" name="count"
+							type="number" value="1" lang="en">
 							
 							
-							
-					</div>
+		
 				</div>
-				<hr class="my-4">
-
-				<div class="text-right mgt-50">
+				
+				
+				
+				<div class="mb-4 mt-5">
 					<h5>결제 금액</h5>
 					<h3 class="font-weight-bold" id="totalPrice" name="totalPrice" lang="en"></h3>
 				</div>

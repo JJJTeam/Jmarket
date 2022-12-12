@@ -9,21 +9,20 @@
     <h2>회원가입</h2>
     <form th:action="@{/signup}" th:object="${userDTO}" method="POST">
        
-        <div class="mb-4 mt-4 d-flex">
-            
-            <div>
+        <div class="mb-4 mt-4 "> 
             <label for="userid">아이디</label>
-            <input type="text" class="form-input" th:field="*{userid}"   placeholder="아이디를 4-20자로 입력해주세요" lang="en"
+            <div class="d-flex">
+            
+            <input type="text" class="form-input" th:field="*{userid}"  placeholder="아이디를 4-20자로 입력해주세요" lang="en"
                    th:classappend="${#fields.hasErrors('userid')} ? 'error(에러시클래스부여)'"/>
              <div th:each="msg : ${#fields.errors('userid')}">
-                <p th:text="${msg}" lang="en"></p>  
+                <p th:text="${msg}" lang="en"></p>
             </div>
-            <button class="black-button" type="button" onclick="checkDoubleId()">중복확인</button>
-            </div>
-            
-            
+             <button class="black-button" type="button" onclick="checkDoubleId()">중복확인</button>
            
             
+            </div>
+              
             <div>
             
             <span id="idCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
@@ -58,60 +57,90 @@
         <span id="userNameCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
         
         
-        <div class="mb-4 mt-4 d-flex">
+        <div class="mb-4 mt-4 ">
+       
+        
+        
             <label for="email">이메일</label>
+        <div class="d-flex">
             <input type="text" class="form-input" th:field="*{email}" placeholder="Enter email" lang="en">
             <button class="black-button" type="button" onclick="checkDoubleEmail()">중복확인</button>
+            </div>
+            
             <span id="emailCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
+            
             <div th:each="msg : ${#fields.errors('email')}">
                 <p th:text="${msg}"></p>
             </div>
 
         </div>
         
-        <div class="mb-4 mt-4 d-flex">
-            <label for="userPhoneNumber">휴대폰:</label>
+        <div class="mb-4 mt-4 ">
+            
+            
+            <label for="userPhoneNumber">휴대폰</label>
+            <div class="d-flex">
             <input class="form-input" th:field="*{userPhoneNumber}" placeholder="숫자만 입력해주세요" lang="en"
                    type="text">
             <button type="button" class="black-button" th:field="${code}" onclick="phoneAuth()">인증번호받기</button>
              </div>
-            <div>
-            <span id="phoneCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
-                <input type="text" name="code" id="code" lang="en">
-                <button type="button" class="black-button" onclick="phoneAuthOk()">확인</button>
-            </div>
+             
             
+                <label for="code">인증번호 입력 </label>
+              
+                <span id="phoneCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
+            
+            <div class="d-flex">
+                   <input type="text" class="form-input" name="code" id="code" lang="en">
+                <button type="button" class="black-button" onclick="phoneAuthOk()">확인</button>
+            
+            </div>
+         
+            </div>
+             
        
         
         <div class="mb-4 mt-4">
-            <div>성별(DTO랑 맵핑은됨)</div>
-            <span class="form-check">
+            <h2>성별(DTO랑 맵핑은됨)</h2>
+            
+            <div class="d-flex form-radio">
+            
+            <span class="form-check me-3">
                 <input checked class="form-check-input" id="exampleRadios1" name="userSex" type="radio"
                        value=1>
                 <label class="form-check-label" for="exampleRadios1">
                     남자
                 </label>
             </span>
-            <span class="form-check">
+            <span class="form-check me-3">
                 <input checked class="form-check-input" id="exampleRadios2" name="userSex" type="radio"
                        value=2>
                 <label class="form-check-label" for="exampleRadios1">
                     여자
                 </label>
             </span>
-            <span class="form-check">
+            <span class="form-check me-3">
                 <input checked class="form-check-input" id="exampleRadios3" name="userSex" type="radio"
                        value=0>
                 <label class="form-check-label" for="exampleRadios1">
                     선택안함
                 </label>
             </span>
+            </div>
+        </div>
+         
+         
+         <div class="mb-4 mt-4 ">
+         <label for="userBirthDate">생년월일</label>
+         <input type="date" class="form-input" th:field="*{userBirthDate}" lang="en">
+         </div>
+        
+        
+        <div class="btn-wrap row">
+        <button class="black-button" type="submit">회원가입</button>
         </div>
         
         
-        <label for="userBirthDate">생년월일</label>
-        <input type="date" th:field="*{userBirthDate}">
-        <button class="black-button" type="submit">회원가입</button>
 <!--        <span th:text="${#messege}">이건 왜 안되지??</span>-->
 <!--        <span>[[${messege}]]</span> 자바스크립트 alert 로 대체-->
     </form>
