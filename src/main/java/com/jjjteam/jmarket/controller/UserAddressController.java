@@ -53,4 +53,10 @@ public class UserAddressController {
 		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
 		return "redirect:/member/address";
 	}
+	@GetMapping("/member/shipping-address/updatedefaultaddress")
+	public String ToUpdateUpdateDefaultAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {
+		userAddressService.clearDefaultAddress(userDetails.getId());
+		userAddressService.updateUserDefaultAddress(id,userDetails.getId());
+		return "redirect:/cart";
+	}
 }

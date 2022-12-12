@@ -30,6 +30,7 @@
                 <td th:text="${address.addressPhoneNumber}"></td>
                 <td th:text="${address.defaultAddress}"></td>
                 <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
+                <td><a th:href="@{/member/shipping-address/updatedefaultaddress(addressNo=${address.id})}">여기로배송</a></td>
             </tr>
 
             </tbody>

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,14 @@ public class UserAddressService {
     public void dropUserAddress(Long id, Long userId) {
         userAddressRepository.deleteByIdAndUserId(id,userId);
 
+    }
+    @Transactional
+    public void updateUserDefaultAddress(Long id, Long userId) {
+        UserAddress userAddress = userAddressRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if(userAddress.getUser().getId().equals(userId)){
+            userAddress.setDefaultAddress(true);
+            userAddressRepository.save(userAddress);
+        };
     }
 
 }
