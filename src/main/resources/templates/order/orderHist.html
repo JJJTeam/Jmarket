@@ -103,11 +103,12 @@
 				</div>
 				<div>
 					<tbody>
-					<tr>
+					<tr><td th:text="${order.userAddress.postCode}"></td>
 						<td>
 							<span th:text="${order.userAddress.address}"></span> <span th:text="${order.userAddress.addressDetail}"></span>
 						</td>
 						<td th:text="${order.userAddress.person}"></td>
+
 						<td th:text="${order.userAddress.addressPhoneNumber}"></td>
 					</tr>
 					</tbody>
