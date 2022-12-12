@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<header th:fragment="header" class="p-3 text-bg-dark mb-auto">
+
+
+  <div class="container">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-md-between">
+    
+    
+      <a href="/" class="">
+        <img src="/images/common/ZARA.svg" alt="logo"> 
+      </a>
+      
+      <nav class="text-end">
+       
+        <ul class="nav col-12 justify-content-center">
+        <li><a href="/item/itemList" class="nav-link link-dark">싱품목록</a></li>
+        <li><a href="/item/itemForm" class="nav-link link-dark" sec:authorize="hasRole('ROLE_ADMIN')">상품등록</a></li>
+        <li><a href="/cart" class="nav-link link-dark" sec:authorize="isAuthenticated()">장바구니 </a></li>
+        <li><a href="/orders" class="nav-link link-dark" sec:authorize="isAuthenticated()">구매이력</a></li>
+        
+        
+     <li>   
+            <span sec:authorize="hasRole('ROLE_USER')">
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <span th:text="${#authentication.name}">//인증된유저이름</span>님
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/mypage/address">배송지관리</a></li>
+                        <li><a class="dropdown-item" href="/mypage/modify">개인정보수정</a></li>
+                      
+                    </ul>
+                </div>
+            </span>
+          
+         </li>  
+         
+         <li>
+         
+            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                        관리자님상품등록하러가세요
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/admin/index">관리자페이지</a></li>
+                        <li><a class="dropdown-item" href="/item/itemForm">상품등록</a></li>
+                        <li><a class="dropdown-item" href="#">Link 3</a></li>
+                    </ul>
+                </div>
+            </span>
+            
+         </li>   
+          
+           <div class="text-end">
+                <button type="button" class="">
+                    <span th:if="${#authorization.expr('isAuthenticated()')}">
+                        <form action="/logout" id="form1" method="post">
+                            <a class="nav-link link-dark" onclick="document.getElementById('form1').submit();">로그아웃</a>
+                        </form>
+
+                    </span>
+                    <span th:unless="${#authorization.expr('isAuthenticated()')}">
+                        <a href="/login" class="nav-link link-dark">로그인</a>
+                    </span>
+                </button>
+                <button type="button" class=""><a href="/signup" class="nav-link link-dark">회원가입</a></button>
+          </div>
+           
+           
+           
+           
+            
+                 
+         
+        
+      </ul>
+      </nav>
+    
+      
+    </div>
+  </div>
+
+    
+
+</header>
+
+
+
+
+</html>

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+#imgId {
+    width: 100%;
+}
+
+.goodsName {
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+}

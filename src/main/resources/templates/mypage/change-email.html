@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<div th:replace="/include/header.html"></div>
-<div class="container d-flex flex-row">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
+
+<!-- 필요에따라 사용 가능한  -->
+<th:block layout:fragment="css">
+<style>
+</style>
+</th:block>
+
+
+
+
+<div layout:fragment="mypage" class="container sub-container">
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <h2>이메일변경</h2>
@@ -26,23 +36,29 @@
     </form>
 
 </div>
-<div th:replace="/include/footer.html"></div>
 
-<script>
-    function checkDoubleEmail(){
-        $.ajax({
-            type:'GET',
-            url:"/api/checkEmail",
-            data: { email: $("#email").val() }
+
+<th:block layout:fragment="script">
+<script th:inline="javascript">
+
+function checkDoubleEmail(){
+    $.ajax({
+        type:'GET',
+        url:"/api/checkEmail",
+        data: { email: $("#email").val() }
+    })
+        .done(function(resp){
+            resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
         })
-            .done(function(resp){
-                resp ? $("#emailCheck").html("사용중인 이메일입니다.") : $("#emailCheck").html("사용가능한 이메일입니다.");
-            })
-            .fail(function(e){
-                alert("error")
-            })
-    }
+        .fail(function(e){
+            alert("error")
+        })
+}
 </script>
-</body>
+</th:block>
+
+
+
+</html>
 
 

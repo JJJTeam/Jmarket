@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
 
 
-<body>
-<div th:replace="/include/header.html"></div>
+<div layout:fragment="mypage" class="container sub-container">
 
-<div class="container d-flex flex-row">
+
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
       <div>배송지관리 <a href="/member/shipping-address">배송지추가</a></div>
@@ -36,7 +37,5 @@
         </table>
     </div>
 </div>
-<div th:replace="/include/footer.html"></div>
 
-</body>
-
+</html>

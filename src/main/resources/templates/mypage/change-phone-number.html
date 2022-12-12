@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<div th:replace="/include/header.html"></div>
-<div class="container d-flex flex-row">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
+
+
+
+<div layout:fragment="mypage" class="container sub-container">
+
     <div th:replace="/mypage/mypageSidebar.html"></div>
     <div style="width: 100%">
         <h2>전화번호변경</h2>
@@ -37,9 +41,10 @@
     </form>
 
 </div>
-<div th:replace="/include/footer.html"></div>
 
-<script>
+
+<th:block layout:fragment="script">
+<script th:inline="javascript">
     function phoneAuth(){
         $.ajax({
             type:'POST',
@@ -72,6 +77,8 @@
     }
 
 </script>
-</body>
+</th:block>
 
+
+</html>
 
