@@ -27,8 +27,6 @@ public class OrderHistDTO {
 		this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		this.orderStatus = order.getOrderStatus();
 		this.userAddress = order.getUserAddress();
-		
-		System.out.println("주문에 뭘 담겼는지 확인 : " + order);
 	}
 
 	

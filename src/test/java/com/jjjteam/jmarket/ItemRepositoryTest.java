@@ -37,6 +37,5 @@ public class ItemRepositoryTest {
 //    	item.setItemColor("테스트상품");
     	
         Item savedItem = itemRepository.save(item);
-        System.out.println(savedItem.toString());
     }
 }

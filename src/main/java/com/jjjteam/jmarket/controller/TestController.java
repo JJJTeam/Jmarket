@@ -77,12 +77,11 @@ public class TestController {
 	}
 
 	@PostMapping("/test")
-	public String registerUser(UserDTO userDTO, BindingResult bindingResult, Model model, HttpSession session) {
-		if(bindingResult.hasErrors()){return "test";}
-		userService.registerUser(userDTO);
+	public String registerUser(UserDTO userDTO) {
+
 		return "/index";
 	}
-	
+
 
 	
 	

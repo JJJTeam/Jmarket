@@ -66,8 +66,7 @@ public class ItemService {
     // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음
     @Transactional(readOnly = true) // 트랜젝션을 readOnly 로 설정할 경우, JPA 가 변경감지(더티체킹)를 수행하지 않아서 성능 향상됨 _데이터 수정이 일어나지 않기 때문에
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
-    	log.info("테으스팅비낟.");
-    	itemRepository.getAdminItemPage(itemSearchDto, pageable).getContent().stream().forEach(x -> System.out.print(x.getRepimg()));
+//    	itemRepository.getAdminItemPage(itemSearchDto, pageable).getContent().stream().forEach(x -> System.out.print(x.getRepimg()));
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
@@ -82,7 +81,6 @@ public class ItemService {
     @Transactional
     public void deleteItem(Long id) {
     	itemRepository.deleteById(id);
-    	System.out.print("@@@@@@@@@@@@@@@@@@@@@@@@@@ 리파지토리 성공");
     }
 	
 }

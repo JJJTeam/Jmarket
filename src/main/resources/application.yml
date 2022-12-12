@@ -12,12 +12,13 @@ spring:
     password: JJJTeam
   thymeleaf:
     cache:  false
-  multipart:
-    maxFileSize: 20MB
-    maxRequestSize: 100MB
   devtools:
     restart:
       enabled: true
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:
@@ -34,7 +35,7 @@ logging:
 
 server:
   port: 8082
-  
+
 spring:
   config:
     activate:
@@ -42,21 +43,16 @@ spring:
   devtools:
     livereload:
       enabled: true
-          
-
-#  servlet:
-#    multipart:
-#      max-file-size: 50MB
-#      max-request-size: 50MB
-      
-
-            
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
+  servlet:
+    multipart:
+      max-file-size:  200MB
+      max-request-size: 200MB
 
 
 itemImgLocation: /Users/jeongsujin/shop/study/item

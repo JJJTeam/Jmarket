@@ -39,19 +39,11 @@ public class CartController {
 	
 	@PostMapping(value="/cart")
 	public @ResponseBody ResponseEntity order(@RequestBody @Valid CartItemDTO cartItemDTO, BindingResult bindingResult, @AuthenticationPrincipal UserDetailsImpl principal) {
-		System.out.println("ddd@@@@ 카트 컨트롤러 !!!1 ");
-		System.out.println("ddd@@@@ cartItemDTO : " + cartItemDTO.getItemId());
-		
 		//장바구니에 담을 상품정보를 받는 cartItemDTO객체에 데이터 바인딩시 에러가 있는지 검사 
 		
 		if(bindingResult.hasErrors()) {
-			System.out.println("@@@@@1번에러");
 			StringBuilder sb = new StringBuilder();
-			
 			List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-			
-			System.out.println("bindingResult.getFieldErrors @@@@ : " + bindingResult.getFieldErrors());
-			
 			for (FieldError fieldError : fieldErrors) {
                 sb.append(fieldError.getDefaultMessage());
                 
@@ -60,18 +52,12 @@ public class CartController {
 		}
 		
 	    Long id = principal.getId(); //현재로그인한 회원의 이메일정보를 변수에 저장
-	    System.out.println("id" + id);
 		Long cartItemId;
 		
 		try {
-			System.out.println(" cartItemDTO  2333333 :" + cartItemDTO.toString());
-			System.out.println(" id   121212w1212111:" + id);
 			//화면으로부터 넘어온 장바구니에 담을 정보와 현재 로그인한 회원의 이메일 정보를 이용하여 장바구니에 상품을 담는 로직을 호출
 			cartItemId = cartService.addCart(cartItemDTO, id);
-			System.out.println("cartItemDTO id   @@@  :" + cartItemId);	
-			
 		}catch(Exception e) {
-		System.out.print(" @@@@ e :" + e);
 		 return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		//결과값으로 생성된 장바구니 상품 아이디와 요쳥이 성공하였다는 HTTP 응답상태코드를 반환
