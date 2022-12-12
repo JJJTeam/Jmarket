@@ -53,7 +53,7 @@
             <thead>
             <tr class="text-center">
                 <td>
-                    <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
+                    <input type="checkbox" class="form-input" id="checkall" onclick="checkAll()"> 전체선택
                 </td>
                 <td>상품정보</td>
                 <td>상품금액</td>
@@ -234,6 +234,8 @@
                 }
             });
         }
+        
+        
 
         function orders(){
 
@@ -252,9 +254,10 @@
             });
 
             paramData['cartOrderDTOList'] = dataList;
-            paramData['addressNum']=$("#defaultUserAddressId").val();
+            //paramData['addressNum']=$("#defaultUserAddressId").val();
             var param = JSON.stringify(paramData);
-
+            
+            console.log("dataList" + JSON.stringify(dataList) );
             $.ajax({
                 url      : url,
                 type     : "POST",
@@ -272,7 +275,7 @@
                         alert('로그인 후 이용해주세요');
                         location.href='/login';
                     } else{
-                        // alert(jqXHR.responseJSON.error);
+                        //alert(jqXHR.responseJSON.error);
                         alert("Ddddd 실패 : : " + error);
                     }
 

@@ -60,7 +60,8 @@ legend { display: block;overflow: hidden; position: absolute; left: -9999px; tex
 textarea { resize: none } 
 
 input { -moz-appearance: none; appearance: none; border-radius: 0;border: 0;} 
-button { margin: 0; padding: 0; border: 0; background: 0; outline: none } 
+
+ button { margin: 0; padding: 0; border: 0; background: 0; outline: none } 
 
 button,
 input { -webkit-appearance: none } 
