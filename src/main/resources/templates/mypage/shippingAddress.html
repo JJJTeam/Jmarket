@@ -47,16 +47,11 @@
     </div>
 </div>
 
-<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
-     
-   
 <th:block layout:fragment="script">
-     
+    <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<!--    <script src="t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
 <script th:inline="javascript">
-
-
             function Postcode() {
-            	
                 new daum.Postcode({
                     oncomplete: function(data) {
                         var addr = ''; // 주소 변수
@@ -77,6 +72,6 @@
                 }).open();
             }
         </script>
-        </th:block>
+</th:block>
 
 </html>
