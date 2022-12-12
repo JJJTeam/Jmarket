@@ -3,6 +3,7 @@ package com.jjjteam.jmarket.test;
 
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.constant.ValidText;
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
@@ -16,7 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -107,6 +112,7 @@ public class TestControllerService {
                 .build();
         userRepository.save(user);
     }
+
 
 
 }
