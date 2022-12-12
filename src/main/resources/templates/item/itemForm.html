@@ -80,8 +80,8 @@
 			</div> -->
 
 		<div class="mb-4 mt-4">
-		<span>판매상태</span>
-			<select th:field="*{itemSellStatus}" class="form-select">
+			<span>판매상태</span> <select th:field="*{itemSellStatus}"
+				class="form-select">
 				<option value="SELL">판매</option>
 				<option value="SOLD_OUT">품절</option>
 			</select>
@@ -97,18 +97,6 @@
 		</div>
 
 
-
-		<!-- 원래상품명  <div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text">상품명</span>
-			</div>
-			<input type="text" th:field="*{itemNm}" class="form-control"
-				placeholder="상품명을 입력해주세요">
-		</div>
-		<p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}"
-			class="fieldError">Incorrect data</p>  -->
-
-
 		<div class="mb-4 mt-4">
 			<span>상품설명</span> <input type="text" th:field="*{itemIntroduction}"
 				class="form-input" placeholder="상품설명을 입력해주세요">
@@ -116,78 +104,69 @@
 			<p th:if="${#fields.hasErrors('itemIntroduction')}"
 				th:errors="*{itemIntroduction}" class="fieldError">Incorrect
 				data</p>
-
 		</div>
 
 
-		<!-- 상품설명 -->
-		<!-- <div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text">상품설명</span>
-			</div>
-			<input type="text" th:field="*{itemIntroduction}"
-				class="form-control" placeholder="상품설명을 입력해주세요">
+	
+
+		<div class="mb-4 mt-4">
+			<span>가격</span> <input type="number" th:field="*{price}"
+				class="form-input" placeholder="상품의 가격을 입력해주세요" lang="en">
+
+			<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+				class="fieldError">Incorrect data</p>
 		</div>
-		<p th:if="${#fields.hasErrors('itemIntroduction')}"
-			th:errors="*{itemIntroduction}" class="fieldError">Incorrect data</p>
-			 -->
+
+
 
 
 		<div class="mb-4 mt-4">
-			<span>가격</span> 
-			
-<input type="number" th:field="*{price}" class="form-input"
-				placeholder="상품의 가격을 입력해주세요" lang="en">
-				
-			<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-			class="fieldError">Incorrect data</p>
+			<span>재고</span> <input type="number" th:field="*{stockNumber}"
+				class="form-input" placeholder="상품의 재고를 입력해주세요" lang="en">
+
+			<p th:if="${#fields.hasErrors('stockNumber')}"
+				th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
 		</div>
 
 
 
-		<!-- 가격 -->
-		<!-- <div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text" lang="en">가격</span>
-			</div>
-			<input type="number" th:field="*{price}" class="form-control"
-				placeholder="상품의 가격을 입력해주세요">
-		</div>
-		<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-			class="fieldError">Incorrect data</p> -->
+		<div class="mb-4 mt-4">
+			<span>소재</span> <input type="text" th:field="*{itemMaterial}"
+				class="form-input" placeholder="소재  입력 값입니다" lang="en">
 
-
-<div class="mb-4 mt-4">
-			<span>재고</span> 
-			
-<input type="number" th:field="*{stockNumber}" class="form-input"
-				placeholder="상품의 재고를 입력해주세요" lang="en">
-								
-		<p th:if="${#fields.hasErrors('stockNumber')}"
-			th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+			<p th:if="${#fields.hasErrors('itemMaterial')}"
+				th:errors="*{itemMaterial}" class="fieldError">Incorrect data</p>
 		</div>
 
 
 
+		<div class="mb-4 mt-4">
+			<span>세탁</span> <input type="text" th:field="*{itemWashing}"
+				class="form-input" placeholder="세탁방법" lang="en">
 
-
-		<!-- 재고 -->
-		<!-- <div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text">재고</span>
-			</div>
-			<input type="number" th:field="*{stockNumber}" class="form-control"
-				placeholder="상품의 재고를 입력해주세요">
+			<p th:if="${#fields.hasErrors('itemWashing')}"
+				th:errors="*{itemWashing}" class="fieldError">Incorrect data</p>
 		</div>
-		<p th:if="${#fields.hasErrors('stockNumber')}"
-			th:errors="*{stockNumber}" class="fieldError">Incorrect data</p> -->
+
+
+		<div class="mb-4 mt-4">
+			<span>원단함유량</span> <input type="text" th:field="*{itemFabric}"
+				class="form-input" placeholder="원단함유량를 입력해주세요" lang="en">
+
+			<p th:if="${#fields.hasErrors('itemFabric')}"
+				th:errors="*{itemFabric}" class="fieldError">Incorrect data</p>
+		</div>
+
+
+
+
+
 
 		<!-- 상품상세내용 -->
-		
+
 		<div class="mb-4 mt-4">
-			<span class="form-input">상세설명 </span> 
-			<textarea class="summernote" rows="5" id="content"
-				name="itemDetail"></textarea>
+			<span class="form-input">상세설명 </span>
+			<textarea class="summernote" rows="5" id="content" name="itemDetail"></textarea>
 		</div>
 
 		<p th:if="${#fields.hasErrors('itemDetail')}"
@@ -224,13 +203,13 @@
 
 		<!-- 상품 아이디가 없는 경우(상품을 처음 등록하는 경우) 저장 로직을 호출하는 버튼을 보여줌 -->
 		<!-- <div th:if="${#strings.isEmpty(itemFormDTO.id)}" style="text-align: center"> -->
-		
-		
+
+
 		<div th:if="${itemFormDTO.id} == null" class="btn-wrap row">
 			<button th:formaction="@{/item/itemForm}" type="submit"
 				class="black-button">상품등록하기</button>
 		</div>
-		
+
 		<div th:unless="${itemFormDTO.id} == null" style="text-align: center">
 			<button th:formaction="@{'/admin/item/' + ${itemFormDTO.id} }"
 				type="submit" class="btn btn-secondary">수정</button>

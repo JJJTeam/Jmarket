@@ -13,9 +13,9 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, audio, video { margin: 0; padding: 0; border: 0; font-size: 14px; line-height: 24px; font-style: normal; 
+time, audio, video { margin: 0; padding: 0; border: 0; font-size:12px; line-height: 24px; font-style: normal; 
     font-weight: 400; vertical-align: baseline; 
-    line-height: 1.2; letter-spacing: -1px; color: #191919;
+    line-height: 1.5; letter-spacing: -1px; color: #191919;
     font-family:"Noto Sans KR", "Montserrat", sans-serif,"맑은 고딕","Nanum Gothic","나눔 고딕","돋움",dotum,sans-serif;} 
 
 mark{ margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; background: none; }
@@ -36,10 +36,6 @@ a { color: inherit; text-decoration: none; }
 
 
 
-*,
-:after,
-:before,
-html { box-sizing: border-box } 
 
 /* img { width: 100%; max-width: 100%; vertical-align: top }  */
 

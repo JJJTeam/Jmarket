@@ -1,6 +1,8 @@
 package com.jjjteam.jmarket.dto;
 
 
+import javax.persistence.Column;
+
 import com.querydsl.core.annotations.QueryProjection;
 
 import lombok.Data;
@@ -19,6 +21,15 @@ public class ItemListDTO {
 	private String itemNm;
 	
 	private Integer price;
+	
+	private String itemMaterial;
+  	
+  	private String itemWashing;
+  	
+  	private String itemFabric;
+  	
+  	
+    
 	
 	
 	@QueryProjection // entity 로 원래 바꿨었는데, 이 어노테이션을 쓰면은 dto 로 객체를 변환할 수 있다.
