@@ -74,7 +74,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
   datasource:
     url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest

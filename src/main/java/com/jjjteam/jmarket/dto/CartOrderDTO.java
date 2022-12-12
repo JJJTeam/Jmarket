@@ -13,5 +13,6 @@ public class CartOrderDTO {
 	
 	private Long cartItemId;
 	private List<CartOrderDTO> cartOrderDTOList;
+	private Long addressNum;
 
 }

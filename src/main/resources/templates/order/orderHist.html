@@ -91,7 +91,18 @@
 
 		<div class="d-flex mb-3 align-self-center">
 			<h4 th:text="${order.orderDate} + '주문'"></h4>
-
+			<h4 th:text="${order.userAddress} + '주문'"></h4>
+<div>
+			<tbody>
+			<tr>
+<!--				<td>-->
+<!--					<span th:text="${order.userAddress.address}"></span> <span th:text="${order.userAddress.addressDetail}"></span>-->
+<!--				</td>-->
+<!--				<td th:text="${order.userAddress.person}"></td>-->
+<!--				<td th:text="${order.userAddress.addressPhoneNumber}"></td>-->
+			</tr>
+			</tbody>
+</div>
 			<div class="ml-3">
 				
 				
@@ -116,9 +127,9 @@
 				<div class="align-self-center w-75">
 					<div class="fs18 font-weight-light">
 					
-					<img th:src="${orderItem.Repimg}" />
-						<span th:text="${orderItem.orderPrice} +'원'"></span> <span
-							th:text="${orderItem.count} +'개'"></span>
+					<img width="100px" th:src="${orderItem.Repimg}" />
+						<span th:text="${orderItem.orderPrice} +'원'"></span>
+						<span th:text="${orderItem.count} +'개'"></span>
 					</div>
 				</div>
 

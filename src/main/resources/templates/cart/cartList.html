@@ -31,206 +31,7 @@
 </style>
 </th:block>
 
-<th:block layout:fragment="script">
-<script th:inline="javascript">
-//주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
-$(document).ready(function(){
-    $("input[name=cartChkBox]").change( function(){
-        getOrderTotalPrice();
-    });
 
-});
-
-
-
-
-//getOrderTotalPrice() 총 주문금액을 구하는 함수
-function getOrderTotalPrice(){
-    var orderTotalPrice = 0;
-    
-    //현재 체크된 장바구니 상품들의 가격과 수량을 곱해서 총 주문 금액을 제시
-    $("input[name=cartChkBox]:checked").each(function() {
-        var cartItemId = $(this).val();
-        var price = $("#price_" + cartItemId).attr("data-price");
-        var count = $("#count_" + cartItemId).val();
-        orderTotalPrice += price*count;
-    });
-   
-    //총 주문 금액
-    $("#orderTotalPrice").html(orderTotalPrice+'원');
-}
-
-
-//장바구니에 들어있는 상품의 수량을 변경 시 상품의가격과 상품의 수량을 곱해서 상품금액을 변경
-function changeCount(obj){
-    var count = obj.value;
-    var cartItemId = obj.id.split('_')[1];
-    var price = $("#price_" + cartItemId).data("price");
-    var totalPrice = count*price;
-    $("#totalPrice_" + cartItemId).html(totalPrice+"원");
-    getOrderTotalPrice();
-    //변경된 총 주문 금액을 계산하기 위해 마지막에 getOrderTotalPrice() 호출
-    updateCartItemCount(cartItemId, count);
-}
-
-
-//장바구니에 있는 전체 상품을 체크하거나체크해제하는 함수 
-function checkAll(){
-    if($("#checkall").prop("checked")){
-        $("input[name=cartChkBox]").prop("checked",true);
-    }else{
-        $("input[name=cartChkBox]").prop("checked",false);
-    }
-   
-    //변경된 총 주문 금액을계산하기 위해 마지막에 함수 호출
-    getOrderTotalPrice();
-}
-
-
-
-function updateCartItemCount(cartItemId, count){
-   
-    var url = "/cartItem/" + cartItemId+"?count=" + count;
-
-    $.ajax({
-        url      : url,
-        type     : "PATCH", 
-        dataType : "json",
-        cache   : false,
-        success  : function(result, status){
-            console.log("cartItem count update success");
-        },
-        error : function(jqXHR, status, error){
-            if(jqXHR.status == '401'){
-                alert('로그인 후 이용해주세요');
-                location.href='/login';
-            } else{
-                alert(jqXHR.responseJSON.message);
-            }
-        }
-    });
-}
-
-
-function deleteCartItem(obj){
-    var cartItemId = obj.dataset.id;
-    var url = "/cartItem/" + cartItemId;
-    $.ajax({
-        url      : url,
-        type     : "DELETE",
-        dataType : "json",
-        cache   : false,
-        success  : function(result, status){
-        	alert("장바구니에서 삭제하였습니다.");
-            location.href='/cart';
-        },
-        
-        error : function(jqXHR, status, error){
-            if(jqXHR.status == '401'){
-                alert('로그인 후 이용해주세요');
-                location.href='/login';
-            } else{
-                alert(jqXHR.responseJSON.message);
-            }
-        }
-    });
-}
-
-
-function orders(){
-   
-    var url = "/cart/orders";
-
-    var dataList = new Array();
-    var paramData = new Object();
- 
-
-    $("input[name=cartChkBox]:checked").each(function() {
-        var cartItemId = $(this).val();
-        var data = new Object();
-        data["cartItemId"] = cartItemId;
-        dataList.push(data);
-        console.log("cartItemId :" + cartItemId);
-    });
-
-    paramData['cartOrderDTOList'] = dataList;             
-    var param = JSON.stringify(paramData);
-    
-    console.log("dataList :" + JSON.stringify(dataList));
-    console.log("param :" + JSON.stringify(param));
-    
-    $.ajax({
-        url      : url,
-        type     : "POST",
-        contentType : "application/json",
-        data     : param,
-        dataType : "json",
-        cache   : false,
-        success  : function(result, status){
-            alert("주문이 완료 되었습니다.");
-            location.href='/orders';
-        },
-        error : function(jqXHR, status, error){
-
-            if(jqXHR.status == '401'){
-                alert('로그인 후 이용해주세요');
-                location.href='/login';
-            } else{
-               // alert(jqXHR.responseJSON.error);
-               alert("Ddddd 실패 : : " + error);
-            }
-
-        }
-    });
-
-   
-    
-   //아임포트 결제 api연결
-    
-	/* IMP.init("imp25587836");
-	IMP.request_pay({
-		pg : "kcp",
-		pay_method : "card",
-		merchant_uid : "11-00ddd00011",
-		name : "",
-		amount : 500,
-		buyer_email : "peekaboo32@gmail.com",
-		buyer_name : "angela",
-		buyer_tel : "010-4242-4242",
-		buyer_addr : "부산",
-		buyer_postcode : "01181"
-	}, function(rsp) { // callback
-		if (rsp.success) {
-
-		//jquery http요청
-		jQuery.ajax({
-			url: "https://www.myservice.com/payments/complete",
-			method:"post",
-			headers:{"Content-Type" : "application/json"},
-			data:{
-				imp_uid:res.imp_uid,
-				merchant_uid: rsp.merchant_uid
-			}
-		}).done(function(data){
-			//가맹점서버 결제 API 성공시 로직 
-		})
-
-		} else {
-			alert("결제실패햇습니다. ~_~_~_~_");
-		}
-	});  */  
-
-    
-} 
-
-
-</script>
-
-<!-- iamport.payment.js -->
-<!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
--->	
-
-</th:block>
 
 
     
@@ -304,14 +105,17 @@ function orders(){
         </h2>
 
         <span th:if="${defaultUserAddress}" >
-        <tbody>
-        <tr>
-            <td>
-                <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
-            </td>
-            <td th:text="${defaultUserAddress.person}"></td>
-            <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
-        </tr>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="hidden" id="defaultUserAddressId", th:value="${defaultUserAddress.id}">
+                </td>
+                <td>
+                    <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
+                </td>
+                <td th:text="${defaultUserAddress.person}"></td>
+                <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
+            </tr>
         </tbody>
         </span>
         <button type="button" onclick = "location.href = '/mypage/address' ">배송지변경</button>
@@ -326,3 +130,200 @@ function orders(){
 
 </div>
 
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
+        $(document).ready(function(){
+            $("input[name=cartChkBox]").change( function(){
+                getOrderTotalPrice();
+            });
+
+        });
+
+
+
+
+        //getOrderTotalPrice() 총 주문금액을 구하는 함수
+        function getOrderTotalPrice(){
+            var orderTotalPrice = 0;
+
+            //현재 체크된 장바구니 상품들의 가격과 수량을 곱해서 총 주문 금액을 제시
+            $("input[name=cartChkBox]:checked").each(function() {
+                var cartItemId = $(this).val();
+                var price = $("#price_" + cartItemId).attr("data-price");
+                var count = $("#count_" + cartItemId).val();
+                orderTotalPrice += price*count;
+            });
+
+            //총 주문 금액
+            $("#orderTotalPrice").html(orderTotalPrice+'원');
+        }
+
+
+        //장바구니에 들어있는 상품의 수량을 변경 시 상품의가격과 상품의 수량을 곱해서 상품금액을 변경
+        function changeCount(obj){
+            var count = obj.value;
+            var cartItemId = obj.id.split('_')[1];
+            var price = $("#price_" + cartItemId).data("price");
+            var totalPrice = count*price;
+            $("#totalPrice_" + cartItemId).html(totalPrice+"원");
+            getOrderTotalPrice();
+            //변경된 총 주문 금액을 계산하기 위해 마지막에 getOrderTotalPrice() 호출
+            updateCartItemCount(cartItemId, count);
+        }
+
+
+        //장바구니에 있는 전체 상품을 체크하거나체크해제하는 함수
+        function checkAll(){
+            if($("#checkall").prop("checked")){
+                $("input[name=cartChkBox]").prop("checked",true);
+            }else{
+                $("input[name=cartChkBox]").prop("checked",false);
+            }
+
+            //변경된 총 주문 금액을계산하기 위해 마지막에 함수 호출
+            getOrderTotalPrice();
+        }
+
+
+
+        function updateCartItemCount(cartItemId, count){
+
+            var url = "/cartItem/" + cartItemId+"?count=" + count;
+
+            $.ajax({
+                url      : url,
+                type     : "PATCH",
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    console.log("cartItem count update success");
+                },
+                error : function(jqXHR, status, error){
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/login';
+                    } else{
+                        alert(jqXHR.responseJSON.message);
+                    }
+                }
+            });
+        }
+
+
+        function deleteCartItem(obj){
+            var cartItemId = obj.dataset.id;
+            var url = "/cartItem/" + cartItemId;
+            $.ajax({
+                url      : url,
+                type     : "DELETE",
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("장바구니에서 삭제하였습니다.");
+                    location.href='/cart';
+                },
+
+                error : function(jqXHR, status, error){
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/login';
+                    } else{
+                        alert(jqXHR.responseJSON.message);
+                    }
+                }
+            });
+        }
+
+        function orders(){
+
+            var url = "/cart/orders";
+
+            var dataList = new Array();
+            var paramData = new Object();
+
+
+            $("input[name=cartChkBox]:checked").each(function() {
+                var cartItemId = $(this).val();
+                var data = new Object();
+                data["cartItemId"] = cartItemId;
+                dataList.push(data);
+                console.log("cartItemId :" + cartItemId);
+            });
+
+            paramData['cartOrderDTOList'] = dataList;
+            paramData['addressNum']=$("#defaultUserAddressId").val();
+            var param = JSON.stringify(paramData);
+
+            $.ajax({
+                url      : url,
+                type     : "POST",
+                contentType : "application/json",
+                data     : param,
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("주문이 완료 되었습니다.");
+                    location.href='/orders';
+                },
+                error : function(jqXHR, status, error){
+
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/login';
+                    } else{
+                        // alert(jqXHR.responseJSON.error);
+                        alert("Ddddd 실패 : : " + error);
+                    }
+
+                }
+            });
+
+
+
+            //아임포트 결제 api연결
+
+            /* IMP.init("imp25587836");
+            IMP.request_pay({
+                pg : "kcp",
+                pay_method : "card",
+                merchant_uid : "11-00ddd00011",
+                name : "",
+                amount : 500,
+                buyer_email : "peekaboo32@gmail.com",
+                buyer_name : "angela",
+                buyer_tel : "010-4242-4242",
+                buyer_addr : "부산",
+                buyer_postcode : "01181"
+            }, function(rsp) { // callback
+                if (rsp.success) {
+
+                //jquery http요청
+                jQuery.ajax({
+                    url: "https://www.myservice.com/payments/complete",
+                    method:"post",
+                    headers:{"Content-Type" : "application/json"},
+                    data:{
+                        imp_uid:res.imp_uid,
+                        merchant_uid: rsp.merchant_uid
+                    }
+                }).done(function(data){
+                    //가맹점서버 결제 API 성공시 로직
+                })
+
+                } else {
+                    alert("결제실패햇습니다. ~_~_~_~_");
+                }
+            });  */
+
+
+        }
+
+
+    </script>
+
+    <!-- iamport.payment.js -->
+    <!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    -->
+
+</th:block>

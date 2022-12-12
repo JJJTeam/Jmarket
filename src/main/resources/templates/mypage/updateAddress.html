@@ -45,7 +45,8 @@
                 </span>
             </div>
             <button type="submit" class="btn btn-primary">주소수정</button>
-            <button type="button" class="btn btn-success btn-sm _delete">삭제</button>
+            <a th:href="@{/member/shipping-address/drop(addressNo=${userAddress.id})}" ><button type="button" class="btn btn-success btn-sm _delete">삭제</button></a>
+
         </form>
     </div>
 </div>

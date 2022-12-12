@@ -7,6 +7,7 @@ import java.util.List;
 import com.jjjteam.jmarket.constant.OrderStatus;
 import com.jjjteam.jmarket.model.Order;
 
+import com.jjjteam.jmarket.model.UserAddress;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,7 @@ public class OrderHistDTO {
 		this.orderId = order.getId();
 		this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		this.orderStatus = order.getOrderStatus();
+		this.userAddress = order.getUserAddress();
 		
 		System.out.println("주문에 뭘 담겼는지 확인 : " + order);
 	}
@@ -33,6 +35,8 @@ public class OrderHistDTO {
 	private Long orderId; // 주문아이디
 	private String orderDate; // 주문 날짜
 	private OrderStatus orderStatus; // 주문 상태
+
+	private UserAddress userAddress;
 
 	// 주문상품리스트
 	private List<OrderItemDTO> orderItemDTOList = new ArrayList<>();
