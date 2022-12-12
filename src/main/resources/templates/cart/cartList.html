@@ -305,7 +305,7 @@ function orders(){
             총 주문 금액 : <span id="orderTotalPrice" class="text-danger" lang="en">0원</span>
         </h2>
 
-
+        <span th:if="${defaultUserAddress}" >
         <tbody>
         <tr>
             <td>
@@ -315,6 +315,7 @@ function orders(){
             <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
         </tr>
         </tbody>
+        </span>
         <button type="button" >배송지변경</button>
         <div class="text-center mt-3">
             

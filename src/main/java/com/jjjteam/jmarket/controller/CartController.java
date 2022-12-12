@@ -83,9 +83,16 @@ public class CartController {
     public String orderHist(@AuthenticationPrincipal UserDetailsImpl principal, Model model){
         
 		List<CartDetailDTO> cartDetailList = cartService.getCartList(principal.getId());
-        UserAddressDTO defaultUserAddressDTO = userAddressService.loadDefaultAddressByUserId(principal.getId());
+        try {
+            UserAddressDTO defaultUserAddressDTO = userAddressService.loadDefaultAddressByUserId(principal.getId());
+            model.addAttribute("defaultUserAddress", defaultUserAddressDTO);
+        }
+        catch (Exception e){
+
+        }
+
         model.addAttribute("cartItems", cartDetailList);
-        model.addAttribute("defaultUserAddress", defaultUserAddressDTO);
+
         return "cart/cartList";
     }
 	
