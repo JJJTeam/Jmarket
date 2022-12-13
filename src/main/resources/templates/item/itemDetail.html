@@ -69,6 +69,8 @@
 						onclick="addCart()" type="button">장바구니 담기</button>
 					<!-- <button class="btn btn-primary btn-lg" onclick="order()"
 						type="button">주문하기</button> -->
+			
+					 
 				</div>
 				<div class="text-right"
 					th:unless="${#strings.equals(item.itemSellStatus,T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)}">
@@ -174,6 +176,7 @@ function addCart() {
 		}
 	});
 }
+
 </script>
 </th:block>
 	
