@@ -13,6 +13,9 @@ public class ItemDTO {
 	private String itemNm;
 	private Integer price;
 	
+	private String itemMaterial;
+	private String itemWashing;
+	private String itemFabric;
 	
 	private String itemDetail;
 	private String sellStatCd;
@@ -21,8 +24,6 @@ public class ItemDTO {
 	private LocalDateTime regTime;
 	private LocalDateTime updateTime;
 	
-	private String itemMaterial;
-	private String itemWashing;
-	private String itemFabric;
+	
 
 }

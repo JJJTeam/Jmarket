@@ -60,7 +60,7 @@ public class CartController {
 		}
 		
 	    Long id = principal.getId(); //현재로그인한 회원의 이메일정보를 변수에 저장
-	    System.out.println("id" + id);
+	    System.out.println("현재로그인한 회원 id : " + id);
 		Long cartItemId;
 		
 		try {

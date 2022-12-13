@@ -256,13 +256,8 @@
             paramData['cartOrderDTOList'] = dataList;
             //paramData['addressNum']=$("#defaultUserAddressId").val();
             var param = JSON.stringify(paramData);
-            
-<<<<<<< HEAD
-            
-            console.log("dataList : " + JSON.stringify(dataList) );
-=======
-            console.log("dataList" + JSON.stringify(dataList) );
->>>>>>> 330d2a0... 장바구니에서 주문하기 안됌
+              console.log("dataList : " + JSON.stringify(dataList) );
+
             $.ajax({
                 url      : url,
                 type     : "POST",

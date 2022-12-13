@@ -40,11 +40,12 @@ public class Item extends BaseEntity {
     
     @Column(nullable = false, length = 200)
     private String itemIntroduction;  //상품 소개 (미들네임)
-    @Column(nullable = false, length = 200)
+    
+    @Column(nullable = false)
   	private String itemMaterial;
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false)
   	private String itemWashing;
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false)
   	private String itemFabric;
   		
 
