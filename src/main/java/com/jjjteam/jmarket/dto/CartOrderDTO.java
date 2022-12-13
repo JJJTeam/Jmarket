@@ -8,10 +8,9 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class CartOrderDTO {
 	
-	private Long cartItemId;
+	private Long cartItemId;//
 	private List<CartOrderDTO> cartOrderDTOList;
 	private Long addressNum;
 

@@ -29,9 +29,6 @@ public class CartItem extends BaseEntity {
 	private int count;
 	private String repimg;
 	
-	private String itemMaterial;
-	private String itemWashing;
-	private String itemFabric;
 
 	
 	

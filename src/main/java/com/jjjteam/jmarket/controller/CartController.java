@@ -156,7 +156,7 @@ public class CartController {
     @ResponseBody
     public ResponseEntity orderCartItem(@RequestBody CartOrderDTO cartOrderDTO, @AuthenticationPrincipal UserDetailsImpl principal){
         List<CartOrderDTO> cartOrderDTOList = cartOrderDTO.getCartOrderDTOList();
-        System.out.println("cartOrderDTOList : " + cartOrderDTOList);
+        System.out.println("cartOrderDTOList :?? " + cartOrderDTOList);
         
         
         if(cartOrderDTOList == null || cartOrderDTOList.size() == 0){
