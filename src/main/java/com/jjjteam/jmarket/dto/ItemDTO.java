@@ -16,7 +16,7 @@ public class ItemDTO {
 	private String itemMaterial;
 	private String itemWashing;
 	private String itemFabric;
-	
+
 	private String itemDetail;
 	private String sellStatCd;
 	

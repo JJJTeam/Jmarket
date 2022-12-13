@@ -235,11 +235,13 @@
         function orders(){
 
         	var url = "/cart/orders";
+        	
             var dataList = new Array();
             var paramData = new Object();
 
             $("input[name=cartChkBox]:checked").each(function() {
-                var cartItemId = $(this).val();
+            
+            	var cartItemId = $(this).val();
                 var data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
@@ -248,25 +250,24 @@
             });
             
             paramData['cartOrderDTOList'] = dataList;
-            //paramData2['addressNum']=$("#defaultUserAddressId").val();
+            paramData['addressNum']=$("#defaultUserAddressId").val();
             
-            
-            var param1 = JSON.stringify(paramData);
-            // var param2 = JSON.stringify(paramData2);
-            console.log(JSON.stringify(param1)) 
+            var param = JSON.stringify(paramData);
             
             
             $.ajax({
                 url      : url,
                 type     : "POST",
                 contentType : "application/json",
-                data     : param1,
+                data     : param,
                 dataType : "json",
                 cache   : false,
+
                 success  : function(result, status){
                     alert("주문이 완료 되었습니다.");
                     location.href='/orders';
                 },
+                
                 error : function(jqXHR, status, error){
 
                     if(jqXHR.status == '401'){
@@ -274,8 +275,8 @@
                         location.href='/login';
                     } else{
                     	
-                        alert(jqXHR.responseJSON.error);
-                        //alert("Ddddd 실패 : : " + jqXHR);
+                        //alert(jqXHR.responseJSON.error);
+                        alert("Ddddd 실패 : : " + jqXHR);
                     }
 
                 }

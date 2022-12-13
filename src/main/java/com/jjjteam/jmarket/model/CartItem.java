@@ -30,10 +30,6 @@ public class CartItem extends BaseEntity {
 	private String repimg;
 	
 
-	
-	
-	
-
 	public static CartItem createCartItem(Cart cart, Item item, int count, String repimg) {
 		CartItem cartItem = new CartItem();
 		cartItem.setCart(cart);
