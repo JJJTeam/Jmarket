@@ -64,6 +64,11 @@ public class ItemFormDTO {
         this.regTime = LocalDateTime.now();
         return this;
     }
+    
+    public ItemFormDTO setUpdateTime(){
+        this.updateTime = LocalDateTime.now();
+        return this;
+    }
 	
 	public Item createItem() {
 		return modelMapper.map(this,  Item.class);
