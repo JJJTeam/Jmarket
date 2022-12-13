@@ -3,20 +3,18 @@ package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
-import com.jjjteam.jmarket.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
-
-import javax.validation.constraints.*;
 
 @Getter
 @Setter

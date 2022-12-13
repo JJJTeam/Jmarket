@@ -1,34 +1,21 @@
 package com.jjjteam.jmarket.controller;
 
 import com.jjjteam.jmarket.constant.ERole;
-import com.jjjteam.jmarket.dto.CartDetailDTO;
-import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Role;
-import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.CartItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.service.ItemService;
 import com.jjjteam.jmarket.service.UserService;
 import com.jjjteam.jmarket.test.TestControllerService;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 @Slf4j

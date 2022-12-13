@@ -1,13 +1,12 @@
 package com.jjjteam.jmarket;
 
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.repository.ItemRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-
-import com.jjjteam.jmarket.model.Item;
-import com.jjjteam.jmarket.repository.ItemRepository;
 
 @SpringBootTest
 @TestPropertySource(properties = {"spring.config.location=classpath:application.yml"})

@@ -1,7 +1,6 @@
 package com.jjjteam.jmarket.controller;
 
 
-
 import com.jjjteam.jmarket.dto.UserAddressDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
@@ -9,18 +8,18 @@ import com.jjjteam.jmarket.service.UserAddressService;
 import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import java.util.List;
 
 

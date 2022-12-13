@@ -3,9 +3,7 @@ package com.jjjteam.jmarket.test;
 
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
-import com.jjjteam.jmarket.constant.ValidText;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
@@ -14,29 +12,18 @@ import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-import com.jjjteam.jmarket.util.Naver_Sens_V2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Service

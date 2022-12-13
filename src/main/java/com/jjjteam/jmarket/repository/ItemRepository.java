@@ -1,14 +1,13 @@
 package com.jjjteam.jmarket.repository;
 
 
-import java.util.List;
-
+import com.jjjteam.jmarket.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
-import com.jjjteam.jmarket.model.Item;
+import java.util.List;
 
 /*
  * Querydsl 을 SpringDataJpa 와 함께 사용하기 위해서는 사용자 정의 repository 를 작성해야 함

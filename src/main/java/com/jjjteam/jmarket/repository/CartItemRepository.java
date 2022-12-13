@@ -1,12 +1,11 @@
 package com.jjjteam.jmarket.repository;
 
-import java.util.List;
-
+import com.jjjteam.jmarket.dto.CartDetailDTO;
+import com.jjjteam.jmarket.model.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.jjjteam.jmarket.dto.CartDetailDTO;
-import com.jjjteam.jmarket.model.CartItem;
+import java.util.List;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Long>{
 

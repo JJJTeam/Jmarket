@@ -1,25 +1,15 @@
 
 package com.jjjteam.jmarket.model;
 
-import java.util.List;
-
-import javax.persistence.*;
-
-
 import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemColor;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.constant.ItemSize;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-
 import com.jjjteam.jmarket.exception.OutOfStockException;
+import lombok.*;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import javax.persistence.*;
 
 @ToString
 @Getter

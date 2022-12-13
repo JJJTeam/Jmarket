@@ -1,29 +1,28 @@
 package com.jjjteam.jmarket.service;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
-
-import com.jjjteam.jmarket.model.*;
+import com.jjjteam.jmarket.dto.OrderDTO;
+import com.jjjteam.jmarket.dto.OrderHistDTO;
+import com.jjjteam.jmarket.dto.OrderItemDTO;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.model.Order;
+import com.jjjteam.jmarket.model.OrderItem;
+import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.repository.ItemRepository;
+import com.jjjteam.jmarket.repository.OrderRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
+import com.jjjteam.jmarket.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.jjjteam.jmarket.dto.OrderDTO;
-import com.jjjteam.jmarket.dto.OrderHistDTO;
-import com.jjjteam.jmarket.dto.OrderItemDTO;
-
-import com.jjjteam.jmarket.repository.ItemRepository;
-import com.jjjteam.jmarket.repository.OrderRepository;
-import com.jjjteam.jmarket.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // 주문목록을 조회하는

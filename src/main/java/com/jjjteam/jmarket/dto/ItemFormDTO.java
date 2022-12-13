@@ -1,25 +1,19 @@
 package com.jjjteam.jmarket.dto;
 
 
-
+import com.jjjteam.jmarket.constant.ClothingItems;
+import com.jjjteam.jmarket.constant.ItemColor;
+import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.constant.ItemSize;
+import com.jjjteam.jmarket.model.Item;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.modelmapper.ModelMapper;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import com.jjjteam.jmarket.constant.*;
-import com.jjjteam.jmarket.model.Item;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter 
 @Setter

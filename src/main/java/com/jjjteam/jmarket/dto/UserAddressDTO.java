@@ -2,7 +2,6 @@ package com.jjjteam.jmarket.dto;
 
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

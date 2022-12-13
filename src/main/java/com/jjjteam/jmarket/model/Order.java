@@ -1,15 +1,10 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.jjjteam.jmarket.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import com.jjjteam.jmarket.constant.OrderStatus;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

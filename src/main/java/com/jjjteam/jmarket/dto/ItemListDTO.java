@@ -2,7 +2,6 @@ package com.jjjteam.jmarket.dto;
 
 
 import com.querydsl.core.annotations.QueryProjection;
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

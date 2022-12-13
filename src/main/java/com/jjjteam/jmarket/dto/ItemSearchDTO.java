@@ -2,7 +2,6 @@ package com.jjjteam.jmarket.dto;
 
 
 import com.jjjteam.jmarket.constant.ItemSellStatus;
-
 import lombok.Getter;
 import lombok.Setter;
 

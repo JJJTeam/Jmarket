@@ -1,9 +1,9 @@
 package com.jjjteam.jmarket.model;
 
-import com.jjjteam.jmarket.constant.ItemSellStatus;
-import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.exception.OutOfStockException;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 @Entity

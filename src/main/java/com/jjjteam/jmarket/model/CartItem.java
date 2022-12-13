@@ -1,8 +1,5 @@
 package com.jjjteam.jmarket.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 import lombok.Getter;
 import lombok.Setter;
 
