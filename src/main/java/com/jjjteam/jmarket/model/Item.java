@@ -40,20 +40,13 @@ public class Item extends BaseEntity {
     
     @Column(nullable = false, length = 200)
     private String itemIntroduction;  //상품 소개 (미들네임)
-    
-  //추가
-    @Column
+    @Column(nullable = false, length = 200)
   	private String itemMaterial;
-  	
-  	//추가
-    @Column
+    @Column(nullable = false, length = 200)
   	private String itemWashing;
-  	
-  	//추가
-    @Column
+    @Column(nullable = false, length = 200)
   	private String itemFabric;
-  	
-  	
+  		
 
     @Column(name = "price", nullable = false)
     private int price;  //가격

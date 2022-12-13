@@ -11,41 +11,43 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="cart_item")
+@Table(name = "cart_item")
 public class CartItem extends BaseEntity {
 	@Id
 	@GeneratedValue
-	@Column(name="cart_item_id")
+	@Column(name = "cart_item_id")
 	private Long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private Cart cart;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="item_id")
+	@JoinColumn(name = "item_id")
 	private Item item;
-	
+
 	private int count;
 	private String repimg;
-	
-	
-    public static CartItem createCartItem(Cart cart, Item item, int count, String repimg) {
-    	CartItem cartItem = new CartItem();
-    	cartItem.setCart(cart);
-    	cartItem.setItem(item);
-    	cartItem.setCount(count);
-    	cartItem.setRepimg(repimg);
-    	return cartItem;
-    }
-    
-    public void addCount(int count) {
-    	this.count += count;
-    }
-    
-    public void updateCount(int count) {
-    	this.count = count;
-    }
 
+	
+
+	public static CartItem createCartItem(Cart cart, Item item, int count, String repimg) {
+		CartItem cartItem = new CartItem();
+		cartItem.setCart(cart);
+		cartItem.setItem(item);
+		cartItem.setCount(count);
+		cartItem.setRepimg(repimg);
+		
+
+		return cartItem;
+	}
+
+	public void addCount(int count) {
+		this.count += count;
+	}
+
+	public void updateCount(int count) {
+		this.count = count;
+	}
 
 }

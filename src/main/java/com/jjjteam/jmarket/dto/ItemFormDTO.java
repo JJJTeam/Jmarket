@@ -35,15 +35,12 @@ public class ItemFormDTO {
 	private String itemIntroduction;
 	
 	//추가
-	
 	private String itemMaterial;
 	
 	//추가
-	
 	private String itemWashing;
 	
 	//추가
-	
 	private String itemFabric;
 	
 	

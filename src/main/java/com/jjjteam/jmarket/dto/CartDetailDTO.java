@@ -14,28 +14,26 @@ public class CartDetailDTO {
 	private Long cartItemId; // 장바구니 상품 아이디
 	private String itemNm; // 상품명
 	private int price; // 상품 금액
+	private int count; // 수량
+	private String repimg;
 
 	private String itemMaterial;
 	private String itemWashing;
 	private String itemFabric;
 
-	private int count; // 수량
-	private String repimg;
-
 	// private String imgUrl; //상품 이미지 경로
 
-	public CartDetailDTO(Long cartItemId, String itemNm, int price, String itemMaterial, String itemWashing,  String itemFabric, int count, String repimg){
-        this.cartItemId = cartItemId;
-        this.itemNm = itemNm;
-        this.price = price;
-        this.itemMaterial = itemMaterial;
-        this.itemWashing = itemWashing;
-        this.itemFabric = itemFabric;
-        this.count = count;
-        this.repimg = repimg;
-        //this.imgUrl = imgUrl;
-    }
+	public CartDetailDTO(Long cartItemId, String itemNm, int price, int count, String repimg, String itemMaterial, String itemWashing, String itemFabric) {
+		this.cartItemId = cartItemId;
+		this.itemNm = itemNm;
+		this.price = price;
+		this.count = count;
+		this.repimg = repimg;
+		this.repimg = itemMaterial;
+		this.repimg = itemWashing;
+		this.repimg = itemFabric;
 
-	
+		// this.imgUrl = imgUrl;
+	}
 
 }

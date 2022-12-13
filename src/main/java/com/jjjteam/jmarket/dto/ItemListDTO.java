@@ -31,9 +31,9 @@ public class ItemListDTO {
   	
     
 	
-	
+	//String itemMaterial,String itemWashing , String itemFabric
 	@QueryProjection // entity 로 원래 바꿨었는데, 이 어노테이션을 쓰면은 dto 로 객체를 변환할 수 있다.
-    public ItemListDTO(Long id, String itemNm, String repimg, Integer price, String itemMaterial,String itemWashing , String itemFabric ){
+    public ItemListDTO(Long id, String itemNm, String repimg, Integer price, String itemMaterial, String itemWashing,String itemFabric ){
         this.id = id;
         this.itemNm = itemNm;
         this.repimg = repimg;
