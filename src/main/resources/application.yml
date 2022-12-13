@@ -19,6 +19,8 @@ spring:
     multipart:
       max-file-size: 200MB
       max-request-size: 200MB
+
+itemdtail: "test"
 # 프로파일 설정법  run config에서 spring.profiles.active=name1
 
 logging:

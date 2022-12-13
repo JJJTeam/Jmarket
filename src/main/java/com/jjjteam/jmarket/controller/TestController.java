@@ -74,14 +74,10 @@ public class TestController {
 		return "test";
 	}
 
-	@PostMapping(value = "/test/itemForm")
+	@GetMapping(value = "/test/itemForm")
 	public String itemNew() throws Exception {
 
-		for (int i = 0; i < 500; i++){
-			ItemFormDTO itemFormDTO = new ItemFormDTO();
-
-			itemService.saveItem(itemFormDTO);
-		}
+		testControllerService.addItem();
 
 		return "redirect:/";
 

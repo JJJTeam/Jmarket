@@ -5,9 +5,11 @@ import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.constant.ValidText;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
+import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;
+import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
@@ -22,6 +24,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -34,6 +43,8 @@ import java.util.stream.Collectors;
 public class TestControllerService {
 
     private final UserRepository userRepository;
+
+    private final ItemRepository itemRepository;
     private final UserAddressRepository userAddressRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
@@ -111,6 +122,15 @@ public class TestControllerService {
                 .userName("운영자")
                 .build();
         userRepository.save(user);
+    }
+    public void addItem() throws IOException, URISyntaxException {
+        @Valid("${itemdtail}")
+        String test = "";
+
+//        ItemFormDTO itemFormDTO = new ItemFormDTO();
+//        itemFormDTO.setItemDetail("");
+//        Item item = itemFormDTO.setRepTime().createItem();
+//        itemRepository.save(item);
     }
 
 
