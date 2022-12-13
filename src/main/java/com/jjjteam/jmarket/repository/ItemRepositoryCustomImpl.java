@@ -76,9 +76,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 		// '문자열'과 '비교할 문자열'과 같다면 true를 반환
 		if(StringUtils.equals("itemNm",searchBy)) {
 			return QItem.item.itemNm.like("%" + searchQuery + "%");
-        } else if(StringUtils.equals("createdBy", searchBy)){
+        } 
+		/*else if(StringUtils.equals("createdBy", searchBy)){
             return QItem.item.createdBy.like("%" + searchQuery + "%");
-		}
+		}*/
 		
 		return null;
 	}

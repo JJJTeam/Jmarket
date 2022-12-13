@@ -5,7 +5,8 @@
 
 <!-- 필요에따라 사용 가능한  -->
 <th:block layout:fragment="css">
-<style>
+<style type="text/css">
+
 </style>
 </th:block>
 	
@@ -22,7 +23,7 @@
 			<div class="repImgDiv" style="width:50%">
 				<!-- <img th:src="${item.itemImgDtoList[0].imgUrl}"
                 class="rounded repImg" th:alt="${item.itemNm}"> -->
-				<img alt="첨부이미지" id="imgId" th:if="${item.repimg != null}"
+				<img style="height:900px;" alt="첨부이미지" id="imgId" th:if="${item.repimg != null}"
 					th:src="${item.repimg}" />
 			</div>
 

@@ -19,7 +19,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Item extends BaseEntity {
+public class Item extends BaseTimeEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "item_id")

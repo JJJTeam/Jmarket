@@ -33,7 +33,8 @@
 	<style type="text/css">
 section#content ul li {
 	display: inline-block;
-	margin: 10px;
+	margin: 0, auto;
+	object-fit: cover;
 }
 
 section#content div.goodsThumb img {
@@ -62,10 +63,10 @@ section#content div.goodsName a {
 		<ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 			<li class="col" th:each="item, status:${items.getContent()}">
-				<div class="">
+				<div class="goodsThumb">
 
 					<a th:href="@{/item/}+${item.id}"> <!-- <a th:href="'/item/'+{item.id}"> -->
-						<img th:if="${item.repimg != null}" th:src="${item.repimg}"
+						<img style="height:630px;" th:if="${item.repimg != null}" th:src="${item.repimg}"
 						alt="상품이미지" id="imgId">
 					</a>
 
@@ -88,7 +89,6 @@ section#content div.goodsName a {
 	</div>
 
 
-
 	<!-- 하단 페이지 정보 view -->
 	<div
 		th:with="start=${(items.number/maxPage)*maxPage + 1},
@@ -106,7 +106,7 @@ section#content div.goodsName a {
 			</a>
 
 			</li>
-
+			
 			<li class="page-item"
 				th:each="page: ${#numbers.sequence(start, end)}"
 				th:classappend="${items.number eq page-1}?'active':''">
