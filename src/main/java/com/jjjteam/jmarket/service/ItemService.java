@@ -81,6 +81,7 @@ public class ItemService {
     @Transactional
     public void deleteItem(Long id) {
     	itemRepository.deleteById(id);
+    	System.out.print("삭제되었습니다.");
     }
 	
 }
