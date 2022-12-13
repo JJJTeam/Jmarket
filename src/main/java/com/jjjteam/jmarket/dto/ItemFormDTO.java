@@ -35,15 +35,15 @@ public class ItemFormDTO {
 	private String itemIntroduction;
 	
 	//추가
-	@NotBlank(message = "소재 필수 입력 값입니다.")
+	
 	private String itemMaterial;
 	
 	//추가
-	@NotBlank(message = "세탁방법은 필수 입력 값입니다.")
+	
 	private String itemWashing;
 	
 	//추가
-	@NotBlank(message = "원단 함유량 필수 입력 값입니다.")
+	
 	private String itemFabric;
 	
 	

@@ -56,8 +56,10 @@ nav a {
 /* 대표이미지 리스틑 뿌려줄때  */
 .detail-img{width: 65%;}
 .detail-text{width:50%;}
+
+
 #imgId {
-	width: 75%;
+	width: 100%;
 }
 /* 대표이미지 상품등록할 때 */
 #tartgetImg {

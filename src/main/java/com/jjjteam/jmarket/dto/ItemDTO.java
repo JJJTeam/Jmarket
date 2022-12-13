@@ -18,8 +18,8 @@ public class ItemDTO {
 	private String itemFabric;
 	
 	private String itemDetail;
-
 	private String sellStatCd;
+	
 	private String repimg;
 	private LocalDateTime regTime;
 	private LocalDateTime updateTime;

@@ -49,7 +49,7 @@ public class CartService {
 //		
 		System.out.println("cart 33333:::  "  + cart);
 		log.info(" cart1 : {}", cart);
-		if(cart == null) {//상품을처음으로 장바구니에 담을 경우 해당 회원의 장바구니 엔티티를 생성
+		if(cart == null) {//상품을 처음으로 장바구니에 담을 경우 해당 회원의 장바구니 엔티티를 생성
 		 cart = Cart.createCart(user);
 		 cartRepository.save(cart);
 		}
@@ -58,7 +58,7 @@ public class CartService {
 		//현재상품이 장바구니에 들어갔는지 확인
 		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
 		
-		System.out.println("@@@@  savedCartItem : " + savedCartItem);
+		System.out.println("@@@@ 현재상품이장바구니에 들어갔는지 확인 savedCartItem : " + savedCartItem);
 		
 		if(savedCartItem != null) {
 			savedCartItem.addCount(cartItemDTO.getCount());//장바구니에 있던 상품일 경우 기존 수량에 현재 장바구니에 담을 수량 만큼 더해준다.
@@ -85,9 +85,7 @@ public class CartService {
 	            return cartDetailDTOList;
 	        }
 	        
-	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());
-
-	        
+	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());       
 	        return cartDetailDTOList;
 	        
 	    }
