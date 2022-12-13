@@ -98,17 +98,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 				.offset(pageable.getOffset()) // 데이터를 가지고 시작인덱스 지정
 				.limit(pageable.getPageSize()) // 한 번에 가지고 최대 개수 지정
 				.fetchResults();
-//		List<Item> results = queryFactory
-//				.selectFrom(QItem.item)
-//				.where(regDtsAfter(itemSearchDTO.getSearchDateType()),
-//						searchSellStatusEq(itemSearchDTO.getSearchSellStatus()),
-//						searchByLike(itemSearchDTO.getSearchBy(),
-//								itemSearchDTO.getSearchQuery())) //',' = and
-//				.orderBy(QItem.item.id.desc())
-//				.offset(pageable.getOffset()) // 데이터를 가지고 시작인덱스 지정
-//				.limit(pageable.getPageSize()) // 한 번에 가지고 최대 개수 지정
-//				.fetch();
-		
+
 		List<Item> content = results.getResults();
 		long total = results.getTotal();
 		

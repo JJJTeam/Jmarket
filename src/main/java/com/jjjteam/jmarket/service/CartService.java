@@ -129,8 +129,6 @@ public class CartService {
 	            orderDTO.setCount(cartItem.getCount());
 	            orderDTOList.add(orderDTO);
 	        }
-
-	        
 	        Long orderId = orderService.orders(orderDTOList, id,addressNum);
 	        
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
@@ -139,13 +137,6 @@ public class CartService {
 	                            .orElseThrow(EntityNotFoundException::new);
 	            cartItemRepository.delete(cartItem);
 	        }
-
 	        return orderId;
 	    }
-
-
-		
-	 
-	
-
 }

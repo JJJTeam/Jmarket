@@ -58,38 +58,7 @@ public class Item extends BaseEntity {
     private ItemSize itemSize;		//상품 사이즈
 
 
-//    @OneToMany(mappedBy = "item")
-//	private List<ItemImg> itemImgs;
-
-//    @Builder
-//    public Item(
-//    		String itemNm,
-//    		String itemIntroduction,
-//    		int price,
-//    		int stockNumber,
-//    		String itemDetail,
-//    		ItemSellStatus itemSellStatus,
-//    		ClothingItems clothingItems,
-//    		ItemSize itemSize,
-//    		ItemColor itemColor,
-//    		List<ItemImg> itemImgs) {
-//        this.itemNm = itemNm;
-//        this.itemIntroduction = itemIntroduction;
-//        this.price = price;
-//        this.stockNumber =stockNumber;
-//        this.itemDetail = itemDetail;
-//        this.itemSellStatus = itemSellStatus;
-//        this.clothingItems = clothingItems;
-//        this.itemSize = itemSize;
-//        this.itemColor = itemColor;
-//        this.itemImgs = itemImgs;
-//    }
-//
-//    public Item() {
-//		// TODO Auto-generated constructor stub
-//	}
-
-	public void updateItem(ItemFormDTO itemFormDto) {
+    public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
         this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();

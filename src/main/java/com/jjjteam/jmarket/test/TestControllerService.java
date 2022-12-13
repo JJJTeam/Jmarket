@@ -46,8 +46,6 @@ public class TestControllerService {
     public void addTestUser(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
@@ -106,8 +104,6 @@ public class TestControllerService {
     public void addAdmin(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("admin")
                 .email("test@test.com")
@@ -126,12 +122,10 @@ public class TestControllerService {
         itemFormDTO.setPrice(299000);
         itemFormDTO.setRepimg(repimg);
         itemFormDTO.setStockNumber(432);
-
         for (int i=0; i<500;i++){
             Item item = itemFormDTO.setRepTime().createItem();
             itemRepository.save(item);
         }
-
     }
 
 

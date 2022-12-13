@@ -28,29 +28,7 @@ public class OrderController {
 	//생성자주입
 	private final OrderService orderService;
 
-//    @PostMapping(value = "/order")
-//    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDTO orderDTO, BindingResult bindingResult,  @AuthenticationPrincipal UserDetailsImpl principal){
-//
-//        if(bindingResult.hasErrors()){
-//            StringBuilder sb = new StringBuilder();
-//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-//
-//            for (FieldError fieldError : fieldErrors) {
-//                sb.append(fieldError.getDefaultMessage());
-//            }
-//            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
-//        }
-//        Long orderId;
-//        try {
-//            Long id = principal.getId();
-//            orderId = orderService.order(orderDTO, id);
-//        } catch(Exception e){
-//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
-//    }
-	
-	
+
 	//구매이력을 조회하는 호출하는 메서드
 	@GetMapping(value= {"/orders", "/orders/{page}"})
 	public String orderHist(@PathVariable("page") Optional<Integer> page, @AuthenticationPrincipal UserDetailsImpl principal, Model model) {

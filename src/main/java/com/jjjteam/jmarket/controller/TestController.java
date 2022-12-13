@@ -39,7 +39,6 @@ public class TestController {
 	@GetMapping("/addrole")
 	public String roleTest() {
 		roleRepository.save(new Role(ERole.ROLE_USER));
-		roleRepository.save(new Role(ERole.ROLE_MODERATOR));
         roleRepository.save(new Role(ERole.ROLE_ADMIN));
         return "index";
 	}

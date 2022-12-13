@@ -49,12 +49,7 @@ public class UserController {
 		model.addAttribute("addressList",addressList);
 		return "/mypage/modify";
 	}
-//	@PostMapping("/info")
-//	public String CheckPassInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, String password,Model model){
-//		if(encoder.matches(password, userDetails.getPassword())){return "/mypage/modify";}
-//		else {return "/mypage/passerror";}
-//	}
-	@GetMapping("/change-email")
+@GetMapping("/change-email")
 	public String ToChangeEmailPage(@AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
 		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-email";

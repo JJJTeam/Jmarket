@@ -20,9 +20,6 @@ import java.util.List;
 
 //3. ItemRepository 에서 ItemRepositoryCustom 상속
 public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
-	
-//	// 상품id로 데이터 조회하기
-//    List<Item> findByItemId(Long id);
 
     // 상품명으로 데이터 조회하기
     List<Item> findByItemNm(String itemNm);
