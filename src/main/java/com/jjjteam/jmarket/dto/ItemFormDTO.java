@@ -51,7 +51,7 @@ public class ItemFormDTO {
 	private ClothingItems clothingItems;
 
 	private ItemSize itemSize;
-	
+
 	private ItemColor itemColor;
 	
     

@@ -74,7 +74,7 @@ public class TestController {
 		return "test";
 	}
 
-	@GetMapping(value = "/test/itemForm")
+	@GetMapping(value = "/testitemadd")
 	public String itemNew() throws Exception {
 
 		testControllerService.addItem();
