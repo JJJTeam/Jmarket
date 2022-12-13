@@ -29,9 +29,7 @@
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 
-    
-	
-
+   
 
 </head>
 
@@ -40,20 +38,14 @@
 
 
 
-
+<th:block layout:fragment="script"></th:block>
 <th:block layout:fragment="css"></th:block>
 
-
     <div th:replace="fragments/header::header"></div>
-
     <div layout:fragment="cart"></div>
-
-
     <div th:replace="fragments/footer::footer"></div>
 
 
-
-<th:block layout:fragment="script"></th:block>
     </body>
 </html>
 
