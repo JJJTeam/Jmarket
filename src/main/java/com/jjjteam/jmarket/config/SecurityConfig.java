@@ -33,7 +33,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //csrf 사용안함
-        http.csrf().disable();  //로그인 로그아웃 회원가입 CSRF 적용함
+        http.csrf().disable();  //로그인 로그아웃 회원가입 CSRF 적용함, 토큰비활성화
 
         //URL 인증여부 설정.
         http.authorizeRequests()

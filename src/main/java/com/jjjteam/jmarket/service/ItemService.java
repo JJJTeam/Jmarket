@@ -33,32 +33,13 @@ public class ItemService {
 	private final ItemRepository itemRepository;
     public void saveItem(ItemFormDTO itemFormDTO) throws Exception {
         // 상품 등록
-        Item item = itemFormDTO.createItem();
+        Item item = itemFormDTO.setRepTime().createItem();
         itemRepository.save(item);
 
     }
 	
-//	// 상품 수정하기를 위한 service
-//    // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
-//	@Transactional(readOnly = true)
-//    public ItemFormDTO getItemDetail(Long itemId) {
-//
-//        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-//        List<ItemImgDTO> itemImgDtoList = new ArrayList<>();
-//
-//        for (ItemImg itemImg : itemImgList) {
-//            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
-//            itemImgDtoList.add(itemImgDTO);
-//        }
-//
-//        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
-//        ItemFormDTO itemFormDTO = ItemFormDTO.of(item);
-//        itemFormDTO.setItemImgDtoList(itemImgDtoList);
-//
-//        return itemFormDTO; //itemFormDTO 에는 상품이랑 상품 이미지 다 있움
-//    }
-	
- // 상품 수정하기를 위한 service
+
+    // 상품 수정하기를 위한 service
     // 상품이랑, 상품이미지의 entity -> dto 로 바꾸 기만 하는 service
 	@Transactional(readOnly = true)
     public ItemFormDTO getItemDetail(Long itemId) {
@@ -85,13 +66,21 @@ public class ItemService {
     // 상품 조회 조건 + 페이지 정보 를 파라미터로 받음
     @Transactional(readOnly = true) // 트랜젝션을 readOnly 로 설정할 경우, JPA 가 변경감지(더티체킹)를 수행하지 않아서 성능 향상됨 _데이터 수정이 일어나지 않기 때문에
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
+//    	itemRepository.getAdminItemPage(itemSearchDto, pageable).getContent().stream().forEach(x -> System.out.print(x.getRepimg()));
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
     // 메인 페이지에 보여줄 상품 데이테 조회
     @Transactional(readOnly = true)
     public Page<ItemListDTO> getMainItemPage(ItemSearchDTO itemSearchDto, Pageable pageable){
+    	
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+    
+    // 상품 삭제하기
+    @Transactional
+    public void deleteItem(Long id) {
+    	itemRepository.deleteById(id);
     }
 	
 }

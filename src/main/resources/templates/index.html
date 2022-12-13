@@ -1,19 +1,171 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  
+</th:block>
 
 
-</head>
+<main layout:fragment="main" class=" text-center text-white">
 
-<body>
-	<div th:replace="/include/header.html"></div>
 
-	
-	<div th:replace="/include/footer.html"></div>
-</body>
+  <div class="main-visual-wrap" >
+  
+ 
+  
+  <div class="visual-content"style="height: 100%;  overflow: hidden;  width: 100vw;">
+  
 
-</html>
+    
+    <div class="visual-img" style="height: 100%;
+    position: relative;
+    width: 100%;">
+    
+    
+    <img src="/images/main/main-visual.jpeg" style="height: 100%;
+    position: relative;
+    width: 100%;
+    z-index: 0;" alt="logo"> 
+    
+    
+
+   
+    <div class="visual-text " style="position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+display: flex;flex-direction: column;
+justify-content: center;
+align-items : center;">
+    
+       <div class="container inner">
+   
+    <h1 lang="en">Cover your page.</h1>
+      <p class="lead" lang="en">Cover is a one-page template for building simple and beautiful home pages. <br/>Download, edit the
+        text, and add your own fullscreen background photo to make it your own.</p>
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+      </p>
+      </div>
+      <!-- text  -->
+      </div> 
+      
+    </div>
+    </div>
+    <!-- 1 -->
+   
+   
+   <div class="visual-content"style="height: 100%;  overflow: hidden;  width: 100vw;">
+  
+
+    
+    <div class="visual-img" style="height: 100%;
+    position: relative;
+    width: 100%;">
+    
+    
+    <img src="/images/main/main-visual2.jpeg" style="height: 100%;
+    position: relative;
+    width: 100%;
+    z-index: 0;" alt="logo"> 
+    
+    
+
+   
+    <div class="visual-text " style="position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+display: flex;flex-direction: column;
+justify-content: center;
+align-items : center;">
+    
+       <div class="container inner">
+   
+    <h1 lang="en">Cover your page.</h1>
+      <p class="lead" lang="en">Cover is a one-page template for building simple and beautiful home pages. <br/>Download, edit the
+        text, and add your own fullscreen background photo to make it your own.</p>
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+      </p>
+      </div>
+      <!-- text  -->
+      </div> 
+      
+    </div>
+    </div>
+    <!-- 2 -->
+    
+    
+  </div>
+    
+    
+    
+<!-- 상품리스트 메인에 뿌리기  -->
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+         <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        </div>
+        </div>
+        </div>
+      
+      
+    </main>
+    
+    
+    

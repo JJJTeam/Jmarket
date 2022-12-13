@@ -32,7 +32,12 @@ public class Order extends BaseEntity { // 카멜표기법으로 , db저장은 �
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_address_id")
+	private UserAddress userAddress;
+
 	private LocalDateTime orderDate; // 주문일
+	private String repimg;
 
 	// 주문상태
 	@Enumerated(EnumType.STRING)
@@ -50,9 +55,10 @@ public class Order extends BaseEntity { // 카멜표기법으로 , db저장은 �
 	}
 
 	// 상품을 주문한 회원의 정보를 셋팅
-	public static Order createOrder(User user, List<OrderItem> orderItemList) {
+	public static Order createOrder(User user, List<OrderItem> orderItemList, UserAddress userAddress) {
 		Order order = new Order();
 		order.setUser(user);
+		order.setUserAddress(userAddress);
 
 		/*
 		 * 상품페이지에서는1개의 상품을 주문하지만, 장바구니 페이지에서는 한 번에 여러개의 상품을 주문할 수있다. 따라서 여러개의 상품을 담을 수

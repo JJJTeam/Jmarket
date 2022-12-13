@@ -6,6 +6,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.jjjteam.jmarket.dto.UserDTO;
+
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -23,5 +25,7 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate // 엔티티 수정 시 시간 자동 저장
     private LocalDateTime updateTime;
+    
 
+    
 }

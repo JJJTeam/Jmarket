@@ -6,15 +6,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.jjjteam.jmarket.constant.*;
 import com.jjjteam.jmarket.model.Item;
 
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +51,25 @@ public class ItemFormDTO {
 	private ClothingItems clothingItems;
 
 	private ItemSize itemSize;
-	
+
 	private ItemColor itemColor;
+	
+    
+    private LocalDateTime regTime;
+
+    private LocalDateTime updateTime;
+    
 
 	// 상품의 이미지 아이디를 저장하는 리스트
     // 상품 등록 전에는 이미지가 없으니까 비어있음(이미지도 공백, 아이디도 공백!)
     // 그냥 수정할 때 이미지 아이디 저장해둘 용도
+	
 
 	private static ModelMapper modelMapper = new ModelMapper();
+    public ItemFormDTO setRepTime(){
+        this.regTime = LocalDateTime.now();
+        return this;
+    }
 	
 	public Item createItem() {
 		return modelMapper.map(this,  Item.class);

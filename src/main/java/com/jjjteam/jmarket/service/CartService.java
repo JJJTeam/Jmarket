@@ -38,22 +38,14 @@ public class CartService {
 	
 	
 	//카트추가하기
-	public Long addCart(CartItemDTO cartItemDTO, Long id ) { //징바구니에 담을 상품 엔티티를 조회
-		System.out.println("@@@@@@@ㅋㅋㅋㅋㅋ");
+	public Long addCart(CartItemDTO cartItemDTO, Long id) { //징바구니에 담을 상품 엔티티를 조회
 		Item item =itemRepository.findById(cartItemDTO.getItemId()).get();
-		System.out.println("item 111111:::  "  + item);
 		User user = userRepository.findById(id).orElseThrow(); //현재 로그인한 회원 엔티티 조회
-		
-		System.out.println("user 22222:::  "  + user);
-		Cart cart = cartRepository.findByUserId(user.getId());//현재 로그인한 회원의 장바구니를 조회 
-//		
-		System.out.println("cart 33333:::  "  + cart);
-		log.info(" cart1 : {}", cart);
+		Cart cart = cartRepository.findByUserId(user.getId());//현재 로그인한 회원의 장바구니를 조회
 		if(cart == null) {//상품을처음으로 장바구니에 담을 경우 해당 회원의 장바구니 엔티티를 생성
 		 cart = Cart.createCart(user);
 		 cartRepository.save(cart);
 		}
-		log.info(" cart2 : {}", cart);
 		
 		//현재상품이 장바구니에 들어갔는지 확인
 		CartItem savedCartItem = cartItemRepository.findByCartIdAndItemId(cart.getId(), item.getId());
@@ -62,7 +54,7 @@ public class CartService {
 			return savedCartItem.getId();
 		}else {
 			//장바구니 엔티티, 상품 엔티티, 장바구니에 담을 상품 수량을 이용하여 CartItem엔티티 생성 
-			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount());
+			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount(),  cartItemDTO.getRepimg());
 			
 			cartItemRepository.save(cartItem);//장바구니에 들어갈 상품을 저장
 			return cartItem.getId();
@@ -100,8 +92,7 @@ public class CartService {
 	    public boolean validateCartItem(Long cartItemId, Long id){
 	    	//현재로그인한회원조회
 	        User curUser = userRepository.findById(id).get();
-	        
-	        
+
 	       //장바구니 상품을 저장한 회원을 조회
 	        CartItem cartItem = cartItemRepository.findById(cartItemId)
 	                .orElseThrow(EntityNotFoundException::new);
@@ -127,7 +118,7 @@ public class CartService {
 	        cartItemRepository.delete(cartItem);
 	    }
 
-	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, Long id){
+	    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, Long id, Long addressNum){
 	        List<OrderDTO> orderDTOList = new ArrayList<>();
 
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
@@ -142,7 +133,8 @@ public class CartService {
 	        }
 
 	        
-	        Long orderId = orderService.orders(orderDTOList, id);
+	        Long orderId = orderService.orders(orderDTOList, id,addressNum);
+	        
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
 	            CartItem cartItem = cartItemRepository
 	                            .findById(cartOrderDTO.getCartItemId())

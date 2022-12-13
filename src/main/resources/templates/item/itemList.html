@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/items}">
+
+
+
+<th:block layout:fragment="script">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#searchBtn").on("click", function(e) {
@@ -22,44 +25,65 @@
 				+ "&searchBy" + searchBy + "&searchQuery" + searchQuery;
 	}
 </script>
-</head>
-<body>
-	<div th:replace="/include/header.html"></div>
-
-	<div class="container container-mt">
-	<h2>상품리스트</h2>
-		<form th:action="@{'/item/itemList/' + ${items.number}}" role="form"
-			method="get" th:object="${items}">
-			<!-- 조회한 상품 데이터 view -->
-			<table class="table table-mb">
-				<thead>
-					<tr>
-						<td>상품아이디</td>
-						<td>상품명</td>
-						<td>상태</td>
-						<td>등록자</td>
-						<td>등록일</td>
-						<td></td>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- 이제 얘네가 반복문으로 데이터 출력함-->
-					<tr th:each="item, status: ${items.getContent()}">
-						<td th:text="${item.id}"></td>
-						<td><a th:href="'/item/'+${item.id}"
-							th:text="${item.itemNm}"></a></td>
-						<td
-							th:text="${#strings.equals(item.itemSellStatus, T(com.jjjteam.jmarket.constant.ItemSellStatus).SELL)} ? '판매중' : '품절'"></td>
-						<td th:text="${item.createdBy}">[구현중]</td>
-						<td th:text="${item.regTime}">[구현중]</td>
-						<td><a th:href="'/admin/item/'+${item.id}">수정</a></td>
-					</tr>
-				</tbody>
-			</table>
+</th:block>
 
 
+<th:block layout:fragment="css">
+<style type="text/css">
 
-			<!-- 하단 페이지 정보 view -->
+section#content ul li {
+	display: inline-block;
+	margin: 10px;
+}
+
+section#content div.goodsThumb img {
+	width: 200px;
+	height: 200px;
+}
+
+section#content div.goodsName {
+	padding: 10px 0;
+	text-align: center;
+}
+
+section#content div.goodsName a {
+	color: #000;
+}
+</style>
+</th:block>
+
+	<div layout:fragment="items" class="container sub-container">
+		
+		
+		
+		<div class="" style="padding:40px;">
+		
+		<ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		
+			<li class="col" th:each="item, status:${items.getContent()}">
+            <div class="">
+				
+				<a th:href="@{/item/}+${item.id}">
+				
+<!-- <a th:href="'/item/'+{item.id}"> -->
+					<img th:if="${item.repimg != null}" th:src="${item.repimg}" alt="상품이미지" id = "imgId" >
+					</a>
+				
+				<div class="goodsName">
+					<a th:href="'/item/'+${item.id}" lang="en" th:text="${item.itemNm}"></a> <a
+						th:href="'/item/'+${item.id}" lang="en" th:text="${item.price}+'원'"></a>
+				</div>
+				</div>
+			</li>
+			
+			
+		</ul>
+		
+		</div>
+		
+		
+		
+	<!-- 하단 페이지 정보 view -->
 			<div
 				th:with="start=${(items.number/maxPage)*maxPage + 1},
     end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) 
@@ -95,10 +119,9 @@
 
 				</ul>
 			</div>
-
-		</form>
+			
 	</div>
 
-	<div th:replace="/include/footer.html"></div>
-</body>
+
+
 </html>

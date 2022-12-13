@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div th:replace="/include/header.html"></div>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/order}">
 
 
-	<script>
+<script>
   function cancelOrder(orderId){
 
 
@@ -35,7 +35,7 @@
 				  alert('로그인 후 이용해주세요.');
 				  location.href='/login';
 			  }else{
-				  alert('jqXHR.responseText');
+				  alert(jqXHR.responseText);
 			  }
 		  }
 	  });
@@ -44,9 +44,8 @@
  </script>
 
 
-
-
-	<style>
+<th:block layout:fragment="css">
+<style>
 .content-mg {
 	margin-left: 30%;
 	margin-right: 30%;
@@ -80,10 +79,11 @@
 	font-size: 24px
 }
 </style>
+</th:block>
 
 
+<div layout:fragment="order" class="container sub-container">
 
-<div>
 
 	<h2 class="mb-4">구매이력</h2>
 
@@ -92,14 +92,27 @@
 		<div class="d-flex mb-3 align-self-center">
 			<h4 th:text="${order.orderDate} + '주문'"></h4>
 
+
 			<div class="ml-3">
+
 				
 				
 				<div	th:if="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
 					<button type="button" class="btn btn-outline-secondary"
 						th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
 				</div>
+				<div>
+					<tbody>
+					<tr><td th:text="${order.userAddress.postCode}"></td>
+						<td>
+							<span th:text="${order.userAddress.address}"></span> <span th:text="${order.userAddress.addressDetail}"></span>
+						</td>
+						<td th:text="${order.userAddress.person}"></td>
 
+						<td th:text="${order.userAddress.addressPhoneNumber}"></td>
+					</tr>
+					</tbody>
+				</div>
 				<div
 					th:unless="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
 					<h4>취소완료</h4>
@@ -111,12 +124,14 @@
 
 		<div class="card d-flex">
 			<div th:each="orderItem : ${order.orderItemDTOList}"
-				class="d-flex mb-3">0
+				class="d-flex mb-3">
 
 				<div class="align-self-center w-75">
 					<div class="fs18 font-weight-light">
-						<span th:text="${orderItem.orderPrice} +'원'"></span> <span
-							th:text="${orderItem.count} +'개'"></span>
+						<span th:text="${orderItem.itemNm}"></span>
+					<img width="100px" th:src="${orderItem.Repimg}" />
+						<span th:text="${orderItem.orderPrice} +'원'"></span>
+						<span th:text="${orderItem.count} +'개'"></span>
 					</div>
 				</div>
 
@@ -157,4 +172,3 @@
 
 </div>
 
-<div th:replace="/include/footer.html"></div>

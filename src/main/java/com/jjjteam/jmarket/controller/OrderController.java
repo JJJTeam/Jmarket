@@ -38,44 +38,35 @@ public class OrderController {
 	//생성자주입
 	private final OrderService orderService;
 
-    @PostMapping(value = "/order")
-    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDTO orderDTO, BindingResult bindingResult,  @AuthenticationPrincipal UserDetailsImpl principal){
-
-        if(bindingResult.hasErrors()){
-            StringBuilder sb = new StringBuilder();
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-
-            for (FieldError fieldError : fieldErrors) {
-                sb.append(fieldError.getDefaultMessage());
-            }
-
-            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
-        }
-
-     
-        Long id = principal.getId();
-        Long orderId;
-
-        try {
-            orderId = orderService.order(orderDTO, id);
-        } catch(Exception e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
-    }
+//    @PostMapping(value = "/order")
+//    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDTO orderDTO, BindingResult bindingResult,  @AuthenticationPrincipal UserDetailsImpl principal){
+//
+//        if(bindingResult.hasErrors()){
+//            StringBuilder sb = new StringBuilder();
+//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//
+//            for (FieldError fieldError : fieldErrors) {
+//                sb.append(fieldError.getDefaultMessage());
+//            }
+//            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
+//        }
+//        Long orderId;
+//        try {
+//            Long id = principal.getId();
+//            orderId = orderService.order(orderDTO, id);
+//        } catch(Exception e){
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+//    }
 	
 	
 	//구매이력을 조회하는 호출하는 메서드
 	@GetMapping(value= {"/orders", "/orders/{page}"})
 	public String orderHist(@PathVariable("page") Optional<Integer> page, @AuthenticationPrincipal UserDetailsImpl principal, Model model) {
-		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get(): 0, 4); //한번에 가져올 주문의 개수는 4개로 설정
-		
 		//현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달하여 화면에 전달할 주문 목록데이터를 리턴 값으로 받는다.
 		Page<OrderHistDTO> ordersHistDTOList = orderService.getOrderList(principal.getId(), pageable);
-		log.warn("ordersHistDTOList : {} ",ordersHistDTOList);
-        log.warn("page : {} ",pageable.getPageNumber());
-
 		model.addAttribute("orders", ordersHistDTOList);
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage",5);
@@ -85,11 +76,10 @@ public class OrderController {
 	
 	//주문취소
 	@PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , Principal principal){
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , @AuthenticationPrincipal UserDetailsImpl userDetails){
 
-	
 		//자바스크립에서 취소할 주문 번호는 조작이 가능하므로 다른사람의 주문을 취소하지 못하도록 주문취소 권한을 검사
-        if(!orderService.validateOrder(orderId, principal.getName())){
+        if(!orderService.validateOrder(orderId,userDetails.getId())){
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
 

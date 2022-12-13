@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mypage}">
 
 
-<div th:replace="/include/header.html"></div>
 
-<body>
-<div class="container">
+<div layout:fragment="mypage" class="container sub-container" >
     <h2>회원가입 form</h2>
     <form th:action="@{/signup}" th:object="${userDTO}" method="POST">
         <div class="form-group">
@@ -58,11 +58,6 @@
             <span id="phoneCheck" style="color: #ee1c25; font-size: 13.125px; line-height: 34px;"></span>
                 <input type="text" name="code" id="code">
                 <button type="button" onclick="phoneAuthOk()">확인</button>
-
-        </div>
-        <div class="form-group">
-            <label for="#">주소(미구현, 가입하고 등록하도록 해도 되죠?):</label>
-            <input class="form-control" id="#" name="#" placeholder="Enter #" type="text" value="">
         </div>
         <div class="form-group">
             <div>성별(DTO랑 맵핑은됨)</div>
@@ -88,7 +83,7 @@
                 </label>
             </span>
         </div>
-        <label for="userBirthDate">생년월일(DTO에 맵핑은됨)</label>
+        <label for="userBirthDate">생년월일</label>
         <input type="date" th:field="*{userBirthDate}">
         <button class="btn btn-primary" type="submit">회원가입</button>
 <!--        <span th:text="${#messege}">이건 왜 안되지??</span>-->
@@ -96,12 +91,19 @@
     </form>
 
 </div>
-<script th:inline="javascript">
+
+ <script src="@{/js/bootstrap.bundle.min.js}"></script>
+    
+
+<th:block layout:fragment="script">
+
+<!-- <script th:inline="javascript">
     [# th:each="msg : ${messege}"]
         alert([[${msg}]])
     [/]
 
-</script>
-</body>
-<div th:replace="/include/footer.html"></div>
-<script src="/js/signup.js"></script>
+</script> -->
+</th:block>
+
+
+</html>

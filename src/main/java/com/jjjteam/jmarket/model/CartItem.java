@@ -1,6 +1,7 @@
 package com.jjjteam.jmarket.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,11 +28,16 @@ public class CartItem extends BaseEntity {
 	
 	private int count;
 	
-    public static CartItem createCartItem(Cart cart, Item item, int count) {
+	
+	private String repimg;
+	
+	
+    public static CartItem createCartItem(Cart cart, Item item, int count, String repimg) {
     	CartItem cartItem = new CartItem();
     	cartItem.setCart(cart);
     	cartItem.setItem(item);
     	cartItem.setCount(count);
+    	cartItem.setRepimg(repimg);
     	return cartItem;
     }
     
@@ -42,4 +48,6 @@ public class CartItem extends BaseEntity {
     public void updateCount(int count) {
     	this.count = count;
     }
+
+
 }
