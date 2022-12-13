@@ -54,7 +54,6 @@ public class Naver_Sens_V2 {
 
         String body = bodyJson.toJSONString();
 
-        System.out.println(body);
 
         try {
 
@@ -78,7 +77,6 @@ public class Naver_Sens_V2 {
 
             int responseCode = con.getResponseCode();
             BufferedReader br;
-            System.out.println("responseCode" +" " + responseCode);
             if(responseCode==202) { // 정상 호출
                 br = new BufferedReader(new InputStreamReader(con.getInputStream()));
             } else {  // 에러 발생
@@ -91,11 +89,7 @@ public class Naver_Sens_V2 {
                 response.append(inputLine);
             }
             br.close();
-
-            System.out.println(response.toString());
-
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 

@@ -47,21 +47,13 @@ public class ItemController {
 	// 상품등록 post
 	@PostMapping(value = "/item/itemForm")
 	public String itemNew(@Valid ItemFormDTO itemFormDTO, BindingResult bindingResult, Model model) {
-
-		System.out.println(
-				"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 컨트롤러 시작점 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		if (bindingResult.hasErrors()) {
-			System.out.println("@@@@@@@@@@@@@@@@@ 1번째 오류 @@@@@@@@@@@@@@@@@@" + bindingResult.toString());
 			return "item/itemForm";
 		}
 
 		try {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@ 오류없이 서비스 시작 @@@@@@@@@@@@@@@@@@");
 			itemService.saveItem(itemFormDTO);
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@성공했습니다.");
-
 		} catch (Exception e) {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@" + e);
 			model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
 			return "item/itemForm";
 		}
@@ -88,13 +80,10 @@ public class ItemController {
 	// 상품 상세보기 get
 	@GetMapping(value = "/item/{itemId}")
 	public String itemDetail(@PathVariable("itemId") Long itemId, Model model) {
-
 		try {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@컨트롤러성공");
 			ItemFormDTO itemFormDTO = itemService.getItemDetail(itemId);
 			model.addAttribute("item", itemFormDTO);
 		} catch (EntityNotFoundException e) {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@컨트롤러실패");
 			model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
 			model.addAttribute("itemFormDto", new ItemFormDTO());
 			return "item/itemList";

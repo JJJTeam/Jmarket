@@ -9,6 +9,7 @@ import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.repository.CartItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
+import com.jjjteam.jmarket.service.ItemService;
 import com.jjjteam.jmarket.service.UserService;
 import com.jjjteam.jmarket.test.TestControllerService;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @Slf4j
@@ -36,6 +38,7 @@ public class TestController {
 
 	private final UserService userService;
 
+	private final ItemService itemService;
 	private final RoleRepository roleRepository;
 
 	private final TestControllerService testControllerService;
@@ -70,19 +73,22 @@ public class TestController {
 	public String totestPage()  {
 		return "test";
 	}
-	@GetMapping("/testadditem")
-	public String totestitemadd(Model model)  {
-		model.addAttribute("itemFormDTO", new ItemFormDTO());
-		return "test/itemForm";
+
+	@GetMapping(value = "/testitemadd")
+	public String itemNew() throws Exception {
+
+		testControllerService.addItem();
+
+		return "redirect:/";
+
 	}
 
 	@PostMapping("/test")
-	public String registerUser(UserDTO userDTO, BindingResult bindingResult, Model model, HttpSession session) {
-		if(bindingResult.hasErrors()){return "test";}
-		userService.registerUser(userDTO);
+	public String registerUser(UserDTO userDTO) {
+
 		return "/index";
 	}
-	
+
 
 	
 	

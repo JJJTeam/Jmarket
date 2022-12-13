@@ -2,21 +2,37 @@ package com.jjjteam.jmarket.test;
 
 
 import com.jjjteam.jmarket.constant.ERole;
+import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.constant.ValidText;
+import com.jjjteam.jmarket.dto.ItemFormDTO;
 import com.jjjteam.jmarket.dto.UserDTO;
+import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
 import com.jjjteam.jmarket.model.UserAddress;
+import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.util.Naver_Sens_V2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -29,9 +45,16 @@ import java.util.stream.Collectors;
 public class TestControllerService {
 
     private final UserRepository userRepository;
+
+    private final ItemRepository itemRepository;
     private final UserAddressRepository userAddressRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
+
+    @Value("${itemdtail}")
+    String itemdtail;
+    @Value("${repimg}")
+    String repimg;
 
     public void addTestUser(){
         Set<Role> roles = new HashSet<>();
@@ -107,6 +130,23 @@ public class TestControllerService {
                 .build();
         userRepository.save(user);
     }
+    public void addItem() throws IOException, URISyntaxException {
+        ItemFormDTO itemFormDTO = new ItemFormDTO();
+        itemFormDTO.setItemDetail(itemdtail);
+        itemFormDTO.setItemIntroduction("울 혼방 소재 코트. 긴소매 와이드 라펠 칼라 디자인. 같은 소재 리본 스타일 벨트. 배색된 핀스트라이프 디테일.");
+        itemFormDTO.setItemNm("핀스트라이프 코트 LIMITED EDITION");
+        itemFormDTO.setItemSellStatus(ItemSellStatus.SELL);
+        itemFormDTO.setPrice(299000);
+        itemFormDTO.setRepimg(repimg);
+        itemFormDTO.setStockNumber(432);
+
+        for (int i=0; i<500;i++){
+            Item item = itemFormDTO.setRepTime().createItem();
+            itemRepository.save(item);
+        }
+
+    }
+
 
 
 }
