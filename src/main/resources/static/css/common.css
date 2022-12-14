@@ -27,7 +27,7 @@ body {
 	overflow-x: hidden;
 }
 
-
+td{vertical-align: middle;}
 /*======================== input =============================*/
 .form-input {
 	display: block;
@@ -67,6 +67,7 @@ body {
 
 .form-check{
 	display: inline-block;
+	vertical-align: middle;
     width: 13px;
     padding-left: 0;
     font-size: 1rem;
@@ -124,10 +125,14 @@ button {
 
 .dropdown-list.active, .dropdown-list:active{background-color:#000; color:#fff;}
 .dropdown-list:focus, .dropdown-list:hover{background-color:#000; color:#fff;}
+table .black-button{width:100%;}
+table .border-button{width:100%;}
+
+
 .black-button {
 	background: #000;
 	font-size: 11px;
-	border: none;
+	border: 1px solid #000;
 	cursor: pointer;
 	padding: 0.75rem 0;
 	text-align: center;
@@ -138,7 +143,9 @@ button {
 
 .border-button {
 	border: 1px solid #000;
-	padding: 0.375rem 0.75rem;
+	padding: 0.75rem 0;
+	line-height: 1.5;
+	font-size: 11px;
 }
 
 
@@ -146,6 +153,23 @@ button {
 	border: 1px solid #bababa;
 	padding: 0.375rem 0.75rem;
 	width: 21%;
+    text-align: center;
+}
+
+.black-btn{
+	border: 1px solid #000;
+	background:#000;
+	padding: 0.375rem 0.75rem;
+	width: 21%;
+    text-align: center;
+    color:#fff;
+}
+
+.delete-btn{
+	border: 1px solid #ffc100;
+	padding: 0.375rem 0.75rem;
+	width: 21%;
+	background:#ffc100;
     text-align: center;
 }
 

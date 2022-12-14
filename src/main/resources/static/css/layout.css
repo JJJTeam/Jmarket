@@ -21,6 +21,7 @@ header {
 
 .sub-title {
 	padding: 0.75rem 0;
+	font-size:14px;
 }
 
 
@@ -36,7 +37,9 @@ nav a {
 
 
 
-
+.table {
+    min-height: 150px;
+}
 
 
 /*============================= page item btn ===============================*/
@@ -44,9 +47,17 @@ nav a {
 	width: 15%;
 }
 
+.d-flex .border-button {
+    width: 100%;
+}
+
 .btn-wrap .black-button {
 	width: 25%;
 	margin: 0 auto;
+}
+
+.btn-wrap .double{
+	    width: 20%;text-align: center;
 }
 
 /*============================= page item btn ===============================*/

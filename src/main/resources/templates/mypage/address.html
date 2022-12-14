@@ -6,12 +6,27 @@
 
 <div layout:fragment="mypage" class="container sub-container">
 
-   
-    <div style="width: 100%">
-      <div>배송지관리</div>
+
+   <div class="container">
+  
+    <div class="d-flex justify-content-between mb-4">
+      <h2 class="title">배송지관리</h2>
       
-      <div> <a href="/member/shipping-address">배송지추가</a></div>
+      <div class="black-button"><a href="/member/shipping-address">배송지추가</a></div>
+      
+     </div> 
         <table class="table">
+        
+         <colgroup>
+			<col width="10%">
+			<col width="30%">
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			
+		</colgroup>
+		
             <thead>
             <tr>
                 <th scope="col">선택</th>
@@ -20,6 +35,7 @@
                 <th scope="col">연락처</th>
                 <th scope="col">기본배송지</th>
                 <th scope="col">수정</th>
+                 <th scope="col">배송지</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +54,8 @@
             </tbody>
         </table>
     </div>
+    
+     
 </div>
 
 </html>

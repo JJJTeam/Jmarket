@@ -7,14 +7,14 @@
 <div layout:fragment="mypage" class="container sub-container">
 
 
-
+ <h2 class="title"> 배송지 등록</h2>
 	<form method="post" action="/member/shipping-address">
 
 
 		<div class="mb-4 mt-4 ">
 			<label for="postcode">우편번호</label>
 			<div class="d-flex">
-				<input type="text" class="form-control" id="postcode"
+				<input type="text" class="form-input" id="postcode"
 					name="postCode" placeholder="우편번호">
 				<button type="button" class="black-button" onclick="Postcode()">우편번호
 					찾기</button>
@@ -26,7 +26,7 @@
 
 		<div class="mb-4 mt-4">
 			<label for="address">주소</label> <input type="address"
-				class="form-control" id="address" placeholder="주소" name="address"
+				class="form-input" id="address" placeholder="주소를 입력해주세요." name="address"
 				readonly>
 
 		</div>
@@ -35,21 +35,21 @@
 
 		<div class="mb-4 mt-4">
 			<label for="addressDetail">상세주소</label> <input type="text"
-				class="form-control" id="addressDetail" placeholder="상세주소"
+				class="form-input" id="addressDetail" placeholder="상세주소를 입력해주세요."
 				name="addressDetail">
 		</div>
 
 
 		<div class="mb-4 mt-4">
 			<label for="person">받는사람이름</label> <input type="text"
-				class="form-control" id="person" placeholder="이름을입력해주세요"
+				class="form-input" id="person" placeholder="이름을입력해주세요"
 				name="person">
 		</div>
 
 
 		<div class="mb-4 mt-4">
 			<label for="addressPhoneNumber">받는사람전화번호</label> <input type="text"
-				class="form-control" id="addressPhoneNumber" placeholder="전화번호"
+				class="form-input" id="addressPhoneNumber" placeholder="전화번호"
 				name="addressPhoneNumber">
 		</div>
 
