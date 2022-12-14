@@ -37,43 +37,6 @@ nav a {
 
 
 
-/*===================== 상품리스트 =====================*/
-.itmeList {
-    padding: 4rem 0;
-}
-.de-title {
-    font-size: 23px;
-}
-.de-midd-title {
-    font-size: 15px;
-    font-weight: 200;
-}
-.de-price{font-size:19px;}
-
-
-.de-price span{font-size:15px; font-weight:200;}
-
-/* 대표이미지 리스틑 뿌려줄때  */
-.detail-img{width: 65%;}
-.detail-text{width:50%;}
-
-
-#imgId {
-	width: 100%;
-}
-/* 대표이미지 상품등록할 때 */
-#tartgetImg {
-	width: 45%;
-}
-
-
-.goodsName {
-	font-size: 12px;
-	padding: 5px 0; display : flex;
-	justify-content: space-between;
-}
-
-
 
 
 /*============================= page item btn ===============================*/
@@ -90,16 +53,11 @@ nav a {
 	margin: 0 auto;
 }
 
-
 /*============================= page item btn ===============================*/
-.pagination {
-	
-}
+.pagination {}
 
-.page-item:first-child .link-arrow {
+.page-item:first-child .link-arrow {}
 	
-}
-
 .page-item:not(:first-child) .link-arrow {
 	margin-left: -1px;
 }
@@ -128,3 +86,53 @@ nav a {
 	transition: color .15s ease-in-out, background-color .15s ease-in-out,
 		border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+
+
+/*===================== 메인 상품리스트  =====================*/
+
+.goodsName {
+	font-size: 12px;
+	padding: 5px 0; display : flex;
+	justify-content: space-between;
+}
+
+
+
+/*===================== 상품리스트 =====================*/
+.itmeList {
+    padding: 4rem 0;
+}
+.de-title {
+    font-size: 23px;
+}
+.de-midd-title {
+    font-size: 15px;
+    font-weight: 200;
+}
+.de-price{font-size:15px;}
+
+
+.de-price span{font-size:15px;}
+.de-add p{font-size:15px; }
+/* 대표이미지 리스틑 뿌려줄때  */
+.detail-img{width: 65%;}
+.detail-text{width:50%;}
+
+
+#imgId {
+	width: 100%;
+}
+/* 대표이미지 상품등록할 때 */
+#tartgetImg {
+	width: 45%;
+}
+
+
+
+/*===================== 장바구니 =====================*/
+
+
+
+/*===================== 구매이력 =====================*/
+
