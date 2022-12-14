@@ -28,12 +28,12 @@
      <li>   
             <span sec:authorize="hasRole('ROLE_USER')">
                 <div class="dropdown">
-                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                        <span th:text="${#authentication.name}">//인증된유저이름</span>님
+                    <button type="button" class="drop-btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <span th:text="${#authentication.name}"lang="en">//인증된유저이름</span>님
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/mypage/address">배송지관리</a></li>
-                        <li><a class="dropdown-item" href="/mypage/modify">개인정보수정</a></li>
+                        <!-- <li><a class="dropdown-item" href="/mypage/address">배송지관리</a></li> -->
+                        <li><a class="dropdown-list" href="/mypage/modify">회원정보 수정</a></li>
                       
                     </ul>
                 </div>
@@ -72,12 +72,7 @@
                 </button>
                 <button type="button" class=""><a href="/signup" class="nav-link link-dark">회원가입</a></button>
           </div>
-           
-           
-           
-           
-            
-                 
+        
          
         
       </ul>
@@ -90,8 +85,6 @@
     
 
 </header>
-
-
 
 
 </html>

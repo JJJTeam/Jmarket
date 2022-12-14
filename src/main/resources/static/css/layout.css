@@ -30,7 +30,7 @@ nav a {
 	font-size: 14px;
 }
 
-.btn.dropdown-toggle {
+.drop-btn.dropdown-toggle {
 	font-size: 14px;
 }
 
@@ -40,10 +40,6 @@ nav a {
 
 
 /*============================= page item btn ===============================*/
-
-
-
-
 .d-flex .black-button {
 	width: 15%;
 }
