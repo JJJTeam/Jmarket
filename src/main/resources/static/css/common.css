@@ -64,24 +64,29 @@ body {
 
 
 .form-check{
-	display: block;
-    width: 10px;
-    /* padding: 0.75rem 0; */
-    /* font-size: 1rem; */
+	display: inline-block;
+    width: 13px;
+    padding-left: 0;
+    font-size: 1rem;
     font-weight: 400;
-    /* line-height: 1.5; */
+    line-height: 1.5;
     color: #212529;
+    appearance: auto;
     border: 1px solid #ced4da;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
-    /* background-color: #fff; */
-    /* background-clip: padding-box; */
-    /* border-bottom: 1px solid #ced4da; */
-    height: 10px;
+    -webkit-appearance: auto;
+    -moz-appearance: initial;
+   
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-bottom: 1px solid #ced4da;
+    min-height: auto;
     margin: 0;
+    border-radius: 0;
+    
 }
+
+
 /*======================== button =============================*/
 button {
 	border: none;
@@ -112,7 +117,6 @@ button {
 
 /*======================== select =============================*/
 .form-select {
-	
 	width: 90px;
 	margin: 0.75em 0;
 	font-size: 11px;
