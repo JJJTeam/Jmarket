@@ -1,21 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/mypage}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/mypage}">
 
 
 <div layout:fragment="mypage" class="container sub-container">
 
-    <div th:replace="/mypage/mypageSidebar.html"></div>
-    <div style="width: 100%">
-        <h2>개인정보수정2222</h2>
-        <a href="/mypage/change-email">이메일변경</a>
-        <a href="/mypage/change-phone-number">전화번호변경</a>
-        <a href="/mypage/change-password">비밀번호변경</a>
-        <a href="/mypage/delete-account">계정삭제</a>
-    </div>
-</div>
+	<div style="width: 100%">
+		<h2 class="title">개인정보수정</h2>
+		
+		<div class="d-flex justify-content-between">
 
+			<div class="border-btn">
+				<a href="/mypage/change-email">이메일변경</a>
+			</div>
+			
+			<div class="border-btn">
+				<a href="/mypage/change-phone-number">전화번호변경</a>
+			</div>
+			
+			<div class="border-btn">
+				<a href="/mypage/change-password">비밀번호변경</a>
+			</div>
+			
+			<div class="border-btn">
+				<a href="/mypage/delete-account">계정삭제</a>
+			</div>
+			
+
+		</div>
+
+	</div>
+
+
+
+<div>배송지관리</div>
+      
+      <div> <a href="/member/shipping-address">배송지추가</a></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">선택</th>
+                <th scope="col">주소</th>
+                <th scope="col">받으실 분</th>
+                <th scope="col">연락처</th>
+                <th scope="col">기본배송지</th>
+                <th scope="col">수정</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="address : ${addressList}">
+                <td>선택</td>
+                <td>
+                    <span th:text="${address.address}"></span> <span th:text="${address.addressDetail}"></span>
+                </td>
+                <td th:text="${address.person}"></td>
+                <td th:text="${address.addressPhoneNumber}"></td>
+                <td th:text="${address.defaultAddress}"></td>
+                <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
+                <td><a th:href="@{/member/shipping-address/updatedefaultaddress(addressNo=${address.id})}">여기로배송</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+   
+    
+</div>
 
 
 </html>

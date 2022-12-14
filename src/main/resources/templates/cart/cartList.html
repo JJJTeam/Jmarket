@@ -34,10 +34,14 @@
 
 <div layout:fragment="cart" class="container sub-container">
 
-    <h2 class="title mb-4">
+<div class="d-flex justify-content-between mb-4">
+  <h2 class="title">
         장바구니 목록
     </h2>
-
+<button type="button" class="border-button" onclick = "location.href = '/mypage/address' ">배송지설정</button>
+  
+</div>
+    
     <div>
 
         <table class="table">
@@ -71,8 +75,8 @@
                    </div>
 
                     <div class="align-self-center">
-                        <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
-                        <div class="fs18 font-weight-light">
+                        <span th:text="${cartItem.itemNm}" class=""></span>
+                        <div class="">
                             <span class="input-group mt-2">
                                 <span th:id="'price_' + ${cartItem.cartItemId}"
                                       th:data-price="${cartItem.price}"
@@ -99,7 +103,7 @@
             </tbody>
         </table>
 
-        <h2 class="text-center">
+        <h2 class="title text-center">
             총 주문 금액 : <span id="orderTotalPrice" class="text-danger" lang="en">0원</span>
         </h2>
 
@@ -118,10 +122,10 @@
         </tbody>
         
         </span>
-        <button type="button" onclick = "location.href = '/mypage/address' ">배송지변경</button>
-        <div class="text-center mt-3">
+        
+        <div class="btn-wrap row mt-3">
             
-            <button type="button" class="border-button" onclick="orders()">주문하기</button>
+            <button type="button" class="black-button" onclick="orders()">주문하기</button>
             
         </div>
 
