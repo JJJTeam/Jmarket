@@ -21,7 +21,6 @@ public class UserAddress {  // 카멜표기법으로 , db저장은 스네이크 
     private String addressDetail;
     private String addressPhoneNumber;
     private String person;
-    @Column(unique = true)
     private Boolean defaultAddress;
 
     @ManyToOne
