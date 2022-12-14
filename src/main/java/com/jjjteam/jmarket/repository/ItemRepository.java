@@ -35,6 +35,8 @@ public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredi
 
     // orderBy 조건 + 가격 조건?
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
+   
+    
     
     @Query("select i from Item i where i.itemDetail like " +
             "%:itemDetail% order by i.price desc")

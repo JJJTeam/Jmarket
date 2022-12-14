@@ -107,9 +107,13 @@ public class CartController {
     @ResponseBody
     public ResponseEntity orderCartItem(@RequestBody CartOrderDTO cartOrderDTO, @AuthenticationPrincipal UserDetailsImpl principal){
         List<CartOrderDTO> cartOrderDTOList = cartOrderDTO.getCartOrderDTOList();
+        System.out.println("cartOrderDTOList :?? " + cartOrderDTOList);
+        
+        
         if(cartOrderDTOList == null || cartOrderDTOList.size() == 0){
             return new ResponseEntity<>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
         }
+        
         for (CartOrderDTO cartOrder : cartOrderDTOList) {
             if(!cartService.validateCartItem(cartOrder.getCartItemId(), principal.getId())){
                 return new ResponseEntity<>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);

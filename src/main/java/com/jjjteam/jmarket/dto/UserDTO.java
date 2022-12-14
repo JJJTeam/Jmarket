@@ -22,7 +22,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Slf4j
 public class UserDTO {
-    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "잘못입력하셨습니다.")
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "아이디를 4-20자로 입력해주세요.")
     private String userid;
     @Email
     private String email;

@@ -5,7 +5,13 @@
 
 
 <div layout:fragment="mypage" class="container sub-container">
-    <div th:replace="/mypage/mypageSidebar.html"></div>
+   
+ 
+       
+
+
+
+    <!-- <div th:replace="/mypage/mypageSidebar.html"></div> -->
     <div style="width: 100%">
     
         <form method="post" action="/member/shipping-address">
@@ -13,9 +19,10 @@
             <div class="form-group" >
                 <label for="postcode">우편번호:</label>
                 <input type="text" class="form-control" id="postcode" placeholder="우편번호" name="postCode">
+                <input type="button" class="btn btn-primary" onclick="Postcode()" value="우편번호 찾기" />
             </div>
             
-            <input type="button" onclick="Postcode()" value="우편번호 찾기" /><br>
+
            
            
             <div class="form-group">
@@ -40,14 +47,22 @@
             </div>
             <button type="submit" class="btn btn-primary">주소등록</button>
         </form>
+        
+  
+        
+        
     </div>
 </div>
 
+
 <th:block layout:fragment="script">
-    <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+ 
 <script th:inline="javascript">
             function Postcode() {
+            
                 new daum.Postcode({
+                	
                     oncomplete: function(data) {
                         var addr = ''; // 주소 변수
                         var extraAddr = ''; // 참고항목 변수
@@ -68,5 +83,7 @@
             }
         </script>
 </th:block>
-
+            
+            
+            
 </html>

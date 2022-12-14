@@ -3,8 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/order}">
 
+<th:block layout:fragment="script">
 
-<script>
+<script th:inline="javascript">
   function cancelOrder(orderId){
 
 
@@ -42,6 +43,8 @@
 
   }
  </script>
+
+</th:block>
 
 
 <th:block layout:fragment="css">

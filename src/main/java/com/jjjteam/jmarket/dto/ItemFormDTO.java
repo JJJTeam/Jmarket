@@ -27,6 +27,17 @@ public class ItemFormDTO {
 	
 	@NotBlank(message = "상품설명은 필수 입력 값입니다.")
 	private String itemIntroduction;
+	
+	//추가
+	private String itemMaterial;
+	
+	//추가
+	private String itemWashing;
+	
+	//추가
+	private String itemFabric;
+	
+	
 
 	@NotNull(message = "가격은 필수 입력 값입니다.")
 	private Integer price;
@@ -37,6 +48,7 @@ public class ItemFormDTO {
 	@NotNull(message = "재고는 필수 입력 값입니다.")
 	private Integer stockNumber;
 
+	
 	@NotBlank(message = "대표이미지는 필수입니다.")
 	private String repimg;
 	

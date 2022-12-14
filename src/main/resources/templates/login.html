@@ -10,15 +10,22 @@
 
     <form action="/login" method="post">
 <!--        <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>-->
-        <div class="form-group">
-            <label for="username">아이디:</label>
+        <div class="mb-4 mt-4">
+            <label for="username" class="form-label">아이디</label>
             <input type="text" class="form-input" id="username" placeholder="Enter username" name="username" value="">
         </div>
-        <div class="form-group">
-            <label for="password">비밀번호:</label>
+        
+        <div class="mb-4 mt-4">
+            <label for="password" class="form-label">비밀번호</label>
             <input type="password" class="form-input" id="password" placeholder="Enter password" name="password" value="">
         </div>
-        <button type="submit" class="black-button">로그인</button>
+        
+        <div class="btn-wrap row">
+        <button class="black-button" type="submit">로그인</button>
+        </div>
+        
+        
+      
     </form>
 </div>
 

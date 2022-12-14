@@ -1,6 +1,11 @@
 
 package com.jjjteam.jmarket.model;
 
+import java.util.List;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
 import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemColor;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
@@ -30,6 +35,14 @@ public class Item extends BaseEntity {
     
     @Column(nullable = false, length = 200)
     private String itemIntroduction;  //상품 소개 (미들네임)
+    
+    @Column(nullable = false)
+  	private String itemMaterial;
+    @Column(nullable = false)
+  	private String itemWashing;
+    @Column(nullable = false)
+  	private String itemFabric;
+  		
 
     @Column(name = "price", nullable = false)
     private int price;  //가격

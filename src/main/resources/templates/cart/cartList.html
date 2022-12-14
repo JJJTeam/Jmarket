@@ -32,10 +32,6 @@
 </th:block>
 
 
-
-
-    
-  
 <div layout:fragment="cart" class="container sub-container">
 
     <h2 class="mb-4">
@@ -53,7 +49,7 @@
             <thead>
             <tr class="text-center">
                 <td>
-                    <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
+                    <input type="checkbox" class="form-check" id="checkall" onclick="checkAll()"> 전체선택
                 </td>
                 <td>상품정보</td>
                 <td>상품금액</td>
@@ -108,7 +104,7 @@
             <tbody>
             <tr>
                 <td>
-                    <input type="hidden" id="defaultUserAddressId", th:value="${defaultUserAddress.id}">
+                    <input type="hidden" id="defaultUserAddressId" th:value="${defaultUserAddress.id}">
                 </td>
                 <td>
                     <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
@@ -117,6 +113,7 @@
                 <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
             </tr>
         </tbody>
+        
         </span>
         <button type="button" onclick = "location.href = '/mypage/address' ">배송지변경</button>
         <div class="text-center mt-3">
@@ -131,6 +128,7 @@
 </div>
 
 <th:block layout:fragment="script">
+
     <script th:inline="javascript">
         //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
@@ -139,9 +137,6 @@
             });
 
         });
-
-
-
 
         //getOrderTotalPrice() 총 주문금액을 구하는 함수
         function getOrderTotalPrice(){
@@ -234,6 +229,8 @@
                 }
             });
         }
+        
+   
 
         function orders() {
 
@@ -272,7 +269,6 @@
                             // alert(jqXHR.responseJSON.error);
                             alert("Ddddd 실패 : : " + error);
                         }
-
                     }
                 });
 
