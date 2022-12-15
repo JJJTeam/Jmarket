@@ -4,48 +4,44 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/mypage}">
 
-
-
-
-
 <div layout:fragment="mypage" class="container sub-container">
 
-    <div th:replace="/mypage/mypageSidebar.html"></div>
+    <h2 class="title"> 배송지 수정</h2>
     <div style="width: 100%">
         <form method="post" action="/member/shipping-address/update">
             <div class="form-group" >
                 <label for="postcode">우편번호:</label>
-                <input readonly type="text" class="form-control" id="postCode" name="postCode" th:value="${userAddress.postCode}" >
-                <input type="hidden" readonly name="id" th:value="${userAddress.id}" >
+                <div class = "d-flex">
+                    <input readonly type="text" class="form-input" id="postCode" name="postCode" th:value="${userAddress.postCode}" >
+                    <input type="hidden" readonly name="id" th:value="${userAddress.id}" >
+                </div>
             </div>
-            <div class="form-group">
+
+            <div class="mb-4 mt-4">
                 <label for="address">주소:</label>
-                <input type="address" class="form-control" id="address" readonly name="address" th:value="${userAddress.address}">
+                <input type="address" class="form-input" id="address" readonly name="address" th:value="${userAddress.address}">
             </div>
-            <div class="form-group">
+
+            <div class="mb-4 mt-4">
                 <label for="addressDetail">상세주소:</label>
-                <input type="text" class="form-control" id="addressDetail" name="addressDetail" th:value="${userAddress.addressDetail}">
+                <input type="text" class="form-input" id="addressDetail" name="addressDetail" th:value="${userAddress.addressDetail}">
             </div>
-            <div class="form-group">
+
+
+            <div class="mb-4 mt-4">
                 <label for="person">받는사람이름:</label>
-                <input type="text" class="form-control" id="person" placeholder="이름을입력해주세요" name="person" th:value="${userAddress.person}">
+                <input type="text" class="form-input" id="person" placeholder="이름을입력해주세요" name="person" th:value="${userAddress.person}">
             </div>
-            <div class="form-group">
+
+            <div class="mb-4 mt-4">
                 <label for="addressPhoneNumber">받는사람전화번호:</label>
-                <input type="text" class="form-control" id="addressPhoneNumber" placeholder="전화번호" name="addressPhoneNumber" th:value="${userAddress.addressPhoneNumber}">
+                <input type="text" class="form-input" id="addressPhoneNumber" placeholder="전화번호" name="addressPhoneNumber" th:value="${userAddress.addressPhoneNumber}">
             </div>
-            <div class="form-group">
-                <span th:if="${userAddress.defaultAddress} == true">
-                    <label>기본배송지입니다.</label>
-                    <input type="hidden"  name="defaultAddress" th:value="${userAddress.defaultAddress}">
-                </span>
-                <span th:unless="${userAddress.defaultAddress} == true">
-                    <label for="defaultAddress">기본배송지로 저장:</label>
-                    <input type="checkbox"  id="defaultAddress"  name="defaultAddress">
-                </span>
+
+            <div class="btn-wrap mb-4 mt-5">
+                <button class="black-button double" type="submit">주소수정</button>
+                <a th:href="@{/member/shipping-address/drop(addressNo=${userAddress.id})}" class="border-button double" type="submit">삭제</a>
             </div>
-            <button type="submit" class="btn btn-primary">주소수정</button>
-            <a th:href="@{/member/shipping-address/drop(addressNo=${userAddress.id})}" ><button type="button" class="btn btn-success btn-sm _delete">삭제</button></a>
 
         </form>
     </div>
