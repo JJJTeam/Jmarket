@@ -3,13 +3,10 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/mypage}">
 
-
 <div layout:fragment="mypage" class="container sub-container">
-
 
  <h2 class="title"> 배송지 등록</h2>
 	<form method="post" action="/member/shipping-address">
-
 
 		<div class="mb-4 mt-4 ">
 			<label for="postcode">우편번호</label>
@@ -20,9 +17,6 @@
 					찾기</button>
 			</div>
 		</div>
-
-
-
 
 		<div class="mb-4 mt-4">
 			<label for="address">주소</label> <input type="address"
@@ -54,7 +48,7 @@
 		</div>
 
 		<div class="mb-4 mt-4">
-			<label for="defaultAddress">기본배송지</label> <input type="checkbox"
+			<label for="defaultAddress">이주소로 배송</label> <input type="checkbox"
 				class="form-check" id="defaultAddress" name="defaultAddress">
 		</div>
 

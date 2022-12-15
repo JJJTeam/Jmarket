@@ -4,7 +4,6 @@ let passwordReg =/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,}$/;
 let userNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
 let emailReg =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 let userPhoneNumberReg =/^[0-9]+$/i;
-
 $("#userid").keyup(function(e) {
     if (!useridReg.test((document.getElementById("userid").value))){
         $("#idCheck").html("형식에 맞지 않습니다.")
