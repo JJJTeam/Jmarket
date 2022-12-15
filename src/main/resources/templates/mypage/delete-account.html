@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/mypage}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/mypage}">
 
 
 
 <div layout:fragment="mypage" class="container sub-container">
 
 
-    <div th:replace="/mypage/mypageSidebar.html"></div>
-    <div style="width: 100%">
-        <h2>계정삭제        </h2>
-    </div>
-    <form action="/mypage/delete-account" method="post">
-        <!--        <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>-->
 
-        <div class="form-group">
-            <label for="password">비밀번호:</label>
-            <input type="password" class="form-control" id="password" placeholder="현재 비밀번호를 입력해주세요" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">삭제</button>
-    </form>
-    </div>
+	<div class="mb-4 mt-4">
+		<h2 class="title">계정삭제</h2>
+	</div>
+
+
+	<form action="/mypage/delete-account" method="post">
+		<!--        <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>-->
+
+		<div class="mb-4 mt-4">
+			<label for="password">비밀번호:</label> <input type="password"
+				class="form-input" id="password" placeholder="현재 비밀번호를 입력해주세요"
+				name="password">
+		</div>
+
+
+		<div class="btn-wrap mb-4 mt-5">
+			<a href="/mypage/modify" class="border-button double" type="submit">목록</a>
+			<button class="black-button double" type="submit">확인</button>
+		</div>
+	</form>
 </div>
+
 
 
 

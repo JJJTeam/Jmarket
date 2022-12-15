@@ -76,9 +76,15 @@ section#content div.goodsName a {
 							lang="en" th:text="${item.price}+'원'"></a>
 
 					</div>
-					<div class="" sec:authorize="hasRole('ROLE_ADMIN')">
-						<a th:href="'/admin/item/'+${item.id}">수정하기</a>
-						<a th:href="'/admin/item/delete/'+${item.id}">삭제하기</a>
+					
+					
+					<div class="btn-wrap row mb-4 mt-4" sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="d-flex">
+						
+						<div class="pe-2"><a class="black-btn" th:href="'/admin/item/'+${item.id}">수정하기</a></div>
+						<div><a class="delete-btn" th:href="'/admin/item/delete/'+${item.id}">삭제하기</a></div>
+						
+						</div>
 					</div>
 				</div>
 			</li>

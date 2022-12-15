@@ -35,11 +35,29 @@
 <div layout:fragment="cart" class="container sub-container">
 
 <div class="d-flex justify-content-between mb-4">
-  <h2 class="title">
+     <h2 class="title">
         장바구니 목록
     </h2>
-<button type="button" class="border-button" onclick = "location.href = '/mypage/address' ">배송지설정</button>
+    
+    <div class="d-flex">
+     <button type="button" class="border-button" onclick = "location.href = '/mypage/modify' ">배송지설정</button>
   
+    
+    <span th:if="${defaultUserAddress}" >
+          
+                    <input type="hidden" id="defaultUserAddressId" th:value="${defaultUserAddress.id}">
+                
+                기본배송지 : 
+                    <span th:text="${defaultUserAddress.address}" lang="en"></span> 
+                    <span th:text="${defaultUserAddress.addressDetail}" lang="en"></span>
+               
+                <!-- <span th:text="${defaultUserAddress.person}"></span>
+                <span th:text="${defaultUserAddress.addressPhoneNumber}"></span> -->
+            
+        
+        </span>
+    </div>
+   
 </div>
     
     <div>
@@ -107,22 +125,11 @@
             총 주문 금액 : <span id="orderTotalPrice" class="text-danger" lang="en">0원</span>
         </h2>
 
-        <span th:if="${defaultUserAddress}" >
-            <tbody>
-            <tr>
-                <td>
-                    <input type="hidden" id="defaultUserAddressId" th:value="${defaultUserAddress.id}">
-                </td>
-                <td>
-                    <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
-                </td>
-                <td th:text="${defaultUserAddress.person}"></td>
-                <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
-            </tr>
-        </tbody>
         
-        </span>
         
+        
+        
+  
         <div class="btn-wrap row mt-3">
             
             <button type="button" class="black-button" onclick="orders()">주문하기</button>
