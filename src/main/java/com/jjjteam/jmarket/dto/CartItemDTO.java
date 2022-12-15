@@ -1,7 +1,6 @@
 package com.jjjteam.jmarket.dto;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -10,6 +9,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CartItemDTO {
 
 	//회원 한명 다 1개의 장바구니를 가지므로  해당회원의장바구니 생성 
@@ -18,11 +18,8 @@ public class CartItemDTO {
 	
 	@Min(value =1, message="최소 1개 이상 담아주세요.")
 	private int count;
-	
-	
 	private String repimg;
 	
-	
-	
+
 	
 }

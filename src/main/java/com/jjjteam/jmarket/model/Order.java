@@ -1,15 +1,10 @@
 package com.jjjteam.jmarket.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.jjjteam.jmarket.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import com.jjjteam.jmarket.constant.OrderStatus;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +34,7 @@ public class Order extends BaseEntity { // 카멜표기법으로 , db저장은 �
 	private LocalDateTime orderDate; // 주문일
 	private String repimg;
 
+	
 	// 주문상태
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
@@ -47,7 +43,8 @@ public class Order extends BaseEntity { // 카멜표기법으로 , db저장은 �
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	/*
-	 * orderItems에는 주문 상품 정보들을 담아줍니다. orderItem객체를 order객체를 order객체의 orderItems에 추가
+	 * orderItems에는 주문 상품 정보들을 담아줍니다. 
+	 * orderItem객체를 order객체를 order객체의 orderItems에 추가
 	 */
 	public void addOrderItem(OrderItem orderItem) {
 		orderItems.add(orderItem);

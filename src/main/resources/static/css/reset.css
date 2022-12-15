@@ -13,9 +13,9 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, audio, video { margin: 0; padding: 0; border: 0; font-size: 16px; line-height: 24px; font-style: normal; 
+time, audio, video { margin: 0; padding: 0; font-size:12px; line-height: 24px; font-style: normal; 
     font-weight: 400; vertical-align: baseline; 
-    line-height: 1.2; letter-spacing: -1px; color: #191919;
+    line-height: 1.5; letter-spacing: -1px; color: #191919;
     font-family:"Noto Sans KR", "Montserrat", sans-serif,"맑은 고딕","Nanum Gothic","나눔 고딕","돋움",dotum,sans-serif;} 
 
 mark{ margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; background: none; }
@@ -36,10 +36,6 @@ a { color: inherit; text-decoration: none; }
 
 
 
-*,
-:after,
-:before,
-html { box-sizing: border-box } 
 
 /* img { width: 100%; max-width: 100%; vertical-align: top }  */
 
@@ -64,10 +60,18 @@ legend { display: block;overflow: hidden; position: absolute; left: -9999px; tex
 textarea { resize: none } 
 
 input { -moz-appearance: none; appearance: none; border-radius: 0;border: 0;} 
+
 button { margin: 0; padding: 0; border: 0; background: 0; outline: none } 
 
 button,
 input { -webkit-appearance: none } 
+
+
+::placeholder {
+  color: #969696;
+  font-size: 13px;
+}
+
 
 a, a *,
 button { cursor: pointer;text-decoration: none; } 
@@ -81,11 +85,10 @@ a, a:focus, a:hover { color: inherit; text-decoration: none }
 pre { white-space: pre-wrap } 
 hr { margin: 0; padding: 0; border: 0; outline: 0 } 
 
-input[type=checkbox],
-input[type=radio] { opacity: 1; width: 13px; height: 13px; margin: 0; cursor: pointer } 
 
-/* 
-input[type="number"]::-webkit-outer-spin-button,
+
+
+/* input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;

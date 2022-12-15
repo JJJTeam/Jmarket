@@ -2,7 +2,6 @@ package com.jjjteam.jmarket.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -27,6 +26,7 @@ public class OrderItem extends BaseEntity{ // BaseEntity: 등록한사람, 수�
     
     @Lob
     private String repimg;
+    
 
 
     // 주문할 상품,주문 수량으로 orderItem 객체 생성

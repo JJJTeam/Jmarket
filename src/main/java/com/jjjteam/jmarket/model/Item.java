@@ -4,22 +4,17 @@ package com.jjjteam.jmarket.model;
 import java.util.List;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.NotBlank;
 
 import com.jjjteam.jmarket.constant.ClothingItems;
 import com.jjjteam.jmarket.constant.ItemColor;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.constant.ItemSize;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-
 import com.jjjteam.jmarket.exception.OutOfStockException;
+import lombok.*;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import javax.persistence.*;
 
 @ToString
 @Getter
@@ -40,6 +35,14 @@ public class Item extends BaseEntity {
     
     @Column(nullable = false, length = 200)
     private String itemIntroduction;  //상품 소개 (미들네임)
+    
+    @Column(nullable = false)
+  	private String itemMaterial;
+    @Column(nullable = false)
+  	private String itemWashing;
+    @Column(nullable = false)
+  	private String itemFabric;
+  		
 
     @Column(name = "price", nullable = false)
     private int price;  //가격
@@ -68,38 +71,7 @@ public class Item extends BaseEntity {
     private ItemSize itemSize;		//상품 사이즈
 
 
-//    @OneToMany(mappedBy = "item")
-//	private List<ItemImg> itemImgs;
-
-//    @Builder
-//    public Item(
-//    		String itemNm,
-//    		String itemIntroduction,
-//    		int price,
-//    		int stockNumber,
-//    		String itemDetail,
-//    		ItemSellStatus itemSellStatus,
-//    		ClothingItems clothingItems,
-//    		ItemSize itemSize,
-//    		ItemColor itemColor,
-//    		List<ItemImg> itemImgs) {
-//        this.itemNm = itemNm;
-//        this.itemIntroduction = itemIntroduction;
-//        this.price = price;
-//        this.stockNumber =stockNumber;
-//        this.itemDetail = itemDetail;
-//        this.itemSellStatus = itemSellStatus;
-//        this.clothingItems = clothingItems;
-//        this.itemSize = itemSize;
-//        this.itemColor = itemColor;
-//        this.itemImgs = itemImgs;
-//    }
-//
-//    public Item() {
-//		// TODO Auto-generated constructor stub
-//	}
-
-	public void updateItem(ItemFormDTO itemFormDto) {
+    public void updateItem(ItemFormDTO itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
         this.itemIntroduction = itemFormDto.getItemIntroduction();
         this.price = itemFormDto.getPrice();

@@ -6,13 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -28,7 +21,7 @@ public class UserAddress {  // 카멜표기법으로 , db저장은 스네이크 
     private String addressDetail;
     private String addressPhoneNumber;
     private String person;
-    @Column(unique = true)
+    @Column(unique = false)
     private Boolean defaultAddress;
 
     @ManyToOne

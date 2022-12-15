@@ -1,15 +1,14 @@
 package com.jjjteam.jmarket.dto;
 
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jjjteam.jmarket.constant.OrderStatus;
 import com.jjjteam.jmarket.model.Order;
-
 import com.jjjteam.jmarket.model.UserAddress;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * 주문정보를 담을 DTO

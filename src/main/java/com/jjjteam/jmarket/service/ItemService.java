@@ -1,27 +1,17 @@
 package com.jjjteam.jmarket.service;
 
 
+import com.jjjteam.jmarket.dto.ItemFormDTO;
+import com.jjjteam.jmarket.dto.ItemListDTO;
+import com.jjjteam.jmarket.dto.ItemSearchDTO;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.jjjteam.jmarket.dto.ItemFormDTO;
-
-import com.jjjteam.jmarket.dto.ItemListDTO;
-import com.jjjteam.jmarket.dto.ItemSearchDTO;
-import com.jjjteam.jmarket.model.Item;
-
-
-import com.jjjteam.jmarket.repository.ItemRepository;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -81,6 +71,7 @@ public class ItemService {
     @Transactional
     public void deleteItem(Long id) {
     	itemRepository.deleteById(id);
+    	System.out.print("삭제되었습니다.");
     }
 	
 }

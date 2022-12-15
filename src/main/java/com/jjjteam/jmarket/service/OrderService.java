@@ -1,29 +1,28 @@
 package com.jjjteam.jmarket.service;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
-
-import com.jjjteam.jmarket.model.*;
+import com.jjjteam.jmarket.dto.OrderDTO;
+import com.jjjteam.jmarket.dto.OrderHistDTO;
+import com.jjjteam.jmarket.dto.OrderItemDTO;
+import com.jjjteam.jmarket.model.Item;
+import com.jjjteam.jmarket.model.Order;
+import com.jjjteam.jmarket.model.OrderItem;
+import com.jjjteam.jmarket.model.User;
+import com.jjjteam.jmarket.repository.ItemRepository;
+import com.jjjteam.jmarket.repository.OrderRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
+import com.jjjteam.jmarket.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.jjjteam.jmarket.dto.OrderDTO;
-import com.jjjteam.jmarket.dto.OrderHistDTO;
-import com.jjjteam.jmarket.dto.OrderItemDTO;
-
-import com.jjjteam.jmarket.repository.ItemRepository;
-import com.jjjteam.jmarket.repository.OrderRepository;
-import com.jjjteam.jmarket.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // 주문목록을 조회하는
@@ -38,29 +37,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 	private final UserAddressRepository userAddressRepository;
 
-
-    //주문할 상품 조회
-	//안쓰여서 주석처리함
-//   public Long order(OrderDTO orderDTO, Long id) {
-//	   Item item = itemRepository.findById(orderDTO.getItemId()).orElseThrow(EntityNotFoundException::new);
-//	   //현재로그인한 회원의 아이디를 이용해서 회원정보 ㅈ
-//	   User user = userRepository.findById(id).get();
-//
-//	   List<OrderItem> orderItemList = new ArrayList<>();
-//
-//	   OrderItem orderItem = OrderItem.createOrderItem(item, orderDTO.getCount(), item.getRepimg() );
-//	   orderItemList.add(orderItem);
-//
-//	   Order order = Order.createOrder(user, orderItemList);
-//	   orderRepository.save(order);
-//
-//	   return order.getId();
-//
-//   }
-
-   
-   
-   @Transactional(readOnly = true)
+	@Transactional(readOnly = true)
    public Page<OrderHistDTO> getOrderList(Long id, Pageable pageable){
 
 	   List<Order> orders = orderRepository.findOrders(id, pageable);
@@ -76,15 +53,10 @@ public class OrderService {
 			 OrderItemDTO orderItemDTO = new OrderItemDTO(orderItem, orderItem.getRepimg());
              orderHistDTO.addOrderItemDTO(orderItemDTO);
           }
-		 
 		 orderHistDTOs.add(orderHistDTO);
-		 
 	   }
-	   
 	   return new PageImpl<OrderHistDTO>(orderHistDTOs, pageable, totalCount);
    }
-   
-   
    //주문취소하는 로직 
    @Transactional(readOnly=true)
    public boolean validateOrder(Long orderId, Long id) {
@@ -98,19 +70,14 @@ public class OrderService {
 	   }
 	   return true;	
    }
-   
-   
-   
+
   //주문 취소상태로 변경하면 변경감지에 의해서 트랜잭션이 끝날 때 update 쿼리가 실행
    public void cancelOrder(Long orderId){
        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
        order.cancelOrder();
 
    }
-   
-   
-   
-   
+
    public Long orders(List<OrderDTO> orderDTOList, Long id, Long addressNum) {
 	   User user = userRepository.findById(id).get();
 	   List<OrderItem> orderItemList = new ArrayList<>();
@@ -127,11 +94,4 @@ public class OrderService {
 	   
 	   return order.getId();
    }
-   
-   
-   
-   
-   
-   
-
 }

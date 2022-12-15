@@ -1,14 +1,13 @@
 package com.jjjteam.jmarket.repository;
 
 
-import java.util.List;
-
+import com.jjjteam.jmarket.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
-import com.jjjteam.jmarket.model.Item;
+import java.util.List;
 
 /*
  * Querydsl 을 SpringDataJpa 와 함께 사용하기 위해서는 사용자 정의 repository 를 작성해야 함
@@ -21,9 +20,6 @@ import com.jjjteam.jmarket.model.Item;
 
 //3. ItemRepository 에서 ItemRepositoryCustom 상속
 public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
-	
-//	// 상품id로 데이터 조회하기
-//    List<Item> findByItemId(Long id);
 
     // 상품명으로 데이터 조회하기
     List<Item> findByItemNm(String itemNm);
@@ -39,6 +35,8 @@ public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredi
 
     // orderBy 조건 + 가격 조건?
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
+   
+    
     
     @Query("select i from Item i where i.itemDetail like " +
             "%:itemDetail% order by i.price desc")

@@ -1,15 +1,5 @@
 package com.jjjteam.jmarket.repository;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.thymeleaf.util.StringUtils;
-
 import com.jjjteam.jmarket.constant.ItemSellStatus;
 import com.jjjteam.jmarket.dto.ItemListDTO;
 import com.jjjteam.jmarket.dto.ItemSearchDTO;
@@ -19,6 +9,14 @@ import com.jjjteam.jmarket.model.QItem;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.thymeleaf.util.StringUtils;
+
+import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 
@@ -100,17 +98,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 				.offset(pageable.getOffset()) // 데이터를 가지고 시작인덱스 지정
 				.limit(pageable.getPageSize()) // 한 번에 가지고 최대 개수 지정
 				.fetchResults();
-//		List<Item> results = queryFactory
-//				.selectFrom(QItem.item)
-//				.where(regDtsAfter(itemSearchDTO.getSearchDateType()),
-//						searchSellStatusEq(itemSearchDTO.getSearchSellStatus()),
-//						searchByLike(itemSearchDTO.getSearchBy(),
-//								itemSearchDTO.getSearchQuery())) //',' = and
-//				.orderBy(QItem.item.id.desc())
-//				.offset(pageable.getOffset()) // 데이터를 가지고 시작인덱스 지정
-//				.limit(pageable.getPageSize()) // 한 번에 가지고 최대 개수 지정
-//				.fetch();
-		
+
 		List<Item> content = results.getResults();
 		long total = results.getTotal();
 		
@@ -131,7 +119,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                                 item.id,
                                 item.itemNm,
                                 item.repimg,
-                                item.price)
+                                item.price,
+                                item.itemMaterial,
+                                item.itemWashing,
+                                item.itemFabric)
                 )
 				.from(item)
 //                .from(itemImg)

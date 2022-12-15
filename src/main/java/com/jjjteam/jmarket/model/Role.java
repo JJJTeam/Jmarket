@@ -1,13 +1,12 @@
 package com.jjjteam.jmarket.model;
 
 
+import com.jjjteam.jmarket.constant.ERole;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-
-import com.jjjteam.jmarket.constant.ERole;
-import lombok.ToString;
 
 @Entity
 @Table(name = "roles")

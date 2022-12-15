@@ -32,16 +32,34 @@
 </th:block>
 
 
-
-
-    
-  
 <div layout:fragment="cart" class="container sub-container">
 
-    <h2 class="mb-4">
-        장바구니 목록f
+<div class="d-flex justify-content-between mb-4">
+     <h2 class="title">
+        장바구니 목록
     </h2>
-
+    
+    <div class="d-flex">
+     <button type="button" class="border-button" onclick = "location.href = '/mypage/modify' ">배송지설정</button>
+  
+    
+    <span th:if="${defaultUserAddress}" >
+          
+                    <input type="hidden" id="defaultUserAddressId" th:value="${defaultUserAddress.id}">
+                
+                기본배송지 : 
+                    <span th:text="${defaultUserAddress.address}" lang="en"></span> 
+                    <span th:text="${defaultUserAddress.addressDetail}" lang="en"></span>
+               
+                <!-- <span th:text="${defaultUserAddress.person}"></span>
+                <span th:text="${defaultUserAddress.addressPhoneNumber}"></span> -->
+            
+        
+        </span>
+    </div>
+   
+</div>
+    
     <div>
 
         <table class="table">
@@ -53,7 +71,7 @@
             <thead>
             <tr class="text-center">
                 <td>
-                    <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
+                    <input type="checkbox" class="form-check" id="checkall" onclick="checkAll()"> 전체선택
                 </td>
                 <td>상품정보</td>
                 <td>상품금액</td>
@@ -63,8 +81,11 @@
             
             <tr th:each="cartItem : ${cartItems}">
                 <td class="text-center align-middle">
-                    <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
+                    <input type="checkbox" class="form-check" name="cartChkBox" th:value="${cartItem.cartItemId}">
                 </td>
+               
+        
+        
                 <td class="d-flex">
                    <div class="repImgDiv align-self-center">
                        <!-- <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}"> -->
@@ -72,8 +93,8 @@
                    </div>
 
                     <div class="align-self-center">
-                        <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
-                        <div class="fs18 font-weight-light">
+                        <span th:text="${cartItem.itemNm}" class=""></span>
+                        <div class="">
                             <span class="input-group mt-2">
                                 <span th:id="'price_' + ${cartItem.cartItemId}"
                                       th:data-price="${cartItem.price}"
@@ -100,28 +121,18 @@
             </tbody>
         </table>
 
-        <h2 class="text-center">
+        <h2 class="title text-center">
             총 주문 금액 : <span id="orderTotalPrice" class="text-danger" lang="en">0원</span>
         </h2>
 
-        <span th:if="${defaultUserAddress}" >
-            <tbody>
-            <tr>
-                <td>
-                    <input type="hidden" id="defaultUserAddressId", th:value="${defaultUserAddress.id}">
-                </td>
-                <td>
-                    <span th:text="${defaultUserAddress.address}"></span> <span th:text="${defaultUserAddress.addressDetail}"></span>
-                </td>
-                <td th:text="${defaultUserAddress.person}"></td>
-                <td th:text="${defaultUserAddress.addressPhoneNumber}"></td>
-            </tr>
-        </tbody>
-        </span>
-        <button type="button" onclick = "location.href = '/mypage/address' ">배송지변경</button>
-        <div class="text-center mt-3">
+        
+        
+        
+        
+  
+        <div class="btn-wrap row mt-3">
             
-            <button type="button" class="border-button" onclick="orders()">주문하기</button>
+            <button type="button" class="black-button" onclick="orders()">주문하기</button>
             
         </div>
 
@@ -131,6 +142,7 @@
 </div>
 
 <th:block layout:fragment="script">
+
     <script th:inline="javascript">
         //주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수를 호출
         $(document).ready(function(){
@@ -139,9 +151,6 @@
             });
 
         });
-
-
-
 
         //getOrderTotalPrice() 총 주문금액을 구하는 함수
         function getOrderTotalPrice(){
@@ -234,56 +243,53 @@
                 }
             });
         }
+        
+   
 
-        function orders(){
+        function orders() {
 
-            var url = "/cart/orders";
-
-            var dataList = new Array();
-            var paramData = new Object();
-
-
-            $("input[name=cartChkBox]:checked").each(function() {
-                var cartItemId = $(this).val();
-                var data = new Object();
-                data["cartItemId"] = cartItemId;
-                dataList.push(data);
-                console.log("cartItemId :" + cartItemId);
-            });
-
-            paramData['cartOrderDTOList'] = dataList;
-            paramData['addressNum']=$("#defaultUserAddressId").val();
-            var param = JSON.stringify(paramData);
-
-            $.ajax({
-                url      : url,
-                type     : "POST",
-                contentType : "application/json",
-                data     : param,
-                dataType : "json",
-                cache   : false,
-                success  : function(result, status){
-                    alert("주문이 완료 되었습니다.");
-                    location.href='/orders';
-                },
-                error : function(jqXHR, status, error){
-
-                    if(jqXHR.status == '401'){
-                        alert('로그인 후 이용해주세요');
-                        location.href='/login';
-                    } else{
-                        // alert(jqXHR.responseJSON.error);
-                        alert("Ddddd 실패 : : " + error);
+            if ($("#defaultUserAddressId").val() == null) {
+                alert("배송지를 설정해주세요")
+            } else {
+                var url = "/cart/orders";
+                var dataList = new Array();
+                var paramData = new Object();
+                $("input[name=cartChkBox]:checked").each(function () {
+                    var cartItemId = $(this).val();
+                    var data = new Object();
+                    data["cartItemId"] = cartItemId;
+                    dataList.push(data);
+                    console.log("cartItemId :" + cartItemId);
+                });
+                paramData['cartOrderDTOList'] = dataList;
+                paramData['addressNum'] = $("#defaultUserAddressId").val();
+                var param = JSON.stringify(paramData);
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: param,
+                    dataType: "json",
+                    cache: false,
+                    success: function (result, status) {
+                        alert("주문이 완료 되었습니다.");
+                        location.href = '/orders';
+                    },
+                    error: function (jqXHR, status, error) {
+                        if (jqXHR.status == '401') {
+                            alert('로그인 후 이용해주세요');
+                            location.href = '/login';
+                        } else {
+                            // alert(jqXHR.responseJSON.error);
+                            alert("Ddddd 실패 : : " + error);
+                        }
                     }
-
-                }
-            });
+                });
 
 
+                //아임포트 결제 api연결
 
-            //아임포트 결제 api연결
-
-            /* IMP.init("imp25587836");
+                /* IMP.init("imp25587836");
             IMP.request_pay({
                 pg : "kcp",
                 pay_method : "card",
@@ -317,6 +323,7 @@
             });  */
 
 
+            }
         }
 
 

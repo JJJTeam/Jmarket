@@ -1,13 +1,5 @@
 package com.jjjteam.jmarket.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.jjjteam.jmarket.dto.CartDetailDTO;
 import com.jjjteam.jmarket.dto.CartItemDTO;
 import com.jjjteam.jmarket.dto.CartOrderDTO;
@@ -20,9 +12,15 @@ import com.jjjteam.jmarket.repository.CartItemRepository;
 import com.jjjteam.jmarket.repository.CartRepository;
 import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +52,7 @@ public class CartService {
 			return savedCartItem.getId();
 		}else {
 			//장바구니 엔티티, 상품 엔티티, 장바구니에 담을 상품 수량을 이용하여 CartItem엔티티 생성 
-			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount(),  cartItemDTO.getRepimg());
+			CartItem cartItem = CartItem.createCartItem(cart, item, cartItemDTO.getCount(), cartItemDTO.getRepimg());
 			
 			cartItemRepository.save(cartItem);//장바구니에 들어갈 상품을 저장
 			return cartItem.getId();
@@ -74,9 +72,7 @@ public class CartService {
 	            return cartDetailDTOList;
 	        }
 	        
-	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());
-
-	        
+	        cartDetailDTOList = cartItemRepository.findCartDetailDTOList(cart.getId());       
 	        return cartDetailDTOList;
 	        
 	    }
@@ -131,8 +127,6 @@ public class CartService {
 	            orderDTO.setCount(cartItem.getCount());
 	            orderDTOList.add(orderDTO);
 	        }
-
-	        
 	        Long orderId = orderService.orders(orderDTOList, id,addressNum);
 	        
 	        for (CartOrderDTO cartOrderDTO : cartOrderDTOList) {
@@ -141,13 +135,6 @@ public class CartService {
 	                            .orElseThrow(EntityNotFoundException::new);
 	            cartItemRepository.delete(cartItem);
 	        }
-
 	        return orderId;
 	    }
-
-
-		
-	 
-	
-
 }

@@ -1,12 +1,11 @@
 package com.jjjteam.jmarket.repository;
 
-import java.util.List;
-
+import com.jjjteam.jmarket.dto.CartDetailDTO;
+import com.jjjteam.jmarket.model.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.jjjteam.jmarket.dto.CartDetailDTO;
-import com.jjjteam.jmarket.model.CartItem;
+import java.util.List;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Long>{
 
@@ -18,7 +17,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long>{
 	@Query("select new com.jjjteam.jmarket.dto.CartDetailDTO(ci.id, i.itemNm, i.price, ci.count, i.repimg) " +
 			"from CartItem ci " +
 			"join ci.item i " +
-			
 			"where ci.cart.id = :cartId " +
 //			"and im.item.id = ci.item.id " +
 //			"and im.repimgYn = 'Y' " +

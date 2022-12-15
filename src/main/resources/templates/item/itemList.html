@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/items}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/items}">
 
 
 
 <th:block layout:fragment="script">
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#searchBtn").on("click", function(e) {
-			e.preventDefault();
-			page(0);
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#searchBtn").on("click", function(e) {
+				e.preventDefault();
+				page(0);
+			});
 		});
-	});
 
-	function page(page) {
-		var searchDateType = $("#searchDateType").val();
-		var searchSellStatus = $("#searchSellStatus").val();
-		var searchBy = $("#seacrhBy").val();
-		var searchQuery = $("#searchQuery").val();
+		function page(page) {
+			var searchDateType = $("#searchDateType").val();
+			var searchSellStatus = $("#searchSellStatus").val();
+			var searchBy = $("#seacrhBy").val();
+			var searchQuery = $("#searchQuery").val();
 
-		location.href = "/item/itemList/" + page + "?searchDateType"
-				+ searchDateType + "&searchSellStatus" + searchSellStatus
-				+ "&searchBy" + searchBy + "&searchQuery" + searchQuery;
-	}
-</script>
+			location.href = "/item/itemList/" + page + "?searchDateType"
+					+ searchDateType + "&searchSellStatus" + searchSellStatus
+					+ "&searchBy" + searchBy + "&searchQuery" + searchQuery;
+		}
+	</script>
 </th:block>
 
 
 <th:block layout:fragment="css">
-<style type="text/css">
-
+	<style type="text/css">
 section#content ul li {
 	display: inline-block;
 	margin: 10px;
@@ -49,6 +49,7 @@ section#content div.goodsName {
 section#content div.goodsName a {
 	color: #000;
 }
+
 </style>
 </th:block>
 
@@ -56,71 +57,84 @@ section#content div.goodsName a {
 		
 		
 		
-		<div class="" style="padding:40px;">
+		<div class="itmeList">
 		
-		<ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		<!-- <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
 		
+		<ul class="row row-cols-md-3 g-3">
 			<li class="col" th:each="item, status:${items.getContent()}">
-            <div class="">
-				
-				<a th:href="@{/item/}+${item.id}">
-				
-<!-- <a th:href="'/item/'+{item.id}"> -->
-					<img th:if="${item.repimg != null}" th:src="${item.repimg}" alt="상품이미지" id = "imgId" >
+				<div class="">
+
+					<a th:href="@{/item/}+${item.id}"> <!-- <a th:href="'/item/'+{item.id}"> -->
+						<img th:if="${item.repimg != null}" th:src="${item.repimg}"
+						alt="상품이미지" id="imgId">
 					</a>
-				
-				<div class="goodsName">
-					<a th:href="'/item/'+${item.id}" lang="en" th:text="${item.itemNm}"></a> <a
-						th:href="'/item/'+${item.id}" lang="en" th:text="${item.price}+'원'"></a>
-				</div>
+
+					<div class="goodsName">
+						<a th:href="'/item/'+${item.id}" lang="en"
+							th:text="${item.itemNm}"></a> <a th:href="'/item/'+${item.id}"
+							lang="en" th:text="${item.price}+'원'"></a>
+
+					</div>
+					
+					
+					<div class="btn-wrap row mb-4 mt-4" sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="d-flex">
+						
+						<div class="pe-2"><a class="black-btn" th:href="'/admin/item/'+${item.id}">수정하기</a></div>
+						<div><a class="delete-btn" th:href="'/admin/item/delete/'+${item.id}">삭제하기</a></div>
+						
+						</div>
+					</div>
 				</div>
 			</li>
-			
-			
+
+
 		</ul>
-		
-		</div>
-		
-		
-		
+
+	</div>
+
+
+
 	<!-- 하단 페이지 정보 view -->
-			<div
+			<div class=""
 				th:with="start=${(items.number/maxPage)*maxPage + 1},
     end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) 
-    < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+    < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
 				<!--start= (현재 페이지 번호/ 보여줄 페이지 수)+1, end= start+(보여줄 페이지 수-1) -->
 
-				<ul class="pagination justify-content-center">
+
+				<ul class="pagination justify-content-center mb-4 mt-4 ">
 
 					<li class="page-item" th:classappend="${items.first}?'disabled'">
-						<!-- 첫번째 페이지면은 '이전 페이지 보여주기 버튼' 비활성화--> <a
-						th:onclick="'javascript:page(' + ${items.number - 1} + ')'"
-						aria-label='Previous' class="page-link"> <!-- 이전 페이지 ㄱㄱ --> <span
-							aria-hidden='true'>Previous</span>
+						<!-- 첫번째 페이지면은 '이전 페이지 보여주기 버튼' 비활성화--> 
+						<a th:onclick="'javascript:page(' + ${items.number - 1} + ')'"
+						aria-label='Previous' class=" link-arrow" > <!-- 이전 페이지 ㄱㄱ --> 
+						<span aria-hidden='true' lang="en">Previous</span>
 					</a>
 
-					</li>
+			</li>
 
 					<li class="page-item"
 						th:each="page: ${#numbers.sequence(start, end)}"
 						th:classappend="${items.number eq page-1}?'active':''">
 						<!-- active 클래스 추가함. 왜냐면은 현재 페이지 일 때 색 넣어줄려고  --> <a
 						th:onclick="'javascript:page(' + ${page - 1} + ')'"
-						th:inline="text" class="page-link a-color">[[${page}]]</a>
+						th:inline="text" class=" a-color link-arrow" lang="en">[[${page}]]</a>
 					</li>
 
 					<li class="page-item" th:classappend="${items.last}?'disabled'">
 						<!-- 마지막 페이지면은 '다음 페이지 보여주기 버튼' 비활성화 --> <a
 						th:onclick="'javascript:page(' + ${items.number + 1} + ')'"
-						aria-label='Next' class="page-link"> <!-- 다음 페이지 ㄱㄱ --> <span
-							aria-hidden='true'>Next</span>
+						aria-label='Next' class=" link-arrow"> <!-- 다음 페이지 ㄱㄱ --> <span
+							aria-hidden='true' lang="en">Next</span>
 					</a>
 					</li>
 
-				</ul>
-			</div>
-			
+		</ul>
 	</div>
+
+</div>
 
 
 

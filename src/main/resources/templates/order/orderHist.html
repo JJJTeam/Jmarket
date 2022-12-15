@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/order}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/order}">
 
+<th:block layout:fragment="script">
 
-<script>
+	<script th:inline="javascript">
   function cancelOrder(orderId){
 
 
@@ -43,9 +44,11 @@
   }
  </script>
 
+</th:block>
+
 
 <th:block layout:fragment="css">
-<style>
+	<style>
 .content-mg {
 	margin-left: 30%;
 	margin-right: 30%;
@@ -85,90 +88,158 @@
 <div layout:fragment="order" class="container sub-container">
 
 
-	<h2 class="mb-4">구매이력</h2>
+	<div class=" ">
+		<h2 class="title mb-4 mt-4">구매이력</h2>
 
-	<div th:each="order : ${orders.getContent()}">
+		
 
-		<div class="d-flex mb-3 align-self-center">
-			<h4 th:text="${order.orderDate} + '주문'"></h4>
+			<table class="table">
+				<colgroup>
+					<col width="12%">
+			<col width="16%">
+			<col width="12%">
+			<col width="14%">
+			<col width="12%">
+			<col width="10%">
+			<col width="5%">
+			<col width="10%">
+
+				</colgroup>
+				<thead>
+					<tr class="text-center">
+						<th scope="col">주문날짜</th>
+						<th scope="col">배송주소</th>
+						<th scope="col">상세주소</th>
+						<th scope="col">상품이미지</th>
+						<th scope="col">상품명</th>
+						<th scope="col">가격</th>
+						<th scope="col">수량</th>
+						<th scope="col">기본설정</th>
+					</tr>
+				</thead>
 
 
-			<div class="ml-3">
+				<tbody>
+					<tr th:each="order : ${orders.getContent()}">
+						<td th:text="${order.orderDate} " lang="en"></td>
+						<td th:text="${order.userAddress.address}" lang="en"></td>
 
-				
-				
-				<div	th:if="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
-					<button type="button" class="btn btn-outline-secondary"
+
+						<td th:text="${order.userAddress.addressDetail}" lang="en"></td>
+						<!-- <td th:text="${order.userAddress.person}"></td>
+                <td th:text="${order.userAddress.addressPhoneNumber}"></td>
+                 -->
+
+
+						<td th:each="orderItem : ${order.orderItemDTOList}" lang="en"><img
+							width="100px" th:src="${orderItem.Repimg}"lang="en"></td>
+						<td th:each="orderItem : ${order.orderItemDTOList}"
+							th:text="${orderItem.itemNm}" lang="en"></td>
+
+						<td th:each="orderItem : ${order.orderItemDTOList}"
+							th:text="${orderItem.orderPrice} +'원'" lang="en"></td>
+						<td th:each="orderItem : ${order.orderItemDTOList}"
+							th:text="${orderItem.count} +'개'" lang="en"></td>
+						<td>
+							<!-- 주문취소 취소완료 부분 -->
+							<div
+								th:if="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
+
+								<button type="button" class="border-button"
+									th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
+							</div>
+
+							<div
+								th:unless="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
+								<h4 class="black-button">취소완료</h4>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+
+
+
+			<!--  원래  -->
+			<!-- <div class="d-flex">
+
+				<h4 class="order-date" th:text="${order.orderDate} + '주문'" lang="en"></h4>
+
+				<div th:text="${order.userAddress.postCode}"></div>
+
+				<div>
+					<span th:text="${order.userAddress.address}"></span> <span
+						th:text="${order.userAddress.addressDetail}"></span> <span
+						th:text="${order.userAddress.person}"></span> <span
+						th:text="${order.userAddress.addressPhoneNumber}"></span>
+				</div>
+
+
+
+				<div th:each="orderItem : ${order.orderItemDTOList}"
+					class="d-flex mb-3">
+
+
+					<img width="100px" th:src="${orderItem.Repimg}" />
+					<div class="">
+						<span th:text="${orderItem.itemNm}"></span> <span
+							th:text="${orderItem.orderPrice} +'원'"></span> <span
+							th:text="${orderItem.count} +'개'"></span>
+					</div>
+
+				</div>
+				주문취소 취소완료 부분
+				<div
+					th:if="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
+
+					<button type="button" class="border-button"
 						th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
 				</div>
-				<div>
-					<tbody>
-					<tr><td th:text="${order.userAddress.postCode}"></td>
-						<td>
-							<span th:text="${order.userAddress.address}"></span> <span th:text="${order.userAddress.addressDetail}"></span>
-						</td>
-						<td th:text="${order.userAddress.person}"></td>
 
-						<td th:text="${order.userAddress.addressPhoneNumber}"></td>
-					</tr>
-					</tbody>
-				</div>
 				<div
 					th:unless="${#strings.equals(order.orderStatus,T(com.jjjteam.jmarket.constant.OrderStatus).ORDER)}">
-					<h4>취소완료</h4>
+					<h4 class="black-button">취소완료</h4>
 				</div>
 
-			</div>
-
-		</div>
-
-		<div class="card d-flex">
-			<div th:each="orderItem : ${order.orderItemDTOList}"
-				class="d-flex mb-3">
-
-				<div class="align-self-center w-75">
-					<div class="fs18 font-weight-light">
-						<span th:text="${orderItem.itemNm}"></span>
-					<img width="100px" th:src="${orderItem.Repimg}" />
-						<span th:text="${orderItem.orderPrice} +'원'"></span>
-						<span th:text="${orderItem.count} +'개'"></span>
-					</div>
-				</div>
+			</div> -->
+			<!--  원래  -->
 
 
-			</div>
+
+
+
+		<div
+			th:with="start=${(orders.number/maxPage)*maxPage +1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage -1) < orders.totalPages ? start + (maxPage -1 ) : orders.totalPages)})">
+			<ul class="pagination justify-content-center mb-4 mt-4">
+
+				<li class="page-item"
+					th:classappend="${orders.number eq 0}? 'disabled':''"><a
+					th:href="@{'/orders/' + ${orders.number-1}}" aria-label="Previous"
+					class="link-arrow"> <span aria-hidden='true' lang="en">Previous</span>
+				</a></li>
+
+
+				<li class="page-item"
+					th:each="page: ${#numbers.sequence(start, end)}"
+					th:classappend="${orders.number eq page-1}?'active':''"><a
+					th:href="@{'/orders/' + ${page-1}}" th:inline="text"
+					class="a-color link-arrow">[[${page}]]</a></li>
+
+				<li class="page-item"
+					th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
+					<a th:href="@{'/orders/' + ${orders.number+1}}" aria-label='Next'
+					class="link-arrow"> <span aria-hidden='true' lang="en">Next</span>
+				</a>
+				</li>
+
+
+			</ul>
 		</div>
 
 	</div>
 
-
-
-	<div
-		th:with="start=${(orders.number/maxPage)*maxPage +1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage -1) < orders.totalPages ? start + (maxPage -1 ) : orders.totalPages)})">
-		<ul class="pagination justify-content-center">
-
-			<li class="page-item"
-				th:classappend="${orders.number eq 0}? 'disabled':''"><a
-				th:href="@{'/orders/' + ${orders.number-1}}" aria-label="Previous"
-				class="page-link"> <span aria-hidden='true'>Previous</span>
-			</a>
-			</li>
-
-
-			<li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page-1}?'active':''">
-                <a th:href="@{'/orders/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
-            </li>
-
-            <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
-                <a th:href="@{'/orders/' + ${orders.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
-                </a>
-            </li>
-
-
-		</ul>
-	</div>
 
 
 </div>
-

@@ -1,11 +1,9 @@
 package com.jjjteam.jmarket.controller;
 
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
+import com.jjjteam.jmarket.dto.OrderHistDTO;
+import com.jjjteam.jmarket.security.services.UserDetailsImpl;
+import com.jjjteam.jmarket.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,20 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jjjteam.jmarket.dto.OrderDTO;
-import com.jjjteam.jmarket.dto.OrderHistDTO;
-import com.jjjteam.jmarket.security.services.UserDetailsImpl;
-import com.jjjteam.jmarket.service.OrderService;
-
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -38,29 +28,7 @@ public class OrderController {
 	//생성자주입
 	private final OrderService orderService;
 
-//    @PostMapping(value = "/order")
-//    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDTO orderDTO, BindingResult bindingResult,  @AuthenticationPrincipal UserDetailsImpl principal){
-//
-//        if(bindingResult.hasErrors()){
-//            StringBuilder sb = new StringBuilder();
-//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-//
-//            for (FieldError fieldError : fieldErrors) {
-//                sb.append(fieldError.getDefaultMessage());
-//            }
-//            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
-//        }
-//        Long orderId;
-//        try {
-//            Long id = principal.getId();
-//            orderId = orderService.order(orderDTO, id);
-//        } catch(Exception e){
-//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
-//    }
-	
-	
+
 	//구매이력을 조회하는 호출하는 메서드
 	@GetMapping(value= {"/orders", "/orders/{page}"})
 	public String orderHist(@PathVariable("page") Optional<Integer> page, @AuthenticationPrincipal UserDetailsImpl principal, Model model) {

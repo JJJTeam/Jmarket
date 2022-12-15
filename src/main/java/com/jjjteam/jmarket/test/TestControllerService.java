@@ -3,9 +3,7 @@ package com.jjjteam.jmarket.test;
 
 import com.jjjteam.jmarket.constant.ERole;
 import com.jjjteam.jmarket.constant.ItemSellStatus;
-import com.jjjteam.jmarket.constant.ValidText;
 import com.jjjteam.jmarket.dto.ItemFormDTO;
-import com.jjjteam.jmarket.dto.UserDTO;
 import com.jjjteam.jmarket.model.Item;
 import com.jjjteam.jmarket.model.Role;
 import com.jjjteam.jmarket.model.User;
@@ -14,29 +12,18 @@ import com.jjjteam.jmarket.repository.ItemRepository;
 import com.jjjteam.jmarket.repository.RoleRepository;
 import com.jjjteam.jmarket.repository.UserAddressRepository;
 import com.jjjteam.jmarket.repository.UserRepository;
-import com.jjjteam.jmarket.util.Naver_Sens_V2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Service
@@ -59,8 +46,6 @@ public class TestControllerService {
     public void addTestUser(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("test")
                 .email("test@test.com")
@@ -119,8 +104,6 @@ public class TestControllerService {
     public void addAdmin(){
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        log.info("roles : {}", roles);
         User user = User.builder()
                 .userId("admin")
                 .email("test@test.com")
@@ -139,12 +122,10 @@ public class TestControllerService {
         itemFormDTO.setPrice(299000);
         itemFormDTO.setRepimg(repimg);
         itemFormDTO.setStockNumber(432);
-
         for (int i=0; i<500;i++){
             Item item = itemFormDTO.setRepTime().createItem();
             itemRepository.save(item);
         }
-
     }
 
 

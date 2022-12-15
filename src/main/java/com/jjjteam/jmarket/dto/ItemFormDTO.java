@@ -1,25 +1,19 @@
 package com.jjjteam.jmarket.dto;
 
 
-
+import com.jjjteam.jmarket.constant.ClothingItems;
+import com.jjjteam.jmarket.constant.ItemColor;
+import com.jjjteam.jmarket.constant.ItemSellStatus;
+import com.jjjteam.jmarket.constant.ItemSize;
+import com.jjjteam.jmarket.model.Item;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.modelmapper.ModelMapper;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import com.jjjteam.jmarket.constant.*;
-import com.jjjteam.jmarket.model.Item;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter 
 @Setter
@@ -33,6 +27,17 @@ public class ItemFormDTO {
 	
 	@NotBlank(message = "상품설명은 필수 입력 값입니다.")
 	private String itemIntroduction;
+	
+	//추가
+	private String itemMaterial;
+	
+	//추가
+	private String itemWashing;
+	
+	//추가
+	private String itemFabric;
+	
+	
 
 	@NotNull(message = "가격은 필수 입력 값입니다.")
 	private Integer price;
@@ -43,6 +48,7 @@ public class ItemFormDTO {
 	@NotNull(message = "재고는 필수 입력 값입니다.")
 	private Integer stockNumber;
 
+	
 	@NotBlank(message = "대표이미지는 필수입니다.")
 	private String repimg;
 	

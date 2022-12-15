@@ -1,12 +1,145 @@
 @charset "UTF-8";
 
+header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	z-index: 9;
+}
 
-#imgId {
+.sub-container {
+	padding: 40px 0;
+	margin-top: 15em;
+	min-height: 500px;
+}
+
+.sub-container .title {
+	font-size: 19px;
+}
+
+.sub-title {
+	padding: 0.75rem 0;
+	font-size:14px;
+}
+
+
+
+
+nav a {
+	font-size: 14px;
+}
+
+.drop-btn.dropdown-toggle {
+	font-size: 14px;
+}
+
+
+
+.table {
+    min-height: 150px;
+}
+
+
+/*============================= page item btn ===============================*/
+.d-flex .black-button {
+	width: 15%;
+}
+
+.d-flex .border-button {
     width: 100%;
 }
 
-.goodsName {
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
+.btn-wrap .black-button {
+	width: 25%;
+	margin: 0 auto;
 }
+
+.btn-wrap .double{
+	    width: 20%;text-align: center;
+}
+
+/*============================= page item btn ===============================*/
+.pagination {}
+
+.page-item:first-child .link-arrow {}
+	
+.page-item:not(:first-child) .link-arrow {
+	margin-left: -1px;
+}
+
+.page-item.disabled .link-arrow {
+	color: #6c757d;
+	pointer-events: none;
+	background-color: #fff;
+	border-color: #dee2e6;
+}
+
+.page-item.active .link-arrow {
+	background: #000;
+	z-index: 3;
+	color: #fff;
+	border-color: #000;
+}
+
+.link-arrow {
+	position: relative;
+	display: block;
+	color: #000;
+	text-decoration: none;
+	padding: 0.375rem 0.75rem;
+	background-color: transparent;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out,
+		border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+
+/*===================== 메인 상품리스트  =====================*/
+
+.goodsName {
+	font-size: 12px;
+	padding: 5px 0; display : flex;
+	justify-content: space-between;
+}
+
+
+
+/*===================== 상품리스트 =====================*/
+.itmeList {
+    padding: 4rem 0;
+}
+.de-title {
+    font-size: 23px;
+}
+.de-midd-title {
+    font-size: 15px;
+    font-weight: 200;
+}
+.de-price{font-size:15px;}
+
+
+.de-price span{font-size:15px;}
+.de-add p{font-size:15px; }
+/* 대표이미지 리스틑 뿌려줄때  */
+.detail-img{width: 65%;}
+.detail-text{width:50%;}
+
+
+#imgId {
+	width: 100%;
+}
+/* 대표이미지 상품등록할 때 */
+#tartgetImg {
+	width: 45%;
+}
+
+
+
+/*===================== 장바구니 =====================*/
+
+
+
+/*===================== 구매이력 =====================*/
+

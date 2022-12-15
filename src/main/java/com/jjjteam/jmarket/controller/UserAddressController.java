@@ -2,12 +2,8 @@ package com.jjjteam.jmarket.controller;
 
 
 import com.jjjteam.jmarket.dto.UserAddressDTO;
-
-import com.jjjteam.jmarket.repository.UserAddressRepository;
-import com.jjjteam.jmarket.repository.UserRepository;
 import com.jjjteam.jmarket.security.services.UserDetailsImpl;
 import com.jjjteam.jmarket.service.UserAddressService;
-import com.jjjteam.jmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
