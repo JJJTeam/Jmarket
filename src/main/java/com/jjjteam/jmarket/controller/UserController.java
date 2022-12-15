@@ -49,16 +49,16 @@ public class UserController {
 		model.addAttribute("addressList",addressList);
 		return "/mypage/modify";
 	}
-@GetMapping("/change-email")
+	@GetMapping("/change-email")
 	public String ToChangeEmailPage(@AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
 		model.addAttribute("user",userService.returnUserDetailById(userDetails.getId()));
 		return "/mypage/change-email";
 	}
 	@PostMapping("/change-email")
 	public String ToChangeEmailProcess(@AuthenticationPrincipal UserDetailsImpl userDetails,@Valid UserDTO userDTO, BindingResult bindingResult) {
-		log.info(userDTO.toString());
-		if(bindingResult.hasErrors()){return "index";}
+
 		if(encoder.matches(userDTO.getPassword(), userDetails.getPassword())){
+			if(bindingResult.hasErrors()){return "index";}
 			userService.changeUserEmail(userDetails.getId(),userDTO.getEmail());
 			return "/index";
 		} else {
