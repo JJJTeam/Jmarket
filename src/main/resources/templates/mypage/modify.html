@@ -5,29 +5,13 @@
 
 
 <div layout:fragment="mypage" class="container sub-container">
-
 	<div class="pb-5">
 		<h2 class="title mb-4">개인정보수정</h2>
-		
 		<div class="d-flex justify-content-between">
-
-			<div class="border-btn">
-				<a href="/mypage/change-email">이메일변경</a>
-			</div>
-			
-			<div class="border-btn">
-				<a href="/mypage/change-phone-number">전화번호변경</a>
-			</div>
-			
-			<div class="border-btn">
-				<a href="/mypage/change-password">비밀번호변경</a>
-			</div>
-			
-			<div class="border-btn">
-				<a href="/mypage/delete-account">계정삭제</a>
-			</div>
-			
-
+			<div class="border-btn" onclick="location.href='/mypage/change-email';">이메일변경</div>
+			<div class="border-btn" onclick="location.href='/mypage/change-phone-number';">전화번호변경</div>
+			<div class="border-btn" onclick="location.href='/mypage/change-password';">비밀번호변경</div>
+			<div class="border-btn" onclick="location.href='/mypage/delete-account';">계정삭제</div>
 		</div>
 
 	</div>
@@ -35,7 +19,8 @@
 <div class="d-flex justify-content-between mb-4">
 
 <h2 class="title">배송지관리</h2>
-<div class="black-button"> <a href="/member/shipping-address">배송지추가</a></div>
+<!--    <div class="black-button" href="/member/shipping-address"> <a href="/member/shipping-address">배송지추가</a></div>-->
+    <div class="black-button" onclick="location.href='/member/shipping-address';">배송지추가</div>
 </div>
 
 
@@ -55,7 +40,7 @@
                 <th scope="col">주소</th>
                 <th scope="col">받으실 분</th>
                 <th scope="col">연락처</th>
-                <th scope="col">기본배송지</th>
+                <th scope="col">현재 배송지</th>
                 <th scope="col">수정</th>
                 <th scope="col">기본설정</th>
             </tr>
@@ -71,7 +56,13 @@
                 </td>
                 <td th:text="${address.person}" lang="en"></td>
                 <td th:text="${address.addressPhoneNumber}" lang="en"></td>
-                <td th:text="${address.defaultAddress}" lang="en"></td>
+<!--                <td th:text="${address.defaultAddress}" lang="en"></td>-->
+                <span th:if="${address.defaultAddress}">
+                <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg></td>
+                </span>
+                <span th:unless="${address.defaultAddress}">
+                <td></td>
+                </span>
                 <td><a th:href="@{/member/shipping-address/update(addressNo=${address.id})}">수정</a></td>
                 <td><a th:href="@{/member/shipping-address/updatedefaultaddress(addressNo=${address.id})}">여기로배송</a></td>
             </tr>

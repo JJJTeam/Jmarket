@@ -25,7 +25,7 @@ public class UserAddressController {
 	@GetMapping("/member/shipping-address/drop")
 	public String DropAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		userAddressService.dropUserAddress(id,userDetails.getId());
-		return "redirect:/mypage/address";
+		return "redirect:/mypage/modify";
 	}
 	@GetMapping("/member/shipping-address")
 	public String ToShippingAddress() {
@@ -35,7 +35,7 @@ public class UserAddressController {
 	public String AddShippingAddress(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
 		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress(userDetails.getId());}
 		userAddressService.saveNewAddress(userAddressDTO, userDetails.getId());
-		return "redirect:/mypage/address";
+		return "redirect:/mypage/modify";
 	}
 	@GetMapping("/member/shipping-address/update")
 	public String ToUpdateAddressForm(@RequestParam(value="addressNo") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails,Model model) {
@@ -47,7 +47,7 @@ public class UserAddressController {
 	public String ToUpdateAddressProcess(@AuthenticationPrincipal UserDetailsImpl userDetails, UserAddressDTO userAddressDTO) {
 		if (userAddressDTO.getDefaultAddress() != null){userAddressService.clearDefaultAddress(userDetails.getId());}
 		userAddressService.updateUserAddress(userAddressDTO,userDetails.getId());
-		return "redirect:/mypage/address";
+		return "redirect:/mypage/modify";
 	}
 	@GetMapping("/member/shipping-address/updatedefaultaddress")
 	public String ToUpdateUpdateDefaultAddressProcess(@RequestParam(value="addressNo") Long id,@AuthenticationPrincipal UserDetailsImpl userDetails) {

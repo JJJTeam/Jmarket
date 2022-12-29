@@ -243,13 +243,16 @@
                 }
             });
         }
-        
-   
 
         function orders() {
 
             if ($("#defaultUserAddressId").val() == null) {
-                alert("배송지를 설정해주세요")
+                // alert("배송지를 설정해주세요")
+                if (confirm("배송지가 없습니다. 설정하시겠습니까?") == true){    //확인
+                    location.href = '/member/shipping-address';
+                }else{   //취소
+                    // return false;
+                }
             } else {
                 var url = "/cart/orders";
                 var dataList = new Array();
