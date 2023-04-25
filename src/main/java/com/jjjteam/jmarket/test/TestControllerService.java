@@ -122,7 +122,11 @@ public class TestControllerService {
         itemFormDTO.setPrice(299000);
         itemFormDTO.setRepimg(repimg);
         itemFormDTO.setStockNumber(432);
-        for (int i=0; i<500;i++){
+        itemFormDTO.setItemFabric("면");
+        itemFormDTO.setItemMaterial("면");
+        itemFormDTO.setItemWashing("중성세제로 세탁");
+
+        for (int i=0; i<20;i++){
             Item item = itemFormDTO.setRepTime().createItem();
             itemRepository.save(item);
         }

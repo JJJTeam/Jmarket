@@ -14,8 +14,6 @@ public enum ValidText {
     phoneAuth2("phoneAuth", true, "pass"),
     phoneAuth("phoneAuth", false, "인증되지 않은 전화번호입니다.");
 
-
-
     private String dataName;
     private Boolean result;
     private String returnMessege;

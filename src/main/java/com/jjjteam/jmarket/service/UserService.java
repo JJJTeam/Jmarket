@@ -78,7 +78,7 @@ public class UserService {
         }
         System.out.println("회원가입 문자 인증 => " + numStr);
 
-//        message.send_msg(tel, numStr);
+//        message.send_msg(tel, numStr); 네이버문자발송 api, 테스트 완료 api키 폐기함
 
         return numStr;
     }

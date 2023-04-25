@@ -75,7 +75,8 @@ spring:
     show-sql: false
 
   datasource:
-    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
+#    url: jdbc:mariadb://jjjteam.duckdns.org:3306/JmarketJungHoTest
+    url: jdbc:mariadb://jjjteam.duckdns.org:3306/Jmarket
 
 
 ---

@@ -82,7 +82,8 @@ function phoneAuth(){
         contentType:"application/json;charset=utf=8"
     })
         .done(function(resp){
-            resp ? $("#phoneCheck").html("전화테스트1") : $("#phoneCheck").html("문자를 발송하였습니다.");
+            resp ? $("#phoneCheck").html("전화테스트1")
+                : $("#phoneCheck").html("문자를 발송하였습니다.");
         })
         .fail(function(e){
             alert("error")
@@ -97,7 +98,8 @@ function phoneAuthOk(){
         // contentType:"application/json;charset=utf=8"
     })
         .done(function(resp){
-            resp ? $("#phoneCheck").html("잘못입력하셨습니다.") : $("#phoneCheck").html("인증완료");
+            resp ? $("#phoneCheck").html("잘못입력하셨습니다.")
+                : $("#phoneCheck").html("인증완료");
         })
         .fail(function(e){
             alert("인증을 다시 시도해 주세요")
