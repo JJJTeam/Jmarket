@@ -58,7 +58,8 @@ spring:
 
 
 itemImgLocation: /Users/jeongsujin/shop/study/item
-uploadPath=file: /Users/jeongsujin/shop/study   
+uploadPath=file: /Users/jeongsujin/shop/study 
+  
 ---
 
 
